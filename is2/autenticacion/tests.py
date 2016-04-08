@@ -11,6 +11,8 @@ class test(TestCase):
 
     def test_login(self):
         """
+        Response recibira un codigo de estado.
+
          200 códigos de estado de la respuesta
         :return:
         """
