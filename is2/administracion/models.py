@@ -9,6 +9,10 @@ from administracion.signals import add_permissions_team_member
 
 
 class Proyecto(models.Model):
+    """
+    Modelo de Proyecto del sistema.
+
+    """
 
     opciones_estado = (('PL', 'Planificacion'), ('EJ', 'Ejecutandose'), ('PE', 'Pendiente'), ('CA', 'Cancelado'), ('TE', 'Terminado'))
     nombre = models.CharField(max_length=40)
@@ -19,7 +23,12 @@ class Proyecto(models.Model):
     equipo = models.ManyToManyField(User, through='MiembroEquipo')
 
 
+
+
     class Meta:
+        # Los permisos estan asociados a los proyectos, entonces los permisos de ABM de las entidades
+        #dependientes del proyecto, deben crearse como permisos de proyecto, aqui una lista
+        #de permisos personalizados
         permissions = (
             ('listar_proyectos', 'Listar todos los proyectos disponibles'),
             ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'),
@@ -33,6 +42,7 @@ class Proyecto(models.Model):
         return self.nombre
 
     def clean(self):
+        #validacion de la fecha de inicio y final del proyecto
         try:
             if self.fecha_inicio > self.fecha_fin:
                 raise ValidationError({'inicio': 'Fecha de inicio no puede ser mayor que la fecha de terminacion.'})
@@ -42,6 +52,9 @@ class Proyecto(models.Model):
 
 
 class MiembroEquipo(models.Model):
+    """
+    Miembros del equipo de un proyecto
+    """
 
     usuario = models.ForeignKey(User)
     proyecto = models.ForeignKey(Proyecto)
@@ -65,12 +78,18 @@ class MiembroEquipo(models.Model):
         verbose_name_plural = 'miembros equipo'
         unique_together = ('usuario', 'proyecto')
 
+#Aqui se llama al models signals y su metodo add_permissions_team_member
+#para que se pueda asignar permisos de algun rol a un usuario de un proyecto
+
 m2m_changed.connect(add_permissions_team_member, sender=MiembroEquipo.roles.through,
                     dispatch_uid='add_permissions_signal')
 
 
 
 class Cliente(models.Model):
+    """
+    Modelo de cliente del sistema
+    """
     nombre = models.CharField(max_length=40)
     apellido = models.CharField(max_length=40)
     email = models.EmailField()
@@ -82,8 +101,8 @@ class Cliente(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,update_fields=None):
         super(MiembroEquipo, self).save(force_insert, force_update, using, update_fields)
-        # Agregamos el permiso view_proyect al usuario
-        assign_perm('view_project', self.usuario, self.proyecto)
+        # Agregamos el permiso ver_proyecto al usuario
+        assign_perm('ver_proyecto', self.usuario, self.proyecto)
 
     def delete(self, using=None):
         for role in self.roles.all():
