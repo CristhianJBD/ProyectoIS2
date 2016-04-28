@@ -1,0 +1,20 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Eliminar Usuario{% endblock %}
+
+{% block breadcrumb %}
+    <p><a href="{% url 'profile' %}">Inicio</a> / 
+    <a href="{% url 'user_list' %}">Usuarios</a> /
+    Eliminar Usuario</p>
+{% endblock %}
+
+{% block content %}
+    <div align=center>
+        <form method="post">{% csrf_token %}
+            <p>¿Esta seguro que desea eliminar el usuario "{{ usuario }}"?</p>
+            <input type="submit" value="Aceptar" />
+            <input type="button" onclick=" location.href='{% url 'user_list' %}' " value="Cancelar">
+        </form>
+    </div>
+{% endblock %}
+

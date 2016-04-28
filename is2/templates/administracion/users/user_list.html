@@ -1,0 +1,56 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Usuarios{% endblock %}
+
+{% block breadcrumb %}
+    <p><a href="{% url 'profile' %}">Inicio</a> / Usuarios</p>
+{% endblock %}
+
+{% block content %}
+    <div align=center>
+        <form class="navbar-form navbar-right" action="{% url 'user_list' %}" method="get"> {% csrf_token %}
+            <input name="query" class="form-control" placeholder="Buscar" type="text">                                                 
+        </form>
+        {% if perms.auth.add_user %}
+            <a href="{% url 'user_create' %}">Crear un nuevo usuario</a>
+        {% endif %}
+        <table class="table table-striped">
+            <tr>
+                <th>Usuario</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+                <th colspan="3">Acciones</th>
+            </tr>
+            {% for usuario in usuarios %}
+            <tr>
+                <td><a href="{% url 'user_detail' usuario.pk %}">{{ usuario.username }}</a></td>
+                <td>{{ usuario.first_name }}</td>
+                <td>{{ usuario.last_name }}</td>
+                <td>{{ usuario.email }}</td>
+
+                {% if perms.auth.change_user and usuario.pk != user.pk and not usuario.is_superuser %}
+                    <td><a href="{% url 'user_edit' usuario.pk %}"> Modificar</a></td>
+                {% else %}
+                    <td> - </td>
+                {% endif %}
+
+
+                {% if perms.auth.delete_user and usuario.pk != user.pk and not usuario.is_superuser %}
+                    <td><a href="{% url 'user_delete' usuario.pk %}"> Eliminar</a></td>
+                {% else %}
+                    <td> - </td>
+                {% endif %}
+
+                {% if perms.system.can_assign_system_group and not usuario.is_superuser %}
+                    <td><a href="{% url 'assign_system_group' usuario.pk %}"> Asignar Roles</a></td>
+                {% else %}
+                    <td> - </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <input type="button" onclick=" location.href='/login/' " value="Atras">
+{% endblock %}
+

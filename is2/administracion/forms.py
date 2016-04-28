@@ -13,8 +13,8 @@ def lista_perms_general():
     :return: lista de permisos que pueden agregarse en general
     """
     permlist= []
-    permlist.append(Permission.objects.get(codename="listar_todos_los_proyectos"))
-    permlist.append(Permission.objects.get(codename='"listar_proyectos_de_usuario'))
+    permlist.append(Permission.objects.get(codename="listar_proyectos"))
+    permlist.append(Permission.objects.get(codename="listar_proyectos_usuario"))
     permlist.append(Permission.objects.get(codename= "add_proyecto"))
     return permlist
 

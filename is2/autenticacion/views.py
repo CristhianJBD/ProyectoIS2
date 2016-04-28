@@ -9,7 +9,6 @@ from django.template.context_processors import csrf
 def login_view(request):
     """
     Recibe de request los datos del usuario guardado que no cerro sesion.
-
     Si el usuario esta autenticado entonces ingresa al sistema(se dirige a loggedin)
     Si no lo esta muestra la interfaz de login_view para introducir los datos del usuario.
 
@@ -42,7 +41,6 @@ def auth_view(request):
 def loggedin(request):
      """
      Si request.user estar auntenticado muestra un mensaje de bienvenida para ese usuario.
-
      sino se redirige a login para volver a introducir los datos
 
 
