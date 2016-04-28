@@ -1,0 +1,22 @@
+
+{% block title %}Aprobar el proyecto?{% endblock %}
+
+{% block breadcrumbs %}
+
+    <li><a href="{% url 'project:project_list' %}">Proyectos</a></li>
+    <li><a href="{% url 'project:project_detail' proyecto.id %}">{{ proyecto.nombre }}</a></li>
+    <li class="active">Aprobar</li>
+{% endblock %}
+
+{% block header %}{{ proyecto }} {% endblock %}
+{% block content %}
+<form method="post" role="form">
+    {% csrf_token %}
+    <div class="form-group">
+        <p>Seguro de que desea <strong>aprobar</strong> el Proyecto <strong>{{ proyecto }}</strong>?</p>
+    </div>
+
+    <input type="submit" name="aprobar" value="aprobar" class="btn btn-primary"/>
+    <input type="submit" name="rechazar" value="rechazar" class="btn btn-danger"/>
+</form>
+{% endblock %}

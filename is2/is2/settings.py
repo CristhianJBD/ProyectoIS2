@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -39,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'autenticacion',
     'guardian',
-    'administracion'
+    'administracion',
+    'bootstrap3',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -58,6 +58,9 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'guardian.backends.ObjectPermissionBackend',
 )
+
+
+ANONYMOUS_USER_ID = -1
 
 ROOT_URLCONF = 'is2.urls'
 
