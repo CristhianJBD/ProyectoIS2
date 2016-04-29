@@ -10,5 +10,5 @@ urlpatterns = [
         #url(r'^users/(?P<pk>\d+)/edit/$', views.user_edit, name="user_update"),
       url(r'^projects/$', view_project.ProjectList.as_view(), name='project_list'),
       url(r'^projects/add/$', view_project.ProjectCreate.as_view(), name='project_create'),
-
+      url(r'^index/$', views.index, name='index'),
             ]
