@@ -15,7 +15,7 @@ def login_view(request):
 
     """
     if request.user.is_authenticated():
-        return HttpResponsePermanentRedirect('/loggedin')
+        return HttpResponsePermanentRedirect('/index')
     else:
         c = {}
         c.update(csrf(request))
@@ -34,11 +34,11 @@ def auth_view(request):
 
     if user is not None:
         login(request, user)
-        return HttpResponsePermanentRedirect('/loggedin')
+        return HttpResponsePermanentRedirect('/index')
     else:
         return HttpResponsePermanentRedirect('/invalid')
 
-def loggedin(request):
+def index(request):
      """
      Si request.user estar auntenticado muestra un mensaje de bienvenida para ese usuario.
      sino se redirige a login para volver a introducir los datos
@@ -46,7 +46,7 @@ def loggedin(request):
 
      """
      if request.user.is_authenticated():
-         return render_to_response('autenticacion/loggedin.html', {'full_name': request.user.username})
+         return render_to_response('administracion/index.html', {'full_name': request.user.username})
      else:
          return HttpResponsePermanentRedirect('/login')
 

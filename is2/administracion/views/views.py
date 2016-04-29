@@ -117,5 +117,3 @@ def user_detail(request, pk):
     usuario = get_object_or_404(User, pk=pk)
     return render_to_response('users/user_detail.html', {'usuario':usuario}, context)
 
-def index(request):
-    return render_to_response('administracion/index.html', context_instance=RequestContext(request))
