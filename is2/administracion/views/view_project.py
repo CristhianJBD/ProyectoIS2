@@ -29,7 +29,7 @@ class ProjectList(LoginRequiredMixin, ListView):
     Listado de Proyectos
     """
     model = Proyecto
-    context_object_name = 'projects'
+    context_object_name = 'proyecto'
     template_name = 'administracion/proyecto/project_list.html'
     show_cancelled = False
 
@@ -39,7 +39,7 @@ class ProjectList(LoginRequiredMixin, ListView):
 
         :return: lista de proyectos
         """
-        if self.request.user.has_perm('project.listar_proyectos'):
+        if self.request.user.has_perm('proyecto.listar_proyectos'):
             proyectos = Proyecto.objects
         else:
             proyectos = self.request.user.proyecto_set
@@ -65,12 +65,12 @@ class ProjectCreate(LoginRequiredMixin, CreateViewPermissionRequiredMixin, gener
     Permite la creacion de Proyectos
     """
     model = Proyecto
-    permission_required = 'project.add_proyecto'
+    permission_required = 'proyecto.add_proyecto'
     form_class = modelform_factory(Proyecto,
                                    widgets={'fecha_inicio': SelectDateWidget, 'fecha_fin': SelectDateWidget},
                                    fields=('nombre', 'fecha_inicio', 'fecha_fin'),)
 
-    template_name = 'administracion/proyecto/project_form.html'
+    template_name = 'administracion/proyecto/project_list.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
                                                     fields=['usuario', 'roles'],
                                                     extra=1,

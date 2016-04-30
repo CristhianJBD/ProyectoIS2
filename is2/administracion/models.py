@@ -45,7 +45,7 @@ class Proyecto(models.Model):
         #validacion de la fecha de inicio y final del proyecto
         try:
             if self.fecha_inicio > self.fecha_fin:
-                raise ValidationError({'inicio': 'Fecha de inicio no puede ser mayor que la fecha de terminacion.'})
+                raise ValidationError({'fecha_inicio': 'Fecha de inicio no puede ser mayor que la fecha de terminacion.'})
         except TypeError:
             pass  # error si una de las fechas es null
 

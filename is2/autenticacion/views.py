@@ -6,6 +6,7 @@ from django.template.context_processors import csrf
 
 
 
+
 def login_view(request):
     """
     Recibe de request los datos del usuario guardado que no cerro sesion.
