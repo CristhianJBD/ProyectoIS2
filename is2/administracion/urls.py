@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from administracion.views import view_project, views_user, views_rol
+from administracion.views import views_rol, views_user, view_project
 
 
 

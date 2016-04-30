@@ -7,7 +7,6 @@ from django.views.generic import DetailView
 from guardian.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User, Permission
 from administracion.forms import UserCreateForm, UserEditForm
-from administracion.views.views_user import UserDetail
 from administracion.views.views import CreateViewPermissionRequiredMixin, GlobalPermissionRequiredMixin
 
 
