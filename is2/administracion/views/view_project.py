@@ -20,7 +20,7 @@ from guardian.shortcuts import remove_perm
 from guardian.shortcuts import get_perms
 from administracion.forms import MiembrosEquipoFormset
 from administracion.models import Proyecto, MiembroEquipo
-
+from django.contrib.auth.decorators import login_required
 from administracion.views.views import GlobalPermissionRequiredMixin, CreateViewPermissionRequiredMixin
 
 
@@ -44,14 +44,14 @@ class ProjectList(LoginRequiredMixin, ListView):
         else:
             proyectos = self.request.user.proyecto_set
         return proyectos.filter(estado='CA') if self.show_cancelled else proyectos.exclude(estado='CA')
-'''
+
 class ProjectDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, DetailView):
     """
     Vista de Detalles de Proyecto
     """
     model = Proyecto
     context_object_name = 'proyecto'
-    permission_required = 'project.view_project'
+    permission_required = 'proyecto.ver_proyecto'
     template_name = 'administracion/proyecto/project_detail.html'
 
     def get_context_data(self, **kwargs):
@@ -59,7 +59,7 @@ class ProjectDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, DetailVie
         context['team'] = self.object.miembroequipo_set.all()
         return context
 
-'''
+
 class ProjectCreate(LoginRequiredMixin, CreateViewPermissionRequiredMixin, generic.CreateView):
     """
     Permite la creacion de Proyectos
@@ -70,7 +70,7 @@ class ProjectCreate(LoginRequiredMixin, CreateViewPermissionRequiredMixin, gener
                                    widgets={'fecha_inicio': SelectDateWidget, 'fecha_fin': SelectDateWidget},
                                    fields=('nombre', 'fecha_inicio', 'fecha_fin'),)
 
-    template_name = 'administracion/proyecto/project_list.html'
+    template_name = 'administracion/proyecto/project_form_create.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
                                                     fields=['usuario', 'roles'],
                                                     extra=1,
@@ -98,48 +98,47 @@ class ProjectCreate(LoginRequiredMixin, CreateViewPermissionRequiredMixin, gener
         return render(self.request, self.get_template_names(), {'form': form, 'formset': formset},
                       context_instance=RequestContext(self.request))
 
-'''
+
 class ProjectUpdate( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.UpdateView):
     """
     Permite la Edicion de Proyectos
     """
     model = Proyecto
-    permission_required = 'project.change_proyecto'
-    template_name = 'administracionproyecto/project_form.html'
+    permission_required = 'proyecto.change_proyecto'
+    template_name = 'administracion/proyecto/project_form.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
                                                     fields=['usuario', 'roles'],
                                                     extra=1,
                                                     widgets={'roles': CheckboxSelectMultiple})
     form_class = modelform_factory(Proyecto,
-                                   widgets={'inicio': SelectDateWidget, 'fin': SelectDateWidget},
-                                   fields=('nombre', 'fechainicio', 'fechafin',
-                                           'descripcion'),
+                                   widgets={'fecha_inicio': SelectDateWidget, 'fecha_fin': SelectDateWidget},
+                                   fields=('nombre', 'fecha_inicio', 'fecha_fin'),
                                    )
 
     def get_proyecto(self):
         return self.get_object()
 
     def form_valid(self, form):
-        ''''''
+        '''
        # actualiza los miembros del equipo del proyecto que se hayan especifico
 
         #:param form: formulario de edición del proyecto
-        ''''''
+        '''
         self.object = form.save()
         formset = self.TeamMemberInlineFormSet(self.request.POST, instance=self.object)
         if formset.is_valid():
             # borramos todos los permisos asociados al usuario en el proyecto antes de volver a asignar los nuevos
-            project = self.object
+            proyecto = self.object
             for form in formset:
                 if form.has_changed():  #solo los formularios con cambios efectuados
                     user = form.cleaned_data['usuario']
                     if('usuario' in form.changed_data and 'usuario' in form.initial): #si se cambia el usuario, borrar permisos del usuario anterior
                         original_user = get_object_or_404(User, pk=form.initial['usuario'])
-                        for perm in get_perms(original_user, project):
-                            remove_perm(perm, original_user, project)
+                        for perm in get_perms(original_user, proyecto):
+                            remove_perm(perm, original_user, proyecto)
                     else:
-                        for perm in get_perms(user, project):
-                            remove_perm(perm, user, project)
+                        for perm in get_perms(user, proyecto):
+                            remove_perm(perm, user, proyecto)
 
             formset.save()
             return HttpResponseRedirect(self.get_success_url())
@@ -148,10 +147,10 @@ class ProjectUpdate( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
                       context_instance=RequestContext(self.request))
 
     def get_context_data(self, **kwargs):
-        ''''''
+        '''
         #Especifica los datos de contexto a pasar al template
         #:param kwargs: Diccionario con parametros con nombres clave
-        '''''''
+        '''
         context = super(ProjectUpdate, self).get_context_data(**kwargs)
         context['action'] = 'Editar'
         context['formset'] = self.TeamMemberInlineFormSet(self.request.POST if self.request.method == 'POST' else None, instance=self.object)
@@ -164,8 +163,8 @@ class ProjectDelete( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
     """
     model = Proyecto
     template_name = 'administracion/proyecto/proyect_delete.html'
-    success_url = reverse_lazy('project:project_list')
-    permission_required = 'project.delete_proyecto'
+    success_url = reverse_lazy('project_list')
+    permission_required = 'proyecto.delete_proyecto'
 
     def get_proyecto(self):
         return self.get_object()
@@ -189,8 +188,8 @@ class ApproveProject( LoginRequiredMixin, GlobalPermissionRequiredMixin, SingleO
     Vista de Aprobación o rechazo de User Stories
     """
     model = Proyecto
-    template_name = 'project/proyecto/project_approve.html'
-    permission_required = 'project.aprobar_proyecto'
+    template_name = 'administracion/proyecto/project_approve.html'
+    permission_required = 'proyecto.aprobar_proyecto'
     context_object_name = 'proyecto'
 
     def get_proyecto(self):
@@ -203,7 +202,7 @@ class ApproveProject( LoginRequiredMixin, GlobalPermissionRequiredMixin, SingleO
         raise Http404
 
     def get_success_url(self):
-        return reverse_lazy('project:project_detail', kwargs={'pk': self.get_object().id})
+        return reverse_lazy('administracion:project_detail', kwargs={'pk': self.get_object().id})
 
     def post(self, request, *args, **kwargs):
         p = self.get_object()
@@ -216,4 +215,4 @@ class ApproveProject( LoginRequiredMixin, GlobalPermissionRequiredMixin, SingleO
         p.save()
 
         return HttpResponseRedirect(self.get_success_url())
-    '''
+
