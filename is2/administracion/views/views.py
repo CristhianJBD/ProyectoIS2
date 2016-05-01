@@ -117,3 +117,8 @@ def user_detail(request, pk):
     usuario = get_object_or_404(User, pk=pk)
     return render_to_response('users/user_detail.html', {'usuario':usuario}, context)
 
+@login_required()
+def projectPersonal(request):
+
+    return render_to_response('administracion/proyecto/proyecto_personal.html',)
+
