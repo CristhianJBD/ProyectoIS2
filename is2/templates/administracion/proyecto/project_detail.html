@@ -1,71 +1,23 @@
-{% extends 'project/base.html' %}
+{% extends 'administracion/base.html' %}
 {% load guardian_tags %}
-{% block title %}{{ proyecto.nombre_corto }}{% endblock %}
+{% block title %}{{ proyecto.nombre }}{% endblock %}
 
-{% block breadcrumbs %}
-    <li><a href="{% url 'project:home' %}">Home</a></li>
-    <li><a href="{% url 'project:project_list' %}">Proyectos</a></li>
-    <li class="active">{{ proyecto.nombre_corto }}</li>
-{% endblock %}
 
-{% block header %}{{ proyecto.nombre_corto }}{% endblock %}
-{% block content %}
+
+
+{% block contentbase %}
     {% get_obj_perms user for proyecto as "proyecto_perms" %}
-    <h3>{{ proyecto.nombre_largo }}</h3>
+    <h3>{{ proyecto.nombre }}</h3>
     <ul class="list-inline">
-        {% if 'change_proyecto' in proyecto_perms %}<li><a href="{% url 'project:project_update' proyecto.id %}" class="fa fa-pencil"> Editar</a></li>{% endif %}
-        {% if 'delete_proyecto' in proyecto_perms %}<li><a href="{% url 'project:project_delete' proyecto.id %}" class="fa fa-eraser"> Cancelar</a></li>{% endif %}
-        <a href="{% url 'project:product_backlog' proyecto.id %}"><i class="fa fa-file fa-fw"></i> Ver Product Backlog</a>
+        {% if 'change_proyecto' in proyecto_perms %}<li><a href="" class="fa fa-pencil"> Editar</a></li>{% endif %}
+        {% if 'delete_proyecto' in proyecto_perms %}<li><a href="" class="fa fa-eraser"> Cancelar</a></li>{% endif %}
+
         {% if 'aprobar_userstory' in proyecto_perms %}
-            {% if proyecto.estado == 'CO' %}
-                 <a href="{% url 'project:project_aprobar' proyecto.id %}"><i class="fa fa-check-square fa-fw"></i> ¿Aprobar proyecto?</a>
-            {% else %}
-                <a href="{% url 'project:pending_userstories' proyecto.id %}"><i class="fa fa-check-square fa-fw"></i> User Stories a Aprobar <span class="badge">{{ pending_us }}</span></a>
+            {% if proyecto.estado == 'TE' %}
+                 <a href=""><i class="fa fa-check-square fa-fw"></i> ¿Aprobar proyecto?</a>
             {% endif %}
         {% endif %}
-        <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <p><span class="fa fa-file-pdf-o" /> Reportes <i class="fa fa-caret-down"></i></p>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="{% url 'project:reporte_backlog_producto' proyecto.id %}">
-                                <div>
-                                    <strong>Reporte de Backlog del Proyecto </strong>
-                                     <span class="fa fa-download" />
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                             <a href="{% url 'project:reporte_equipo_proyecto' proyecto.id %}">
-                                <div>
-                                    <strong>Reporte de trabajo en curso del Equipo </strong>
-                                     <span class="fa fa-download" />
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                             <a href="{% url 'project:reporte_lista_priorizada' proyecto.id %}">
-                                <div>
-                                    <strong>Reporte de User Stories pendientes por orden de prioridad </strong>
-                                     <span class="fa fa-download" />
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                             <a href="{% url 'project:reporte_burndown' proyecto.id %}">
-                                <div>
-                                    <strong>Reporte de Estado de Proyecto y Tiempos Estimados </strong>
-                                     <span class="fa fa-download" />
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-messages -->
-                </li>
+
     </ul>
 
     <div class="row">
@@ -73,40 +25,27 @@
             <div class="well">
                 <p><strong>Estado:</strong> {{ proyecto.get_estado_display }}</p>
 
-                <p><strong>Inicio:</strong> {{ proyecto.inicio|date }}</p>
+                <p><strong>Inicio:</strong> {{ proyecto.fecha_inicio|date }}</p>
 
-                <p><strong>Fin:</strong> {{ proyecto.fin|date }}</p>
+                <p><strong>Fin:</strong> {{ proyecto.fecha_fin|date }}</p>
 
-                <p><strong>Duracion de Sprints:</strong> {{ proyecto.duracion_sprint }}</p>
+
             </div>
         </div>
         <div class="col-lg-4">
-            <div class="well well-sm">
-                <h4>Descripcion</h4>
 
-                <p>{{ proyecto.descripcion }}</p>
-            </div>
         </div>
-        <div class="col-lg-4">
-            <div class="well">
-                <p><strong>User Stories del proyecto:</strong> {{ total_us }}</p>
-                <p><strong>User Stories en desarrollo:</strong> {{ active_us }}</p>
-                <p><strong>User Stories cancelados:</strong> {{ failed_us }}</p>
-                <p><strong>User Stories aprobados:</strong> {{ approved_us }}</p>
-            </div>
-        </div>
+
     </div>
 
     <div class="row">
         <div class="col-lg-4">
             <h4 class="list-group-item-heading">
-                <a href="{% if perms.project.change_proyecto %}
-                {% url 'project:project_update' proyecto.id %}#equipo
-                {% else %}#{% endif %}">Equipo</a>
+
             </h4>
             <div class="list-group">
                 {% for m in team %}
-                    <a href="{% url 'project:user_detail' m.usuario_id %}" class="list-group-item">
+                    <a href="" class="list-group-item">
                         {{ m.usuario.get_full_name }}
                         {% for r in m.roles.all %}
                             <span class="badge" data-toggle="tooltip" data-placement="left"
@@ -117,28 +56,5 @@
             </div>
         </div>
 
-        <div class="col-lg-4">
-            <h4 class="list-group-item-heading"><a href="{% url 'project:sprint_list' proyecto.id %}">Sprints</a></h4>
-            <div class="list-group">
-                {% for s in sprints %}
-                    <a href="{% url 'project:sprint_detail' s.id %}" class="list-group-item">{{ s.nombre }}
-                        <span class="badge" data-toggle="tooltip" data-placement="right"
-                              title="Fecha de Inicio">{{ s.userstory_set.count }}</span>
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
 
-        <div class="col-lg-4">
-            <h4 class="list-group-item-heading"><a href="{% url 'project:flujo_list' proyecto.id %}">Flujos</a></h4>
-
-            <div class="list-group">
-                {% for f in flows %}
-                    <a href="{% url 'project:flujo_detail' f.id %}" class="list-group-item">{{ f.nombre }}
-                        <span class="badge" data-toggle="tooltip" data-placement="right"
-                              title="Actividades">{{ f.actividad_set.count }}</span>
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
 {% endblock %}

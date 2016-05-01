@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, Group
 from django.core.exceptions import ValidationError
 from django.db import models
 from administracion.signals import add_permissions_team_member
+from django.core.urlresolvers import reverse_lazy
 # Create your models here.
 
 
@@ -49,6 +50,8 @@ class Proyecto(models.Model):
         except TypeError:
             pass  # error si una de las fechas es null
 
+    def get_absolute_url(self):
+        return reverse_lazy('project_detail', args=[self.pk])
 
 
 class MiembroEquipo(models.Model):

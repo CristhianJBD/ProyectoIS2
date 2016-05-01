@@ -61,10 +61,11 @@
                                    {% endblock %}
                                     {% block tbody %}
 
-
+                                    
 
                                     {% for p in proyecto %}
                                             {% get_obj_perms user for p as "proyecto_perms" %}
+
 
                                             <tr data-index={{ p.id }}>
                                                 <td class="bs-checkbox">
