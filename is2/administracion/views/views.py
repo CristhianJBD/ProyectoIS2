@@ -121,6 +121,6 @@ def user_detail(request, pk):
 @login_required()
 def projectPersonal(request):
 
-    return render_to_response('administracion/proyecto/proyecto_personal.html',)
+    return render_to_response('administracion/proyecto/project_Personal.html', )
 
 

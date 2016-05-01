@@ -9,6 +9,9 @@ urlpatterns = [
       url(r'^users/add/$', views_user.AddUser.as_view, name="user_add"),
       url(r'^users/(?P<pk>\d+)/delete/$', views_user.DeleteUser.as_view, name="user_delete"),
       url(r'^users/(?P<pk>\d+)/edit/$', views_user.EditUser.as_view, name="user_edit"),
+
+      # ESTO DEBO TENER
+      # url(r'^roles/$', views_rol.AddRol.rol_index.as_view(), name='rol_index'),
       url(r'^roles/$', views_rol.RolList.as_view(), name='rol_list'),
       url(r'^roles/(?P<pk>\d+)/$', views_rol.RolDetail.as_view(), name='rol_detail'),
       url(r'^roles/add/$', views_rol.AddRol.as_view(), name="rol_add"),

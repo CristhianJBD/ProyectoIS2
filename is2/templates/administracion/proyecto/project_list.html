@@ -7,7 +7,8 @@
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-				<li class="active">Index</li>
+                <li><a href="{% url "project" %}">Proyectos</a></li>
+				<li class="active">Lista de Proyectos</li>
 			</ol>
 		</div><!--/.row-->
 
@@ -58,6 +59,7 @@
                                         <th>Estado</th>
                                         <th>Fecha de Inicio</th>
                                         <th>Fecha de Finalizacion</th>
+                                        <th>Det</th>
                                    {% endblock %}
                                     {% block tbody %}
 

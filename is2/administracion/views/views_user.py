@@ -63,7 +63,7 @@ class AddUser(LoginRequiredMixin, CreateViewPermissionRequiredMixin, generic.Cre
         Retorno url del usuario
         :return:url del UserDetail
         """
-        return reverse('administracion:user_detail', kwargs={'pk':self.object.id})
+        return reverse('user_detail', kwargs={'pk':self.object.id})
 
     def form_valid(self, form):
         """
@@ -86,7 +86,7 @@ class DeleteUser(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.Dele
     model = User
     template_name = 'administracion/users/user_delete.html'
     context_object_name = 'usuario'
-    success_url = reverse_lazy('administracion:user_list')
+    success_url = reverse_lazy('user_list')
     permission_required = 'auth.delete_user'
 
     def delete(self, request, *args, **kwargs):
@@ -120,7 +120,7 @@ class EditUser(LoginRequiredMixin,GlobalPermissionRequiredMixin, generic.UpdateV
         Se redirige a la url del detalle del usuario
         :return: url de UserDetail
         """
-        return reverse('project:user_detail', kwargs={'pk': self.object.id})
+        return reverse('user_detail', kwargs={'pk': self.object.id})
 
     def get_initial(self):
         """

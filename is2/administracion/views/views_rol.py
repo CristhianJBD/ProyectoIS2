@@ -32,7 +32,7 @@ class AddRol(LoginRequiredMixin, CreateViewPermissionRequiredMixin, generic.Crea
         Se redirije a la url de detalles del rol
         :return: url de rol_detail
         """
-        return reverse('administracion:rol_detail', kwargs={'pk':self.object.id})
+        return reverse('rol_detail', kwargs={'pk':self.object.id})
     
     def form_valid(self, form):
         """
@@ -71,7 +71,7 @@ class EditRol(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.UpdateV
         """
         :return: URL de redireccion correcta a UserDetail
         """
-        return reverse('project:rol_detail', kwargs={'pk': self.object.id})
+        return reverse('rol_detail', kwargs={'pk': self.object.id})
 
     def get_initial(self):
         """
@@ -119,8 +119,8 @@ class DeleteRolView(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.D
     Vista de Eliminacion de Roles
     """
     model = Group
-    template_name = 'project/roles/rol_delete.html'
-    success_url = reverse_lazy('project:rol_list')
+    template_name = 'administracion/roles/rol_delete.html'
+    success_url = reverse_lazy('rol_list')
     permission_required = 'auth.delete_group'
 
     def delete(self, request, *args, **kwargs):
