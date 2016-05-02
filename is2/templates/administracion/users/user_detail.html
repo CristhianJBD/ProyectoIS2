@@ -1,21 +1,13 @@
 {% extends 'administracion/base.html' %}
-{% block title %}Ver Usuario{% endblock %}
-
-    		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-                <li><a href="{% url "user_list" %}">Usuarios</a></li>
-				<li class="active">Detalles</li>
-			</ol>
-		</div><!--/.row-->
+{% block contentbase %}
 
 
 
 {% block header %}{{ usuario.first_name | title}} {{ usuario.last_name }}{% endblock %}
-{% block content %}
+
     <ul class="list-inline">
-        {% if perms.auth.change_user %}<li><a href="{% url 'user_edit' usuario.id%}" class="fa fa-pencil"> Edit</a></li>{% endif %}
-        {% if perms.auth.delete_user %}<li><a href="{% url 'user_delete' usuario.id %}" class="fa fa-eraser"> Delete</a></li>{% endif %}
+        {% if perms.auth.change_user %}<li><a href="{% url 'user_edit' usuario.id%}" class="fa fa-pencil"><h2> Editar</h2></a></li>{% endif %}
+        {% if perms.auth.delete_user %}<li><a href="{% url 'user_delete' usuario.id %}" class="fa fa-eraser"> <h2>Desactivar</h2></a></li>{% endif %}
 
     </ul>
 <p><strong>Nombre:</strong> {{ usuario.first_name }}</p>
@@ -55,6 +47,7 @@
             </div>
         </div>
     </div>
+
 
 
 

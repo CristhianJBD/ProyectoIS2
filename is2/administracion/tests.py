@@ -6,45 +6,45 @@ from django.utils import timezone
 
 from administracion.models import Proyecto
 
-#
-# class RoleTest(TestCase):
-#     def setUp(self):
-#         u = User.objects.create_user('admin','admin@gmail.com','admin')
-#         u.user_permissions.add(Permission.objects.get(codename='add_group'))
-#         u.user_permissions.add(Permission.objects.get(codename='change_group'))
-#         u.user_permissions.add(Permission.objects.get(codename='delete_group'))
-#
-#
-#     def create_role(self, name):
-#         g = Group.objects.create(name=name)
-#         g.save()
-#         return g
-#
-#
-#     def test_create_role(self):
-#         c = self.client
-#         self.assertTrue(c.login(username='admin', password='admin'))
-#         response = c.get('/roles/add/');
-#         self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a roles/add')
-#         #intentamos crear un rol developer que pueda crear, editar y borrar proyectos
-#         response = c.post('/roles/add/', {'name':'scrum', 'perms_proyecto':[u'add_proyecto', u'change_proyecto', u'delete_proyecto']}, follow=True)
-#         #deberia redirigir
-#         self.assertRedirects(response, '/roles/1/')
-#
-#
-#     def test_delete_role(self):
-#         c = self.client
-#         self.assertTrue(c.login(username='admin', password='admin'))
-#         response = c.post('/roles/add/', {'name':'developer', 'perms_proyecto':[u'add_proyecto', u'change_proyecto', u'delete_proyecto']}, follow=True)
-#         #deberia redirigir
-#         self.assertRedirects(response, '/roles/2/')
-#         #eliminamos el rol
-#         response = c.post('/roles/2/delete/', {'Confirmar':True}, follow=True)
-#         self.assertRedirects(response, '/roles/')
-#         #ahora ya no deberia existir el registro
-#         response = c.get('/roles/2/')
-#         self.assertEquals(response.status_code, 404)
-#
+
+class RoleTest(TestCase):
+    def setUp(self):
+        u = User.objects.create_user('admin','admin@gmail.com','admin')
+        u.user_permissions.add(Permission.objects.get(codename='add_group'))
+        u.user_permissions.add(Permission.objects.get(codename='change_group'))
+        u.user_permissions.add(Permission.objects.get(codename='delete_group'))
+
+
+    def create_role(self, name):
+        g = Group.objects.create(name=name)
+        g.save()
+        return g
+
+
+    def test_create_role(self):
+        c = self.client
+        self.assertTrue(c.login(username='admin', password='admin'))
+        response = c.get('/roles/add/');
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a roles/add')
+        #intentamos crear un rol developer que pueda crear, editar y borrar proyectos
+        response = c.post('/roles/add/', {'name':'scrum', 'perms_proyecto':[u'add_proyecto', u'change_proyecto', u'delete_proyecto']}, follow=True)
+        #deberia redirigir
+        self.assertRedirects(response, '/roles/1/')
+
+
+    def test_delete_role(self):
+        c = self.client
+        self.assertTrue(c.login(username='admin', password='admin'))
+        response = c.post('/roles/add/', {'name':'developer', 'perms_proyecto':[u'add_proyecto', u'change_proyecto', u'delete_proyecto']}, follow=True)
+        #deberia redirigir
+        self.assertRedirects(response, '/roles/2/')
+        #eliminamos el rol
+        response = c.post('/roles/2/delete/', {'Confirmar':True}, follow=True)
+        self.assertRedirects(response, '/roles/')
+        #ahora ya no deberia existir el registro
+        response = c.get('/roles/2/')
+        self.assertEquals(response.status_code, 404)
+
 
 
 
