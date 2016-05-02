@@ -9,14 +9,10 @@
     {% get_obj_perms user for proyecto as "proyecto_perms" %}
     <h3>{{ proyecto.nombre }}</h3>
     <ul class="list-inline">
-        {% if 'change_proyecto' in proyecto_perms %}<li><a href="" class="fa fa-pencil"> Editar</a></li>{% endif %}
-        {% if 'delete_proyecto' in proyecto_perms %}<li><a href="" class="fa fa-eraser"> Cancelar</a></li>{% endif %}
+        {% if 'change_proyecto' in proyecto_perms %}<li><a href="{% url 'project_update' proyecto.id %}" class="fa fa-pencil"> Modificar</a></li>{% endif %}
 
-        {% if 'aprobar_userstory' in proyecto_perms %}
-            {% if proyecto.estado == 'TE' %}
-                 <a href=""><i class="fa fa-check-square fa-fw"></i> ¿Aprobar proyecto?</a>
-            {% endif %}
-        {% endif %}
+
+
 
     </ul>
 
@@ -25,9 +21,9 @@
             <div class="well">
                 <p><strong>Estado:</strong> {{ proyecto.get_estado_display }}</p>
 
-                <p><strong>Inicio:</strong> {{ proyecto.fecha_inicio|date }}</p>
+                <p><strong>Fecha de Inicio:</strong> {{ proyecto.fecha_inicio|date }}</p>
 
-                <p><strong>Fin:</strong> {{ proyecto.fecha_fin|date }}</p>
+                <p><strong>Fecha de Finalizacion:</strong> {{ proyecto.fecha_fin|date }}</p>
 
 
             </div>
@@ -38,15 +34,19 @@
 
     </div>
 
-    <div class="row">
+
+
+<div class="row">
         <div class="col-lg-4">
             <h4 class="list-group-item-heading">
-
+                <a href="{% if perms.proyecto.change_proyecto %}
+                {% url 'project_update' proyecto.id %}#equipo
+                {% else %}#{% endif %}">Equipo</a>
             </h4>
             <div class="list-group">
                 {% for m in team %}
-                    <a href="" class="list-group-item">
-                        {{ m.usuario.get_full_name }}
+                    <a href="{% url 'user_detail' m.usuario_id %}" class="list-group-item">
+                        {{ m.usuario }}
                         {% for r in m.roles.all %}
                             <span class="badge" data-toggle="tooltip" data-placement="left"
                               title="Rol">{{ r }}</span>
@@ -54,6 +54,9 @@
                     </a>
                 {% endfor %}
             </div>
+        </div>
+
+
         </div>
 
 

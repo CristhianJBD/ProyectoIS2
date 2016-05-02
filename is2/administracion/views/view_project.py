@@ -45,6 +45,9 @@ class ProjectList(LoginRequiredMixin, ListView):
             proyectos = self.request.user.proyecto_set
         return proyectos.filter(estado='CA') if self.show_cancelled else proyectos.exclude(estado='CA')
 
+    def get_absolute_url(self):
+        return reverse_lazy('project_detail', args=[self.pk])
+
 class ProjectDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, DetailView):
     """
     Vista de Detalles de Proyecto
@@ -105,7 +108,7 @@ class ProjectUpdate( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
     """
     model = Proyecto
     permission_required = 'proyecto.change_proyecto'
-    template_name = 'administracion/proyecto/project_form.html'
+    template_name = 'administracion/proyecto/project_form_create.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
                                                     fields=['usuario', 'roles'],
                                                     extra=1,

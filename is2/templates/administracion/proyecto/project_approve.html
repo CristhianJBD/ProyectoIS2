@@ -1,15 +1,16 @@
 
-{% block title %}Aprobar el proyecto?{% endblock %}
+{% block contentbase %}
+{% block title %}Cambiar estado del proyecto?{% endblock %}
 
 {% block breadcrumbs %}
 
-    <li><a href="{% url 'project:project_list' %}">Proyectos</a></li>
-    <li><a href="{% url 'project:project_detail' proyecto.id %}">{{ proyecto.nombre }}</a></li>
-    <li class="active">Aprobar</li>
+    <li><a href="{% url 'project_list' %}">Proyectos</a></li>
+    <li><a href="{% url 'project_detail' proyecto.id %}">{{ proyecto.nombre }}</a></li>
+    <li class="active">Cambiar Estado</li>
 {% endblock %}
 
 {% block header %}{{ proyecto }} {% endblock %}
-{% block content %}
+
 <form method="post" role="form">
     {% csrf_token %}
     <div class="form-group">

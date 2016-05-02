@@ -4,9 +4,9 @@ from administracion.views import views_rol, views_user, view_project, views
 
 
 urlpatterns = [
-      url(r'^users', views_user.UserList.as_view, name='user_list'),
-      url(r'^(?P<pk>\d+)$', views_user.UserDetail.as_view, name='user_detail'),
-      url(r'^users/add/$', views_user.AddUser.as_view, name="user_add"),
+      url(r'^users', views_user.UserList.as_view(), name='user_list'),
+      url(r'^(?P<pk>\d+)$', views_user.UserDetail.as_view(), name='user_detail'),
+      url(r'^users/add/$', views_user.AddUser.as_view(), name="user_add"),
       url(r'^users/(?P<pk>\d+)/delete/$', views_user.DeleteUser.as_view, name="user_delete"),
       url(r'^users/(?P<pk>\d+)/edit/$', views_user.EditUser.as_view, name="user_edit"),
 

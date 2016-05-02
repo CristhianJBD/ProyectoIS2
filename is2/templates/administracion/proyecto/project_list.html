@@ -54,12 +54,11 @@
                                         data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
 
                                    {% block thead %}
-                                        <th>Seleccion</th>
                                         <th>Nombre</th>
                                         <th>Estado</th>
                                         <th>Fecha de Inicio</th>
                                         <th>Fecha de Finalizacion</th>
-                                        <th>Det</th>
+
                                    {% endblock %}
                                     {% block tbody %}
 
@@ -70,15 +69,21 @@
 
 
                                             <tr data-index={{ p.id }}>
-                                                <td class="bs-checkbox">
-                                                    <input data-index={{ p.id }} name="toolbar1" type="checkbox">
-                                                </td>
+
                                                 <td style>{{ p.nombre|title }}</td>
                                                 <td style>{{ p.get_estado_display }}</td>
                                                 <td style>{{ p.fecha_inicio|date:"SHORT_DATE_FORMAT" }}</td>
                                                 <td style>{{ p.fecha_fin|date:"SHORT_DATE_FORMAT" }}</td>
-                                            </tr>
+                                                <td style>
 
+                                                    {% if "ver_proyecto" in proyecto_perms %}
+                                                         <a href="{{ p.get_absolute_url }}"><button type="submit" class="btn btn-default btn-md">Ver</button></a>
+                                                     {% else %}
+                                                            <td><i class="fa fa-eye fa-fw"></i></td>
+                                                     {% endif %}
+
+                                                </td>
+                                            </tr>
 
 
                                         {% endfor %}
