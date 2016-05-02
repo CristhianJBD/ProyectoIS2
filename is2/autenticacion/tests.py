@@ -33,10 +33,3 @@ class test(TestCase):
          resp = self.client.get('/logout/')
          self.assertEqual(resp.status_code, 302)
 
-
-    def test_loggedin(self):
-        """
-        indica que que la redireccion es permante por lo tanto envia un codigo 301
-        """
-        response = self.client.get('/loggedin/')
-        self.assertEquals(response.status_code, 301)

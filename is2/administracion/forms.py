@@ -69,7 +69,6 @@ class RolForm(forms.ModelForm):
 class MiembrosEquipoFormset(BaseInlineFormSet):
   def clean(self):
         super(MiembrosEquipoFormset, self).clean()
-        print("En chequeo")
         for form in self.forms:
             if form in self.deleted_forms:
                 usuario = form.cleaned_data['usuario']
