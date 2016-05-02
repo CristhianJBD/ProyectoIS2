@@ -1,0 +1,56 @@
+{% extends 'administracion/base.html' %}
+{% block title %}Ver Usuario{% endblock %}
+
+
+
+{% block header %}{{ usuario.first_name | title}} {{ usuario.last_name }}{% endblock %}
+{% block content %}
+    <ul class="list-inline">
+        {% if perms.auth.change_user %}<li><a href="{% url 'user_edit' usuario.id%}" class="fa fa-pencil"> Edit</a></li>{% endif %}
+        {% if perms.auth.delete_user %}<li><a href="{% url 'user_delete' usuario.id %}" class="fa fa-eraser"> Delete</a></li>{% endif %}
+
+    </ul>
+<p><strong>Nombre:</strong> {{ usuario.first_name }}</p>
+<p><strong>Apellido:</strong> {{ usuario.last_name }}</p>
+<p><strong>Username:</strong> {{ usuario.username }}</p>
+<p><strong>Email:</strong> {{ usuario.email }}</p>
+<h3>Proyectos</h3>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel-group" id="accordion">
+                {% for p in proyectos %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" aria-expanded="false"
+                               class="collapsed">{{ p.proyecto.nombre }}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <strong>Roles: </strong>
+                            {% for r in p.roles.all %}
+                                <span class="label label-primary">{{ r }}</span>
+                            {% endfor %}-
+                                <ul class="list-inline">
+                                    <li><strong>Estado: </strong>{{ p.proyecto.get_estado_display }}</li>
+                                    <li><strong>Inicio: </strong>{{ p.proyecto.fecha_inicio|date }}</li>
+                                    <li><strong>Fin: </strong>{{ p.proyecto.fecha_fin|date }}</li>
+                                </ul>
+
+                            <a href="{% url 'project_detail' p.proyecto_id %}" class="btn btn-primary btn-sm">Ver Más</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}

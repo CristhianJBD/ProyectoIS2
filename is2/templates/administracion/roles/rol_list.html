@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'administracion/base.html' %}
+{% block title %}Roles{% endblock %}
+{% load guardian_tags %}
+{% load static %}
 
-</body>
-</html>
+
+
+
+{% block contentbase %}
+
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+				<li>Lista de Roles</li>
+
+			</ol>
+		</div><!--/.row-->
+
+
+    {% if perms.auth.add_group %}<p><a href="{% url 'rol_add' %}" class="fa fa-plus-circle">Agregar</a></p>{% endif %}
+{% endblock %}
+{% block thead %}
+        <tr>
+            <th width="70%">Nombre</th>
+            <th>Ver</th>
+            {% if perms.auth.change_group %}<th>Editar</th>{% endif %}
+            {% if perms.auth.delete_group %}<th>Eliminar</th>{% endif %}
+        </tr>
+{% endblock %}
+{% block tbody %}
+        {% for r in roles %}
+        <tr class="odd gradeX">
+            <td>{{ r.name }}</td>
+            <td ><a href="{% url 'rol_detail' r.id %}"><i class="fa fa-eye fa-fw"></i></a> </td>
+            {% if perms.auth.change_group %}<td><a href="{% url 'rol_update' r.id %}"><i class="fa fa-pencil fa-fw"></i></a></td>{% endif %}
+            {% if perms.auth.delete_group %}<td><a href="{% url 'rol_delete' r.id %}"><i class="fa fa-trash-o fa-fw"></i></a></td>{% endif %}
+        </tr>
+        {% endfor %}
+{% endblock %}

@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'project/base.html' %}
+{% block title %}{{ rol.name }}{% endblock %}
 
-</body>
-</html>
+{% block breadcrumbs %}
+    <li><a href="{% url 'project:home' %}">Home</a></li>
+    <li><a href="{% url 'project:rol_list' %}">Roles</a></li>
+    <li class="active">{{ rol }}</li>
+{% endblock %}
+
+{% block header %}{{ rol.name }}{% endblock %}
+{% block content %}
+    <h3>Permisos: </h3>
+    <ul>
+    {% for p in rol.permissions.all %}
+        <li>{{ p.name }}</li>
+    {% endfor %}
+    </ul>
+    <div class="row">
+
+    {% if perms.auth.change_group %}<p><a href="{% url 'project:rol_update' rol.id %}" class="fa fa-pencil">Edit</a></p>{% endif %}
+    {% if perms.auth.delete_group %}<p><a href="{% url 'project:rol_delete' rol.id %}" class="fa fa-eraser">Delete</a></p>{% endif %}
+    </div>
+{% endblock %}

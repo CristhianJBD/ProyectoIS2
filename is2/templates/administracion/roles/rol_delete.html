@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'project/base.html' %}
+{% block title %}{{ group }}{% endblock %}
 
-</body>
-</html>
+{% block breadcrumbs %}
+    <li><a href="{% url 'project:home' %}">Home</a></li>
+    <li><a href="{% url 'project:rol_list' %}">Roles</a></li>
+    <li><a href="{% url 'project:rol_detail' group.id %}">{{ group }}</a></li>
+    <li class="active">Eliminar</li>
+{% endblock %}
+
+{% block header %}{{ group }}{% endblock %}
+{% block content %}
+<form action="" method="post" role="form">
+    {% csrf_token %}
+    <div class="form-group">
+        <p>Seguro de que desea eliminar el rol <strong>{{ group }}</strong>?</p>
+    </div>
+
+    <input type="submit" value="Confirmar" class="btn btn-default"/>
+</form>
+{% endblock %}

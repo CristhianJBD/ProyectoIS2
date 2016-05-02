@@ -41,7 +41,7 @@ class UserDetail(LoginRequiredMixin,DetailView):
         :return:el contexto
         """
         context = super(UserDetail, self).get_context_data(**kwargs)
-        context['projects'] = self.object.miembroequipo_set.all()
+        context['proyectos'] = self.object.miembroequipo_set.all()
         return context
 
 class AddUser(LoginRequiredMixin, CreateViewPermissionRequiredMixin, generic.CreateView):
@@ -75,7 +75,7 @@ class AddUser(LoginRequiredMixin, CreateViewPermissionRequiredMixin, generic.Cre
         seleccionadas = self.request.POST.getlist('general_perms')
         for permname in seleccionadas:
             perm = Permission.objects.get(codename=permname)
-            self.object.user_permissions_add(perm)
+            self.object.user_permissions.add(perm)
 
         return HttpResponseRedirect(self.get_success_url())
 
