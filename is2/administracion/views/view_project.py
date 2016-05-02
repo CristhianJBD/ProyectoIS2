@@ -39,7 +39,7 @@ class ProjectList(LoginRequiredMixin, ListView):
 
         :return: lista de proyectos
         """
-        if self.request.user.has_perm('proyecto.listar_proyectos'):
+        if self.request.user.has_perm('administracion.listar_proyectos'):
             proyectos = Proyecto.objects
         else:
             proyectos = self.request.user.proyecto_set
@@ -54,7 +54,7 @@ class ProjectDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, DetailVie
     """
     model = Proyecto
     context_object_name = 'proyecto'
-    permission_required = 'proyecto.ver_proyecto'
+    permission_required = 'administracion.ver_proyecto'
     template_name = 'administracion/proyecto/project_detail.html'
 
     def get_context_data(self, **kwargs):
@@ -68,7 +68,7 @@ class ProjectCreate(LoginRequiredMixin, CreateViewPermissionRequiredMixin, gener
     Permite la creacion de Proyectos
     """
     model = Proyecto
-    permission_required = 'proyecto.add_proyecto'
+    permission_required = 'administracion.add_proyecto'
     form_class = modelform_factory(Proyecto,
                                    widgets={'fecha_inicio': SelectDateWidget, 'fecha_fin': SelectDateWidget},
                                    fields=('nombre', 'fecha_inicio', 'fecha_fin'),)
@@ -107,7 +107,7 @@ class ProjectUpdate( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
     Permite la Edicion de Proyectos
     """
     model = Proyecto
-    permission_required = 'proyecto.change_proyecto'
+    permission_required = 'administracion.change_proyecto'
     template_name = 'administracion/proyecto/project_form_create.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
                                                     fields=['usuario', 'roles'],
@@ -167,7 +167,7 @@ class ProjectDelete( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
     model = Proyecto
     template_name = 'administracion/proyecto/proyect_delete.html'
     success_url = reverse_lazy('project_list')
-    permission_required = 'proyecto.delete_proyecto'
+    permission_required = 'administracion.delete_proyecto'
 
     def get_proyecto(self):
         return self.get_object()
@@ -192,7 +192,7 @@ class ApproveProject( LoginRequiredMixin, GlobalPermissionRequiredMixin, SingleO
     """
     model = Proyecto
     template_name = 'administracion/proyecto/project_approve.html'
-    permission_required = 'proyecto.aprobar_proyecto'
+    permission_required = 'administracion.aprobar_proyecto'
     context_object_name = 'proyecto'
 
     def get_proyecto(self):
