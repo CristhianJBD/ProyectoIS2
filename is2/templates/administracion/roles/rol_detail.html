@@ -1,23 +1,27 @@
-{% extends 'project/base.html' %}
-{% block title %}{{ rol.name }}{% endblock %}
+{% extends 'administracion/base.html' %}
+{% block title %}Ver rol{% endblock %}
 
-{% block breadcrumbs %}
-    <li><a href="{% url 'project:home' %}">Home</a></li>
-    <li><a href="{% url 'project:rol_list' %}">Roles</a></li>
-    <li class="active">{{ rol }}</li>
-{% endblock %}
+{% block contentbase %}
 
-{% block header %}{{ rol.name }}{% endblock %}
-{% block content %}
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li><a href="{% url "rol_list" %}">Proyectos</a></li>
+				<li class="active">Delete</li>
+			</ol>
+		</div><!--/.row-->
+
+
+
     <h3>Permisos: </h3>
     <ul>
-    {% for p in rol.permissions.all %}
+    {% for p in roles.permissions.all %}
         <li>{{ p.name }}</li>
     {% endfor %}
     </ul>
     <div class="row">
 
-    {% if perms.auth.change_group %}<p><a href="{% url 'project:rol_update' rol.id %}" class="fa fa-pencil">Edit</a></p>{% endif %}
-    {% if perms.auth.delete_group %}<p><a href="{% url 'project:rol_delete' rol.id %}" class="fa fa-eraser">Delete</a></p>{% endif %}
+    {% if perms.auth.change_group %}<p><a href="{% url 'rol_edit' roles.id %}" class="btn btn-warning btn-md">Editar</a></p>{% endif %}
+    {% if perms.auth.delete_group %}<p><a href="{% url 'rol_edit' roles.id %}" class="btn btn-danger btn-md">Eliminar</a></p>{% endif %}
     </div>
 {% endblock %}

@@ -8,6 +8,7 @@
 
 {% block contentbase %}
 
+
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
@@ -17,23 +18,138 @@
 		</div><!--/.row-->
 
 
+    	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li><a href="{% url 'project' %}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Proyectos</a></li>
+            <li><a href="{% url 'user_list' %}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
+            <li class="active"><a href="{% url 'rol_list' %}"><svg class="glyph stroked key "><use xlink:href="#stroked-key"/></svg> Roles</a></li>
+
+        </ul>
+
+
+	</div><!--/.sidebar-->
+
+
+
+
+
+    <a href="{% url 'rol_add' %}"> <div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-teal panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">Add</div>
+							<div class="text-muted">Rol</div>
+						</div>
+					</div>
+				</div>
+			</div>
+</a>
+
+
+
+
+
+
+    		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">Lista de Roles</div>
+					 <div class="bootstrap-table"><div class="fixed-table-toolbar">
+                         <div class="columns btn-group pull-right">
+                             <button class="btn btn-default" type="button" name="refresh" title="Refresh">
+                                 <i class="glyphicon glyphicon-refresh icon-refresh"></i>
+                             </button>
+                             <button class="btn btn-default" type="button" name="toggle" title="Toggle">
+                                 <i class="glyphicon glyphicon glyphicon-list-alt icon-list-alt">
+
+                                 </i>
+                             </button>
+                             <div class="keep-open btn-group" title="Columns">
+                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                     <i class="glyphicon glyphicon-th icon-th">
+
+                                     </i>
+                                     <span class="caret"></span>
+
+                             </div>
+                         </div>
+                         <div class="pull-right search"><input class="form-control" type="text" placeholder="Search"></div>
+                     </div>
+                         <div class="fixed-table-container"><div class="fixed-table-header"><table></table></div>
+                             <div class="fixed-table-body"><div class="fixed-table-loading" style="top: 37px; display: none;">Loading, please wait…</div>
+                                 <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true"
+                                        data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+
+                                   {% block thead %}
+                                        <th>Nombre</th>
+                                       <th>Ver Permisos</th>
+
+
+                                   {% endblock %}
+                                    {% block tbody %}
+
+
+
+                                      {% for r in roles %}
+        <tr class="odd gradeX">
+            <td>{{ r.name }}</td>
+            <td ><a href="{% url 'rol_detail' r.id %}"><button type="submit" class="btn btn-default btn-md">Ver</button> <i class="fa fa-eye fa-fw"></i></a> </td>
+            {% if perms.auth.change_group %}<td><a href="{% url 'rol_edit' r.id %}"><i class="fa fa-pencil fa-fw"></i></a></td>{% endif %}
+            {% if perms.auth.delete_group %}<td><a href="{% url 'rol_edit' r.id %}"><i class="fa fa-trash-o fa-fw"></i></a></td>{% endif %}
+        </tr>
+        {% endfor %}
+
+
+
+
+                                    {% endblock %}
+
+                            </table>
+                             </div><div class="fixed-table-pagination"><div class="pull-left pagination-detail">
+                                 <span class="pagination-info">Showing 1 to 10 of 21 rows</span><span class="page-list"><span class="btn-group dropup">
+                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="page-size">10</span>
+                                     <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li class="active"><a href="javascript:void(0)">10</a></li>
+                                 <li><a href="javascript:void(0)">25</a></li><li><a href="javascript:void(0)">50</a></li><li><a href="javascript:void(0)">100</a></li></ul></span> records per page</span></div>
+                                 <div class="pull-right pagination"><ul class="pagination"><li class="page-first disabled"><a href="javascript:void(0)">&lt;&lt;</a></li><li class="page-pre disabled">
+                                     <a href="javascript:void(0)">&lt;</a></li><li class="page-number active disabled"><a href="javascript:void(0)">1</a></li>
+                                     <li class="page-number"><a href="javascript:void(0)">2</a></li><li class="page-number"><a href="javascript:void(0)">3</a></li>
+                                     <li class="page-next"><a href="javascript:void(0)">&gt;</a></li><li class="page-last"><a href="javascript:void(0)">&gt;&gt;</a></li></ul></div></div></div></div>
+
+				</div>
+			</div>
+		</div><!--/.row-->
+
+
+
+
+
+
+
     {% if perms.auth.add_group %}<p><a href="{% url 'rol_add' %}" class="fa fa-plus-circle">Agregar</a></p>{% endif %}
-{% endblock %}
-{% block thead %}
+
+
         <tr>
             <th width="70%">Nombre</th>
             <th>Ver</th>
             {% if perms.auth.change_group %}<th>Editar</th>{% endif %}
             {% if perms.auth.delete_group %}<th>Eliminar</th>{% endif %}
         </tr>
-{% endblock %}
-{% block tbody %}
+
+
         {% for r in roles %}
         <tr class="odd gradeX">
             <td>{{ r.name }}</td>
             <td ><a href="{% url 'rol_detail' r.id %}"><i class="fa fa-eye fa-fw"></i></a> </td>
-            {% if perms.auth.change_group %}<td><a href="{% url 'rol_update' r.id %}"><i class="fa fa-pencil fa-fw"></i></a></td>{% endif %}
-            {% if perms.auth.delete_group %}<td><a href="{% url 'rol_delete' r.id %}"><i class="fa fa-trash-o fa-fw"></i></a></td>{% endif %}
+            {% if perms.auth.change_group %}<td><a href="{% url 'rol_edit' r.id %}"><i class="fa fa-pencil fa-fw"></i></a></td>{% endif %}
+            {% if perms.auth.delete_group %}<td><a href="{% url 'rol_edit' r.id %}"><i class="fa fa-trash-o fa-fw"></i></a></td>{% endif %}
         </tr>
         {% endfor %}
 {% endblock %}

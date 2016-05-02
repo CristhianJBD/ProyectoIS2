@@ -1,17 +1,19 @@
-{% extends 'project/base.html' %}
-{% block title %}{{ group }}{% endblock %}
+{% extends 'administracion/base.html' %}
+{% block contentbase %}
 
-{% block breadcrumbs %}
-    <li><a href="{% url 'project:home' %}">Home</a></li>
-    <li><a href="{% url 'project:rol_list' %}">Roles</a></li>
-    <li><a href="{% url 'project:rol_detail' group.id %}">{{ group }}</a></li>
-    <li class="active">Eliminar</li>
-{% endblock %}
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li><a href="{% url "rol_list" %}">Roles</a></li>
+				<li class="active">Delete</li>
+			</ol>
+		</div><!--/.row-->
+
 
 {% block header %}{{ group }}{% endblock %}
-{% block content %}
+
 <form action="" method="post" role="form">
-    {% csrf_token %}
+
     <div class="form-group">
         <p>Seguro de que desea eliminar el rol <strong>{{ group }}</strong>?</p>
     </div>
