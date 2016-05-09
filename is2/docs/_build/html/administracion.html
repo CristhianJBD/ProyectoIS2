@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>administracion package &mdash; documentación de is2Proyecto - 2.0</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="documentación de is2Proyecto - 2.0" href="index.html"/>
+        <link rel="next" title="administracion.migrations package" href="administracion.migrations.html"/>
+        <link rel="prev" title="autenticacion package" href="autenticacion.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> is2Proyecto
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="autenticacion.html">autenticacion package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">administracion package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="administracion.migrations.html">administracion.migrations package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-administracion.admin">administracion.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-administracion.apps">administracion.apps module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-administracion.forms">administracion.forms module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-administracion.models">administracion.models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-administracion.signals">administracion.signals module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-administracion.tests">administracion.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-administracion.urls">administracion.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-administracion">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">is2Proyecto</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>administracion package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/administracion.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="administracion-package">
+<h1>administracion package<a class="headerlink" href="#administracion-package" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="administracion.migrations.html">administracion.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="administracion.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administracion.migrations.html#module-administracion.migrations.0001_initial">administracion.migrations.0001_initial module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administracion.migrations.html#module-administracion.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-administracion.admin">
+<span id="administracion-admin-module"></span><h2>administracion.admin module<a class="headerlink" href="#module-administracion.admin" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="administracion.admin.MiembroEquipoInLine">
+<em class="property">class </em><code class="descclassname">administracion.admin.</code><code class="descname">MiembroEquipoInLine</code><span class="sig-paren">(</span><em>parent_model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/admin.html#MiembroEquipoInLine"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.admin.MiembroEquipoInLine" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.TabularInline</span></code></p>
+<dl class="attribute">
+<dt id="administracion.admin.MiembroEquipoInLine.extra">
+<code class="descname">extra</code><em class="property"> = 0</em><a class="headerlink" href="#administracion.admin.MiembroEquipoInLine.extra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.admin.MiembroEquipoInLine.media">
+<code class="descname">media</code><a class="headerlink" href="#administracion.admin.MiembroEquipoInLine.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.admin.MiembroEquipoInLine.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.admin.MiembroEquipoInLine.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">MiembroEquipo</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.admin.ProyectoAdmin">
+<em class="property">class </em><code class="descclassname">administracion.admin.</code><code class="descname">ProyectoAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/admin.html#ProyectoAdmin"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.admin.ProyectoAdmin" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.admin.GuardedModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="administracion.admin.ProyectoAdmin.inlines">
+<code class="descname">inlines</code><em class="property"> = [&lt;class 'administracion.admin.MiembroEquipoInLine'&gt;]</em><a class="headerlink" href="#administracion.admin.ProyectoAdmin.inlines" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.admin.ProyectoAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#administracion.admin.ProyectoAdmin.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-administracion.apps">
+<span id="administracion-apps-module"></span><h2>administracion.apps module<a class="headerlink" href="#module-administracion.apps" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="administracion.apps.AdministracionConfig">
+<em class="property">class </em><code class="descclassname">administracion.apps.</code><code class="descname">AdministracionConfig</code><span class="sig-paren">(</span><em>app_name</em>, <em>app_module</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/apps.html#AdministracionConfig"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.apps.AdministracionConfig" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.apps.config.AppConfig</span></code></p>
+<dl class="attribute">
+<dt id="administracion.apps.AdministracionConfig.name">
+<code class="descname">name</code><em class="property"> = 'administracion'</em><a class="headerlink" href="#administracion.apps.AdministracionConfig.name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-administracion.forms">
+<span id="administracion-forms-module"></span><h2>administracion.forms module<a class="headerlink" href="#module-administracion.forms" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="administracion.forms.MiembrosEquipoFormset">
+<em class="property">class </em><code class="descclassname">administracion.forms.</code><code class="descname">MiembrosEquipoFormset</code><span class="sig-paren">(</span><em>data=None</em>, <em>files=None</em>, <em>instance=None</em>, <em>save_as_new=False</em>, <em>prefix=None</em>, <em>queryset=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#MiembrosEquipoFormset"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.MiembrosEquipoFormset" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.forms.models.BaseInlineFormSet</span></code></p>
+<dl class="method">
+<dt id="administracion.forms.MiembrosEquipoFormset.clean">
+<code class="descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#MiembrosEquipoFormset.clean"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.MiembrosEquipoFormset.clean" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.RolForm">
+<em class="property">class </em><code class="descclassname">administracion.forms.</code><code class="descname">RolForm</code><span class="sig-paren">(</span><em>data=None</em>, <em>files=None</em>, <em>auto_id='id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.utils.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#RolForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.RolForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<p>Formulario para el manejo de roles</p>
+<dl class="class">
+<dt id="administracion.forms.RolForm.Meta">
+<em class="property">class </em><code class="descname">Meta</code><a class="reference internal" href="_modules/administracion/forms.html#RolForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.RolForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="administracion.forms.RolForm.Meta.fields">
+<code class="descname">fields</code><em class="property"> = ['name']</em><a class="headerlink" href="#administracion.forms.RolForm.Meta.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RolForm.Meta.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.forms.RolForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">Group</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RolForm.base_fields">
+<code class="descclassname">RolForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('name', &lt;django.forms.fields.CharField object at 0x2b79c1988f28&gt;), ('perms_proyecto', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c1930470&gt;)])</em><a class="headerlink" href="#administracion.forms.RolForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RolForm.declared_fields">
+<code class="descclassname">RolForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('perms_proyecto', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c1930470&gt;)])</em><a class="headerlink" href="#administracion.forms.RolForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RolForm.media">
+<code class="descclassname">RolForm.</code><code class="descname">media</code><a class="headerlink" href="#administracion.forms.RolForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RolForm.perms_proyecto_list">
+<code class="descclassname">RolForm.</code><code class="descname">perms_proyecto_list</code><em class="property"> = [('add_proyecto', 'Can add proyecto'), ('aprobar_proyecto', 'permiso para aprobar el proyecto'), ('change_proyecto', 'Can change proyecto'), ('delete_proyecto', 'Can delete proyecto'), ('listar_proyectos', 'Listar todos los proyectos disponibles'), ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'), ('ver_proyecto', 'ver detalles del proyecto')]</em><a class="headerlink" href="#administracion.forms.RolForm.perms_proyecto_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.UserCreateForm">
+<em class="property">class </em><code class="descclassname">administracion.forms.</code><code class="descname">UserCreateForm</code><span class="sig-paren">(</span><em>data=None</em>, <em>files=None</em>, <em>auto_id='id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.utils.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#UserCreateForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UserCreateForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.auth.forms.UserCreationForm</span></code></p>
+<p>Formulario para creación de usuarios</p>
+<dl class="class">
+<dt id="administracion.forms.UserCreateForm.Meta">
+<em class="property">class </em><code class="descname">Meta</code><a class="reference internal" href="_modules/administracion/forms.html#UserCreateForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UserCreateForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="administracion.forms.UserCreateForm.Meta.fields">
+<code class="descname">fields</code><em class="property"> = ['first_name', 'last_name', 'email', 'username']</em><a class="headerlink" href="#administracion.forms.UserCreateForm.Meta.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UserCreateForm.Meta.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.forms.UserCreateForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">User</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UserCreateForm.base_fields">
+<code class="descclassname">UserCreateForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('first_name', &lt;django.forms.fields.CharField object at 0x2b79c18f45f8&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b79c1951470&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b79c19518d0&gt;), ('username', &lt;django.forms.fields.CharField object at 0x2b79c196fe10&gt;), ('password1', &lt;django.forms.fields.CharField object at 0x2b79c149c0b8&gt;), ('password2', &lt;django.forms.fields.CharField object at 0x2b79c149c2e8&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c196fa58&gt;)])</em><a class="headerlink" href="#administracion.forms.UserCreateForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UserCreateForm.declared_fields">
+<code class="descclassname">UserCreateForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('password1', &lt;django.forms.fields.CharField object at 0x2b79c149c0b8&gt;), ('password2', &lt;django.forms.fields.CharField object at 0x2b79c149c2e8&gt;), ('first_name', &lt;django.forms.fields.CharField object at 0x2b79c18f45f8&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b79c1951470&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b79c19518d0&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c196fa58&gt;)])</em><a class="headerlink" href="#administracion.forms.UserCreateForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UserCreateForm.general_perms_list">
+<code class="descclassname">UserCreateForm.</code><code class="descname">general_perms_list</code><em class="property"> = [('listar_proyectos', 'Listar todos los proyectos disponibles'), ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'), ('add_proyecto', 'Can add proyecto'), ('add_user', 'Can add user'), ('change_user', 'Can change user'), ('delete_user', 'Can delete user'), ('add_group', 'Can add group'), ('change_group', 'Can change group'), ('delete_group', 'Can delete group')]</em><a class="headerlink" href="#administracion.forms.UserCreateForm.general_perms_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UserCreateForm.media">
+<code class="descclassname">UserCreateForm.</code><code class="descname">media</code><a class="headerlink" href="#administracion.forms.UserCreateForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.UserEditForm">
+<em class="property">class </em><code class="descclassname">administracion.forms.</code><code class="descname">UserEditForm</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#UserEditForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UserEditForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.auth.forms.UserChangeForm</span></code></p>
+<p>Formulario para edición de usuarios</p>
+<dl class="attribute">
+<dt id="administracion.forms.UserEditForm.base_fields">
+<code class="descname">base_fields</code><em class="property"> = OrderedDict([('password', &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x2b79c149c748&gt;), ('last_login', &lt;django.forms.fields.DateTimeField object at 0x2b79c1984b00&gt;), ('is_superuser', &lt;django.forms.fields.BooleanField object at 0x2b79c1984908&gt;), ('groups', &lt;django.forms.models.ModelMultipleChoiceField object at 0x2b79c19848d0&gt;), ('user_permissions', &lt;django.forms.models.ModelMultipleChoiceField object at 0x2b79c1984d68&gt;), ('username', &lt;django.forms.fields.CharField object at 0x2b79c1984ef0&gt;), ('first_name', &lt;django.forms.fields.CharField object at 0x2b79c1988048&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b79c1988160&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b79c1988278&gt;), ('is_staff', &lt;django.forms.fields.BooleanField object at 0x2b79c1988390&gt;), ('is_active', &lt;django.forms.fields.BooleanField object at 0x2b79c1988438&gt;), ('date_joined', &lt;django.forms.fields.DateTimeField object at 0x2b79c19884e0&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c196fe80&gt;)])</em><a class="headerlink" href="#administracion.forms.UserEditForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UserEditForm.declared_fields">
+<code class="descname">declared_fields</code><em class="property"> = OrderedDict([('password', &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x2b79c149c748&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c196fe80&gt;)])</em><a class="headerlink" href="#administracion.forms.UserEditForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UserEditForm.general_perms_list">
+<code class="descname">general_perms_list</code><em class="property"> = [('listar_proyectos', 'Listar todos los proyectos disponibles'), ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'), ('add_proyecto', 'Can add proyecto'), ('add_user', 'Can add user'), ('change_user', 'Can change user'), ('delete_user', 'Can delete user'), ('add_group', 'Can add group'), ('change_group', 'Can change group'), ('delete_group', 'Can delete group')]</em><a class="headerlink" href="#administracion.forms.UserEditForm.general_perms_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.UserEditForm.media">
+<code class="descname">media</code><a class="headerlink" href="#administracion.forms.UserEditForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-administracion.models">
+<span id="administracion-models-module"></span><h2>administracion.models module<a class="headerlink" href="#module-administracion.models" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="administracion.models.Cliente">
+<em class="property">class </em><code class="descclassname">administracion.models.</code><code class="descname">Cliente</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Cliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Cliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Modelo de cliente del sistema</p>
+<dl class="exception">
+<dt id="administracion.models.Cliente.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#administracion.models.Cliente.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="administracion.models.Cliente.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Cliente.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#administracion.models.Cliente.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Cliente.delete">
+<code class="descclassname">Cliente.</code><code class="descname">delete</code><span class="sig-paren">(</span><em>using=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Cliente.delete"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Cliente.delete" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Cliente.objects">
+<code class="descclassname">Cliente.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#administracion.models.Cliente.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Cliente.proyecto">
+<code class="descclassname">Cliente.</code><code class="descname">proyecto</code><a class="headerlink" href="#administracion.models.Cliente.proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Cliente.save">
+<code class="descclassname">Cliente.</code><code class="descname">save</code><span class="sig-paren">(</span><em>force_insert=False</em>, <em>force_update=False</em>, <em>using=None</em>, <em>update_fields=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Cliente.save"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Cliente.save" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.models.MiembroEquipo">
+<em class="property">class </em><code class="descclassname">administracion.models.</code><code class="descname">MiembroEquipo</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#MiembroEquipo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.MiembroEquipo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Miembros del equipo de un proyecto</p>
+<dl class="exception">
+<dt id="administracion.models.MiembroEquipo.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#administracion.models.MiembroEquipo.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="administracion.models.MiembroEquipo.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">MiembroEquipo.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#administracion.models.MiembroEquipo.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.MiembroEquipo.delete">
+<code class="descclassname">MiembroEquipo.</code><code class="descname">delete</code><span class="sig-paren">(</span><em>using=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#MiembroEquipo.delete"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.MiembroEquipo.delete" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.MiembroEquipo.objects">
+<code class="descclassname">MiembroEquipo.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#administracion.models.MiembroEquipo.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.MiembroEquipo.proyecto">
+<code class="descclassname">MiembroEquipo.</code><code class="descname">proyecto</code><a class="headerlink" href="#administracion.models.MiembroEquipo.proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.MiembroEquipo.roles">
+<code class="descclassname">MiembroEquipo.</code><code class="descname">roles</code><a class="headerlink" href="#administracion.models.MiembroEquipo.roles" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">pizza.toppings</span></code> and <code class="docutils literal"><span class="pre">topping.pizzas</span></code> are <code class="docutils literal"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.MiembroEquipo.save">
+<code class="descclassname">MiembroEquipo.</code><code class="descname">save</code><span class="sig-paren">(</span><em>force_insert=False</em>, <em>force_update=False</em>, <em>using=None</em>, <em>update_fields=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#MiembroEquipo.save"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.MiembroEquipo.save" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.MiembroEquipo.usuario">
+<code class="descclassname">MiembroEquipo.</code><code class="descname">usuario</code><a class="headerlink" href="#administracion.models.MiembroEquipo.usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.models.Proyecto">
+<em class="property">class </em><code class="descclassname">administracion.models.</code><code class="descname">Proyecto</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Modelo de Proyecto del sistema.</p>
+<dl class="exception">
+<dt id="administracion.models.Proyecto.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#administracion.models.Proyecto.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="administracion.models.Proyecto.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Proyecto.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#administracion.models.Proyecto.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.clean">
+<code class="descclassname">Proyecto.</code><code class="descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Proyecto.clean"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Proyecto.clean" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.cliente_set">
+<code class="descclassname">Proyecto.</code><code class="descname">cliente_set</code><a class="headerlink" href="#administracion.models.Proyecto.cliente_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.equipo">
+<code class="descclassname">Proyecto.</code><code class="descname">equipo</code><a class="headerlink" href="#administracion.models.Proyecto.equipo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">pizza.toppings</span></code> and <code class="docutils literal"><span class="pre">topping.pizzas</span></code> are <code class="docutils literal"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_absolute_url">
+<code class="descclassname">Proyecto.</code><code class="descname">get_absolute_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Proyecto.get_absolute_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Proyecto.get_absolute_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_estado_display">
+<code class="descclassname">Proyecto.</code><code class="descname">get_estado_display</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Proyecto.get_estado_display" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_next_by_fecha_creacion">
+<code class="descclassname">Proyecto.</code><code class="descname">get_next_by_fecha_creacion</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Proyecto.get_next_by_fecha_creacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_next_by_fecha_fin">
+<code class="descclassname">Proyecto.</code><code class="descname">get_next_by_fecha_fin</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Proyecto.get_next_by_fecha_fin" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_next_by_fecha_inicio">
+<code class="descclassname">Proyecto.</code><code class="descname">get_next_by_fecha_inicio</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Proyecto.get_next_by_fecha_inicio" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_previous_by_fecha_creacion">
+<code class="descclassname">Proyecto.</code><code class="descname">get_previous_by_fecha_creacion</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Proyecto.get_previous_by_fecha_creacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_previous_by_fecha_fin">
+<code class="descclassname">Proyecto.</code><code class="descname">get_previous_by_fecha_fin</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Proyecto.get_previous_by_fecha_fin" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_previous_by_fecha_inicio">
+<code class="descclassname">Proyecto.</code><code class="descname">get_previous_by_fecha_inicio</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Proyecto.get_previous_by_fecha_inicio" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.miembroequipo_set">
+<code class="descclassname">Proyecto.</code><code class="descname">miembroequipo_set</code><a class="headerlink" href="#administracion.models.Proyecto.miembroequipo_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.objects">
+<code class="descclassname">Proyecto.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#administracion.models.Proyecto.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.opciones_estado">
+<code class="descclassname">Proyecto.</code><code class="descname">opciones_estado</code><em class="property"> = (('PL', 'Planificacion'), ('EJ', 'Ejecutandose'), ('PE', 'Pendiente'), ('CA', 'Cancelado'), ('TE', 'Terminado'))</em><a class="headerlink" href="#administracion.models.Proyecto.opciones_estado" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-administracion.signals">
+<span id="administracion-signals-module"></span><h2>administracion.signals module<a class="headerlink" href="#module-administracion.signals" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="function">
+<dt id="administracion.signals.add_permissions_team_member">
+<code class="descclassname">administracion.signals.</code><code class="descname">add_permissions_team_member</code><span class="sig-paren">(</span><em>sender</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/signals.html#add_permissions_team_member"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.signals.add_permissions_team_member" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Signal que se ejecuta cuando se agrega un rol a un miembro de equipo
+que hace que los permisos asociados al rol se asigne.
+:param sender: Clase que envia la signal
+:param kwargs: Diccionario con parámetros</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-administracion.tests">
+<span id="administracion-tests-module"></span><h2>administracion.tests module<a class="headerlink" href="#module-administracion.tests" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="administracion.tests.ProjectTest">
+<em class="property">class </em><code class="descclassname">administracion.tests.</code><code class="descname">ProjectTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#ProjectTest"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.ProjectTest" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<dl class="method">
+<dt id="administracion.tests.ProjectTest.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#ProjectTest.setUp"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.ProjectTest.setUp" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.ProjectTest.test_not_permission_to_create_proyecto">
+<code class="descname">test_not_permission_to_create_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#ProjectTest.test_not_permission_to_create_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.ProjectTest.test_not_permission_to_create_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.ProjectTest.test_permission_to_create_proyecto">
+<code class="descname">test_permission_to_create_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#ProjectTest.test_permission_to_create_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.ProjectTest.test_permission_to_create_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.tests.RoleTest">
+<em class="property">class </em><code class="descclassname">administracion.tests.</code><code class="descname">RoleTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#RoleTest"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.RoleTest" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<dl class="method">
+<dt id="administracion.tests.RoleTest.create_role">
+<code class="descname">create_role</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#RoleTest.create_role"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.RoleTest.create_role" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.RoleTest.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#RoleTest.setUp"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.RoleTest.setUp" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.RoleTest.test_create_role">
+<code class="descname">test_create_role</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#RoleTest.test_create_role"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.RoleTest.test_create_role" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.RoleTest.test_delete_role">
+<code class="descname">test_delete_role</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#RoleTest.test_delete_role"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.RoleTest.test_delete_role" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.tests.UserTest">
+<em class="property">class </em><code class="descclassname">administracion.tests.</code><code class="descname">UserTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#UserTest"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.UserTest" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<dl class="method">
+<dt id="administracion.tests.UserTest.create_role">
+<code class="descname">create_role</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#UserTest.create_role"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.UserTest.create_role" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.UserTest.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#UserTest.setUp"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.UserTest.setUp" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.UserTest.test_create_user">
+<code class="descname">test_create_user</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#UserTest.test_create_user"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.UserTest.test_create_user" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.UserTest.test_delete_user">
+<code class="descname">test_delete_user</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#UserTest.test_delete_user"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.UserTest.test_delete_user" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.UserTest.test_edit_user">
+<code class="descname">test_edit_user</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#UserTest.test_edit_user"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.UserTest.test_edit_user" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-administracion.urls">
+<span id="administracion-urls-module"></span><h2>administracion.urls module<a class="headerlink" href="#module-administracion.urls" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-administracion">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-administracion" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="administracion.migrations.html" class="btn btn-neutral float-right" title="administracion.migrations package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="autenticacion.html" class="btn btn-neutral" title="autenticacion package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Christian Delgado, Cristhian Benitez, Fernando Britez, Isidro Gaona.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
