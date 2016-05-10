@@ -26,7 +26,7 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li><a href="{% url 'project' %}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Proyectos</a></li>
+			<li><a href="{% url 'project_list' %}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Proyectos</a></li>
             <li class="active"><a href="{% url 'user_list' %}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
             <li><a href="{% url 'rol_list' %}"><svg class="glyph stroked key "><use xlink:href="#stroked-key"/></svg> Roles</a></li>
 
@@ -122,6 +122,12 @@
 
 
                                                 </td>
+                                                       <td>
+                                                <a href="{% url 'user_edit' u.id %}"><button type="submit" class="btn btn-warning btn-md">Editar</button></a>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'user_delete' u.id %}"><button type="submit" class="btn btn-danger btn-md">Eliminar</button></a>
+                                            </td>
                                            </tr>
 
 
