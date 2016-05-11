@@ -36,6 +36,8 @@ class UserCreateForm(UserCreationForm):
     last_name = forms.CharField(required=True)
     email = forms.EmailField(required=True)
 
+
+
     general_perms_list = [(perm.codename, perm.name) for perm in __general_perms_list__()]
     general_perms_list.extend(__user_and_group_permissions__())
     general_perms = forms.MultipleChoiceField(general_perms_list, widget=forms.CheckboxSelectMultiple, label="General permissions", required=False)
@@ -73,3 +75,18 @@ class MiembrosEquipoFormset(BaseInlineFormSet):
             if form in self.deleted_forms:
                 usuario = form.cleaned_data['usuario']
                 proyecto = form.cleaned_data['proyecto']
+
+class MiembrosEquipoFormset(BaseInlineFormSet):
+  def clean(self):
+        super(MiembrosEquipoFormset, self).clean()
+        for form in self.forms:
+            if form in self.deleted_forms:
+                usuario = form.cleaned_data['usuario']
+                proyecto = form.cleaned_data['proyecto']
+
+class UsuarioFormset(BaseInlineFormSet):
+  def clean(self):
+        super(UsuarioFormset, self).clean()
+        for form in self.forms:
+            if form in self.deleted_forms:
+                usuario = form.cleaned_data['usuario']

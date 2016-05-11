@@ -35,7 +35,10 @@ class Proyecto(models.Model):
             ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'),
             ('ver_proyecto', 'ver detalles del proyecto'),
             ('asignar_equipo', 'asignar los miembros del equipo'),
-            ('aprobar_proyecto', 'permiso para aprobar el proyecto')
+
+            ('crear_sprint', 'agregar sprint'),
+            ('editar_sprint', 'editar sprint'),
+            ('eliminar_sprint', 'eliminar sprint'),
 
         )
 
@@ -53,7 +56,24 @@ class Proyecto(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('project_detail', args=[self.pk])
 
+'''
+class Usuario(models.Model):
+    """
+    Usuario con roles asociados
+    """
+    usuario = models.ForeignKey(User)
+    roles = models.ManyToManyField(Group)
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(Usuario, self).save(force_insert, force_update, using, update_fields)
+
+
+
+    class Meta:
+        default_roles = ()
+        verbose_name_plural = 'usuarios'
+        unique_together = ('usuario', 'roles')
+'''
 class MiembroEquipo(models.Model):
     """
     Miembros del equipo de un proyecto
@@ -67,7 +87,7 @@ class MiembroEquipo(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,update_fields=None):
         super(MiembroEquipo, self).save(force_insert, force_update, using, update_fields)
-        # Agregamos el permiso view_proyect al usuario
+        # Agregamos el permiso ver_proyecto al usuario
         assign_perm('ver_proyecto', self.usuario, self.proyecto)
 
     def delete(self, using=None):
@@ -81,6 +101,61 @@ class MiembroEquipo(models.Model):
         verbose_name_plural = 'miembros equipo'
         unique_together = ('usuario', 'proyecto')
 
+class Sprint(models.Model):
+    """
+    Manejo de los sprints del proyecto
+    """
+    nombre = models.CharField(max_length=20)
+    fecha_inicio = models.DateTimeField()
+    fecha_fin = models.DateTimeField()
+    proyecto = models.ForeignKey(Proyecto, null=False, blank=True)
+
+
+
+    class Meta:
+        default_permissions = ()
+        verbose_name = 'sprint'
+        verbose_name_plural = 'sprints'
+
+    def __str__(self):
+        return self.nombre
+
+    def get_absolute_url(self):
+        return reverse_lazy('sprint_detail', args=[self.pk])
+
+class Flujo(models.Model):
+    """
+    Administración de los flujos que forman parte de un proyecto.
+    """
+    nombre = models.CharField(max_length=20)
+    proyecto = models.ForeignKey(Proyecto, null=True, blank=True)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name_plural = 'flujos'
+        default_permissions = ()
+
+
+    def get_absolute_url(self):
+        return reverse_lazy('flujo_detail', args=[self.pk])
+
+
+class Actividad(models.Model):
+    """
+    Las actividades representan las distintas etapas de las que se componen un flujo
+    """
+    nombre = models.CharField(max_length=20)
+    flujo = models.ForeignKey(Flujo)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        order_with_respect_to = 'flujo'
+        verbose_name_plural = 'actividades'
+
 #Aqui se llama al models signals y su metodo add_permissions_team_member
 #para que se pueda asignar permisos de algun rol a un usuario de un proyecto
 
@@ -88,30 +163,6 @@ m2m_changed.connect(add_permissions_team_member, sender=MiembroEquipo.roles.thro
                     dispatch_uid='add_permissions_signal')
 
 
-
-class Cliente(models.Model):
-    """
-    Modelo de cliente del sistema
-    """
-    nombre = models.CharField(max_length=40)
-    apellido = models.CharField(max_length=40)
-    email = models.EmailField()
-    telefono = models.CharField(max_length=20)
-    direccion = models.CharField(max_length=50)
-    proyecto = models.ForeignKey(Proyecto)
-
-    # nota: si se quiere eliminar o guardar se llama al delete o save de cada objeto
-
-    def save(self, force_insert=False, force_update=False, using=None,update_fields=None):
-        super(MiembroEquipo, self).save(force_insert, force_update, using, update_fields)
-        # Agregamos el permiso ver_proyecto al usuario
-        assign_perm('ver_proyecto', self.usuario, self.proyecto)
-
-    def delete(self, using=None):
-        for role in self.roles.all():
-            for perm in role.permissions.all():
-                remove_perm(perm.codename, self.usuario, self.proyecto)
-        super(MiembroEquipo, self).delete(using)
 
 
 
