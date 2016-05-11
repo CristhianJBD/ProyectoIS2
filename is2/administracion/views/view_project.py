@@ -60,6 +60,8 @@ class ProjectDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, DetailVie
     def get_context_data(self, **kwargs):
         context = super(ProjectDetail, self).get_context_data(**kwargs)
         context['team'] = self.object.miembroequipo_set.all()
+        context['flujos'] = self.object.flujo_set.all()
+        context['sprints'] = self.object.sprint_set.all()
         return context
 
 
@@ -71,7 +73,7 @@ class ProjectCreate(LoginRequiredMixin, CreateViewPermissionRequiredMixin, gener
     permission_required = 'administracion.add_proyecto'
     form_class = modelform_factory(Proyecto,
                                    widgets={'fecha_inicio': SelectDateWidget, 'fecha_fin': SelectDateWidget},
-                                   fields=('nombre', 'fecha_inicio', 'fecha_fin'),)
+                                   fields=('nombre', 'fecha_inicio', 'fecha_fin', 'duracion_sprint'),)
 
     template_name = 'administracion/proyecto/project_form_create.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
@@ -115,7 +117,7 @@ class ProjectUpdate( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
                                                     widgets={'roles': CheckboxSelectMultiple})
     form_class = modelform_factory(Proyecto,
                                    widgets={'fecha_inicio': SelectDateWidget, 'fecha_fin': SelectDateWidget},
-                                   fields=('nombre', 'fecha_inicio', 'fecha_fin'),
+                                   fields=('nombre', 'fecha_inicio', 'fecha_fin', 'duracion_sprint'),
                                    )
 
     def get_proyecto(self):

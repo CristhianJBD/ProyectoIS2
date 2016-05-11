@@ -15,7 +15,7 @@ def login_view(request):
 
 
     """
-    if request.user.is_authenticated():
+    if request.user.is_authenticated() and request.user.is_active == True :
         return HttpResponsePermanentRedirect('/index')
     else:
         c = {}
@@ -46,7 +46,7 @@ def index(request):
 
 
      """
-     if request.user.is_authenticated():
+     if request.user.is_authenticated() and request.user.is_active == True:
          return render_to_response('administracion/index.html', {'full_name': request.user.username})
      else:
          return HttpResponsePermanentRedirect('/login')
