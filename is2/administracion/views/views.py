@@ -8,6 +8,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth.models import User
 from administracion.forms import UserCreateForm, UserEditForm
+from django.core.exceptions import PermissionDenied
 
 
 
@@ -28,7 +29,17 @@ class CreateViewPermissionRequiredMixin(GlobalPermissionRequiredMixin):
     def get_object(self):
         return None
 
+class ActiveProjectRequiredMixin(object):
+    proyecto = None
 
+    def get_proyecto(self):
+        return self.proyecto
+
+    def dispatch(self, request, *args, **kwargs):
+        proyecto = self.get_proyecto()
+        if proyecto.estado != 'AP':
+            return super(ActiveProjectRequiredMixin, self).dispatch(request, *args, **kwargs)
+        raise PermissionDenied()
 
 
 def get_selected_perms(POST):
@@ -39,6 +50,8 @@ def get_selected_perms(POST):
     :return: lista de permisos
     """
     current_list = POST.getlist('perms_proyecto')
+    current_list.extend(POST.getlist('perms_flujo'))
+    current_list.extend(POST.getlist('perms_sprint'))
     return current_list
 
 

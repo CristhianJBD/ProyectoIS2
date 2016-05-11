@@ -22,6 +22,7 @@ class Proyecto(models.Model):
     fecha_inicio = models.DateTimeField()
     fecha_fin = models.DateTimeField()
     equipo = models.ManyToManyField(User, through='MiembroEquipo')
+    duracion_sprint = models.PositiveIntegerField(default=30)
 
 
 
@@ -35,10 +36,15 @@ class Proyecto(models.Model):
             ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'),
             ('ver_proyecto', 'ver detalles del proyecto'),
             ('asignar_equipo', 'asignar los miembros del equipo'),
+            ('aprobar_proyecto', 'aprobar el proyecto'),
 
             ('crear_sprint', 'agregar sprint'),
             ('editar_sprint', 'editar sprint'),
             ('eliminar_sprint', 'eliminar sprint'),
+
+            ('crear_flujo', 'agregar flujo'),
+            ('editar_flujo', 'editar flujo'),
+            ('eliminar_flujo', 'eliminar flujo'),
 
         )
 
@@ -136,6 +142,7 @@ class Flujo(models.Model):
     class Meta:
         verbose_name_plural = 'flujos'
         default_permissions = ()
+
 
 
     def get_absolute_url(self):
