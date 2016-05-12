@@ -1,7 +1,7 @@
 from django.contrib import admin
 from guardian.admin import GuardedModelAdmin
 
-from .models import Proyecto, MiembroEquipo,Actividad, Flujo, Sprint
+from .models import Proyecto, MiembroEquipo,Actividad, Flujo, Sprint, UserStory
 # Register your models here.
 
 class MiembroEquipoInLine(admin.TabularInline):
@@ -18,8 +18,11 @@ class ActividadInLine(admin.TabularInline):
 class ActividadAdmin(GuardedModelAdmin):
     inlines = [ActividadInLine]
 
+class UserStoryAdmin(GuardedModelAdmin):
+    pass
 
 #admin.site.register(Usuario)
+admin.site.register(UserStory, UserStoryAdmin)
 admin.site.register(Proyecto, ProyectoAdmin)
 admin.site.register(MiembroEquipo)
 admin.site.register(Flujo, ActividadAdmin)
