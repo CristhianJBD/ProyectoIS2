@@ -15,9 +15,7 @@
 		</div><!--/.row-->
 
 
-    <div class="col-lg-12">
-                    <h3 class="page-header"></h3>
-    </div>
+
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 
 		<form role="search">
@@ -30,7 +28,8 @@
             <li class="active"><a href="{% url 'user_list' %}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
             <li><a href="{% url 'rol_list' %}"><svg class="glyph stroked key "><use xlink:href="#stroked-key"/></svg> Roles</a></li>
 
-        </ul></div>
+        </ul>
+    </div>
 
 
 {% if perms.auth.add_user %}
@@ -105,8 +104,9 @@
                                             <th>Username</th>
                                             <th>Nombre</th>
                                             <th>Apellido</th>
-                                            <th>Detalles</th>
-
+                                            <th>Detalles del usuario</th>
+                                            <th>Editar usuario</th>
+                                            <th>Eliminar usuario</th>
                                         </tr>
 
                                         {% for u in usuario %}
