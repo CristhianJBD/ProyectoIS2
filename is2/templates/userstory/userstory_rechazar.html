@@ -1,0 +1,23 @@
+{% extends 'project/base.html' %}
+{% load bootstrap3 %}
+{% block title %}{{ action | title }} User Story{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="{% url 'project:home' %}">Home</a></li>
+    <li><a href="{% url 'project:project_list' %}">Proyectos</a></li>
+    <li><a href="{{ object.proyecto.get_absolute_url }}">{{ object.proyecto }}</a></li>
+    <li><a href="{% url 'project:pending_userstories' object.proyecto_id %}">User Stories a Aprobar</a></li>
+    <li class="Active">Rechazar {{ object }}</li>
+{% endblock %}
+
+{% block header %}{{ userstory.nombre }} {% endblock %}
+{% block content %}
+<form action="" method="post" role="form">
+    {% csrf_token %}
+    <div class="form-group">
+        <p>Indique dónde reubicar el User Story <strong>{{ object }}</strong> a continuación, o si desea haga clic <a href="{% url 'project:userstory_cancelar' object.id %}">aquí</a> para cancelarlo.</p>
+    </div>
+    {% bootstrap_form form layout='horizontal' %}
+    <input type="submit" value="Rechazar" class="btn btn-default"/>
+</form>
+{% endblock %}
