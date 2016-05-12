@@ -1,11 +1,12 @@
 {% extends 'administracion/base.html' %}
 {% load guardian_tags %}
-{% block title %}{{ proyecto.nombre }}{% endblock %}
-
-
-
-
 {% block contentbase %}
+
+
+
+
+
+
 
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 
@@ -51,28 +52,41 @@
 
 
 
-<div class="row">
-        <div class="col-lg-4">
-            <h4 class="list-group-item-heading">
-                <a href="{% if perms.proyecto.change_proyecto %}
-                {% url 'project_update' proyecto.id %}#equipo
-                {% else %}#{% endif %}">Equipo</a>
-            </h4>
+    <div class="row">
+            <div class="col-lg-4">
+                <h4 class="list-group-item-heading">
+                    <a href="{% if perms.proyecto.change_proyecto %}
+                    {% url 'project_update' proyecto.id %}#equipo
+                    {% else %}#{% endif %}">Equipo</a>
+                </h4>
+                <div class="list-group">
+                    {% for m in team %}
+                        <a href="{% url 'user_detail' m.usuario_id %}" class="list-group-item">
+                            {{ m.usuario }}
+                            {% for r in m.roles.all %}
+                                <span class="badge" data-toggle="tooltip" data-placement="left"
+                                  title="Rol">{{ r }}</span>
+                            {% endfor %}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+    </div>
+
+    <div class="col-lg-4">
+            <h4 class="list-group-item-heading"><a href="{% url 'flujo_list' proyecto.id %}">Flujos</a></h4>
+
             <div class="list-group">
-                {% for m in team %}
-                    <a href="{% url 'user_detail' m.usuario_id %}" class="list-group-item">
-                        {{ m.usuario }}
-                        {% for r in m.roles.all %}
-                            <span class="badge" data-toggle="tooltip" data-placement="left"
-                              title="Rol">{{ r }}</span>
-                        {% endfor %}
+                {% for f in flujos %}
+                    <a href="#" class="list-group-item">{{ f.nombre }}
+                        <span class="badge" data-toggle="tooltip" data-placement="right"
+                              title="Actividades">{{ f.actividad_set.count }}</span>
                     </a>
                 {% endfor %}
             </div>
-        </div>
-
-
-        </div>
+    </div>
 
 
 {% endblock %}

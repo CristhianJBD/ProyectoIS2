@@ -8,14 +8,14 @@ from django.template import RequestContext
 from django.views import generic
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from guardian.shortcuts import get_perms
-from project.forms import ActividadFormSet, FlujosCreateForm, CreateFromPlantillaForm
-from project.models import Flujo, Proyecto, UserStory, Sprint
-from project.views import CreateViewPermissionRequiredMixin, GlobalPermissionRequiredMixin, ActiveProjectRequiredMixin
+from administracion.forms import ActividadFormSet, FlujosCreateForm
+from administracion.models import Flujo, Proyecto, Sprint
+from administracion.views.views import CreateViewPermissionRequiredMixin, GlobalPermissionRequiredMixin, ActiveProjectRequiredMixin
 
 
 class FlujoList(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.ListView):
     """
-    Vista de Listado de Flujos en el sistema
+    Vista de Listado de Flujos en el sistema de acuerdo a un proyecto
     """
     model = Flujo
     template_name = 'administracion/flujo/flujo_list.html'
@@ -211,7 +211,7 @@ class DeleteFlujo(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissi
     Vista de Eliminacion de Flujos
     """
     model = Flujo
-    template_name = 'flujo/flujo_delete.html'
+    template_name = 'administracion/flujo/flujo_delete.html'
     permission_required = 'proyecto.eliminar_flujo'
     context_object_name = 'flujo'
 

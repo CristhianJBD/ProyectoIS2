@@ -1,0 +1,36 @@
+{% extends 'administracion/base.html' %}
+{% block contentbase %}
+{% block title %}<strong><h1>Flujos</strong></h1>{% endblock %}
+
+
+
+    <h4><strong>Proyecto: </strong><td>{{ view.project }}</td></h4>
+    {% if "crear_flujo" in proyecto_perms %}<p><a href="#" class="fa fa-plus-circle"> Agregar</a></p>{% endif %}
+ {% endblock %}
+
+    <tr>
+        <th>Nombre</th>
+        <th>Actividades</th>
+        <th>Ver</th>
+        {% if "#" in proyecto_perms %}<th>Editar</th>{% endif %}
+        {% if "#" in proyecto_perms %}<th>Eliminar</th>{% endif %}
+
+    </tr>
+
+
+    {% for f in flujos %}
+    <tr class="odd gradeX">
+        <td>{{ f.nombre }}</td>
+        <td>{{ f.actividad_set.count }}</td>
+        <td ><a href="#"><i class="fa fa-eye fa-fw"></i></a> </td>
+        {% if "edit_flujo" in proyecto_perms %}<td><a href="#"><i class="fa fa-pencil fa-fw"></i></a></td>{% endif %}
+        {% if "remove_flujo" in proyecto_perms %}<td><a href="#"><i class="fa fa-trash-o fa-fw"></i></a></td>{% endif %}
+    </tr>
+    {% endfor %}
+
+{% block after_table %}
+     <div class="col-lg-12">
+    <p><a class="fa fa-file" href="#"> Volver al Proyecto {{ view.project }}</a></p>
+    </div>
+
+{% endblock %}
