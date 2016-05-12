@@ -2,6 +2,7 @@ from django.contrib import admin
 from guardian.admin import GuardedModelAdmin
 
 from .models import Proyecto, MiembroEquipo,Actividad, Flujo, Sprint, UserStory
+from reversion import revisions as reversion
 # Register your models here.
 
 class MiembroEquipoInLine(admin.TabularInline):

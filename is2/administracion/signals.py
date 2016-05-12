@@ -17,5 +17,19 @@ def add_permissions_team_member(sender, **kwargs):
             for perm in role.permissions.all():
                 assign_perm(perm.codename, instance.usuario, instance.proyecto)
 
+# Desde aqui lo nuevo para User Story
+
+    # exceptions = ['edit_my_userstory', 'registraractividad_my_userstory'] #Permisos a no copiar en el proyecto
+     #if(action=="post_add"):
+            #Copiar permisos del grupo al usuario para la instancia del proyecto y a los user stories que puedan corresponder dentro del proyecto
+      #      for role in instance.roles.all():
+       #         for perm in role.permissions.all():
+        #            if not perm.codename in exceptions:
+         #               assign_perm(perm.codename, instance.usuario, instance.proyecto)
+          #          else:
+           #             #buscamos los US que pertenezcan al usuario y le asignamos los permisos del rol
+            #            uslist = UserStory.objects.filter(proyecto=instance.proyecto, desarrollador=instance.usuario)
+             #           for us in uslist:
+              #              assign_perm(perm.codename, instance.usuario, us)
 
 

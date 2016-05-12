@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'guardian',
     'administracion',
     'bootstrap3',
+    'reversion',
 ]
 
 MIDDLEWARE_CLASSES = [

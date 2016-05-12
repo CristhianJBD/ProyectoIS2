@@ -2,7 +2,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import Group, Permission, User
 from guardian.shortcuts import get_perms_for_model
-from administracion.models import Proyecto, Sprint, Flujo, Actividad
+from administracion.models import Proyecto, Sprint, Flujo, Actividad, UserStory
 from django import forms
 from django.forms.models import BaseInlineFormSet, inlineformset_factory
 import datetime
@@ -174,3 +174,13 @@ class UsuarioFormset(BaseInlineFormSet):
         for form in self.forms:
             if form in self.deleted_forms:
                 usuario = form.cleaned_data['usuario']
+
+class RegistrarActividadForm(forms.ModelForm):
+    '''
+    Formulario para registrar actividad en un User Story
+    '''
+    horas_a_registrar = forms.IntegerField(min_value=0, error_messages={'required':'Ingrese cantidad de horas'}, initial=0)
+
+    class Meta:
+        model = UserStory
+        fields = ["estado_actividad"]

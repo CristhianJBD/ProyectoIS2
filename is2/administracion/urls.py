@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from administracion.views import views_rol, views_user, view_project, views
+from administracion.views import views_rol, views_user, view_project, views, view_userstory
 
 
 
@@ -31,7 +31,28 @@ urlpatterns = [
       url(r'^proyecto/(?P<pk>\d+)/$', view_project.ProjectDetail.as_view(), name='project_detail'),
       url(r'^proyecto/(?P<pk>\d+)/editar/$', view_project.ProjectUpdate.as_view(), name='project_update'),
       url(r'^proyecto/(?P<pk>\d+)/eliminar/$', view_project.ProjectDelete.as_view(), name='project_delete'),
-      url(r'^proyecto/(?P<pk>\d+)/aprobar/$', view_project.ApproveProject.as_view(), name='project_aprobar')
+      url(r'^proyecto/(?P<pk>\d+)/aprobar/$', view_project.ApproveProject.as_view(), name='project_aprobar'),
+
+
+
+       # USER STORY
+      url(r'^userstory/(?P<pk>\d+)/$', view_userstory.UserStoryDetail.as_view(), name='userstory_detail'),
+      url(r'^proyecto/(?P<project_pk>\d+)/userstories/add/$', view_userstory.AddUserStory.as_view(), name="userstory_add"),
+      url(r'^userstory/(?P<pk>\d+)/edit/$', view_userstory.UpdateUserStory.as_view(), name="userstory_update"),
+      url(r'^userstory/(?P<pk>\d+)/registrar/$', view_userstory.RegistrarActividadUserStory.as_view(), name="userstory_registraractividad"),
+      url(r'^userstory/(?P<pk>\d+)/delete/$', view_userstory.DeleteUserStory.as_view(), name="userstory_delete"),
+      url(r'^userstory/(?P<pk>\d+)/aprobar/$', view_userstory.ApproveUserStory.as_view(), name="userstory_aprobar"),
+      url(r'^userstory/(?P<pk>\d+)/rechazar/$', view_userstory.RechazarUserStory.as_view(), name="userstory_rechazar"),
+      url(r'^userstory/(?P<pk>\d+)/cancelar/$',view_userstory.CancelUserStory.as_view(),name="userstory_cancelar"),
+      url(r'^userstory/(?P<pk>\d+)/version/$', view_userstory.VersionList.as_view(), name="version_list"),
+      url(r'^userstory/(?P<pk>\d+)/revert/(?P<version_pk>\d+)/$', view_userstory.UpdateVersion.as_view(), name="version_revert"),
+      #url(r'^userstory/(?P<pk>\d+)/files/$', view_userstory.FileList.as_view(), name="file_list"),
+      #url(r'^userstory/(?P<pk>\d+)/files/upload/$', view_userstory.UploadFileView.as_view(), name="file_upload"),
+      #url(r'^file/(?P<pk>\d+)/$', view_userstory.FileDetail.as_view(), name="file_detail"),
+      #url(r'^nota/(?P<pk>\d+)/$', view_userstory.NotaDetail.as_view(), name='nota_detail'),
+      #url(r'^userstory/(?P<pk>\d+)/notas/$', view_userstory.NotaList.as_view(), name="nota_list"),
+
+
 
 
             ]
