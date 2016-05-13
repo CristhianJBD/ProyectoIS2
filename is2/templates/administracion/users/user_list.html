@@ -110,32 +110,22 @@
                                         </tr>
 
                                         {% for u in usuario %}
-                                        <tr class="odd gradeX">
+                                            <tr class="odd gradeX">
                                             <td>{{ u.username }}</td>
                                             <td>{{ u.first_name }}</td>
                                             <td>{{ u.last_name }}</td>
                                             <td>
-
-
-                                                         <a href="{% url 'user_detail' u.id %}"><button type="submit" class="btn btn-default btn-md">Ver</button></a>
-
-
-
-                                                </td>
-                                                       <td>
-                                                <a href="{% url 'user_edit' u.id %}"><button type="submit" class="btn btn-warning btn-md">Editar</button></a>
+                                                <a href="{% url 'user_detail' u.id %}"><button type="submit" class="btn btn-default btn-md">Ver</button></a>
                                             </td>
                                             <td>
-                                                <a href="{% url 'user_delete' u.id %}"><button type="submit" class="btn btn-danger btn-md">Eliminar</button></a>
+                                            {% if perms.auth.change_user %}<a href="{% url 'user_edit' u.id %}"><button type="submit" class="btn btn-warning btn-md">Editar</button></a>{% endif %}
+                                            </td>
+                                            <td>
+                                             {% if perms.auth.delete_user %}<a href="{% url 'user_delete' u.id %}"><button type="submit" class="btn btn-danger btn-md">Eliminar</button></a>{% endif %}
                                             </td>
                                            </tr>
-
-
-
                                         {% endfor %}
-
-
-                                    {% endblock %}
+                                   {% endblock %}
 
                             </table>
                              </div><div class="fixed-table-pagination"><div class="pull-left pagination-detail">

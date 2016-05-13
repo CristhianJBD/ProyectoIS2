@@ -29,7 +29,7 @@
 
 {% block header %}{{ group }}{% endblock %}
 
-<form action="" method="post" role="form">
+<form action="" method="post" role="form"> {% csrf_token %}
 
     <div class="form-group">
         <p>Seguro de que desea eliminar el rol <strong>{{ group }}</strong>?</p>
