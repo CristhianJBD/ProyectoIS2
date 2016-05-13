@@ -5,32 +5,105 @@
 
 
     <h4><strong>Proyecto: </strong><td>{{ view.project }}</td></h4>
-    {% if "crear_flujo" in proyecto_perms %}<p><a href="#" class="fa fa-plus-circle"> Agregar</a></p>{% endif %}
- {% endblock %}
+    {% if "crear_flujo" in proyecto_perms %}<p><a href="{% url 'flujo_add' view.kwargs.project_pk %}" class="fa fa-plus-circle"> Agregar</a></p>{% endif %}
 
-    <tr>
-        <th>Nombre</th>
-        <th>Actividades</th>
-        <th>Ver</th>
-        {% if "#" in proyecto_perms %}<th>Editar</th>{% endif %}
-        {% if "#" in proyecto_perms %}<th>Eliminar</th>{% endif %}
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">Lista de actividades dentro del flujo</div>
+					 <div class="bootstrap-table"><div class="fixed-table-toolbar">
+                         <div class="columns btn-group pull-right">
+                             <button class="btn btn-default" type="button" name="refresh" title="Refresh">
+                                 <i class="glyphicon glyphicon-refresh icon-refresh"></i>
+                             </button>
+                             <button class="btn btn-default" type="button" name="toggle" title="Toggle">
+                                 <i class="glyphicon glyphicon glyphicon-list-alt icon-list-alt">
 
-    </tr>
+                                 </i>
+                             </button>
+                             <div class="keep-open btn-group" title="Columns">
+                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                     <i class="glyphicon glyphicon-th icon-th">
+
+                                     </i>
+                                     <span class="caret"></span>
+                                 </button><ul class="dropdown-menu" role="menu">
+                                 <li><label><input type="checkbox" data-field="id" value="1" checked="checked"> Proyecto ID</label></li>
+                                 <li><label><input type="checkbox" data-field="name" value="2" checked="checked"> Nombre del Proyecto</label></li>
+                                 <li><label><input type="checkbox" data-field="price" value="3" checked="checked"> Item Price</label></li>
+                             </ul>
+                             </div>
+                         </div>
+                         <div class="pull-right search"><input class="form-control" type="text" placeholder="Search"></div>
+                     </div>
+                         <div class="fixed-table-container"><div class="fixed-table-header"><table></table></div>
+                             <div class="fixed-table-body"><div class="fixed-table-loading" style="top: 37px; display: none;">Loading, please wait…</div>
+                                 <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true"
+                                        data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+
+                                   {% block thead %}
+
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Actividades</th>
+                                            <th>Ver</th>
+                                            {% if "#" in proyecto_perms %}<th>Editar</th>{% endif %}
+                                            {% if "#" in proyecto_perms %}<th>Eliminar</th>{% endif %}
+
+                                        </tr>
+
+                                   {% endblock %}
+                                    {% block tbody %}
 
 
-    {% for f in flujos %}
-    <tr class="odd gradeX">
-        <td>{{ f.nombre }}</td>
-        <td>{{ f.actividad_set.count }}</td>
-        <td ><a href="#"><i class="fa fa-eye fa-fw"></i></a> </td>
-        {% if "edit_flujo" in proyecto_perms %}<td><a href="#"><i class="fa fa-pencil fa-fw"></i></a></td>{% endif %}
-        {% if "remove_flujo" in proyecto_perms %}<td><a href="#"><i class="fa fa-trash-o fa-fw"></i></a></td>{% endif %}
-    </tr>
-    {% endfor %}
 
-{% block after_table %}
-     <div class="col-lg-12">
-    <p><a class="fa fa-file" href="#"> Volver al Proyecto {{ view.project }}</a></p>
+                                        {% for f in flujos %}
+                                            <tr class="odd gradeX">
+                                                <td>{{ f.nombre }}</td>
+                                                <td>{{ f.actividad_set.count }}</td>
+                                                <td ><a href="#"><i class="fa fa-eye fa-fw"></i></a> </td>
+                                                {% if "edit_flujo" in proyecto_perms %}<td><a href="#"><i class="fa fa-pencil fa-fw"></i></a></td>{% endif %}
+                                                {% if "remove_flujo" in proyecto_perms %}<td><a href="#"><i class="fa fa-trash-o fa-fw"></i></a></td>{% endif %}
+                                            </tr>
+                                        {% endfor %}
+
+
+                                    {% endblock %}
+
+                            </table>
+                             </div><div class="fixed-table-pagination"><div class="pull-left pagination-detail">
+                                 <span class="pagination-info">Showing 1 to 10 of 21 rows</span><span class="page-list"><span class="btn-group dropup">
+                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="page-size">10</span>
+                                     <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li class="active"><a href="javascript:void(0)">10</a></li>
+                                 <li><a href="javascript:void(0)">25</a></li><li><a href="javascript:void(0)">50</a></li><li><a href="javascript:void(0)">100</a></li></ul></span> records per page</span></div>
+                                 <div class="pull-right pagination"><ul class="pagination"><li class="page-first disabled"><a href="javascript:void(0)">&lt;&lt;</a></li><li class="page-pre disabled">
+                                     <a href="javascript:void(0)">&lt;</a></li><li class="page-number active disabled"><a href="javascript:void(0)">1</a></li>
+                                     <li class="page-number"><a href="javascript:void(0)">2</a></li><li class="page-number"><a href="javascript:void(0)">3</a></li>
+                                     <li class="page-next"><a href="javascript:void(0)">&gt;</a></li><li class="page-last"><a href="javascript:void(0)">&gt;&gt;</a></li></ul></div></div></div></div>
+
+				</div>
+			</div>
+		</div><!--/.row-->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+
+
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+
+				</div>
+			</div>
+		</div><!--/.row-->
+
+
+
+
+
+     <div class="col-lg-20">
+        <p><a class="fa fa-file" href={% url 'project_detail' view.project.id  %}> Volver al Proyecto {{ view.project }}</a></p>
     </div>
 
 {% endblock %}

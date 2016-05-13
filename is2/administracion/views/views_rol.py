@@ -45,7 +45,7 @@ class AddRol(LoginRequiredMixin, CreateViewPermissionRequiredMixin, generic.Crea
         for permname in seleccionadas:
             perm = Permission.objects.get(codename=permname)
             self.object.permissions.add(perm)
-            return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class EditRol(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.UpdateView):

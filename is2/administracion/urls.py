@@ -20,19 +20,22 @@ urlpatterns = [
       url(r'^roles/(?P<pk>\d+)/edit/$', views_rol.EditRol.as_view(), name="rol_edit"),
       url(r'^roles/(?P<pk>\d+)/delete/$', views_rol.DeleteRolView.as_view(), name="rol_delete"),
 
-      #proyecto
+
 
       ##url(r'^projects/$', view_project.ProjectList.as_view(), name='project_list'),
       ##url(r'^projects/add/$', view_project.ProjectCreate.as_view(), name='project_create'),
 
-      url(r'^proyecto/(?P<project_pk>\d+)/flujo/$', views_flujo.FlujoList.as_view(), name='flujo_list'), #flujos dentro del proyecto
+      # proyecto
       url(r'^proyecto/lista$', view_project.ProjectList.as_view(), name='project_list'),
       url(r'^proyecto/agregar/$', view_project.ProjectCreate.as_view(), name='project_create'),
       url(r'^proyecto/$', views.projectPersonal, name='project'),
       url(r'^proyecto/(?P<pk>\d+)/$', view_project.ProjectDetail.as_view(), name='project_detail'),
       url(r'^proyecto/(?P<pk>\d+)/editar/$', view_project.ProjectUpdate.as_view(), name='project_update'),
       url(r'^proyecto/(?P<pk>\d+)/eliminar/$', view_project.ProjectDelete.as_view(), name='project_delete'),
-      url(r'^proyecto/(?P<pk>\d+)/aprobar/$', view_project.ApproveProject.as_view(), name='project_aprobar')
+      url(r'^proyecto/(?P<pk>\d+)/aprobar/$', view_project.ApproveProject.as_view(), name='project_aprobar'),
 
-
-            ]
+      # flujos dentro del proyecto
+      url(r'^proyecto/(?P<project_pk>\d+)/flujo/add/$', views_flujo.AddFlujo.as_view(), name="flujo_add"),
+      url(r'^proyecto/(?P<project_pk>\d+)/flujo/$', views_flujo.FlujoList.as_view(), name='flujo_list'),
+      url(r'^flujo/(?P<pk>\d+)/$', views_flujo.FlujoDetail.as_view(), name='flujo_detail'),
+]
