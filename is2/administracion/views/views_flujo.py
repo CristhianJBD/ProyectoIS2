@@ -136,7 +136,7 @@ class AddFlujo(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPermiss
         """
         self.object = form.save(commit=False)
         self.object.proyecto = self.get_proyecto()
-        self.object.proyecto.estado = 'EP'
+        self.object.proyecto.estado = 'PE'
         self.object.proyecto.save()
         self.object.save()
         actividad_form = ActividadFormSet(self.request.POST, instance=self.object)
