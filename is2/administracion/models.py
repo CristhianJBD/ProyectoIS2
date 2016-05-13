@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.utils.encoding import force_bytes
 from reversion import revisions as reversion
+from datetime import datetime
 
 
 class Proyecto(models.Model):
@@ -23,8 +24,8 @@ class Proyecto(models.Model):
     nombre = models.CharField(max_length=40)
     estado = models.CharField(choices=opciones_estado, max_length=2, default='PE')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
-    fecha_inicio = models.DateTimeField()
-    fecha_fin = models.DateTimeField()
+    fecha_inicio = models.DateTimeField(default=datetime.now())
+    fecha_fin = models.DateTimeField(default=datetime.now())
     equipo = models.ManyToManyField(User, through='MiembroEquipo')
     duracion_sprint = models.PositiveIntegerField(default=30)
 
