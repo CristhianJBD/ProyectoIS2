@@ -2,25 +2,13 @@
 {% load static %}
 
 
-{% block title %}Formulario Flujo{% endblock %}
 {% block contentbase %}
-{% block breadcrumbs %}
-    <li><a href="{% url 'index' %}">Index</a></li>
-    <li><a href="{% url 'project_list' %}">Proyectos</a></li>
-    {% if current_action == 'Editar' %}
-        <li><a href="{{ flujo.proyecto.get_absolute_url }}">{{ flujo.proyecto }}</a></li>
-        <li><a href="{% url 'project:flujo_list' flujo.proyecto_id %}">Flujos</a></li>
-        <li><a href="{{ flujo.get_absolute_url }}">{{ flujo }}</a></li>
-    {% elif current_action == 'Agregar' %}
-        <li><a href="{{ view.proyecto.get_absolute_url }}">{{ view.proyecto }}</a></li>
-        <li><a href="{% url 'project:flujo_list' view.proyecto.id %}">Flujos</a></li>
-    {% endif %}
-    <li class="active">{{ current_action }}</li>
-{% endblock %}
 
-{% block extrahead %}
-    <script src="{% static 'js/jquery.formset.js' %}"></script>
-    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+
+
+
+    <script src="{% static 'lumino/js/jquery.formset.js' %}"></script>
+    <script src="{% static 'lumino/js/jquery-ui.min.js' %}"></script>
     <script type="text/javascript">
     $(function() {
         $('.activity').formset({
@@ -47,9 +35,9 @@
         });
     })
     </script>
-{% endblock %}
-{% block header %}Flujo{% endblock %}
-{% block content %}
+
+{% block title %}<strong><h1>Flujo</strong></h1>{% endblock %}
+
     <style media="screen" type="text/css">
         input[id$='-ORDER'] { display: none; }
     </style>
@@ -63,14 +51,14 @@
             <div class="sortable">
             {{ actividad_form.management_form }}
             {{ actividad_form.non_form_errors }}
-                {%for form in actividad_form%}
+                {%for form in actividad_form %}
 
                     {{ form.id }}
                     <div  class="activity form-group">
                     <span class="fa fa-arrows"> </span>
-                    {{ form.name.errors }}
-                   <label> {{ form.name.label_tag }}</label>
-                   {{ form.name }}
+                    {{ form.nombre.errors }}
+                   <label> {{ form.nombre.label_tag }}</label>
+                   {{ form.nombre }}
                     {% if actividad_form.can_order %}
                         {{ form.ORDER }}
                         {{ form.DELETE }}
@@ -82,7 +70,7 @@
         <input type="submit" value="{{ current_action }}" class="btn btn-default"/>
     </form>
 
-{% endblock %}
+
 {% endblock %}
 
 
