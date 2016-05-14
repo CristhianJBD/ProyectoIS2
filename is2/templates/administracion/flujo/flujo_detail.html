@@ -1,27 +1,28 @@
-{% extends 'administracion/base_table.html' %}
+{% extends 'administracion/base.html' %}
 {% load guardian_tags %}
+{% load staticfiles %}
 
-{% block contenbase %}
-
-{% block title %}{{ flujo }}{% endblock %}
-
+{% block contentbase %}
 
 
-{% block header %}{{ flujo.nombre | title }} {% endblock %}
+
+
+    <div class="page-header"><h1>{{ flujo.nombre | title }}</h1></div>
+
 
     <ul class="list-inline">
         {% get_obj_perms user for flujo.proyecto as "proyecto_perms" %}
-        {% if "edit_flujo" in proyecto_perms %}
-            <li><a href="{% url 'flujo_update'  flujo.id %}" class="fa fa-pencil"> Edit</a></li>{% endif %}
-        {% if "remove_flujo" in proyecto_perms %}
-            <li><a href="{% url 'flujo_delete'  flujo.id %}" class="fa fa-eraser"> Delete</a></li>{% endif %}
+        {% if "editar_flujo" in proyecto_perms %}
+            <li><a href="{% url 'flujo_update'  flujo.id %}" class="glyphicon glyphicon-pencil"> Editar</a></li>{% endif %}
+        {% if "eliminar_flujo" in proyecto_perms %}
+            <li><a href="{% url 'flujo_delete'  flujo.id %}" class="glyphicon glyphicon-remove"> Eliminar</a></li>{% endif %}
     </ul>
 
     <p><strong>Proyecto Asociado:</strong> {{ flujo.proyecto }}</p>
     <ul class="nav nav-pills">
         <li {% if not sprint %}class="active"{% endif %}><a href="{% url 'flujo_detail' flujo.id %}">Ver Todos</a></li>
         {% for s in flujo.proyecto.sprint_set.all %}
-            <li {% if s.id == sprint.id %}class="active"{% endif %}><a href="{% url 'flujo_detail_sprint' flujo.id s.id %}">{{ s }}</a></li>
+            <li {% if s.id == sprint.id %}class="active"{% endif %}><a href="#">{{ s }}</a></li>
         {% endfor %}
     </ul>
     <p><strong>Proyecto Asociado:</strong> {{ flujo.proyecto }}</p>
@@ -29,76 +30,89 @@
     <p><strong>Tiempo Estimado:</strong> {{ estimado|default_if_none:"0" }} horas</p>
 
 
-    {% for a in actividades %}
-        <th class="text-center">{{ a.0 }} <span class="badge">{{ a.1 }} US</span> </th>
-    {% endfor %}
+    {% block tablaf %}
+        {% for a in actividades %}
+            <div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading text-center">{{ a.0 }} <span class="badge">{{ a.1 }} US</span></div>
+
+
+                        <div class="panel-body">
+                                <div class="bootstrap-table"><div class="fixed-table-toolbar"></div>
+                                    <div class="fixed-table-container"><div class="fixed-table-header"><table></table></div>
+                                        <div class="fixed-table-body"><div class="fixed-table-loading" style="top: 37px; display: none;">Loading, please wait…</div>
+                                            <table data-toggle="table" data-url="tables/data2.json" class="table table-hover">
+                                                <thead>
+                                                    <tr><th style="text-align: center; "><div class="th-inner ">To Do</div><div class="fht-cell"></div></th>
+                                                    <th style="text-align: center; "><div class="th-inner ">Doing</div><div class="fht-cell"></div></th>
+                                                    <th style="text-align: center; "><div class="th-inner ">Done</div><div class="fht-cell"></div></th></tr>
+                                                </thead>
+
+                            {% for us in act_us %}
+                                {% for u in us %}
+                                    <tbody>
+                                        <tr>
+
+                                    <td class="text-center text-hide">
+                                         {% if  u.estado_actividad == 0 %}
+
+                                                 <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
+                                                 {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
+                                                 {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
+                                                 {% endif %}{{ u.nombre }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
+
+
+                                         {% endif %}
+                                    <td class="text-center">
+                                         {% if u.estado_actividad == 1 %}
+
+                                                 <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
+                                                     {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
+                                                     {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
+                                                     {% endif %}{{ u.nombre }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
+
+                                         {% endif %}
+                                         </td>
+                                         <td class="text-center">
+                                         {% if u.estado_actividad == 2 %}
+
+                                                 <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
+                                                     {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
+                                                     {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
+                                                     {% endif %}{{ u.nombre }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
+
+                                         {% endif %}
+                                         </td>
+                                    </td>
+                                    </tr>
+                                    </tbody>
 
 
 
-    {% for us in act_us %}
-        <td>
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <th class="text-center">To Do</th>
-                    <th class="text-center">Doing</th>
-                    <th class="text-center">Done</th>
-                </thead>
-                {% for u in us %}
-                     <tbody>
-                     <tr>
-                         <td class="text-center">
-                         {% if  u.estado_actividad == 0 %}
-                             {% with p=u.prioridad %}
-                                 <a href="{% url 'userstory_detail' u.id %}" class="btn btn-outline
-                                 btn-{% if p == 0 %}primary{% elif p == 1 %}warning{% elif p == 2 %}danger{% endif %}
-                                 btn-sm btn-block">{% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>{% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li> {% endif %}{{ u.nombre }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
-                             {% endwith %}
-                         {% endif %}
-                         </td>
-                         <td class="text-center">
-                         {% if u.estado_actividad == 1 %}
-                             {% with p=u.prioridad %}
-                                 <a href="{% url 'userstory_detail' u.id %}" class="btn btn-outline
-                                 btn-{% if p == 0 %}primary{% elif p == 1 %}warning{% elif p == 2 %}danger{% endif %}
-                                 btn-sm btn-block">{% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>{% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li> {% endif %}{{ u.nombre }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
-                             {% endwith %}
-                         {% endif %}
-                         </td>
-                         <td class="text-center">
-                         {% if u.estado_actividad == 2 %}
-                             {% with p=u.prioridad %}
-                                 <a href="{% url 'userstory_detail' u.id %}" class="btn btn-outline
-                                 btn-{% if p == 0 %}primary{% elif p == 1 %}warning{% elif p == 2 %}danger{% endif %}
-                                 btn-sm btn-block">{% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>{% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li> {% endif %}{{ u.nombre }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
-                             {% endwith %}
-                         {% endif %}
-                         </td>
-                     </tr>
-                     </tbody>
-                {% endfor %}
-            </table>
-        </td>
-    {% endfor %}
+                                {% endfor %}
+                            {% endfor %}
 
-    <div class="col-lg-4">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Observacion
-            </div>
-            <div class="panel-body">
-                <p style="color: #d33333" >User story de prioridad alta</p>
-                <p style="color: orange">User story de prioridad medio</p>
-                <p style="color: #0044DD"> User story de prioridad baja</p>
-                <p class="fa fa-check-circle">: User Story aprobado</p>
-                <p class="fa fa-times-circle">: User Story cancelado </p>
-            </div>
-            <div class="panel-footer">
-                Los colores representan la prioridad
-            </div>
-        </div>
-    </div>
+                                            </table>
+                                        </div>
+                                <div class="fixed-table-pagination"></div></div></div><div class="clearfix"></div>
+                        </div>
+
+
+				</div>
+			</div>
+        {% endfor %}
+
+
+    {% endblock %}
+
+
+
+
+
+
+
     <div class="col-lg-12">
-            <p><a class="fa fa-step-backward" href="{% url 'flujo_list' flujo.proyecto.id %}"> Volver a
+            <p><a class="glyphicon glyphicon-circle-arrow-left" href="{% url 'flujo_list' flujo.proyecto.id %}"> Volver a
                 Flujos</a></p>
     </div>
 
