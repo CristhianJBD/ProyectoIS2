@@ -12,6 +12,7 @@ from django.utils import timezone
 from django.utils.encoding import force_bytes
 from reversion import revisions as reversion
 from datetime import datetime
+from django.db.models import Sum
 
 
 class Proyecto(models.Model):
@@ -37,19 +38,28 @@ class Proyecto(models.Model):
         #dependientes del proyecto, deben crearse como permisos de proyecto, aqui una lista
         #de permisos personalizados
         permissions = (
+
+            #Permisos especificos del manejo de un proyecto
             ('listar_proyectos', 'Listar todos los proyectos disponibles'),
             ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'),
             ('ver_proyecto', 'ver detalles del proyecto'),
             ('asignar_equipo', 'asignar los miembros del equipo'),
             ('aprobar_proyecto', 'aprobar el proyecto'),
-
+            #permisos especificos para el manejo de sprint dentro del proyecto
             ('crear_sprint', 'agregar sprint'),
             ('editar_sprint', 'editar sprint'),
             ('eliminar_sprint', 'eliminar sprint'),
-
+            # permisos especificos para el manejo de flujos dentro del proyecto
             ('crear_flujo', 'agregar flujo'),
             ('editar_flujo', 'editar flujo'),
             ('eliminar_flujo', 'eliminar flujo'),
+            # permisos especificos para el manejo de User Storys dentro del proyecto
+            ('crear_userstory', 'agregar userstory'),
+            ('editar_userstory', 'editar userstory'),
+            ('eliminar_userstory', 'eliminar userstory'),
+            ('registraractividad_userstory', 'registrar avances en userstories'),
+            ('aprobar_userstory', 'aprobar userstories completados'),
+            ('cancelar_userstory', 'cancela userstories completados'),
 
         )
 
@@ -67,6 +77,19 @@ class Proyecto(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('project_detail', args=[self.pk])
 
+    def get_horas_estimadas(self):
+        return self.userstory_set.aggregate(total=Sum('tiempo_estimado'))['total']
+
+    def get_horas_trabajadas(self):
+        return self.userstory_set.aggregate(total=Sum('tiempo_registrado'))['total']
+
+    def _get_progreso(self):
+        us_total = self.userstory_set.count() - self.userstory_set.filter(estado=4).count()
+        us_aprobados = self.userstory_set.filter(estado=3).count()
+        progreso = float(us_aprobados) / us_total * 100 if us_total > 0 else 0
+        return int(progreso)
+
+    progreso = property(_get_progreso)
 '''
 class Usuario(models.Model):
     """
@@ -168,11 +191,9 @@ class Actividad(models.Model):
         order_with_respect_to = 'flujo'
         verbose_name_plural = 'actividades'
 
-#Aqui se llama al models signals y su metodo add_permissions_team_member
-#para que se pueda asignar permisos de algun rol a un usuario de un proyecto
 
-m2m_changed.connect(add_permissions_team_member, sender=MiembroEquipo.roles.through,
-                    dispatch_uid='add_permissions_signal')
+
+
 
 
 class UserStory(models.Model):
@@ -182,10 +203,11 @@ class UserStory(models.Model):
     """
     estado_actividad_choices = ((0, 'ToDo'), (1, 'Doing'), (2, 'Done'), )
     estado_choices = ((0, 'Inactivo'), (1, 'En curso'), (2, 'Pendiente Aprobacion'), (3, 'Aprobado'), (4,'Cancelado'),)
-    priority_choices = ((0, 'Baja'), (1, 'Media'), (2, 'Alta'))
-    nombre = models.CharField(max_length=60)
+    #priority_choices = ((0, 'Baja'), (1, 'Media'), (2, 'Alta'))
+    nombre_corto = models.CharField(max_length=20)
+    nombre_largo = models.CharField(max_length=80)
     descripcion = models.TextField()
-    prioridad = models.IntegerField(choices=priority_choices, default=0)
+    #prioridad = models.IntegerField(choices=priority_choices, default=0)
     valor_negocio = models.IntegerField()
     valor_tecnico = models.IntegerField()
     tiempo_estimado = models.PositiveIntegerField()
@@ -195,8 +217,8 @@ class UserStory(models.Model):
     estado_actividad = models.IntegerField(choices=estado_actividad_choices, default=0)
     proyecto = models.ForeignKey(Proyecto)
     desarrollador = models.ForeignKey(User, null=True, blank=True)
-   # sprint = models.ForeignKey(Sprint, null=True, blank=True)
-    #actividad = models.ForeignKey(Actividad, null=True, blank=True)
+    sprint = models.ForeignKey(Sprint, null=True, blank=True)
+    actividad = models.ForeignKey(Actividad, null=True, blank=True)
 
     def __unicode__(self):
         return self.nombre
@@ -208,7 +230,7 @@ class UserStory(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse_lazy('project:userstory_detail', args=[self.pk])
+        return reverse_lazy('userstory_detail', args=[self.pk])
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -235,37 +257,19 @@ class UserStory(models.Model):
         verbose_name_plural = 'user stories'
         default_permissions = ()
         permissions = (
-            ('edit_my_userstory', 'editar mis userstories'),
-            ('registraractividad_my_userstory', 'registrar avances en mis userstories')
+            ('editar_mi_userstory', 'editar mis userstories'),
+            ('registraractividad_mi_userstory', 'registrar avances en mis userstories')
 
         )
 
-reversion.register(UserStory,
-                  fields=['nombre', 'descripcion', 'prioridad', 'valor_negocio', 'valor_tecnico', 'tiempo_estimado'])
-#importamos recién acá la señal para que no haya la dependencia circular entre la señal y UserStory
-from administracion.signals import add_permissions_team_member
+reversion.register(UserStory,fields=['nombre_corto','nombre_largo', 'descripcion', 'valor_negocio', 'valor_tecnico', 'tiempo_estimado'])
+
+#Aqui se llama al models signals y su metodo add_permissions_team_member
+#para que se pueda asignar permisos de algun rol a un usuario de un proyecto
 m2m_changed.connect(add_permissions_team_member, sender=MiembroEquipo.roles.through,
                     dispatch_uid='add_permissions_signal')
 
-class Nota(models.Model):
-    """
-    Manejo de notas adjuntas relacionadas a un User Story, estás entradas representan
-    constancias de los cambios, como cantidad de horas trabajadas, en un user story.
-    """
-    estado_choices = ((0, 'Inactivo'), (1, 'En curso'), (2, 'Pendiente Aprobacion'), (3, 'Aprobado'), (4,'Cancelado'),)
-    mensaje = models.TextField(help_text='Mensaje de descripcion de los avances o motivo de cancelacion', null=True, blank=True)
-    fecha = models.DateTimeField(default=timezone.now)
-    tiempo_registrado = models.IntegerField(default=0)
-    horas_a_registrar = models.IntegerField(default=0)
-    desarrollador = models.ForeignKey(User, null=True)
-    #sprint = models.ForeignKey(Sprint, null=True)
-    #actividad = models.ForeignKey(Actividad, null=True)
-    estado = models.IntegerField(choices=estado_choices, default=0)
-    estado_actividad = models.IntegerField(choices=UserStory.estado_actividad_choices, null=True)
-    user_story = models.ForeignKey(UserStory)
 
-    def __unicode__(self):
-        return '{}({}): {}'.format(self.desarrollador, self.fecha, self.horas_a_registrar)
 
 class Adjunto(models.Model):
     """

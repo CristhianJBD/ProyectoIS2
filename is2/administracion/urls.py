@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from administracion.views import views_rol, views_user, view_project, views, views_flujo
+from administracion.views import views_rol, views_user, view_project, views, views_flujo, view_userstory
 
 
 
@@ -38,4 +38,20 @@ urlpatterns = [
       url(r'^proyecto/(?P<project_pk>\d+)/flujo/add/$', views_flujo.AddFlujo.as_view(), name="flujo_add"),
       url(r'^proyecto/(?P<project_pk>\d+)/flujo/$', views_flujo.FlujoList.as_view(), name='flujo_list'),
       url(r'^flujo/(?P<pk>\d+)/$', views_flujo.FlujoDetail.as_view(), name='flujo_detail'),
+
+      #user stories
+      url(r'^proyecto/(?P<project_pk>\d+)/userstories/$', view_userstory.UserStoriesList.as_view(), name='product_backlog'),
+      url(r'^proyecto/(?P<project_pk>\d+)/userstories/add/$', view_userstory.AddUserStory.as_view(),name="userstory_add"),
+      url(r'^userstory/(?P<pk>\d+)/$', view_userstory.UserStoryDetail.as_view(), name='userstory_detail'),
+      url(r'^userstory/(?P<pk>\d+)/version/$', view_userstory.VersionList.as_view(), name="version_list"),
+      url(r'^userstory/(?P<pk>\d+)/editar/$', view_userstory.UpdateUserStory.as_view(), name="userstory_update"),
+      url(r'^userstory/(?P<pk>\d+)/cancelar/$', view_userstory.CancelUserStory.as_view(), name="userstory_cancelar"),
+
+      url(r'^userstory/(?P<pk>\d+)/registrar/$', view_userstory.RegistrarActividadUserStory.as_view(),name="userstory_registraractividad"),
+      url(r'^userstory/(?P<pk>\d+)/aprobar/$', view_userstory.AprobarUserStory.as_view(), name="userstory_aprobar"),
+      url(r'^userstory/(?P<pk>\d+)/rechazar/$', view_userstory.RechazarUserStory.as_view(), name="userstory_rechazar"),
+      url(r'^proyecto/(?P<project_pk>\d+)/userstories/pendientes/$',view_userstory.AprobarPendientesUserStories.as_view(), name='pendientes_userstories'),
+
+      url(r'^userstory/(?P<pk>\d+)/revert/(?P<version_pk>\d+)/$', view_userstory.UpdateVersion.as_view(), name="version_revert"),
+
 ]
