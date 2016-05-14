@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
@@ -18,7 +17,7 @@ from guardian.shortcuts import get_perms, get_perms_for_model, assign_perm
 from guardian.utils import get_403_or_None
 from reversion import revisions as reversion
 from administracion.forms import RegistrarActividadForm
-from administracion.models import UserStory, Proyecto, Nota
+from administracion.models import UserStory, Proyecto, Actividad
 from administracion.views.views import CreateViewPermissionRequiredMixin, GlobalPermissionRequiredMixin, ActiveProjectRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 
@@ -29,7 +28,7 @@ class UserStoriesList(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic
     '''
     model = UserStory
     template_name = 'administracion/userstory/userstory_list.html'
-    permission_required = 'administracion.views.view_project'
+    permission_required = 'administracion.ver_proyecto'
     context_object_name = 'userstories'
     project = None
 
@@ -49,9 +48,12 @@ class UserStoriesList(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic
             self.project = get_object_or_404(Proyecto, pk=self.kwargs['project_pk'])
         return manager.filter(proyecto=self.project)
 
-class ApprovalPendingUserStories(UserStoriesList):
+class AprobarPendientesUserStories(UserStoriesList):
+    """
+    Vista que sirve para aprobar user storys pendientes
+    """
     permission_required = 'administracion.aprobar_userstory'
-    template_name = 'administracion/userstory/userstory_pending.html'
+    template_name = 'administracion/userstory/userstory_pendiente.html'
 
     def get_queryset(self):
         manager = UserStory.objects
@@ -64,7 +66,7 @@ class UserStoryDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic
     Vista de Detalles de un user story
     """
     model = UserStory
-    permission_required = 'administracion.view_project'
+    permission_required = 'administracion.ver_proyecto'
     template_name = 'administracion/userstory/userstory_detail.html'
     context_object_name = 'userstory'
 
@@ -80,7 +82,7 @@ class AddUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPer
     """
     model = UserStory
     template_name = 'administracion/userstory/userstory_form.html'
-    permission_required = 'project.create_userstory'
+    permission_required = 'administracion.crear_userstory'
 
     def get_context_data(self, **kwargs):
         context = super(AddUserStory, self).get_context_data(**kwargs)
@@ -94,9 +96,9 @@ class AddUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPer
 
     def get_form_class(self):
         project = get_object_or_404(Proyecto, id=self.kwargs['project_pk'])
-        form_fields = ['nombre', 'descripcion', 'valor_negocio', 'valor_tecnico', 'tiempo_estimado']
-        if 'prioritize_userstory' in get_perms(self.request.user, project):
-            form_fields.insert(2, 'prioridad')
+        form_fields = ['nombre_corto','nombre_largo', 'descripcion', 'valor_negocio', 'valor_tecnico', 'tiempo_estimado']
+        #if 'prioritize_userstory' in get_perms(self.request.user, project):
+         #   form_fields.insert(2, 'prioridad')
         form_class = modelform_factory(UserStory, fields=form_fields)
         return form_class
 
@@ -110,7 +112,7 @@ class AddUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPer
         """
         :return:la url de redireccion a la vista de los detalles del user story agregado.
         """
-        return reverse('administracion:userstory_detail', kwargs={'pk': self.object.id})
+        return reverse('userstory_detail', kwargs={'pk': self.object.id})
 
     def form_valid(self, form):
         """
@@ -120,7 +122,7 @@ class AddUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPer
         """
         self.object = form.save(commit=False)
         self.object.proyecto = self.get_proyecto()
-        self.object.proyecto.estado = 'EP'
+        self.object.proyecto.estado = 'EJ'
         self.object.proyecto.save()
         with transaction.atomic(), reversion.create_revision():
             reversion.set_user(self.request.user)
@@ -147,18 +149,18 @@ class UpdateUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.Up
         :param kwargs: argumentos adicionales en forma de diccionario
         :return: PermissionDenied si el usuario no cuenta con permisos
         """
-        if 'edit_userstory' in get_perms(request.user, self.get_object().proyecto):
+        if 'editar_userstory' in get_perms(request.user, self.get_object().proyecto):
             return super(UpdateUserStory, self).dispatch(request, *args, **kwargs)
-        elif 'edit_my_userstory' in get_perms(self.request.user, self.get_object()):
+        elif 'editar_mi_userstory' in get_perms(self.request.user, self.get_object()):
             return super(UpdateUserStory, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied()
 
     def get_form_class(self):
         project = self.get_object().proyecto
-        form_fields = ['nombre', 'descripcion', 'valor_negocio', 'valor_tecnico', 'tiempo_estimado']
-        if 'prioritize_userstory' in get_perms(self.request.user, project):
-            form_fields.insert(2, 'prioridad')
+        form_fields = ['nombre_corto','nombre_largo', 'descripcion', 'valor_negocio', 'valor_tecnico', 'tiempo_estimado']
+       # if 'prioritize_userstory' in get_perms(self.request.user, project):
+        #    form_fields.insert(2, 'prioridad')
         form_class = modelform_factory(UserStory, fields=form_fields)
         return form_class
 
@@ -176,7 +178,7 @@ class UpdateUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.Up
         """
         :return:la url de redireccion a la vista de los detalles del user story agregado.
         """
-        return reverse('project:userstory_detail', kwargs={'pk': self.object.id})
+        return reverse('userstory_detail', kwargs={'pk': self.object.id})
 
     def form_valid(self, form):
         """
@@ -189,22 +191,22 @@ class UpdateUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.Up
                 self.object = form.save()
                 reversion.set_user(self.request.user)
                 reversion.set_comment("Modificacion: {}".format(str.join(', ', form.changed_data)))
-            self.notify(self.object, form.changed_data)
+            #self.notify(self.object, form.changed_data)
 
         return HttpResponseRedirect(self.get_success_url())
 
-    def notify(self, user_story, changes):
-        proyecto = user_story.proyecto
-        changelist = [c.replace('_', ' ').title() for c in changes]
-        subject = 'Cambios en User Story: {} - {}'.format(user_story, proyecto)
-        domain = get_current_site(self.request).domain
-        message = render_to_string('mail/change_mail.html',
-                                   {'proyecto': proyecto, 'us': user_story, 'domain': domain, 'cambios': changelist})
-        recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('project.aprobar_userstory', proyecto)]
-        if user_story.desarrollador and user_story.desarrollador.email not in recipients:
-            recipients.append(user_story.desarrollador.email)
-        send_mail(subject, message, 'projectium15@gamil.com', recipients, html_message=message)
-        #send_mail(subject, message, 'projectium15@gamil.com', ['jayala1993@outlook.com'], html_message=message)
+    # def notify(self, user_story, changes):
+    #     proyecto = user_story.proyecto
+    #     changelist = [c.replace('_', ' ').title() for c in changes]
+    #     subject = 'Cambios en User Story: {} - {}'.format(user_story, proyecto)
+    #     domain = get_current_site(self.request).domain
+    #     message = render_to_string('mail/change_mail.html',
+    #                                {'proyecto': proyecto, 'us': user_story, 'domain': domain, 'cambios': changelist})
+    #     recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('project.aprobar_userstory', proyecto)]
+    #     if user_story.desarrollador and user_story.desarrollador.email not in recipients:
+    #         recipients.append(user_story.desarrollador.email)
+    #     send_mail(subject, message, 'projectium15@gamil.com', recipients, html_message=message)
+    #     #send_mail(subject, message, 'projectium15@gamil.com', ['jayala1993@outlook.com'], html_message=message)
 
 
 
@@ -212,7 +214,7 @@ class CancelUserStory(LoginRequiredMixin, ActiveProjectRequiredMixin, generic.Fo
     """
     Vista cancelacion de User Stories
     """
-    form_class = modelform_factory(Nota, fields=['mensaje'])
+    form_class = modelform_factory(UserStory, fields=[])
     template_name = 'administracion/userstory/userstory_cancel.html'
     user_story = None
 
@@ -230,7 +232,7 @@ class CancelUserStory(LoginRequiredMixin, ActiveProjectRequiredMixin, generic.Fo
         return context
 
     def get_success_url(self):
-        return reverse_lazy('project:product_backlog', kwargs={'project_pk': self.get_proyecto().id})
+        return reverse_lazy('product_backlog', kwargs={'project_pk': self.get_proyecto().id})
 
     def dispatch(self, request, *args, **kwargs):
         """
@@ -243,10 +245,10 @@ class CancelUserStory(LoginRequiredMixin, ActiveProjectRequiredMixin, generic.Fo
         return super(CancelUserStory, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        nota = form.save(commit=False)
+        form.save(commit=False)
         self.get_user_story().estado = 4
         self.user_story.save()
-        crearNota(self.user_story, self.request.user, "Cancelado: {}".format(nota.mensaje))
+       # crearNota(self.user_story, self.request.user, "Cancelado: {}".format(nota.mensaje))
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -258,40 +260,40 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
     template_name = 'administracion/userstory/userstory_registraractividad_form.html'
     error_template = 'administracion/userstory/userstory_error.html'
     #TODO: quitar fecha del formset. solo para debug
-    NoteFormset = modelformset_factory(Nota, fields=('mensaje', 'fecha'), extra=1)
+     #NoteFormset = modelformset_factory(Nota, fields=('mensaje', 'fecha'), extra=1)
 
     def get_proyecto(self):
         return self.get_object().proyecto
 
     def get_context_data(self, **kwargs):
         context = super(RegistrarActividadUserStory, self).get_context_data(**kwargs)
-        context['formset'] = self.NoteFormset(queryset=Nota.objects.none())
+        # context['formset'] = self.NoteFormset(queryset=Nota.objects.none())
         return context
 
-    def dispatch(self, request, *args, **kwargs):
-        """
-        Comprobación de permisos hecha antes de la llamada al dispatch que inicia el proceso de respuesta al request de la url
-        :param request: request hecho por el cliente
-        :param args: argumentos adicionales posicionales
-        :param kwargs: argumentos adicionales en forma de diccionario
-        :return: PermissionDenied si el usuario no cuenta con permisos
-        """
-        if 'registraractividad_userstory' in get_perms(request.user, self.get_object().proyecto) \
-                or ('registraractividad_my_userstory' in get_perms(request.user, self.get_object())): #Comprobacion de permisos
-            if self.get_object().sprint and self.get_object().sprint.inicio.date() <= timezone.now().date() and self.get_object().sprint.fin.date() >= timezone.now().date():
-                if self.get_object().actividad:
-                    current_priority = self.get_object().prioridad
-                    s = self.get_object().sprint
-                    a = self.get_object().actividad
-                    d = self.get_object().desarrollador
-                    bigger_priorities = UserStory.objects.filter(sprint=s, actividad=a, desarrollador=d, prioridad__gt=current_priority).count()
-                    if bigger_priorities == 0: #Comprobacion de prioridad del User Story
-                        if self.get_object().estado == 1: #Comprobacion de estado del User Story
-                            return super(RegistrarActividadUserStory, self).dispatch(request, *args, **kwargs)
-                        return render(request, self.error_template, {'userstory': self.get_object(), 'error': "OTRO_ESTADO"})
-                return render(request, self.error_template, {'userstory': self.get_object(), 'error': "MENOR_PRIORIDAD"})
-            return render(request, self.error_template, {'userstory': self.get_object(), 'error': "SPRINT_VENCIDO"})
-        raise PermissionDenied()
+    # def dispatch(self, request, *args, **kwargs):
+    #     """
+    #     Comprobación de permisos hecha antes de la llamada al dispatch que inicia el proceso de respuesta al request de la url
+    #     :param request: request hecho por el cliente
+    #     :param args: argumentos adicionales posicionales
+    #     :param kwargs: argumentos adicionales en forma de diccionario
+    #     :return: PermissionDenied si el usuario no cuenta con permisos
+    #     """
+    #     # if 'registraractividad_userstory' in get_perms(request.user, self.get_object().proyecto) \
+    #     #         or ('registraractividad_mi_userstory' in get_perms(request.user, self.get_object())): #Comprobacion de permisos
+    #     #     if self.get_object().sprint and self.get_object().sprint.fecha_inicio.date() <= timezone.now().date() and self.get_object().sprint.fecha_fin.date() >= timezone.now().date():
+    #     #         if self.get_object().actividad:
+    #     #             #current_priority = self.get_object().prioridad
+    #     #             # s = self.get_object().sprint
+    #     #             # a = self.get_object().actividad
+    #     #             # d = self.get_object().desarrollador
+    #     #             # bigger_priorities = UserStory.objects.filter(sprint=s, actividad=a, desarrollador=d, prioridad__gt=current_priority).count()
+    #     #             # if bigger_priorities == 0: #Comprobacion de prioridad del User Story
+    #     #             #     if self.get_object().estado == 1: #Comprobacion de estado del User Story
+    #     #             #         return super(RegistrarActividadUserStory, self).dispatch(request, *args, **kwargs)
+    #     #             #     return render(request, self.error_template, {'userstory': self.get_object(), 'error': "OTRO_ESTADO"})
+    #     #         return render(request, self.error_template, {'userstory': self.get_object(), 'error': "MENOR_PRIORIDAD"})
+    #     #     return render(request, self.error_template, {'userstory': self.get_object(), 'error': "SPRINT_VENCIDO"})
+    #     # raise PermissionDenied()
 
     def get_form_class(self):
         """
@@ -300,25 +302,25 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
         del User Story.
         """
         actual_fields = ['estado_actividad']
-        if 'edit_userstory' in get_perms(self.request.user, self.get_object().proyecto) or \
-                        'edit_my_userstory' in get_perms(self.request.user, self.get_object()):
+        if 'editar_userstory' in get_perms(self.request.user, self.get_object().proyecto) or \
+                        'editar_mi_userstory' in get_perms(self.request.user, self.get_object()):
             actual_fields.insert(1, 'actividad')
         return modelform_factory(UserStory, form=RegistrarActividadForm, fields=actual_fields)
 
-    #def get_form(self, form_class):
-     #   '''
-      #  Personalización del form retornado
-       # '''
+    def get_form(self):
+        '''
+        Personalización del form retornado
+        '''
 
-        #form = super(RegistrarActividadUserStory, self).get_form(form_class)
-        #if 'actividad' in form.fields:
-         #   form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
-        #return form
+        form = super(RegistrarActividadUserStory, self).get_form()
+        if 'actividad' in form.fields:
+            form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
+        return form
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.tiempo_registrado = self.object.tiempo_registrado + form.cleaned_data['horas_a_registrar']
-        nota_form = self.NoteFormset(self.request.POST)
+        #nota_form = self.NoteFormset(self.request.POST)
         new_estado = 0
         #movemos el User Story a la sgte actividad en caso de que haya llegado a Done
         if form.cleaned_data['estado_actividad'] == 2:
@@ -335,59 +337,42 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
 
         self.object.save()
 
-        if nota_form.is_valid():
-            for f in nota_form.forms:
-                n = f.save(commit=False)
-                n.horas_a_registrar = form.cleaned_data['horas_a_registrar']
-                n.tiempo_registrado = self.object.tiempo_registrado
-                n.desarrollador = self.request.user
-                n.sprint = self.object.sprint
-                n.actividad = self.object.actividad
-                n.estado = self.object.estado
-                n.estado_actividad = self.object.estado_actividad
-                n.user_story = self.object
-                n.save()
-            self.notify(n)
+        # if nota_form.is_valid():
+        #     for f in nota_form.forms:
+        #         n = f.save(commit=False)
+        #         n.horas_a_registrar = form.cleaned_data['horas_a_registrar']
+        #         n.tiempo_registrado = self.object.tiempo_registrado
+        #         n.desarrollador = self.request.user
+        #         n.sprint = self.object.sprint
+        #         n.actividad = self.object.actividad
+        #         n.estado = self.object.estado
+        #         n.estado_actividad = self.object.estado_actividad
+        #         n.user_story = self.object
+        #         n.save()
+        #     self.notify(n)
 
         return HttpResponseRedirect(self.get_success_url())
 
-    def notify(self, nota):
-        proyecto = nota.user_story.proyecto
-        subject = 'Registro de Actividad: {} - {}'.format(nota.user_story, proyecto)
-        domain = get_current_site(self.request).domain
-        message = render_to_string('mail/notification_mail.html', {'proyecto': proyecto, 'nota': nota, 'us': nota.user_story, 'domain': domain})
-        recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('project.aprobar_userstory', proyecto)]
-        send_mail(subject, message, 'noreply.projectium15@gmail.com', recipients, html_message=message)
-
-
-class DeleteUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.DeleteView):
-    """
-    Vista de Eliminacion de User Stories
-    """
-    model = UserStory
-    template_name = 'administracion/userstory/userstory_delete.html'
-    permission_required = 'project.remove_userstory'
-    context_object_name = 'userstory'
-
-    def get_proyecto(self):
-        return self.get_object().proyecto
-    def get_permission_object(self):
-        return self.get_proyecto()
-
-    def get_success_url(self):
-        return reverse_lazy('project:product_backlog', kwargs={'project_pk': self.get_object().proyecto.id})
+    # def notify(self, nota):
+    #     proyecto = nota.user_story.proyecto
+    #     subject = 'Registro de Actividad: {} - {}'.format(nota.user_story, proyecto)
+    #     domain = get_current_site(self.request).domain
+    #     message = render_to_string('mail/notification_mail.html', {'proyecto': proyecto, 'nota': nota, 'us': nota.user_story, 'domain': domain})
+    #     recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('project.aprobar_userstory', proyecto)]
+    #     send_mail(subject, message, 'noreply.projectium15@gmail.com', recipients, html_message=message)
 
 
 
 
 
-class ApproveUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissionRequiredMixin, SingleObjectTemplateResponseMixin, detail.BaseDetailView):
+
+class AprobarUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissionRequiredMixin, SingleObjectTemplateResponseMixin, detail.BaseDetailView):
     """
     Vista de Aprobación de User Story
     """
     model = UserStory
-    template_name = 'project/userstory/userstory_approve.html'
-    permission_required = 'project.aprobar_userstory'
+    template_name = 'administracion/userstory/userstory_aprobar.html'
+    permission_required = 'administracion.aprobar_userstory'
     context_object_name = 'userstory'
 
     def get_proyecto(self):
@@ -397,14 +382,14 @@ class ApproveUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
     def dispatch(self, request, *args, **kwargs):
         instance = self.get_object()
         if instance.estado == 2:
-            return super(ApproveUserStory, self).dispatch(request, *args, **kwargs)
+            return super(AprobarUserStory, self).dispatch(request, *args, **kwargs)
         raise Http404
 
     def get_permission_object(self):
         return self.get_proyecto()
 
     def get_success_url(self):
-        return reverse_lazy('project:product_backlog', kwargs={'project_pk': self.get_object().proyecto.id})
+        return reverse_lazy('product_backlog', kwargs={'project_pk': self.get_object().proyecto.id})
 
     def post(self, request, *args, **kwargs):
         us = self.get_object()
@@ -418,31 +403,31 @@ class ApproveUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
         approved_us_count = p.userstory_set.filter(estado=3).count()
         approved_us_count += 1  # sumamos el actual que todavia no se ha guardado
         if us_count == approved_us_count:
-            p.estado = 'CO'
+            p.estado = 'TE'
             p.save()
         us.save()
 
-        crearNota(us, user, "User Story {} por {}".format(action, user.get_full_name()))
-        self.notify(us, user, action)
+        #crearNota(us, user, "User Story {} por {}".format(action, user.get_full_name()))
+        #self.notify(us, user, action)
         return HttpResponseRedirect(self.get_success_url())
 
-    def notify(self, user_story, user, action):
-        proyecto = user_story.proyecto
-        subject = 'Se ha {} el User Story: {} - {}'.format(action, user_story, proyecto)
-        domain = get_current_site(self.request).domain
-        message = render_to_string('mail/approved_email.html',
-                                   {'proyecto': proyecto, 'us': user_story, 'domain': domain, 'u': user, 'act': action})
-        recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('project.aprobar_userstory', proyecto)]
-        if user_story.desarrollador and user_story.desarrollador.email not in recipients:
-            recipients.append(user_story.desarrollador.email)
-        send_mail(subject, message, 'projectium15@gamil.com', recipients, html_message=message)
+    # def notify(self, user_story, user, action):
+    #     proyecto = user_story.proyecto
+    #     subject = 'Se ha {} el User Story: {} - {}'.format(action, user_story, proyecto)
+    #     domain = get_current_site(self.request).domain
+    #     message = render_to_string('mail/approved_email.html',
+    #                                {'proyecto': proyecto, 'us': user_story, 'domain': domain, 'u': user, 'act': action})
+    #     recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('project.aprobar_userstory', proyecto)]
+    #     if user_story.desarrollador and user_story.desarrollador.email not in recipients:
+    #         recipients.append(user_story.desarrollador.email)
+    #     send_mail(subject, message, 'projectium15@gamil.com', recipients, html_message=message)
 
 
 class RechazarUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.UpdateView):
     model = UserStory
-    template_name = 'project/userstory/userstory_rechazar.html'
+    template_name = 'administracion/userstory/userstory_rechazar.html'
     fields = ['actividad', 'estado_actividad']
-    permission_required = 'project.aprobar_userstory'
+    permission_required = 'administracion.aprobar_userstory'
     context_object_name = 'userstory'
 
     def get_proyecto(self):
@@ -454,14 +439,14 @@ class RechazarUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.
             return super(RechazarUserStory, self).dispatch(request, *args, **kwargs)
         raise Http404
 
-    #def get_form(self, form_class):
-     #   '''
-      #  Personalización del form retornado
-       # '''
+    def get_form(self):
+        '''
+        Personalización del form retornado
+        '''
 
-        #form = super(RechazarUserStory, self).get_form(form_class)
-        #form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
-        #return form
+        form = super(RechazarUserStory, self).get_form()
+        form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
+        return form
 
     def get_permission_object(self):
         return self.get_proyecto()
@@ -471,29 +456,29 @@ class RechazarUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.
         self.object.estado = 1
         self.object.save()
         action = "rechazado"
-        crearNota(self.object, self.request.user, "User Story {} por {}".format(action, self.request.user.get_full_name()))
-        self.notify(self.object, self.request.user, action)
+        #crearNota(self.object, self.request.user, "User Story {} por {}".format(action, self.request.user.get_full_name()))
+        #self.notify(self.object, self.request.user, action)
         return HttpResponseRedirect(self.get_success_url())
 
     #TODO: Hacer una funcion que envie notificaciones
-    def notify(self, user_story, user, action):
-        proyecto = user_story.proyecto
-        subject = 'Se ha {} el User Story: {} - {}'.format(action, user_story, proyecto)
-        domain = get_current_site(self.request).domain
-        message = render_to_string('mail/approved_email.html',
-                                   {'proyecto': proyecto, 'us': user_story, 'domain': domain, 'u': user, 'act': action})
-        recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('project.aprobar_userstory', proyecto)]
-        if user_story.desarrollador and user_story.desarrollador.email not in recipients:
-            recipients.append(user_story.desarrollador.email)
-        send_mail(subject, message, 'projectium15@gamil.com', recipients, html_message=message)
+    # def notify(self, user_story, user, action):
+    #     proyecto = user_story.proyecto
+    #     subject = 'Se ha {} el User Story: {} - {}'.format(action, user_story, proyecto)
+    #     domain = get_current_site(self.request).domain
+    #     message = render_to_string('mail/approved_email.html',
+    #                                {'proyecto': proyecto, 'us': user_story, 'domain': domain, 'u': user, 'act': action})
+    #     recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('project.aprobar_userstory', proyecto)]
+    #     if user_story.desarrollador and user_story.desarrollador.email not in recipients:
+    #         recipients.append(user_story.desarrollador.email)
+    #     send_mail(subject, message, 'projectium15@gamil.com', recipients, html_message=message)
 
 class VersionList(LoginRequiredMixin, generic.ListView):
     """
     Vista que devuelve una lista de versiones del User Story deseado.
     """
     context_object_name = 'versions'
-    template_name = 'project/version/version_list.html'
-    permission_required = ['project.edit_userstory', 'project.edit_my_userstory']
+    template_name = 'administracion/userstory/version_list_us.html'
+    permission_required = ['administracion.editar_userstory', 'administracion.editar_mi_userstory']
     us = None
 
     def dispatch(self, request, *args, **kwargs):
@@ -505,9 +490,9 @@ class VersionList(LoginRequiredMixin, generic.ListView):
         :return: PermissionDenied si el usuario no cuenta con permisos
         """
         self.us = get_object_or_404(UserStory, pk=self.kwargs['pk'])
-        if 'edit_userstory' in get_perms(request.user, self.us.proyecto):
+        if 'editar_userstory' in get_perms(request.user, self.us.proyecto):
             return super(VersionList, self).dispatch(request, *args, **kwargs)
-        elif 'edit_my_userstory' in get_perms(self.request.user, self.us):
+        elif 'editar_mi_userstory' in get_perms(self.request.user, self.us):
             return super(VersionList, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied()
@@ -557,8 +542,8 @@ class UpdateVersion(UpdateUserStory):
 
         return HttpResponseRedirect(self.get_success_url())
 
-def crearNota(us, user, msg):
-    nota = Nota(desarrollador=user, sprint=us.sprint, tiempo_registrado=us.tiempo_registrado, actividad=us.actividad,
-                    estado=us.estado, estado_actividad=us.estado_actividad, user_story=us, mensaje=msg)
-    nota.save()
+# def crearNota(us, user, msg):
+#     nota = Nota(desarrollador=user, sprint=us.sprint, tiempo_registrado=us.tiempo_registrado, actividad=us.actividad,
+#                     estado=us.estado, estado_actividad=us.estado_actividad, user_story=us, mensaje=msg)
+#     nota.save()
 

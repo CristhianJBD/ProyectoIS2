@@ -1,0 +1,26 @@
+{% extends "administracion/base.html" %}
+{% load bootstrap3 %}
+{% load guardian_tags %}
+
+
+
+
+{% block contentbase %}
+    <div class="page-header"><h1>Cancelar User Story</h1></div>
+
+    <p><strong>Desea Cancelar el User Story: {{ userstory.nombre_largo }} ? </strong></p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-4">
+                {% bootstrap_form form layout="inline" %}
+            </div>
+        </div>
+        {% buttons submit='Si' %}
+            <a href="javascript:history.back()">
+                <button type="button" class="btn btn-danger">No</button>
+            </a>
+        {% endbuttons %}
+    </form>
+    </div>
+{% endblock %}

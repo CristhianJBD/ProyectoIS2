@@ -1,16 +1,19 @@
 {% extends 'administracion/base.html' %}
+{% load static %}
+
+
+
+
+
 {% block contentbase %}
-{% block title %}<strong><h1>Flujos</strong></h1>{% endblock %}
+    <div class="page-header" xmlns="http://www.w3.org/1999/html"><h1>{{ userstory.nombre_largo | title}}</h1></div>
 
 
 
-    <h4><strong>Proyecto: </strong><td>{{ view.project }}</td></h4>
-    {% if "crear_flujo" in proyecto_perms %}<p><a href="{% url 'flujo_add' view.kwargs.project_pk %}" class="fa fa-plus-circle"> Agregar</a></p>{% endif %}
-
-		<div class="row">
+    <div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">Lista de flujos</div>
+					<div class="panel-heading">Versiones</div>
 					 <div class="bootstrap-table"><div class="fixed-table-toolbar">
                          <div class="columns btn-group pull-right">
                              <button class="btn btn-default" type="button" name="refresh" title="Refresh">
@@ -42,36 +45,29 @@
                                         data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
 
                                    {% block thead %}
-
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Actividades</th>
-                                            <th>Ver</th>
-                                            {% if "#" in proyecto_perms %}<th>Editar</th>{% endif %}
-                                            {% if "#" in proyecto_perms %}<th>Eliminar</th>{% endif %}
-
-                                        </tr>
-
+                                        <th>Fecha de Modificacion</th>
+                                        <th>Comentario</th>
+                                        <th>Usuario</th>
+                                        <th>Deshacer</th>
                                    {% endblock %}
                                     {% block tbody %}
 
 
 
-                                        {% for f in flujos %}
-                                            <tr class="odd gradeX">
-                                                <td>{{ f.nombre }}</td>
-                                                <td>{{ f.actividad_set.count }}</td>
-                                                <td ><a href="#"><i class="fa fa-eye fa-fw"></i></a> </td>
-                                                {% if "editar_flujo" in proyecto_perms %}<td><a href="#"><i class="fa fa-pencil fa-fw"></i></a></td>{% endif %}
-                                                {% if "eliminar_flujo" in proyecto_perms %}<td><a href="#"><i class="fa fa-trash-o fa-fw"></i></a></td>{% endif %}
-                                            </tr>
-                                        {% endfor %}
-
+                                    {% for v in versions %}
+                                        <tr>
+                                            <td>{{ v.revision.date_created }}</td>
+                                            <td>{{ v.revision.comment }}</td>
+                                            <td>{{ v.revision.user }}</td>
+                                            <th><a href="{% url 'version_revert' v.object_id v.id %}" class="glyphicon glyphicon-repeat"></a></th>
+                                        </tr>
+                                    {% endfor %}
 
                                     {% endblock %}
 
                             </table>
-                             </div><div class="fixed-table-pagination"><div class="pull-left pagination-detail">
+                             </div>
+                             <div class="fixed-table-pagination"><div class="pull-left pagination-detail">
                                  <span class="pagination-info">Showing 1 to 10 of 21 rows</span><span class="page-list"><span class="btn-group dropup">
                                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="page-size">10</span>
                                      <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li class="active"><a href="javascript:void(0)">10</a></li>
@@ -83,7 +79,7 @@
 
 				</div>
 			</div>
-		</div><!--/.row-->
+    </div><!--/.row-->
 		<div class="row">
 			<div class="col-md-6">
 				<div class="panel panel-default">
@@ -97,13 +93,5 @@
 				</div>
 			</div>
 		</div><!--/.row-->
-
-
-
-
-
-     <div class="col-lg-20">
-        <p><a class="fa fa-file" href={% url 'project_detail' view.project.id  %}> Volver al Proyecto {{ view.project }}</a></p>
-    </div>
 
 {% endblock %}
