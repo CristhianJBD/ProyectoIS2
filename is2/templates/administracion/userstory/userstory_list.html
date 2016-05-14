@@ -9,7 +9,7 @@
 
     <h2><strong>Proyecto: </strong><td>{{ view.project }}</td></h2>
 
-    {% if "crear_userstory" in proyecto_perms %}<p><a href="{% url 'userstory_add' view.project.pk %}" class="fa fa-plus-circle"><h4>Agregar User Story</h4></a></p>{% endif %}
+    {% if "crear_userstory" in proyecto_perms %}<p><a href="{% url 'userstory_add' view.project.pk %}" class="glyphicon glyphicon-plus-sign">Agregar User Story</a></p>{% endif %}
 
     <h3>User Stories</h3>
     <!-- Buscador -->

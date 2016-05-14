@@ -97,8 +97,7 @@ class AddUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPer
     def get_form_class(self):
         project = get_object_or_404(Proyecto, id=self.kwargs['project_pk'])
         form_fields = ['nombre_corto','nombre_largo', 'descripcion', 'valor_negocio', 'valor_tecnico', 'tiempo_estimado']
-        #if 'prioritize_userstory' in get_perms(self.request.user, project):
-         #   form_fields.insert(2, 'prioridad')
+
         form_class = modelform_factory(UserStory, fields=form_fields)
         return form_class
 
