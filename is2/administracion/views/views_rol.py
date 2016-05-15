@@ -5,6 +5,7 @@ from django.http.response import HttpResponseRedirect
 from django.views import generic
 from guardian.shortcuts import remove_perm, get_perms
 from administracion.forms import RolForm
+from administracion.models import UserStory
 from administracion.views.views import CreateViewPermissionRequiredMixin, get_selected_perms, GlobalPermissionRequiredMixin
 
 
@@ -32,7 +33,7 @@ class AddRol(LoginRequiredMixin, CreateViewPermissionRequiredMixin, generic.Crea
         Se redirije a la url de detalles del rol
         :return: url de rol_detail
         """
-        return reverse('rol_detail', kwargs={'pk':self.object.id})
+        return reverse('rol_list')
     
     def form_valid(self, form):
         """
@@ -64,14 +65,14 @@ class EditRol(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.UpdateV
         :return: contexto
         """
         context = super(EditRol, self).get_context_data(**kwargs)
-        context['current_action'] = "Editar"
+        context['current_action'] = "Guardar"
         return context
 
     def get_success_url(self):
         """
         :return: URL de redireccion correcta a UserDetail
         """
-        return reverse('rol_detail', kwargs={'pk': self.object.id})
+        return reverse('rol_list')
 
     def get_initial(self):
         """
@@ -80,21 +81,23 @@ class EditRol(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.UpdateV
         """
         modelo = self.get_object()
         perm_list = [perm.codename for perm in list(modelo.permissions.all())]
-        initial = {'perms_proyecto': perm_list}
+        initial = {'perms_proyecto': perm_list, 'perms_sprint': perm_list, 'perms_userstory': perm_list,
+                   'perms_flujo': perm_list}
         return initial
 
 
     def form_valid(self, form):
         """
         Comprobar validez del formulario
+
         :param form: formulario recibido
         :return: URL de redireccion correcta
         """
         super(EditRol, self).form_valid(form)
         # eliminamos permisos anteriores
         self.object.permissions.clear()
-        selecionadas = get_selected_perms(self.request.POST)
-        for permname in selecionadas:
+        escogidas = get_selected_perms(self.request.POST)
+        for permname in escogidas:
             perm = Permission.objects.get(codename=permname)
             self.object.permissions.add(perm)
         # actualizamos los permisos de los miembros de equipos que tienen este rol
@@ -104,12 +107,16 @@ class EditRol(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.UpdateV
             project = team_member.proyecto
             # borramos todos los permisos que tiene asociado el usuario en el proyecto
             for perm in get_perms(user, project):
-                if perm!='ver_proyecto': #cuidamos de no eliminar permiso de ver proyecto
+                if perm!='view_project': #cuidamos de no eliminar permiso de ver proyecto
                     remove_perm(perm, user, project)
+            #borramos todos los permisos que tiene asociado el usuario a los User Stories del proyecto
+            for us in UserStory.objects.filter(desarrollador=user, proyecto=project):
+                for perm in get_perms(user, us):
+                    remove_perm(perm, user, us)
 
             all_roles = team_member.roles.all()
             for role in all_roles:
-                team_member.roles.remove(role)  #desasociamos al usuario de los demas roles con los que contaba (para que se eliminen los permisos anteriores)
+                team_member.roles.remove(role)  #desacociamos al usuario de los demas roles con los que contaba (para que se eliminen los permisos anteriores)
                 team_member.roles.add(role)  #volvemos a agregar para que se copien los permisos actualizados
         return HttpResponseRedirect(self.get_success_url())
 

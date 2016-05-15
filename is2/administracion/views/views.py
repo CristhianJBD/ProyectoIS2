@@ -50,6 +50,7 @@ def get_selected_perms(POST):
     :return: lista de permisos
     """
     current_list = POST.getlist('perms_proyecto')
+    current_list.extend(POST.getlist('perms_userstory'))
     current_list.extend(POST.getlist('perms_flujo'))
     current_list.extend(POST.getlist('perms_sprint'))
     return current_list

@@ -41,7 +41,7 @@
 							<svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>
 						</div>
 						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large">Add</div>
+							<div class="large">Crear</div>
 							<div class="text-muted">Usuario</div>
 						</div>
 					</div>
@@ -104,6 +104,7 @@
                                             <th>Username</th>
                                             <th>Nombre</th>
                                             <th>Apellido</th>
+                                            <th>Estado</th>
                                             <th>Detalles del usuario</th>
                                             <th>Editar usuario</th>
                                             <th>Eliminar usuario</th>
@@ -114,6 +115,8 @@
                                             <td>{{ u.username }}</td>
                                             <td>{{ u.first_name }}</td>
                                             <td>{{ u.last_name }}</td>
+                                            <td>{% if u.is_active %}Activo{% else %}Inactivo{% endif %}</td>
+
                                             <td>
                                                 <a href="{% url 'user_detail' u.id %}"><button type="submit" class="btn btn-default btn-md">Ver</button></a>
                                             </td>

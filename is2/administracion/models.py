@@ -40,26 +40,27 @@ class Proyecto(models.Model):
         permissions = (
 
             #Permisos especificos del manejo de un proyecto
-            ('listar_proyectos', 'Listar todos los proyectos disponibles'),
-            ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'),
-            ('ver_proyecto', 'ver detalles del proyecto'),
-            ('asignar_equipo', 'asignar los miembros del equipo'),
-            ('aprobar_proyecto', 'aprobar el proyecto'),
+            ('listar_proyectos', 'Listar Proyectos'),
+            ('ver_proyecto', 'Ver detalles del proyecto'),
+            ('asignar_equipo', 'Asignar los miembros del equipo'),
+            ('aprobar_proyecto', 'Aprobar el proyecto'),
             #permisos especificos para el manejo de sprint dentro del proyecto
-            ('crear_sprint', 'agregar sprint'),
-            ('editar_sprint', 'editar sprint'),
-            ('eliminar_sprint', 'eliminar sprint'),
+            ('crear_sprint', 'Agregar Sprint'),
+            ('editar_sprint', 'Editar Sprint'),
+            ('eliminar_sprint', 'Eliminar Sprint'),
+            ('ver_sprint', 'Ver Sprint'),
             # permisos especificos para el manejo de flujos dentro del proyecto
-            ('crear_flujo', 'agregar flujo'),
-            ('editar_flujo', 'editar flujo'),
-            ('eliminar_flujo', 'eliminar flujo'),
+            ('crear_flujo', 'Agregar Flujo'),
+            ('editar_flujo', 'Editar Flujo'),
+            ('eliminar_flujo', 'Eliminar Flujo'),
+            ('ver_flujo', 'Ver Flujo'),
             # permisos especificos para el manejo de User Storys dentro del proyecto
-            ('crear_userstory', 'agregar userstory'),
-            ('editar_userstory', 'editar userstory'),
-            ('eliminar_userstory', 'eliminar userstory'),
-            ('registraractividad_userstory', 'registrar avances en userstories'),
-            ('aprobar_userstory', 'aprobar userstories completados'),
-            ('cancelar_userstory', 'cancela userstories completados'),
+            ('crear_userstory', 'Agregar User Story'),
+            ('editar_userstory', 'Editar User Story'),
+            ('eliminar_userstory', 'Eliminar User Story'),
+            ('registraractividad_userstory', 'Registrar avances en User Story'),
+            ('aprobar_userstory', 'Aprobar User Story completado'),
+            ('cancelar_userstory', 'Cancelar User Story completado'),
 
         )
 
@@ -257,8 +258,8 @@ class UserStory(models.Model):
         verbose_name_plural = 'user stories'
         default_permissions = ()
         permissions = (
-            ('editar_mi_userstory', 'editar mis userstories'),
-            ('registraractividad_mi_userstory', 'registrar avances en mis userstories')
+            ('editar_mi_userstory', 'Editar mis User Stories'),
+            ('registraractividad_mi_userstory', 'Registrar avances en mis User Stories')
 
         )
 
