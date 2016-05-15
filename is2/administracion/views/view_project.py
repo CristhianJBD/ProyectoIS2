@@ -33,18 +33,6 @@ class ProjectList(LoginRequiredMixin, ListView):
     template_name = 'administracion/proyecto/project_list.html'
     show_cancelled = False
 
-    def get_queryset(self):
-        """
-        Obtener proyectos del Sistema.
-
-        :return: lista de proyectos
-        """
-        if self.request.user.has_perm('administracion.listar_proyectos'):
-            proyectos = Proyecto.objects
-        else:
-            proyectos = self.request.user.proyecto_set
-        return proyectos.filter(estado='CA') if self.show_cancelled else proyectos.exclude(estado='CA')
-
     def get_absolute_url(self):
         return reverse_lazy('project_detail', args=[self.pk])
 
@@ -78,7 +66,7 @@ class ProjectCreate(LoginRequiredMixin, CreateViewPermissionRequiredMixin, gener
     permission_required = 'administracion.add_proyecto'
     form_class = modelform_factory(Proyecto,
                                    widgets={'fecha_inicio': SelectDateWidget, 'fecha_fin': SelectDateWidget},
-                                   fields=('nombre', 'fecha_inicio', 'fecha_fin', 'duracion_sprint'),)
+                                   fields=('nombre', 'fecha_inicio', 'fecha_fin', 'duracion_sprint', 'estado'),)
 
     template_name = 'administracion/proyecto/project_form_create.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
@@ -122,7 +110,7 @@ class ProjectUpdate( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
                                                     widgets={'roles': CheckboxSelectMultiple})
     form_class = modelform_factory(Proyecto,
                                    widgets={'fecha_inicio': SelectDateWidget, 'fecha_fin': SelectDateWidget},
-                                   fields=('nombre', 'fecha_inicio', 'fecha_fin', 'duracion_sprint'),
+                                   fields=('nombre', 'fecha_inicio', 'fecha_fin', 'duracion_sprint', 'estado'),
                                    )
 
     def get_proyecto(self):

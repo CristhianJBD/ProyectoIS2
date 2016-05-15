@@ -64,7 +64,7 @@ class AddUser(LoginRequiredMixin, CreateViewPermissionRequiredMixin, generic.Cre
         Retorno url del usuario
         :return:url del UserDetail
         """
-        return reverse('user_detail', kwargs={'pk':self.object.id})
+        return reverse('user_list')
 
     def form_valid(self, form):
         """
@@ -121,7 +121,7 @@ class EditUser(LoginRequiredMixin,GlobalPermissionRequiredMixin, generic.UpdateV
         Se redirige a la url del detalle del usuario
         :return: url de UserDetail
         """
-        return reverse('user_detail', kwargs={'pk': self.object.id})
+        return reverse('user_list')
 
     def get_initial(self):
         """
