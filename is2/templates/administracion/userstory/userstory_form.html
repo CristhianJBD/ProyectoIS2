@@ -3,9 +3,19 @@
 {% load guardian_tags %}
 {% block contentbase %}
 
+
+
     {% if current_action == "Crear" %}
-        <li><a href="{% url 'project_detail' view.proyecto.id %}">{{ view.proyecto}}</a></li>
-        <li><a href="{% url 'product_backlog' view.proyecto.id %}">User Stories</a></li>
+        <div class="row">
+           <ol class="breadcrumb">
+              <li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+              <li><a href="{%url "project_detail" view.proyecto.id %}">{{ view.proyecto }}</a></li>
+               <li><a href="{% url 'product_backlog' view.proyecto.id %}">User Stories </a></li>
+               <li class="active">Crear User Stories</li>
+           </ol>
+        </div><!--/.row-->
+
+
     {% else %}
         <li><a href="{% url 'project_detail' userstory.proyecto_id %}">{{ userstory.proyecto }}</a></li>
         <li><a href="{% url 'product_backlog' userstory.proyecto_id %}">User Stories</a></li>

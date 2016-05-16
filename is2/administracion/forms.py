@@ -108,20 +108,20 @@ class AddSprintBaseForm(forms.ModelForm):
             return
 
         if 'fecha_inicio' and 'proyecto' in self.cleaned_data:
-            inicio = self.cleaned_data['fecha_inicio']
+            fecha_inicio = self.cleaned_data['fecha_inicio']
             proyecto = self.cleaned_data['proyecto']
-            fin = inicio + datetime.timedelta(days=proyecto.duracion_sprint)
+            fecha_fin = fecha_inicio + datetime.timedelta(days=proyecto.duracion_sprint)
             today = timezone.now().date()
-            sprint = proyecto.sprint_set.filter(inicio__lte=fin, fin__gte=inicio).exclude(pk=self.instance.pk)
-            if (inicio.date() < today) & (inicio != self.instance.inicio):
+            sprint = proyecto.sprint_set.filter(fecha_inicio__lte=fecha_fin, fecha_fin__gte=fecha_inicio).exclude(pk=self.instance.pk)
+            if (fecha_inicio.date() < today) & (fecha_inicio != self.instance.fecha_inicio):
                 raise ValidationError({'fecha_inicio': 'Fecha inicio debe ser mayor o igual a la fecha actual '})
             if sprint.exists():
                 raise ValidationError({'fecha_inicio': 'Durante este tiempo existe  ' + str(sprint[0].nombre)})
-            if inicio.date() < proyecto.inicio.date():
+            if fecha_inicio.date() < proyecto.fecha_inicio.date():
                 raise ValidationError({'fecha_inicio': 'Fecha inicio debe ser mayor o igual a la fecha de inicio del proyecto'})
-            if inicio.date() >= proyecto.fin.date():
+            if fecha_inicio.date() >= proyecto.fecha_fin.date():
                 raise ValidationError({'fecha_inicio': 'Fecha inicio debe ser menor a la fecha de fin del proyecto'})
-            if fin.date() > proyecto.fin.date():
+            if fecha_fin.date() > proyecto.fecha_fin.date():
                 raise ValidationError({'fecha_inicio': 'Fin del sprint supera la fecha de fin del proyecto'})
 
 
@@ -131,7 +131,7 @@ class AddToSprintForm(forms.Form):
     """
     userStory = forms.ModelChoiceField(queryset=UserStory.objects.all())
     desarrollador = forms.ModelChoiceField(queryset=User.objects.all())
-    flujo = forms.ModelChoiceField(queryset=Flujo.objects.all())
+    #flujo = forms.ModelChoiceField(queryset=Flujo.objects.all())
 
 
 class AddToSprintFormset(BaseFormSet):
