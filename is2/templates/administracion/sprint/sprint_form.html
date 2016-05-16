@@ -1,0 +1,87 @@
+{% extends "administracion/base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+
+
+{% block contentbase %}
+
+        <div class="row">
+   <ol class="breadcrumb">
+      <li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+      <li><a href="{%url "project_list" %}">Lista de Proyectos</a></li>
+       <li><a href="">Lista de Sprint</a></li>
+       <li class="active">Editar Sprint</li>
+   </ol>
+</div><!--/.row-->
+
+
+
+
+
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li class="active"><a href="{% url 'project_list' %}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Proyectos</a></li>
+            <li><a href="{% url 'user_list' %}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
+            <li><a href="{% url 'rol_list' %}"><svg class="glyph stroked key "><use xlink:href="#stroked-key"/></svg> Roles</a></li>
+
+        </ul>
+    </div>
+
+                <legend>Agregar UserStory</legend>
+
+
+    <script src="{% static 'lumino/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'lumino/js/jquery.formset.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.teammember').formset({
+                prefix: '{{ formset.prefix }}',
+                addText: 'Agregar UserStory',
+                deleteText: 'Eliminar'
+            });
+        })
+    </script>
+
+
+    <style>
+        .empty-form {
+            display: none;
+        }
+    </style>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-3">
+                {% bootstrap_field form.nombre %}
+            </div>
+            <div class="col-lg-3">
+                {% bootstrap_field form.fecha_inicio %}
+            </div>
+            {%  bootstrap_field form.proyecto %}
+        </div>
+        <fieldset>
+            <legend>Agregar UserStory</legend>
+            {{ formset.management_form }}
+            {{ formset.non_form_errors }}
+            <div class="row top-buffer team-members">
+                {% for form in formset %}
+                    {{ form.id }}
+                    <div class="teammember" id="teammember-{{ forloop.counter0 }}">
+                        {% if form.instance.pk %}{% bootstrap_field form.DELETE %}{% endif %}
+                        {% bootstrap_form form %}
+
+                    </div>
+
+                {% endfor %}
+            </div>
+        </fieldset>
+        <input type="submit" value="Agregar" class="btn btn-default"/>
+    </form>
+
+{% endblock %}
