@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>views_flujo module &mdash; documentación de ProyectoIs2 - 3.0</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ProyectoIs2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="administracion.html">administracion package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">ProyectoIs2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>views_flujo module</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/views_flujo.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-administracion.views.views_flujo">
+<span id="views-flujo-module"></span><h1>views_flujo module<a class="headerlink" href="#module-administracion.views.views_flujo" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="class">
+<dt id="administracion.views.views_flujo.AddFlujo">
+<em class="property">class </em><code class="descclassname">administracion.views.views_flujo.</code><code class="descname">AddFlujo</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#AddFlujo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.AddFlujo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="views.html#administracion.views.views.ActiveProjectRequiredMixin" title="administracion.views.views.ActiveProjectRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.ActiveProjectRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.CreateViewPermissionRequiredMixin" title="administracion.views.views.CreateViewPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.CreateViewPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.CreateView</span></code></p>
+<p>View que agrega un flujo al sistema</p>
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.AddFlujo.form_class">
+<code class="descname">form_class</code><a class="headerlink" href="#administracion.views.views_flujo.AddFlujo.form_class" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">FlujosCreateForm</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.AddFlujo.form_valid">
+<code class="descname">form_valid</code><span class="sig-paren">(</span><em>form</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#AddFlujo.form_valid"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.AddFlujo.form_valid" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Comprobar validez del formulario. Crea una instancia de flujo para asociar con la actividad
+:param form: formulario recibido
+:param actividad_form: formulario recibido de actividad
+:return: URL de redireccion</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.AddFlujo.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#AddFlujo.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.AddFlujo.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Agregar datos al contexto
+:param kwargs: argumentos clave
+:return: contexto</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.AddFlujo.get_permission_object">
+<code class="descname">get_permission_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#AddFlujo.get_permission_object"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.AddFlujo.get_permission_object" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Objeto por el cual comprobar el permiso</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.AddFlujo.get_proyecto">
+<code class="descname">get_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#AddFlujo.get_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.AddFlujo.get_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.AddFlujo.get_success_url">
+<code class="descname">get_success_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#AddFlujo.get_success_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.AddFlujo.get_success_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>:return:la url de redireccion a la vista de los detalles del flujo agregado.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.AddFlujo.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.views_flujo.AddFlujo.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">Flujo</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.AddFlujo.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.crear_flujo'</em><a class="headerlink" href="#administracion.views.views_flujo.AddFlujo.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.AddFlujo.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/flujo/flujo_form.html'</em><a class="headerlink" href="#administracion.views.views_flujo.AddFlujo.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.views_flujo.DeleteFlujo">
+<em class="property">class </em><code class="descclassname">administracion.views.views_flujo.</code><code class="descname">DeleteFlujo</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#DeleteFlujo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.DeleteFlujo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="views.html#administracion.views.views.ActiveProjectRequiredMixin" title="administracion.views.views.ActiveProjectRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.ActiveProjectRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.DeleteView</span></code></p>
+<p>Vista de Eliminacion de Flujos</p>
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.DeleteFlujo.context_object_name">
+<code class="descname">context_object_name</code><em class="property"> = 'flujo'</em><a class="headerlink" href="#administracion.views.views_flujo.DeleteFlujo.context_object_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.DeleteFlujo.get_permission_object">
+<code class="descname">get_permission_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#DeleteFlujo.get_permission_object"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.DeleteFlujo.get_permission_object" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.DeleteFlujo.get_proyecto">
+<code class="descname">get_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#DeleteFlujo.get_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.DeleteFlujo.get_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.DeleteFlujo.get_success_url">
+<code class="descname">get_success_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#DeleteFlujo.get_success_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.DeleteFlujo.get_success_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.DeleteFlujo.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.views_flujo.DeleteFlujo.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">Flujo</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.DeleteFlujo.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.eliminar_flujo'</em><a class="headerlink" href="#administracion.views.views_flujo.DeleteFlujo.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.DeleteFlujo.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/flujo/flujo_eliminar.html'</em><a class="headerlink" href="#administracion.views.views_flujo.DeleteFlujo.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.views_flujo.FlujoDetail">
+<em class="property">class </em><code class="descclassname">administracion.views.views_flujo.</code><code class="descname">FlujoDetail</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#FlujoDetail"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.FlujoDetail" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.DetailView</span></code></p>
+<p>Vista de Detalles de un flujo</p>
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.FlujoDetail.context_object_name">
+<code class="descname">context_object_name</code><em class="property"> = 'flujo'</em><a class="headerlink" href="#administracion.views.views_flujo.FlujoDetail.context_object_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.FlujoDetail.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#FlujoDetail.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.FlujoDetail.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Agregar lista de actividades al contexto
+:param kwargs: diccionario de argumentos claves
+:return: contexto</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.FlujoDetail.get_permission_object">
+<code class="descname">get_permission_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#FlujoDetail.get_permission_object"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.FlujoDetail.get_permission_object" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Objeto por el cual comprobar el permiso</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.FlujoDetail.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.views_flujo.FlujoDetail.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">Flujo</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.FlujoDetail.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.ver_proyecto'</em><a class="headerlink" href="#administracion.views.views_flujo.FlujoDetail.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.FlujoDetail.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/flujo/flujo_detail.html'</em><a class="headerlink" href="#administracion.views.views_flujo.FlujoDetail.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.views_flujo.FlujoList">
+<em class="property">class </em><code class="descclassname">administracion.views.views_flujo.</code><code class="descname">FlujoList</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#FlujoList"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.FlujoList" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.list.ListView</span></code></p>
+<p>Vista de Listado de Flujos en el sistema de acuerdo a un proyecto</p>
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.FlujoList.context_object_name">
+<code class="descname">context_object_name</code><em class="property"> = 'flujos'</em><a class="headerlink" href="#administracion.views.views_flujo.FlujoList.context_object_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.FlujoList.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#FlujoList.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.FlujoList.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.FlujoList.get_permission_object">
+<code class="descname">get_permission_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#FlujoList.get_permission_object"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.FlujoList.get_permission_object" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.FlujoList.get_queryset">
+<code class="descname">get_queryset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#FlujoList.get_queryset"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.FlujoList.get_queryset" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.FlujoList.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.views_flujo.FlujoList.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">Flujo</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.FlujoList.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.ver_proyecto'</em><a class="headerlink" href="#administracion.views.views_flujo.FlujoList.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.FlujoList.project">
+<code class="descname">project</code><em class="property"> = None</em><a class="headerlink" href="#administracion.views.views_flujo.FlujoList.project" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.FlujoList.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/flujo/flujo_list.html'</em><a class="headerlink" href="#administracion.views.views_flujo.FlujoList.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.views_flujo.UpdateFlujo">
+<em class="property">class </em><code class="descclassname">administracion.views.views_flujo.</code><code class="descname">UpdateFlujo</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#UpdateFlujo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.UpdateFlujo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="views.html#administracion.views.views.ActiveProjectRequiredMixin" title="administracion.views.views.ActiveProjectRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.ActiveProjectRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.UpdateView</span></code></p>
+<p>View que agrega un flujo al sistema</p>
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.UpdateFlujo.form_class">
+<code class="descname">form_class</code><a class="headerlink" href="#administracion.views.views_flujo.UpdateFlujo.form_class" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">FlujosCreateForm</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.UpdateFlujo.form_valid">
+<code class="descname">form_valid</code><span class="sig-paren">(</span><em>form</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#UpdateFlujo.form_valid"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.UpdateFlujo.form_valid" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Comprobar validez del formulario. Crea una instancia de flujo para asociar con la actividad
+:param form: formulario recibido
+:param actividad_form: formulario recibido de actividad
+:return: URL de redireccion</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.UpdateFlujo.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#UpdateFlujo.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.UpdateFlujo.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Agregar datos al contexto
+:param kwargs: argumentos clave
+:return: contexto</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.UpdateFlujo.get_permission_object">
+<code class="descname">get_permission_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#UpdateFlujo.get_permission_object"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.UpdateFlujo.get_permission_object" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.UpdateFlujo.get_proyecto">
+<code class="descname">get_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#UpdateFlujo.get_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.UpdateFlujo.get_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.views_flujo.UpdateFlujo.get_success_url">
+<code class="descname">get_success_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#UpdateFlujo.get_success_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.UpdateFlujo.get_success_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>:return:la url de redireccion a la vista de los detalles del flujo agregado.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.UpdateFlujo.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.views_flujo.UpdateFlujo.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">Flujo</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.UpdateFlujo.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.editar_flujo'</em><a class="headerlink" href="#administracion.views.views_flujo.UpdateFlujo.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.UpdateFlujo.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/flujo/flujo_form.html'</em><a class="headerlink" href="#administracion.views.views_flujo.UpdateFlujo.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Christian Delgado, Cristhian Benitez, Fernando Britez, Isidro Gaona.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'3.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

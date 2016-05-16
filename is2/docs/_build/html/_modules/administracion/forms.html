@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>administracion.forms &mdash; documentación de is2Proyecto - 2.0</title>
+  <title>administracion.forms &mdash; documentación de ProyectoIs2 - 3.0</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="documentación de is2Proyecto - 2.0" href="../../index.html"/>
+    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="../../index.html"/>
         <link rel="up" title="Código de módulo" href="../index.html"/> 
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> is2Proyecto
+            <a href="../../index.html" class="icon icon-home"> ProyectoIs2
           
 
           
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                2.0
+                3.0
               </div>
             
           
@@ -81,8 +81,15 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../autenticacion.html">autenticacion package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../administracion.html">administracion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../view_project.html">view_project module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">views module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views_flujo.html">views_flujo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views_rol.html">views_rol module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views_sprints.html">views_sprints module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views_user.html">views_user module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../view_userstory.html">view_userstory module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autenticacion.html">autenticacion package</a></li>
 </ul>
 
             
@@ -96,7 +103,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">is2Proyecto</a>
+        <a href="../../index.html">ProyectoIs2</a>
       </nav>
 
 
@@ -132,9 +139,13 @@
 <span class="kn">from</span> <span class="nn">django.contrib.auth.forms</span> <span class="kn">import</span> <span class="n">UserCreationForm</span><span class="p">,</span> <span class="n">UserChangeForm</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Permission</span><span class="p">,</span> <span class="n">User</span>
 <span class="kn">from</span> <span class="nn">guardian.shortcuts</span> <span class="kn">import</span> <span class="n">get_perms_for_model</span>
-<span class="kn">from</span> <span class="nn">administracion.models</span> <span class="kn">import</span> <span class="n">Proyecto</span>
+<span class="kn">from</span> <span class="nn">administracion.models</span> <span class="kn">import</span> <span class="n">Proyecto</span><span class="p">,</span> <span class="n">Sprint</span><span class="p">,</span> <span class="n">Flujo</span><span class="p">,</span> <span class="n">Actividad</span><span class="p">,</span> <span class="n">UserStory</span>
 <span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
-<span class="kn">from</span> <span class="nn">django.forms.models</span> <span class="kn">import</span> <span class="n">BaseInlineFormSet</span>
+<span class="kn">from</span> <span class="nn">django.forms.models</span> <span class="kn">import</span> <span class="n">BaseInlineFormSet</span><span class="p">,</span> <span class="n">inlineformset_factory</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">BaseFormSet</span>
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">timezone</span>
 
 
 <span class="k">def</span> <span class="nf">__general_perms_list__</span><span class="p">():</span>
@@ -144,8 +155,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">permlist</span><span class="o">=</span> <span class="p">[]</span>
     <span class="n">permlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Permission</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">codename</span><span class="o">=</span><span class="s2">&quot;listar_proyectos&quot;</span><span class="p">))</span>
-    <span class="n">permlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Permission</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">codename</span><span class="o">=</span><span class="s2">&quot;listar_proyectos_usuario&quot;</span><span class="p">))</span>
     <span class="n">permlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Permission</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">codename</span><span class="o">=</span> <span class="s2">&quot;add_proyecto&quot;</span><span class="p">))</span>
+
     <span class="k">return</span> <span class="n">permlist</span>
 
 <span class="k">def</span> <span class="nf">__user_and_group_permissions__</span><span class="p">():</span>
@@ -165,6 +176,8 @@
     <span class="n">first_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">last_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">email</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+
 
     <span class="n">general_perms_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">perm</span><span class="o">.</span><span class="n">codename</span><span class="p">,</span> <span class="n">perm</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">__general_perms_list__</span><span class="p">()]</span>
     <span class="n">general_perms_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">__user_and_group_permissions__</span><span class="p">())</span>
@@ -189,12 +202,93 @@
 <span class="sd">    Formulario para el manejo de roles</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">perms_proyecto_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">perm</span><span class="o">.</span><span class="n">codename</span><span class="p">,</span> <span class="n">perm</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">get_perms_for_model</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;proyecto&#39;</span> <span class="ow">in</span> <span class="n">perm</span><span class="o">.</span><span class="n">codename</span><span class="p">]</span>
-
+    <span class="n">perms_userstories_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">perm</span><span class="o">.</span><span class="n">codename</span><span class="p">,</span> <span class="n">perm</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">get_perms_for_model</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;userstory&#39;</span> <span class="ow">in</span> <span class="n">perm</span><span class="o">.</span><span class="n">codename</span><span class="p">]</span>
+    <span class="n">perms_userstories_list</span><span class="o">.</span><span class="n">extend</span><span class="p">([(</span><span class="n">perm</span><span class="o">.</span><span class="n">codename</span><span class="p">,</span> <span class="n">perm</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">get_perms_for_model</span><span class="p">(</span><span class="n">UserStory</span><span class="p">)])</span>
+    <span class="n">perms_flujo_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">perm</span><span class="o">.</span><span class="n">codename</span><span class="p">,</span> <span class="n">perm</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">get_perms_for_model</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;flujo&#39;</span> <span class="ow">in</span> <span class="n">perm</span><span class="o">.</span><span class="n">codename</span><span class="p">]</span>
+    <span class="n">perms_sprint_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">perm</span><span class="o">.</span><span class="n">codename</span><span class="p">,</span> <span class="n">perm</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">get_perms_for_model</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;sprint&#39;</span> <span class="ow">in</span> <span class="n">perm</span><span class="o">.</span><span class="n">codename</span><span class="p">]</span>
+    <span class="c1">#muestra las opciones a elegir por medio de multiplechoiceField</span>
     <span class="n">perms_proyecto</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">MultipleChoiceField</span><span class="p">(</span><span class="n">perms_proyecto_list</span><span class="p">,</span> <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">CheckboxSelectMultiple</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">Proyecto</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">verbose_name_plural</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">perms_userstory</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">MultipleChoiceField</span><span class="p">(</span><span class="n">perms_userstories_list</span><span class="p">,</span> <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">CheckboxSelectMultiple</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">UserStory</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">verbose_name_plural</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">perms_flujo</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">MultipleChoiceField</span><span class="p">(</span><span class="n">perms_flujo_list</span><span class="p">,</span> <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">CheckboxSelectMultiple</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">Flujo</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">verbose_name_plural</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">perms_sprint</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">MultipleChoiceField</span><span class="p">(</span><span class="n">perms_sprint_list</span><span class="p">,</span> <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">CheckboxSelectMultiple</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">Sprint</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">verbose_name_plural</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RolForm.Meta"><a class="viewcode-back" href="../../administracion.html#administracion.forms.RolForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Group</span>
         <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span></div></div>
+
+<div class="viewcode-block" id="FlujosCreateForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.FlujosCreateForm">[documentos]</a><span class="k">class</span> <span class="nc">FlujosCreateForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formulario para la creacion de flujos</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="FlujosCreateForm.Meta"><a class="viewcode-back" href="../../administracion.html#administracion.forms.FlujosCreateForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Flujo</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nombre&#39;</span><span class="p">]</span></div></div>
+
+
+<span class="c1">#ActividadFormSet utilizamos este form para agregar la actividad al flujo, extra es la cantidad que aparecera en el formulario</span>
+<span class="n">ActividadFormSet</span> <span class="o">=</span> <span class="n">inlineformset_factory</span><span class="p">(</span><span class="n">Flujo</span><span class="p">,</span> <span class="n">Actividad</span><span class="p">,</span> <span class="n">can_order</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">can_delete</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">max_num</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="s1">&#39;__all__&#39;</span><span class="p">,)</span>
+
+<div class="viewcode-block" id="AddSprintBaseForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.AddSprintBaseForm">[documentos]</a><span class="k">class</span> <span class="nc">AddSprintBaseForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Formulario base para la creacion de Sprints</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AddSprintBaseForm.Meta"><a class="viewcode-back" href="../../administracion.html#administracion.forms.AddSprintBaseForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">=</span> <span class="n">Sprint</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nombre&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha_inicio&#39;</span><span class="p">,</span> <span class="s1">&#39;proyecto&#39;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="AddSprintBaseForm.clean"><a class="viewcode-back" href="../../administracion.html#administracion.forms.AddSprintBaseForm.clean">[documentos]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Chequea que  las fechas  de los Sprints no se solapen</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="s1">&#39;fecha_inicio&#39;</span> <span class="ow">and</span> <span class="s1">&#39;proyecto&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">:</span>
+            <span class="n">fecha_inicio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;fecha_inicio&#39;</span><span class="p">]</span>
+            <span class="n">proyecto</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;proyecto&#39;</span><span class="p">]</span>
+            <span class="n">fecha_fin</span> <span class="o">=</span> <span class="n">fecha_inicio</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">proyecto</span><span class="o">.</span><span class="n">duracion_sprint</span><span class="p">)</span>
+            <span class="n">today</span> <span class="o">=</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+            <span class="n">sprint</span> <span class="o">=</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">sprint_set</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">fecha_inicio__lte</span><span class="o">=</span><span class="n">fecha_fin</span><span class="p">,</span> <span class="n">fecha_fin__gte</span><span class="o">=</span><span class="n">fecha_inicio</span><span class="p">)</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">fecha_inicio</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">today</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">fecha_inicio</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">fecha_inicio</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">({</span><span class="s1">&#39;fecha_inicio&#39;</span><span class="p">:</span> <span class="s1">&#39;Fecha inicio debe ser mayor o igual a la fecha actual &#39;</span><span class="p">})</span>
+            <span class="k">if</span> <span class="n">sprint</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">({</span><span class="s1">&#39;fecha_inicio&#39;</span><span class="p">:</span> <span class="s1">&#39;Durante este tiempo existe  &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sprint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">nombre</span><span class="p">)})</span>
+            <span class="k">if</span> <span class="n">fecha_inicio</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">fecha_inicio</span><span class="o">.</span><span class="n">date</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">({</span><span class="s1">&#39;fecha_inicio&#39;</span><span class="p">:</span> <span class="s1">&#39;Fecha inicio debe ser mayor o igual a la fecha de inicio del proyecto&#39;</span><span class="p">})</span>
+            <span class="k">if</span> <span class="n">fecha_inicio</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">fecha_fin</span><span class="o">.</span><span class="n">date</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">({</span><span class="s1">&#39;fecha_inicio&#39;</span><span class="p">:</span> <span class="s1">&#39;Fecha inicio debe ser menor a la fecha de fin del proyecto&#39;</span><span class="p">})</span>
+            <span class="k">if</span> <span class="n">fecha_fin</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">fecha_fin</span><span class="o">.</span><span class="n">date</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">({</span><span class="s1">&#39;fecha_inicio&#39;</span><span class="p">:</span> <span class="s1">&#39;Fin del sprint supera la fecha de fin del proyecto&#39;</span><span class="p">})</span></div></div>
+
+
+<div class="viewcode-block" id="AddToSprintForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.AddToSprintForm">[documentos]</a><span class="k">class</span> <span class="nc">AddToSprintForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    formulario para la agregacion de userStory, desarrollador y flujo a un Sprint</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">userStory</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelChoiceField</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">UserStory</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+    <span class="n">desarrollador</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelChoiceField</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span></div>
+    <span class="c1">#flujo = forms.ModelChoiceField(queryset=Flujo.objects.all())</span>
+
+
+<div class="viewcode-block" id="AddToSprintFormset"><a class="viewcode-back" href="../../administracion.html#administracion.forms.AddToSprintFormset">[documentos]</a><span class="k">class</span> <span class="nc">AddToSprintFormset</span><span class="p">(</span><span class="n">BaseFormSet</span><span class="p">):</span>
+<div class="viewcode-block" id="AddToSprintFormset.clean"><a class="viewcode-back" href="../../administracion.html#administracion.forms.AddToSprintFormset.clean">[documentos]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Chequea que no se incluye el mismo user story más de una vez en el sprint</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">):</span>
+            <span class="k">return</span> <span class="c1">#si algún form del formset tiene errores, no se hace la validación</span>
+
+        <span class="n">userstories</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">form</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">forms</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;userStory&#39;</span> <span class="ow">in</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">form</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deleted_forms</span><span class="p">:</span>
+                <span class="n">us</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;userStory&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">us</span> <span class="ow">in</span> <span class="n">userstories</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Un mismo User Story puede aparecer sólo una vez en el sprint.&quot;</span><span class="p">)</span>
+                <span class="n">userstories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">us</span><span class="p">)</span>
+
+                <span class="n">userstories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">us</span><span class="p">)</span></div></div>
+
 
 <div class="viewcode-block" id="MiembrosEquipoFormset"><a class="viewcode-back" href="../../administracion.html#administracion.forms.MiembrosEquipoFormset">[documentos]</a><span class="k">class</span> <span class="nc">MiembrosEquipoFormset</span><span class="p">(</span><span class="n">BaseInlineFormSet</span><span class="p">):</span>
 <div class="viewcode-block" id="MiembrosEquipoFormset.clean"><a class="viewcode-back" href="../../administracion.html#administracion.forms.MiembrosEquipoFormset.clean">[documentos]</a>  <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -202,7 +296,27 @@
         <span class="k">for</span> <span class="n">form</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">forms</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">form</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deleted_forms</span><span class="p">:</span>
                 <span class="n">usuario</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;usuario&#39;</span><span class="p">]</span>
-                <span class="n">proyecto</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;proyecto&#39;</span><span class="p">]</span></div></div>
+                <span class="n">proyecto</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;proyecto&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">usuario</span><span class="o">.</span><span class="n">userstory_set</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">proyecto</span><span class="o">=</span><span class="n">proyecto</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;El usuario {0} tiene User Stories asignados en el proyecto.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">usuario</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="UsuarioFormset"><a class="viewcode-back" href="../../administracion.html#administracion.forms.UsuarioFormset">[documentos]</a><span class="k">class</span> <span class="nc">UsuarioFormset</span><span class="p">(</span><span class="n">BaseInlineFormSet</span><span class="p">):</span>
+<div class="viewcode-block" id="UsuarioFormset.clean"><a class="viewcode-back" href="../../administracion.html#administracion.forms.UsuarioFormset.clean">[documentos]</a>  <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UsuarioFormset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">form</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">forms</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">form</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deleted_forms</span><span class="p">:</span>
+                <span class="n">usuario</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;usuario&#39;</span><span class="p">]</span></div></div>
+
+<div class="viewcode-block" id="RegistrarActividadForm"><a class="viewcode-back" href="../../administracion.html#administracion.forms.RegistrarActividadForm">[documentos]</a><span class="k">class</span> <span class="nc">RegistrarActividadForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Formulario para registrar actividad en un User Story</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">horas_a_registrar</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span><span class="s1">&#39;Ingrese cantidad de horas&#39;</span><span class="p">},</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RegistrarActividadForm.Meta"><a class="viewcode-back" href="../../administracion.html#administracion.forms.RegistrarActividadForm.Meta">[documentos]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">UserStory</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;estado_actividad&quot;</span><span class="p">]</span></div></div>
 </pre></div>
 
            </div>
@@ -236,7 +350,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0',
+            VERSION:'3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

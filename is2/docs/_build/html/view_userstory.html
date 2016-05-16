@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>view_userstory module &mdash; documentación de ProyectoIs2 - 3.0</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ProyectoIs2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="administracion.html">administracion package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">ProyectoIs2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>view_userstory module</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/view_userstory.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-administracion.views.view_userstory">
+<span id="view-userstory-module"></span><h1>view_userstory module<a class="headerlink" href="#module-administracion.views.view_userstory" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="class">
+<dt id="administracion.views.view_userstory.AddUserStory">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">AddUserStory</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AddUserStory"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AddUserStory" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="views.html#administracion.views.views.ActiveProjectRequiredMixin" title="administracion.views.views.ActiveProjectRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.ActiveProjectRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.CreateViewPermissionRequiredMixin" title="administracion.views.views.CreateViewPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.CreateViewPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.CreateView</span></code></p>
+<p>View que agrega un user story al sistema</p>
+<dl class="method">
+<dt id="administracion.views.view_userstory.AddUserStory.form_valid">
+<code class="descname">form_valid</code><span class="sig-paren">(</span><em>form</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AddUserStory.form_valid"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AddUserStory.form_valid" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Comprobar validez del formulario.
+:param form: formulario recibido
+:return: URL de redireccion</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.AddUserStory.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AddUserStory.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AddUserStory.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.AddUserStory.get_form_class">
+<code class="descname">get_form_class</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AddUserStory.get_form_class"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AddUserStory.get_form_class" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.AddUserStory.get_permission_object">
+<code class="descname">get_permission_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AddUserStory.get_permission_object"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AddUserStory.get_permission_object" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Objeto por el cual comprobar el permiso</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.AddUserStory.get_proyecto">
+<code class="descname">get_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AddUserStory.get_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AddUserStory.get_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.AddUserStory.get_success_url">
+<code class="descname">get_success_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AddUserStory.get_success_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AddUserStory.get_success_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>:return:la url de redireccion a la vista de los detalles del user story agregado.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.AddUserStory.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.view_userstory.AddUserStory.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">UserStory</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.AddUserStory.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.crear_userstory'</em><a class="headerlink" href="#administracion.views.view_userstory.AddUserStory.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.AddUserStory.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/userstory/userstory_form.html'</em><a class="headerlink" href="#administracion.views.view_userstory.AddUserStory.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.view_userstory.AprobarPendientesUserStories">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">AprobarPendientesUserStories</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AprobarPendientesUserStories"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AprobarPendientesUserStories" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="#administracion.views.view_userstory.UserStoriesList" title="administracion.views.view_userstory.UserStoriesList"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.view_userstory.UserStoriesList</span></code></a></p>
+<p>Vista que sirve para aprobar user storys pendientes</p>
+<dl class="method">
+<dt id="administracion.views.view_userstory.AprobarPendientesUserStories.get_queryset">
+<code class="descname">get_queryset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AprobarPendientesUserStories.get_queryset"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AprobarPendientesUserStories.get_queryset" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.AprobarPendientesUserStories.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.aprobar_userstory'</em><a class="headerlink" href="#administracion.views.view_userstory.AprobarPendientesUserStories.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.AprobarPendientesUserStories.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/userstory/userstory_pendiente.html'</em><a class="headerlink" href="#administracion.views.view_userstory.AprobarPendientesUserStories.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.view_userstory.AprobarUserStory">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">AprobarUserStory</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AprobarUserStory"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AprobarUserStory" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="views.html#administracion.views.views.ActiveProjectRequiredMixin" title="administracion.views.views.ActiveProjectRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.ActiveProjectRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.SingleObjectTemplateResponseMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.BaseDetailView</span></code></p>
+<p>Vista de Aprobación de User Story</p>
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.AprobarUserStory.context_object_name">
+<code class="descname">context_object_name</code><em class="property"> = 'userstory'</em><a class="headerlink" href="#administracion.views.view_userstory.AprobarUserStory.context_object_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.AprobarUserStory.dispatch">
+<code class="descname">dispatch</code><span class="sig-paren">(</span><em>request</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AprobarUserStory.dispatch"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AprobarUserStory.dispatch" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.AprobarUserStory.get_permission_object">
+<code class="descname">get_permission_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AprobarUserStory.get_permission_object"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AprobarUserStory.get_permission_object" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.AprobarUserStory.get_proyecto">
+<code class="descname">get_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AprobarUserStory.get_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AprobarUserStory.get_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.AprobarUserStory.get_success_url">
+<code class="descname">get_success_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AprobarUserStory.get_success_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AprobarUserStory.get_success_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.AprobarUserStory.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.view_userstory.AprobarUserStory.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">UserStory</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.AprobarUserStory.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.aprobar_userstory'</em><a class="headerlink" href="#administracion.views.view_userstory.AprobarUserStory.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.AprobarUserStory.post">
+<code class="descname">post</code><span class="sig-paren">(</span><em>request</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#AprobarUserStory.post"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.AprobarUserStory.post" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.AprobarUserStory.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/userstory/userstory_aprobar.html'</em><a class="headerlink" href="#administracion.views.view_userstory.AprobarUserStory.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.view_userstory.CancelUserStory">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">CancelUserStory</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#CancelUserStory"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.CancelUserStory" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.ActiveProjectRequiredMixin" title="administracion.views.views.ActiveProjectRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.ActiveProjectRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.FormView</span></code></p>
+<p>Vista cancelacion de User Stories</p>
+<dl class="method">
+<dt id="administracion.views.view_userstory.CancelUserStory.dispatch">
+<code class="descname">dispatch</code><span class="sig-paren">(</span><em>request</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#CancelUserStory.dispatch"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.CancelUserStory.dispatch" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Comprobacion de permisos hecha antes de la llamada al dispatch que inicia el proceso de respuesta al request de la url
+:param request: request hecho por el cliente
+:param args: argumentos adicionales posicionales
+:param kwargs: argumentos adicionales en forma de diccionario
+:return: PermissionDenied si el usuario no cuenta con permisos</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.CancelUserStory.form_class">
+<code class="descname">form_class</code><a class="headerlink" href="#administracion.views.view_userstory.CancelUserStory.form_class" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">UserStoryForm</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.CancelUserStory.form_valid">
+<code class="descname">form_valid</code><span class="sig-paren">(</span><em>form</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#CancelUserStory.form_valid"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.CancelUserStory.form_valid" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.CancelUserStory.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#CancelUserStory.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.CancelUserStory.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.CancelUserStory.get_proyecto">
+<code class="descname">get_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#CancelUserStory.get_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.CancelUserStory.get_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.CancelUserStory.get_success_url">
+<code class="descname">get_success_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#CancelUserStory.get_success_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.CancelUserStory.get_success_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.CancelUserStory.get_user_story">
+<code class="descname">get_user_story</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#CancelUserStory.get_user_story"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.CancelUserStory.get_user_story" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.CancelUserStory.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/userstory/userstory_cancel.html'</em><a class="headerlink" href="#administracion.views.view_userstory.CancelUserStory.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.CancelUserStory.user_story">
+<code class="descname">user_story</code><em class="property"> = None</em><a class="headerlink" href="#administracion.views.view_userstory.CancelUserStory.user_story" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.view_userstory.RechazarUserStory">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">RechazarUserStory</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RechazarUserStory"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="views.html#administracion.views.views.ActiveProjectRequiredMixin" title="administracion.views.views.ActiveProjectRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.ActiveProjectRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.UpdateView</span></code></p>
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.RechazarUserStory.context_object_name">
+<code class="descname">context_object_name</code><em class="property"> = 'userstory'</em><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory.context_object_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.RechazarUserStory.dispatch">
+<code class="descname">dispatch</code><span class="sig-paren">(</span><em>request</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RechazarUserStory.dispatch"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory.dispatch" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.RechazarUserStory.fields">
+<code class="descname">fields</code><em class="property"> = ['actividad', 'estado_actividad']</em><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.RechazarUserStory.form_valid">
+<code class="descname">form_valid</code><span class="sig-paren">(</span><em>form</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RechazarUserStory.form_valid"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory.form_valid" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.RechazarUserStory.get_form">
+<code class="descname">get_form</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RechazarUserStory.get_form"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory.get_form" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Personalización del form retornado</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.RechazarUserStory.get_permission_object">
+<code class="descname">get_permission_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RechazarUserStory.get_permission_object"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory.get_permission_object" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.RechazarUserStory.get_proyecto">
+<code class="descname">get_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RechazarUserStory.get_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory.get_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.RechazarUserStory.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">UserStory</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.RechazarUserStory.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.aprobar_userstory'</em><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.RechazarUserStory.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/userstory/userstory_rechazar.html'</em><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.view_userstory.RegistrarActividadUserStory">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">RegistrarActividadUserStory</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RegistrarActividadUserStory"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RegistrarActividadUserStory" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="views.html#administracion.views.views.ActiveProjectRequiredMixin" title="administracion.views.views.ActiveProjectRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.ActiveProjectRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.UpdateView</span></code></p>
+<p>View que permite registrar los cambios aplicados a un user story</p>
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.RegistrarActividadUserStory.error_template">
+<code class="descname">error_template</code><em class="property"> = 'administracion/userstory/userstory_error.html'</em><a class="headerlink" href="#administracion.views.view_userstory.RegistrarActividadUserStory.error_template" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.RegistrarActividadUserStory.form_valid">
+<code class="descname">form_valid</code><span class="sig-paren">(</span><em>form</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RegistrarActividadUserStory.form_valid"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RegistrarActividadUserStory.form_valid" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.RegistrarActividadUserStory.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RegistrarActividadUserStory.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RegistrarActividadUserStory.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.RegistrarActividadUserStory.get_form_class">
+<code class="descname">get_form_class</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RegistrarActividadUserStory.get_form_class"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RegistrarActividadUserStory.get_form_class" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Retorna el tipo de formulario que se mostrará en el template. En caso de que
+el usuario cuente con el permiso de editar userstory se le permitirá cambiar la actividad
+del User Story.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.RegistrarActividadUserStory.get_proyecto">
+<code class="descname">get_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RegistrarActividadUserStory.get_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RegistrarActividadUserStory.get_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.RegistrarActividadUserStory.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.view_userstory.RegistrarActividadUserStory.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">UserStory</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.RegistrarActividadUserStory.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/userstory/userstory_registraractividad_form.html'</em><a class="headerlink" href="#administracion.views.view_userstory.RegistrarActividadUserStory.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.view_userstory.UpdateUserStory">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">UpdateUserStory</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UpdateUserStory"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UpdateUserStory" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="views.html#administracion.views.views.ActiveProjectRequiredMixin" title="administracion.views.views.ActiveProjectRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.ActiveProjectRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.UpdateView</span></code></p>
+<p>View que actualiza un user story del sistema</p>
+<dl class="method">
+<dt id="administracion.views.view_userstory.UpdateUserStory.dispatch">
+<code class="descname">dispatch</code><span class="sig-paren">(</span><em>request</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UpdateUserStory.dispatch"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UpdateUserStory.dispatch" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Comprobación de permisos hecha antes de la llamada al dispatch que inicia el proceso de respuesta al request de la url
+:param request: request hecho por el cliente
+:param args: argumentos adicionales posicionales
+:param kwargs: argumentos adicionales en forma de diccionario
+:return: PermissionDenied si el usuario no cuenta con permisos</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.UpdateUserStory.form_valid">
+<code class="descname">form_valid</code><span class="sig-paren">(</span><em>form</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UpdateUserStory.form_valid"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UpdateUserStory.form_valid" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Comprobar validez del formulario. Crea una instancia de user story
+:param form: formulario recibido
+:return: URL de redireccion</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.UpdateUserStory.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UpdateUserStory.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UpdateUserStory.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Agregar datos al contexto
+:param kwargs: argumentos clave
+:return: contexto</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.UpdateUserStory.get_form_class">
+<code class="descname">get_form_class</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UpdateUserStory.get_form_class"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UpdateUserStory.get_form_class" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.UpdateUserStory.get_proyecto">
+<code class="descname">get_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UpdateUserStory.get_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UpdateUserStory.get_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.UpdateUserStory.get_success_url">
+<code class="descname">get_success_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UpdateUserStory.get_success_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UpdateUserStory.get_success_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>:return:la url de redireccion a la vista de los detalles del user story agregado.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UpdateUserStory.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.view_userstory.UpdateUserStory.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">UserStory</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UpdateUserStory.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/userstory/userstory_form.html'</em><a class="headerlink" href="#administracion.views.view_userstory.UpdateUserStory.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.view_userstory.UpdateVersion">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">UpdateVersion</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UpdateVersion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UpdateVersion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="#administracion.views.view_userstory.UpdateUserStory" title="administracion.views.view_userstory.UpdateUserStory"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.view_userstory.UpdateUserStory</span></code></a></p>
+<p>Vista que permite revertir un User Story a una version anterior.</p>
+<dl class="method">
+<dt id="administracion.views.view_userstory.UpdateVersion.form_valid">
+<code class="descname">form_valid</code><span class="sig-paren">(</span><em>form</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UpdateVersion.form_valid"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UpdateVersion.form_valid" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Comprobar validez del formulario. Crea una instancia de user story
+:param form: formulario recibido
+:return: URL de redireccion</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.UpdateVersion.get_initial">
+<code class="descname">get_initial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UpdateVersion.get_initial"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UpdateVersion.get_initial" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Obtiene la version deseada del User Story.
+:return: diccionarnio con los datos de la version anterior.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UpdateVersion.version">
+<code class="descname">version</code><em class="property"> = None</em><a class="headerlink" href="#administracion.views.view_userstory.UpdateVersion.version" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.view_userstory.UserStoriesList">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">UserStoriesList</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UserStoriesList"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UserStoriesList" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.list.ListView</span></code></p>
+<p>Lista de User Stories del proyecto</p>
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UserStoriesList.context_object_name">
+<code class="descname">context_object_name</code><em class="property"> = 'userstories'</em><a class="headerlink" href="#administracion.views.view_userstory.UserStoriesList.context_object_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.UserStoriesList.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UserStoriesList.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UserStoriesList.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.UserStoriesList.get_permission_object">
+<code class="descname">get_permission_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UserStoriesList.get_permission_object"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UserStoriesList.get_permission_object" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.UserStoriesList.get_queryset">
+<code class="descname">get_queryset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UserStoriesList.get_queryset"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UserStoriesList.get_queryset" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UserStoriesList.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.view_userstory.UserStoriesList.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">UserStory</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UserStoriesList.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.ver_proyecto'</em><a class="headerlink" href="#administracion.views.view_userstory.UserStoriesList.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UserStoriesList.project">
+<code class="descname">project</code><em class="property"> = None</em><a class="headerlink" href="#administracion.views.view_userstory.UserStoriesList.project" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UserStoriesList.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/userstory/userstory_list.html'</em><a class="headerlink" href="#administracion.views.view_userstory.UserStoriesList.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.view_userstory.UserStoryDetail">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">UserStoryDetail</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UserStoryDetail"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UserStoryDetail" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.DetailView</span></code></p>
+<p>Vista de Detalles de un user story</p>
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UserStoryDetail.context_object_name">
+<code class="descname">context_object_name</code><em class="property"> = 'userstory'</em><a class="headerlink" href="#administracion.views.view_userstory.UserStoryDetail.context_object_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.UserStoryDetail.get_permission_object">
+<code class="descname">get_permission_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#UserStoryDetail.get_permission_object"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.UserStoryDetail.get_permission_object" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Retorna el objeto al cual corresponde el permiso</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UserStoryDetail.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.view_userstory.UserStoryDetail.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">UserStory</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UserStoryDetail.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.ver_proyecto'</em><a class="headerlink" href="#administracion.views.view_userstory.UserStoryDetail.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.UserStoryDetail.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/userstory/userstory_detail.html'</em><a class="headerlink" href="#administracion.views.view_userstory.UserStoryDetail.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.views.view_userstory.VersionList">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">VersionList</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#VersionList"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.VersionList" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.list.ListView</span></code></p>
+<p>Vista que devuelve una lista de versiones del User Story deseado.</p>
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.VersionList.context_object_name">
+<code class="descname">context_object_name</code><em class="property"> = 'versions'</em><a class="headerlink" href="#administracion.views.view_userstory.VersionList.context_object_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.VersionList.dispatch">
+<code class="descname">dispatch</code><span class="sig-paren">(</span><em>request</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#VersionList.dispatch"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.VersionList.dispatch" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Comprobación de permisos hecha antes de la llamada al dispatch que inicia el proceso de respuesta al request de la url
+:param request: request hecho por el cliente
+:param args: argumentos adicionales posicionales
+:param kwargs: argumentos adicionales en forma de diccionario
+:return: PermissionDenied si el usuario no cuenta con permisos</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.VersionList.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#VersionList.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.VersionList.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Agrega el user story al contexto.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.VersionList.get_queryset">
+<code class="descname">get_queryset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#VersionList.get_queryset"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.VersionList.get_queryset" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Obtiene el user story y sus versiones</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.VersionList.permission_required">
+<code class="descname">permission_required</code><em class="property"> = ['administracion.editar_userstory', 'administracion.editar_mi_userstory']</em><a class="headerlink" href="#administracion.views.view_userstory.VersionList.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.VersionList.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/userstory/version_list_us.html'</em><a class="headerlink" href="#administracion.views.view_userstory.VersionList.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.VersionList.us">
+<code class="descname">us</code><em class="property"> = None</em><a class="headerlink" href="#administracion.views.view_userstory.VersionList.us" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Christian Delgado, Cristhian Benitez, Fernando Britez, Isidro Gaona.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'3.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>administracion package &mdash; documentación de is2Proyecto - 2.0</title>
+  <title>administracion package &mdash; documentación de ProyectoIs2 - 3.0</title>
   
 
   
@@ -30,9 +30,9 @@
   
 
   
-    <link rel="top" title="documentación de is2Proyecto - 2.0" href="index.html"/>
+    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="index.html"/>
         <link rel="next" title="administracion.migrations package" href="administracion.migrations.html"/>
-        <link rel="prev" title="autenticacion package" href="autenticacion.html"/> 
+        <link rel="prev" title="Welcome to ProyectoIs2’s documentation!" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -50,7 +50,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> is2Proyecto
+            <a href="index.html" class="icon icon-home"> ProyectoIs2
           
 
           
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                2.0
+                3.0
               </div>
             
           
@@ -82,7 +82,6 @@
             
             
                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="autenticacion.html">autenticacion package</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">administracion package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="administracion.migrations.html">administracion.migrations package</a></li>
@@ -112,7 +111,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">is2Proyecto</a>
+        <a href="index.html">ProyectoIs2</a>
       </nav>
 
 
@@ -164,6 +163,44 @@
 <div class="section" id="module-administracion.admin">
 <span id="administracion-admin-module"></span><h2>administracion.admin module<a class="headerlink" href="#module-administracion.admin" title="Enlazar permanentemente con este título">¶</a></h2>
 <dl class="class">
+<dt id="administracion.admin.ActividadAdmin">
+<em class="property">class </em><code class="descclassname">administracion.admin.</code><code class="descname">ActividadAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/admin.html#ActividadAdmin"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.admin.ActividadAdmin" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.admin.GuardedModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="administracion.admin.ActividadAdmin.inlines">
+<code class="descname">inlines</code><em class="property"> = [&lt;class 'administracion.admin.ActividadInLine'&gt;]</em><a class="headerlink" href="#administracion.admin.ActividadAdmin.inlines" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.admin.ActividadAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#administracion.admin.ActividadAdmin.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.admin.ActividadInLine">
+<em class="property">class </em><code class="descclassname">administracion.admin.</code><code class="descname">ActividadInLine</code><span class="sig-paren">(</span><em>parent_model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/admin.html#ActividadInLine"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.admin.ActividadInLine" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.TabularInline</span></code></p>
+<dl class="attribute">
+<dt id="administracion.admin.ActividadInLine.extra">
+<code class="descname">extra</code><em class="property"> = 0</em><a class="headerlink" href="#administracion.admin.ActividadInLine.extra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.admin.ActividadInLine.media">
+<code class="descname">media</code><a class="headerlink" href="#administracion.admin.ActividadInLine.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.admin.ActividadInLine.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.admin.ActividadInLine.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">Actividad</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="administracion.admin.MiembroEquipoInLine">
 <em class="property">class </em><code class="descclassname">administracion.admin.</code><code class="descname">MiembroEquipoInLine</code><span class="sig-paren">(</span><em>parent_model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/admin.html#MiembroEquipoInLine"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.admin.MiembroEquipoInLine" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.contrib.admin.options.TabularInline</span></code></p>
@@ -201,6 +238,17 @@
 
 </dd></dl>
 
+<dl class="class">
+<dt id="administracion.admin.UserStoryAdmin">
+<em class="property">class </em><code class="descclassname">administracion.admin.</code><code class="descname">UserStoryAdmin</code><span class="sig-paren">(</span><em>model</em>, <em>admin_site</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/admin.html#UserStoryAdmin"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.admin.UserStoryAdmin" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.admin.GuardedModelAdmin</span></code></p>
+<dl class="attribute">
+<dt id="administracion.admin.UserStoryAdmin.media">
+<code class="descname">media</code><a class="headerlink" href="#administracion.admin.UserStoryAdmin.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-administracion.apps">
 <span id="administracion-apps-module"></span><h2>administracion.apps module<a class="headerlink" href="#module-administracion.apps" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -219,12 +267,169 @@
 <div class="section" id="module-administracion.forms">
 <span id="administracion-forms-module"></span><h2>administracion.forms module<a class="headerlink" href="#module-administracion.forms" title="Enlazar permanentemente con este título">¶</a></h2>
 <dl class="class">
+<dt id="administracion.forms.AddSprintBaseForm">
+<em class="property">class </em><code class="descclassname">administracion.forms.</code><code class="descname">AddSprintBaseForm</code><span class="sig-paren">(</span><em>data=None</em>, <em>files=None</em>, <em>auto_id='id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.utils.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#AddSprintBaseForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.AddSprintBaseForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<p>Formulario base para la creacion de Sprints</p>
+<dl class="class">
+<dt id="administracion.forms.AddSprintBaseForm.Meta">
+<em class="property">class </em><code class="descname">Meta</code><a class="reference internal" href="_modules/administracion/forms.html#AddSprintBaseForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.AddSprintBaseForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="administracion.forms.AddSprintBaseForm.Meta.fields">
+<code class="descname">fields</code><em class="property"> = ['nombre', 'fecha_inicio', 'proyecto']</em><a class="headerlink" href="#administracion.forms.AddSprintBaseForm.Meta.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.AddSprintBaseForm.Meta.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.forms.AddSprintBaseForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">Sprint</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.AddSprintBaseForm.base_fields">
+<code class="descclassname">AddSprintBaseForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('nombre', &lt;django.forms.fields.CharField object at 0x2b2003425358&gt;), ('fecha_inicio', &lt;django.forms.fields.DateTimeField object at 0x2b2003425438&gt;), ('proyecto', &lt;django.forms.models.ModelChoiceField object at 0x2b20034254e0&gt;)])</em><a class="headerlink" href="#administracion.forms.AddSprintBaseForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.forms.AddSprintBaseForm.clean">
+<code class="descclassname">AddSprintBaseForm.</code><code class="descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#AddSprintBaseForm.clean"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.AddSprintBaseForm.clean" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Chequea que  las fechas  de los Sprints no se solapen</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.AddSprintBaseForm.declared_fields">
+<code class="descclassname">AddSprintBaseForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict()</em><a class="headerlink" href="#administracion.forms.AddSprintBaseForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.AddSprintBaseForm.media">
+<code class="descclassname">AddSprintBaseForm.</code><code class="descname">media</code><a class="headerlink" href="#administracion.forms.AddSprintBaseForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.AddToSprintForm">
+<em class="property">class </em><code class="descclassname">administracion.forms.</code><code class="descname">AddToSprintForm</code><span class="sig-paren">(</span><em>data=None</em>, <em>files=None</em>, <em>auto_id='id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.utils.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>field_order=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#AddToSprintForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.AddToSprintForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.forms.forms.Form</span></code></p>
+<p>formulario para la agregacion de userStory, desarrollador y flujo a un Sprint</p>
+<dl class="attribute">
+<dt id="administracion.forms.AddToSprintForm.base_fields">
+<code class="descname">base_fields</code><em class="property"> = OrderedDict([('userStory', &lt;django.forms.models.ModelChoiceField object at 0x2b2003425668&gt;), ('desarrollador', &lt;django.forms.models.ModelChoiceField object at 0x2b20034257b8&gt;)])</em><a class="headerlink" href="#administracion.forms.AddToSprintForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.AddToSprintForm.declared_fields">
+<code class="descname">declared_fields</code><em class="property"> = OrderedDict([('userStory', &lt;django.forms.models.ModelChoiceField object at 0x2b2003425668&gt;), ('desarrollador', &lt;django.forms.models.ModelChoiceField object at 0x2b20034257b8&gt;)])</em><a class="headerlink" href="#administracion.forms.AddToSprintForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.AddToSprintForm.media">
+<code class="descname">media</code><a class="headerlink" href="#administracion.forms.AddToSprintForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.AddToSprintFormset">
+<em class="property">class </em><code class="descclassname">administracion.forms.</code><code class="descname">AddToSprintFormset</code><span class="sig-paren">(</span><em>data=None</em>, <em>files=None</em>, <em>auto_id='id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.utils.ErrorList'&gt;</em>, <em>form_kwargs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#AddToSprintFormset"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.AddToSprintFormset" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.forms.formsets.BaseFormSet</span></code></p>
+<dl class="method">
+<dt id="administracion.forms.AddToSprintFormset.clean">
+<code class="descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#AddToSprintFormset.clean"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.AddToSprintFormset.clean" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Chequea que no se incluye el mismo user story más de una vez en el sprint</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.FlujosCreateForm">
+<em class="property">class </em><code class="descclassname">administracion.forms.</code><code class="descname">FlujosCreateForm</code><span class="sig-paren">(</span><em>data=None</em>, <em>files=None</em>, <em>auto_id='id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.utils.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#FlujosCreateForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.FlujosCreateForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<p>Formulario para la creacion de flujos</p>
+<dl class="class">
+<dt id="administracion.forms.FlujosCreateForm.Meta">
+<em class="property">class </em><code class="descname">Meta</code><a class="reference internal" href="_modules/administracion/forms.html#FlujosCreateForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.FlujosCreateForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="administracion.forms.FlujosCreateForm.Meta.fields">
+<code class="descname">fields</code><em class="property"> = ['nombre']</em><a class="headerlink" href="#administracion.forms.FlujosCreateForm.Meta.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.FlujosCreateForm.Meta.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.forms.FlujosCreateForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">Flujo</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.FlujosCreateForm.base_fields">
+<code class="descclassname">FlujosCreateForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('nombre', &lt;django.forms.fields.CharField object at 0x2b2003422208&gt;)])</em><a class="headerlink" href="#administracion.forms.FlujosCreateForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.FlujosCreateForm.declared_fields">
+<code class="descclassname">FlujosCreateForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict()</em><a class="headerlink" href="#administracion.forms.FlujosCreateForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.FlujosCreateForm.media">
+<code class="descclassname">FlujosCreateForm.</code><code class="descname">media</code><a class="headerlink" href="#administracion.forms.FlujosCreateForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="administracion.forms.MiembrosEquipoFormset">
 <em class="property">class </em><code class="descclassname">administracion.forms.</code><code class="descname">MiembrosEquipoFormset</code><span class="sig-paren">(</span><em>data=None</em>, <em>files=None</em>, <em>instance=None</em>, <em>save_as_new=False</em>, <em>prefix=None</em>, <em>queryset=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#MiembrosEquipoFormset"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.MiembrosEquipoFormset" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.forms.models.BaseInlineFormSet</span></code></p>
 <dl class="method">
 <dt id="administracion.forms.MiembrosEquipoFormset.clean">
 <code class="descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#MiembrosEquipoFormset.clean"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.MiembrosEquipoFormset.clean" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.forms.RegistrarActividadForm">
+<em class="property">class </em><code class="descclassname">administracion.forms.</code><code class="descname">RegistrarActividadForm</code><span class="sig-paren">(</span><em>data=None</em>, <em>files=None</em>, <em>auto_id='id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.utils.ErrorList'&gt;</em>, <em>label_suffix=None</em>, <em>empty_permitted=False</em>, <em>instance=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#RegistrarActividadForm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.RegistrarActividadForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<p>Formulario para registrar actividad en un User Story</p>
+<dl class="class">
+<dt id="administracion.forms.RegistrarActividadForm.Meta">
+<em class="property">class </em><code class="descname">Meta</code><a class="reference internal" href="_modules/administracion/forms.html#RegistrarActividadForm.Meta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.RegistrarActividadForm.Meta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="administracion.forms.RegistrarActividadForm.Meta.fields">
+<code class="descname">fields</code><em class="property"> = ['estado_actividad']</em><a class="headerlink" href="#administracion.forms.RegistrarActividadForm.Meta.fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RegistrarActividadForm.Meta.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.forms.RegistrarActividadForm.Meta.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">UserStory</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RegistrarActividadForm.base_fields">
+<code class="descclassname">RegistrarActividadForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('estado_actividad', &lt;django.forms.fields.TypedChoiceField object at 0x2b2003425978&gt;), ('horas_a_registrar', &lt;django.forms.fields.IntegerField object at 0x2b2003425860&gt;)])</em><a class="headerlink" href="#administracion.forms.RegistrarActividadForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RegistrarActividadForm.declared_fields">
+<code class="descclassname">RegistrarActividadForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('horas_a_registrar', &lt;django.forms.fields.IntegerField object at 0x2b2003425860&gt;)])</em><a class="headerlink" href="#administracion.forms.RegistrarActividadForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RegistrarActividadForm.media">
+<code class="descclassname">RegistrarActividadForm.</code><code class="descname">media</code><a class="headerlink" href="#administracion.forms.RegistrarActividadForm.media" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -253,12 +458,12 @@
 
 <dl class="attribute">
 <dt id="administracion.forms.RolForm.base_fields">
-<code class="descclassname">RolForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('name', &lt;django.forms.fields.CharField object at 0x2b79c1988f28&gt;), ('perms_proyecto', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c1930470&gt;)])</em><a class="headerlink" href="#administracion.forms.RolForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">RolForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('name', &lt;django.forms.fields.CharField object at 0x2b2003422a58&gt;), ('perms_proyecto', &lt;django.forms.fields.MultipleChoiceField object at 0x2b200341ef98&gt;), ('perms_userstory', &lt;django.forms.fields.MultipleChoiceField object at 0x2b200341ee48&gt;), ('perms_flujo', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003367240&gt;), ('perms_sprint', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003418d30&gt;)])</em><a class="headerlink" href="#administracion.forms.RolForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="administracion.forms.RolForm.declared_fields">
-<code class="descclassname">RolForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('perms_proyecto', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c1930470&gt;)])</em><a class="headerlink" href="#administracion.forms.RolForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">RolForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('perms_proyecto', &lt;django.forms.fields.MultipleChoiceField object at 0x2b200341ef98&gt;), ('perms_userstory', &lt;django.forms.fields.MultipleChoiceField object at 0x2b200341ee48&gt;), ('perms_flujo', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003367240&gt;), ('perms_sprint', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003418d30&gt;)])</em><a class="headerlink" href="#administracion.forms.RolForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -267,8 +472,23 @@
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="administracion.forms.RolForm.perms_flujo_list">
+<code class="descclassname">RolForm.</code><code class="descname">perms_flujo_list</code><em class="property"> = [('crear_flujo', 'Agregar Flujo'), ('editar_flujo', 'Editar Flujo'), ('eliminar_flujo', 'Eliminar Flujo'), ('ver_flujo', 'Ver Flujo')]</em><a class="headerlink" href="#administracion.forms.RolForm.perms_flujo_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="administracion.forms.RolForm.perms_proyecto_list">
-<code class="descclassname">RolForm.</code><code class="descname">perms_proyecto_list</code><em class="property"> = [('add_proyecto', 'Can add proyecto'), ('aprobar_proyecto', 'permiso para aprobar el proyecto'), ('change_proyecto', 'Can change proyecto'), ('delete_proyecto', 'Can delete proyecto'), ('listar_proyectos', 'Listar todos los proyectos disponibles'), ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'), ('ver_proyecto', 'ver detalles del proyecto')]</em><a class="headerlink" href="#administracion.forms.RolForm.perms_proyecto_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">RolForm.</code><code class="descname">perms_proyecto_list</code><em class="property"> = [('add_proyecto', 'Can add proyecto'), ('aprobar_proyecto', 'Aprobar el proyecto'), ('change_proyecto', 'Can change proyecto'), ('delete_proyecto', 'Can delete proyecto'), ('listar_proyectos', 'Listar Proyectos'), ('ver_proyecto', 'Ver detalles del proyecto')]</em><a class="headerlink" href="#administracion.forms.RolForm.perms_proyecto_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RolForm.perms_sprint_list">
+<code class="descclassname">RolForm.</code><code class="descname">perms_sprint_list</code><em class="property"> = [('crear_sprint', 'Agregar Sprint'), ('editar_sprint', 'Editar Sprint'), ('eliminar_sprint', 'Eliminar Sprint'), ('ver_sprint', 'Ver Sprint')]</em><a class="headerlink" href="#administracion.forms.RolForm.perms_sprint_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.forms.RolForm.perms_userstories_list">
+<code class="descclassname">RolForm.</code><code class="descname">perms_userstories_list</code><em class="property"> = [('aprobar_userstory', 'Aprobar User Story completado'), ('cancelar_userstory', 'Cancelar User Story completado'), ('crear_userstory', 'Agregar User Story'), ('editar_userstory', 'Editar User Story'), ('eliminar_userstory', 'Eliminar User Story'), ('registraractividad_userstory', 'Registrar avances en User Story'), ('editar_mi_userstory', 'Editar mis User Stories'), ('registraractividad_mi_userstory', 'Registrar avances en mis User Stories')]</em><a class="headerlink" href="#administracion.forms.RolForm.perms_userstories_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -297,17 +517,17 @@
 
 <dl class="attribute">
 <dt id="administracion.forms.UserCreateForm.base_fields">
-<code class="descclassname">UserCreateForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('first_name', &lt;django.forms.fields.CharField object at 0x2b79c18f45f8&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b79c1951470&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b79c19518d0&gt;), ('username', &lt;django.forms.fields.CharField object at 0x2b79c196fe10&gt;), ('password1', &lt;django.forms.fields.CharField object at 0x2b79c149c0b8&gt;), ('password2', &lt;django.forms.fields.CharField object at 0x2b79c149c2e8&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c196fa58&gt;)])</em><a class="headerlink" href="#administracion.forms.UserCreateForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">UserCreateForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('first_name', &lt;django.forms.fields.CharField object at 0x2b2003371438&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b20033716d8&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b2003371b70&gt;), ('username', &lt;django.forms.fields.CharField object at 0x2b2003371be0&gt;), ('password1', &lt;django.forms.fields.CharField object at 0x2b2002ebe048&gt;), ('password2', &lt;django.forms.fields.CharField object at 0x2b2002ebe4a8&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003406ba8&gt;)])</em><a class="headerlink" href="#administracion.forms.UserCreateForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="administracion.forms.UserCreateForm.declared_fields">
-<code class="descclassname">UserCreateForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('password1', &lt;django.forms.fields.CharField object at 0x2b79c149c0b8&gt;), ('password2', &lt;django.forms.fields.CharField object at 0x2b79c149c2e8&gt;), ('first_name', &lt;django.forms.fields.CharField object at 0x2b79c18f45f8&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b79c1951470&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b79c19518d0&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c196fa58&gt;)])</em><a class="headerlink" href="#administracion.forms.UserCreateForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">UserCreateForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('password1', &lt;django.forms.fields.CharField object at 0x2b2002ebe048&gt;), ('password2', &lt;django.forms.fields.CharField object at 0x2b2002ebe4a8&gt;), ('first_name', &lt;django.forms.fields.CharField object at 0x2b2003371438&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b20033716d8&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b2003371b70&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003406ba8&gt;)])</em><a class="headerlink" href="#administracion.forms.UserCreateForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="administracion.forms.UserCreateForm.general_perms_list">
-<code class="descclassname">UserCreateForm.</code><code class="descname">general_perms_list</code><em class="property"> = [('listar_proyectos', 'Listar todos los proyectos disponibles'), ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'), ('add_proyecto', 'Can add proyecto'), ('add_user', 'Can add user'), ('change_user', 'Can change user'), ('delete_user', 'Can delete user'), ('add_group', 'Can add group'), ('change_group', 'Can change group'), ('delete_group', 'Can delete group')]</em><a class="headerlink" href="#administracion.forms.UserCreateForm.general_perms_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">UserCreateForm.</code><code class="descname">general_perms_list</code><em class="property"> = [('listar_proyectos', 'Listar Proyectos'), ('add_proyecto', 'Can add proyecto'), ('add_user', 'Can add user'), ('change_user', 'Can change user'), ('delete_user', 'Can delete user'), ('add_group', 'Can add group'), ('change_group', 'Can change group'), ('delete_group', 'Can delete group')]</em><a class="headerlink" href="#administracion.forms.UserCreateForm.general_perms_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -324,17 +544,17 @@
 <p>Formulario para edición de usuarios</p>
 <dl class="attribute">
 <dt id="administracion.forms.UserEditForm.base_fields">
-<code class="descname">base_fields</code><em class="property"> = OrderedDict([('password', &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x2b79c149c748&gt;), ('last_login', &lt;django.forms.fields.DateTimeField object at 0x2b79c1984b00&gt;), ('is_superuser', &lt;django.forms.fields.BooleanField object at 0x2b79c1984908&gt;), ('groups', &lt;django.forms.models.ModelMultipleChoiceField object at 0x2b79c19848d0&gt;), ('user_permissions', &lt;django.forms.models.ModelMultipleChoiceField object at 0x2b79c1984d68&gt;), ('username', &lt;django.forms.fields.CharField object at 0x2b79c1984ef0&gt;), ('first_name', &lt;django.forms.fields.CharField object at 0x2b79c1988048&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b79c1988160&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b79c1988278&gt;), ('is_staff', &lt;django.forms.fields.BooleanField object at 0x2b79c1988390&gt;), ('is_active', &lt;django.forms.fields.BooleanField object at 0x2b79c1988438&gt;), ('date_joined', &lt;django.forms.fields.DateTimeField object at 0x2b79c19884e0&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c196fe80&gt;)])</em><a class="headerlink" href="#administracion.forms.UserEditForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descname">base_fields</code><em class="property"> = OrderedDict([('password', &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x2b2002ebe908&gt;), ('last_login', &lt;django.forms.fields.DateTimeField object at 0x2b2003418ef0&gt;), ('is_superuser', &lt;django.forms.fields.BooleanField object at 0x2b20034186a0&gt;), ('groups', &lt;django.forms.models.ModelMultipleChoiceField object at 0x2b2003418b38&gt;), ('user_permissions', &lt;django.forms.models.ModelMultipleChoiceField object at 0x2b2003418f98&gt;), ('username', &lt;django.forms.fields.CharField object at 0x2b200341e160&gt;), ('first_name', &lt;django.forms.fields.CharField object at 0x2b200341e278&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b200341e390&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b200341e4a8&gt;), ('is_staff', &lt;django.forms.fields.BooleanField object at 0x2b200341e5c0&gt;), ('is_active', &lt;django.forms.fields.BooleanField object at 0x2b200341e668&gt;), ('date_joined', &lt;django.forms.fields.DateTimeField object at 0x2b200341e710&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003406cf8&gt;)])</em><a class="headerlink" href="#administracion.forms.UserEditForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="administracion.forms.UserEditForm.declared_fields">
-<code class="descname">declared_fields</code><em class="property"> = OrderedDict([('password', &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x2b79c149c748&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b79c196fe80&gt;)])</em><a class="headerlink" href="#administracion.forms.UserEditForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descname">declared_fields</code><em class="property"> = OrderedDict([('password', &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x2b2002ebe908&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003406cf8&gt;)])</em><a class="headerlink" href="#administracion.forms.UserEditForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="administracion.forms.UserEditForm.general_perms_list">
-<code class="descname">general_perms_list</code><em class="property"> = [('listar_proyectos', 'Listar todos los proyectos disponibles'), ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'), ('add_proyecto', 'Can add proyecto'), ('add_user', 'Can add user'), ('change_user', 'Can change user'), ('delete_user', 'Can delete user'), ('add_group', 'Can add group'), ('change_group', 'Can change group'), ('delete_group', 'Can delete group')]</em><a class="headerlink" href="#administracion.forms.UserEditForm.general_perms_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descname">general_perms_list</code><em class="property"> = [('listar_proyectos', 'Listar Proyectos'), ('add_proyecto', 'Can add proyecto'), ('add_user', 'Can add user'), ('change_user', 'Can change user'), ('delete_user', 'Can delete user'), ('add_group', 'Can add group'), ('change_group', 'Can change group'), ('delete_group', 'Can delete group')]</em><a class="headerlink" href="#administracion.forms.UserEditForm.general_perms_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -344,39 +564,40 @@
 
 </dd></dl>
 
+<dl class="class">
+<dt id="administracion.forms.UsuarioFormset">
+<em class="property">class </em><code class="descclassname">administracion.forms.</code><code class="descname">UsuarioFormset</code><span class="sig-paren">(</span><em>data=None</em>, <em>files=None</em>, <em>instance=None</em>, <em>save_as_new=False</em>, <em>prefix=None</em>, <em>queryset=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#UsuarioFormset"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioFormset" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.forms.models.BaseInlineFormSet</span></code></p>
+<dl class="method">
+<dt id="administracion.forms.UsuarioFormset.clean">
+<code class="descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/forms.html#UsuarioFormset.clean"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.forms.UsuarioFormset.clean" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-administracion.models">
 <span id="administracion-models-module"></span><h2>administracion.models module<a class="headerlink" href="#module-administracion.models" title="Enlazar permanentemente con este título">¶</a></h2>
 <dl class="class">
-<dt id="administracion.models.Cliente">
-<em class="property">class </em><code class="descclassname">administracion.models.</code><code class="descname">Cliente</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Cliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Cliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dt id="administracion.models.Actividad">
+<em class="property">class </em><code class="descclassname">administracion.models.</code><code class="descname">Actividad</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Actividad"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Actividad" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
-<p>Modelo de cliente del sistema</p>
+<p>Las actividades representan las distintas etapas de las que se componen un flujo</p>
 <dl class="exception">
-<dt id="administracion.models.Cliente.DoesNotExist">
-<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#administracion.models.Cliente.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dt id="administracion.models.Actividad.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#administracion.models.Actividad.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
 </dd></dl>
 
 <dl class="exception">
-<dt id="administracion.models.Cliente.MultipleObjectsReturned">
-<em class="property">exception </em><code class="descclassname">Cliente.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#administracion.models.Cliente.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dt id="administracion.models.Actividad.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Actividad.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#administracion.models.Actividad.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
 </dd></dl>
 
-<dl class="method">
-<dt id="administracion.models.Cliente.delete">
-<code class="descclassname">Cliente.</code><code class="descname">delete</code><span class="sig-paren">(</span><em>using=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Cliente.delete"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Cliente.delete" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="attribute">
-<dt id="administracion.models.Cliente.objects">
-<code class="descclassname">Cliente.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#administracion.models.Cliente.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="administracion.models.Cliente.proyecto">
-<code class="descclassname">Cliente.</code><code class="descname">proyecto</code><a class="headerlink" href="#administracion.models.Cliente.proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dt id="administracion.models.Actividad.flujo">
+<code class="descclassname">Actividad.</code><code class="descname">flujo</code><a class="headerlink" href="#administracion.models.Actividad.flujo" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one relation.</p>
 <p>In the example:</p>
@@ -388,8 +609,182 @@ one-to-one relation.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="administracion.models.Cliente.save">
-<code class="descclassname">Cliente.</code><code class="descname">save</code><span class="sig-paren">(</span><em>force_insert=False</em>, <em>force_update=False</em>, <em>using=None</em>, <em>update_fields=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Cliente.save"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Cliente.save" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dt id="administracion.models.Actividad.get_next_in_order">
+<code class="descclassname">Actividad.</code><code class="descname">get_next_in_order</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Actividad.get_next_in_order" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Actividad.get_previous_in_order">
+<code class="descclassname">Actividad.</code><code class="descname">get_previous_in_order</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Actividad.get_previous_in_order" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Actividad.objects">
+<code class="descclassname">Actividad.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#administracion.models.Actividad.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Actividad.userstory_set">
+<code class="descclassname">Actividad.</code><code class="descname">userstory_set</code><a class="headerlink" href="#administracion.models.Actividad.userstory_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.models.Adjunto">
+<em class="property">class </em><code class="descclassname">administracion.models.</code><code class="descname">Adjunto</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Adjunto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Adjunto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Modelo para la administración de archivos adjuntos a un User Story.</p>
+<dl class="exception">
+<dt id="administracion.models.Adjunto.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#administracion.models.Adjunto.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="administracion.models.Adjunto.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Adjunto.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#administracion.models.Adjunto.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Adjunto.get_absolute_url">
+<code class="descclassname">Adjunto.</code><code class="descname">get_absolute_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Adjunto.get_absolute_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Adjunto.get_absolute_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Adjunto.get_download_url">
+<code class="descclassname">Adjunto.</code><code class="descname">get_download_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Adjunto.get_download_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Adjunto.get_download_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Adjunto.get_lenguaje_display">
+<code class="descclassname">Adjunto.</code><code class="descname">get_lenguaje_display</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Adjunto.get_lenguaje_display" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Adjunto.get_next_by_creacion">
+<code class="descclassname">Adjunto.</code><code class="descname">get_next_by_creacion</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Adjunto.get_next_by_creacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Adjunto.get_previous_by_creacion">
+<code class="descclassname">Adjunto.</code><code class="descname">get_previous_by_creacion</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Adjunto.get_previous_by_creacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Adjunto.get_tipo_display">
+<code class="descclassname">Adjunto.</code><code class="descname">get_tipo_display</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Adjunto.get_tipo_display" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Adjunto.img64">
+<code class="descclassname">Adjunto.</code><code class="descname">img64</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Adjunto.img64"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Adjunto.img64" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Adjunto.lang_choices">
+<code class="descclassname">Adjunto.</code><code class="descname">lang_choices</code><em class="property"> = [('clike', 'C'), ('python', 'Python'), ('ruby', 'Ruby'), ('css', 'CSS'), ('php', 'PHP'), ('scala', 'Scala'), ('sql', 'SQL'), ('bash', 'Bash'), ('javascript', 'JavaScript'), ('markup', 'Markup')]</em><a class="headerlink" href="#administracion.models.Adjunto.lang_choices" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Adjunto.objects">
+<code class="descclassname">Adjunto.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#administracion.models.Adjunto.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Adjunto.tipo_choices">
+<code class="descclassname">Adjunto.</code><code class="descname">tipo_choices</code><em class="property"> = [('img', 'Imagen'), ('text', 'Texto'), ('misc', 'Otro'), ('src', 'Codigo')]</em><a class="headerlink" href="#administracion.models.Adjunto.tipo_choices" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Adjunto.user_story">
+<code class="descclassname">Adjunto.</code><code class="descname">user_story</code><a class="headerlink" href="#administracion.models.Adjunto.user_story" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.models.Flujo">
+<em class="property">class </em><code class="descclassname">administracion.models.</code><code class="descname">Flujo</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Flujo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Flujo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Administración de los flujos que forman parte de un proyecto.</p>
+<dl class="exception">
+<dt id="administracion.models.Flujo.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#administracion.models.Flujo.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="administracion.models.Flujo.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Flujo.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#administracion.models.Flujo.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Flujo.actividad_set">
+<code class="descclassname">Flujo.</code><code class="descname">actividad_set</code><a class="headerlink" href="#administracion.models.Flujo.actividad_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Flujo.get_absolute_url">
+<code class="descclassname">Flujo.</code><code class="descname">get_absolute_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Flujo.get_absolute_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Flujo.get_absolute_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Flujo.get_actividad_order">
+<code class="descclassname">Flujo.</code><code class="descname">get_actividad_order</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Flujo.get_actividad_order" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Flujo.objects">
+<code class="descclassname">Flujo.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#administracion.models.Flujo.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Flujo.proyecto">
+<code class="descclassname">Flujo.</code><code class="descname">proyecto</code><a class="headerlink" href="#administracion.models.Flujo.proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Flujo.set_actividad_order">
+<code class="descclassname">Flujo.</code><code class="descname">set_actividad_order</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Flujo.set_actividad_order" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -493,21 +888,6 @@ one-to-one relation.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="administracion.models.Proyecto.cliente_set">
-<code class="descclassname">Proyecto.</code><code class="descname">cliente_set</code><a class="headerlink" href="#administracion.models.Proyecto.cliente_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Accessor to the related objects manager on the reverse side of a
-many-to-one relation.</p>
-<p>In the example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
-<p>Most of the implementation is delegated to a dynamically defined manager
-class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
-</dd></dl>
-
-<dl class="attribute">
 <dt id="administracion.models.Proyecto.equipo">
 <code class="descclassname">Proyecto.</code><code class="descname">equipo</code><a class="headerlink" href="#administracion.models.Proyecto.equipo" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Accessor to the related objects manager on the forward and reverse sides of
@@ -523,6 +903,21 @@ instances.</p>
 class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.flujo_set">
+<code class="descclassname">Proyecto.</code><code class="descname">flujo_set</code><a class="headerlink" href="#administracion.models.Proyecto.flujo_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="administracion.models.Proyecto.get_absolute_url">
 <code class="descclassname">Proyecto.</code><code class="descname">get_absolute_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Proyecto.get_absolute_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Proyecto.get_absolute_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
@@ -531,6 +926,16 @@ class built by <code class="docutils literal"><span class="pre">create_forward_m
 <dl class="method">
 <dt id="administracion.models.Proyecto.get_estado_display">
 <code class="descclassname">Proyecto.</code><code class="descname">get_estado_display</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Proyecto.get_estado_display" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_horas_estimadas">
+<code class="descclassname">Proyecto.</code><code class="descname">get_horas_estimadas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Proyecto.get_horas_estimadas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Proyecto.get_horas_estimadas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Proyecto.get_horas_trabajadas">
+<code class="descclassname">Proyecto.</code><code class="descname">get_horas_trabajadas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Proyecto.get_horas_trabajadas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Proyecto.get_horas_trabajadas" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -588,6 +993,255 @@ class built by <code class="docutils literal"><span class="pre">create_forward_m
 <code class="descclassname">Proyecto.</code><code class="descname">opciones_estado</code><em class="property"> = (('PL', 'Planificacion'), ('EJ', 'Ejecutandose'), ('PE', 'Pendiente'), ('CA', 'Cancelado'), ('TE', 'Terminado'))</em><a class="headerlink" href="#administracion.models.Proyecto.opciones_estado" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.progreso">
+<code class="descclassname">Proyecto.</code><code class="descname">progreso</code><a class="headerlink" href="#administracion.models.Proyecto.progreso" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.sprint_set">
+<code class="descclassname">Proyecto.</code><code class="descname">sprint_set</code><a class="headerlink" href="#administracion.models.Proyecto.sprint_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Proyecto.userstory_set">
+<code class="descclassname">Proyecto.</code><code class="descname">userstory_set</code><a class="headerlink" href="#administracion.models.Proyecto.userstory_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.models.Sprint">
+<em class="property">class </em><code class="descclassname">administracion.models.</code><code class="descname">Sprint</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Sprint"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Sprint" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Manejo de los sprints del proyecto</p>
+<dl class="exception">
+<dt id="administracion.models.Sprint.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#administracion.models.Sprint.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="administracion.models.Sprint.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Sprint.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#administracion.models.Sprint.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Sprint.get_absolute_url">
+<code class="descclassname">Sprint.</code><code class="descname">get_absolute_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#Sprint.get_absolute_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.Sprint.get_absolute_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Sprint.get_next_by_fecha_fin">
+<code class="descclassname">Sprint.</code><code class="descname">get_next_by_fecha_fin</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Sprint.get_next_by_fecha_fin" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Sprint.get_next_by_fecha_inicio">
+<code class="descclassname">Sprint.</code><code class="descname">get_next_by_fecha_inicio</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Sprint.get_next_by_fecha_inicio" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Sprint.get_previous_by_fecha_fin">
+<code class="descclassname">Sprint.</code><code class="descname">get_previous_by_fecha_fin</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Sprint.get_previous_by_fecha_fin" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.Sprint.get_previous_by_fecha_inicio">
+<code class="descclassname">Sprint.</code><code class="descname">get_previous_by_fecha_inicio</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.Sprint.get_previous_by_fecha_inicio" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Sprint.objects">
+<code class="descclassname">Sprint.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#administracion.models.Sprint.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Sprint.proyecto">
+<code class="descclassname">Sprint.</code><code class="descname">proyecto</code><a class="headerlink" href="#administracion.models.Sprint.proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.Sprint.userstory_set">
+<code class="descclassname">Sprint.</code><code class="descname">userstory_set</code><a class="headerlink" href="#administracion.models.Sprint.userstory_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.models.UserStory">
+<em class="property">class </em><code class="descclassname">administracion.models.</code><code class="descname">UserStory</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#UserStory"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.UserStory" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Manejo de los User Stories. Los User Stories representan a cada
+funcionalidad desde la perspectiva del cliente que debe realizar el sistema.</p>
+<dl class="exception">
+<dt id="administracion.models.UserStory.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#administracion.models.UserStory.DoesNotExist" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="administracion.models.UserStory.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">UserStory.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#administracion.models.UserStory.MultipleObjectsReturned" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.UserStory.actividad">
+<code class="descclassname">UserStory.</code><code class="descname">actividad</code><a class="headerlink" href="#administracion.models.UserStory.actividad" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.UserStory.adjunto_set">
+<code class="descclassname">UserStory.</code><code class="descname">adjunto_set</code><a class="headerlink" href="#administracion.models.UserStory.adjunto_set" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">parent.children</span></code> is a <code class="docutils literal"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.UserStory.desarrollador">
+<code class="descclassname">UserStory.</code><code class="descname">desarrollador</code><a class="headerlink" href="#administracion.models.UserStory.desarrollador" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.UserStory.estado_actividad_choices">
+<code class="descclassname">UserStory.</code><code class="descname">estado_actividad_choices</code><em class="property"> = ((0, 'ToDo'), (1, 'Doing'), (2, 'Done'))</em><a class="headerlink" href="#administracion.models.UserStory.estado_actividad_choices" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.UserStory.estado_choices">
+<code class="descclassname">UserStory.</code><code class="descname">estado_choices</code><em class="property"> = ((0, 'Inactivo'), (1, 'En curso'), (2, 'Pendiente Aprobacion'), (3, 'Aprobado'), (4, 'Cancelado'))</em><a class="headerlink" href="#administracion.models.UserStory.estado_choices" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.UserStory.get_absolute_url">
+<code class="descclassname">UserStory.</code><code class="descname">get_absolute_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#UserStory.get_absolute_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.UserStory.get_absolute_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.UserStory.get_estado_actividad_display">
+<code class="descclassname">UserStory.</code><code class="descname">get_estado_actividad_display</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.UserStory.get_estado_actividad_display" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.UserStory.get_estado_display">
+<code class="descclassname">UserStory.</code><code class="descname">get_estado_display</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.UserStory.get_estado_display" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.UserStory.get_next_by_ultimo_cambio">
+<code class="descclassname">UserStory.</code><code class="descname">get_next_by_ultimo_cambio</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.UserStory.get_next_by_ultimo_cambio" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.UserStory.get_previous_by_ultimo_cambio">
+<code class="descclassname">UserStory.</code><code class="descname">get_previous_by_ultimo_cambio</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.UserStory.get_previous_by_ultimo_cambio" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.UserStory.objects">
+<code class="descclassname">UserStory.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#administracion.models.UserStory.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.UserStory.progreso">
+<code class="descclassname">UserStory.</code><code class="descname">progreso</code><a class="headerlink" href="#administracion.models.UserStory.progreso" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.UserStory.proyecto">
+<code class="descclassname">UserStory.</code><code class="descname">proyecto</code><a class="headerlink" href="#administracion.models.UserStory.proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="administracion.models.UserStory.save">
+<code class="descclassname">UserStory.</code><code class="descname">save</code><span class="sig-paren">(</span><em>force_insert=False</em>, <em>force_update=False</em>, <em>using=None</em>, <em>update_fields=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/models.html#UserStory.save"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.models.UserStory.save" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.UserStory.sprint">
+<code class="descclassname">UserStory.</code><code class="descname">sprint</code><a class="headerlink" href="#administracion.models.UserStory.sprint" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">child.parent</span></code> is a <code class="docutils literal"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -597,14 +1251,55 @@ class built by <code class="docutils literal"><span class="pre">create_forward_m
 <dt id="administracion.signals.add_permissions_team_member">
 <code class="descclassname">administracion.signals.</code><code class="descname">add_permissions_team_member</code><span class="sig-paren">(</span><em>sender</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/signals.html#add_permissions_team_member"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.signals.add_permissions_team_member" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Signal que se ejecuta cuando se agrega un rol a un miembro de equipo
-que hace que los permisos asociados al rol se asigne.
-:param sender: Clase que envia la signal
-:param kwargs: Diccionario con parámetros</p>
+que hace que los permisos asociados al rol se asigne.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sender</strong> &#8211; Clase que envia la signal</li>
+<li><strong>kwargs</strong> &#8211; Diccionario con parámetros</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
 <div class="section" id="module-administracion.tests">
 <span id="administracion-tests-module"></span><h2>administracion.tests module<a class="headerlink" href="#module-administracion.tests" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="administracion.tests.FlujoTest">
+<em class="property">class </em><code class="descclassname">administracion.tests.</code><code class="descname">FlujoTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#FlujoTest"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.FlujoTest" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<dl class="method">
+<dt id="administracion.tests.FlujoTest.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#FlujoTest.setUp"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.FlujoTest.setUp" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.FlujoTest.test_not_permission_to_change_flujo">
+<code class="descname">test_not_permission_to_change_flujo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#FlujoTest.test_not_permission_to_change_flujo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.FlujoTest.test_not_permission_to_change_flujo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.FlujoTest.test_not_permission_to_create_flujo">
+<code class="descname">test_not_permission_to_create_flujo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#FlujoTest.test_not_permission_to_create_flujo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.FlujoTest.test_not_permission_to_create_flujo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.FlujoTest.test_permission_to_change_flujo">
+<code class="descname">test_permission_to_change_flujo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#FlujoTest.test_permission_to_change_flujo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.FlujoTest.test_permission_to_change_flujo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.FlujoTest.test_permission_to_create_flujo">
+<code class="descname">test_permission_to_create_flujo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#FlujoTest.test_permission_to_create_flujo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.FlujoTest.test_permission_to_create_flujo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="class">
 <dt id="administracion.tests.ProjectTest">
 <em class="property">class </em><code class="descclassname">administracion.tests.</code><code class="descname">ProjectTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#ProjectTest"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.ProjectTest" title="Enlazar permanentemente con esta definición">¶</a></dt>
@@ -648,6 +1343,43 @@ que hace que los permisos asociados al rol se asigne.
 <dl class="method">
 <dt id="administracion.tests.RoleTest.test_delete_role">
 <code class="descname">test_delete_role</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#RoleTest.test_delete_role"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.RoleTest.test_delete_role" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.tests.SprintTest">
+<em class="property">class </em><code class="descclassname">administracion.tests.</code><code class="descname">SprintTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#SprintTest"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.SprintTest" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<dl class="method">
+<dt id="administracion.tests.SprintTest.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#SprintTest.setUp"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.SprintTest.setUp" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.SprintTest.test_to_create_sprint">
+<code class="descname">test_to_create_sprint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#SprintTest.test_to_create_sprint"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.SprintTest.test_to_create_sprint" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="administracion.tests.UserStoryTest">
+<em class="property">class </em><code class="descclassname">administracion.tests.</code><code class="descname">UserStoryTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#UserStoryTest"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.UserStoryTest" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<dl class="method">
+<dt id="administracion.tests.UserStoryTest.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#UserStoryTest.setUp"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.UserStoryTest.setUp" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.UserStoryTest.test_add_userstory_with_permission">
+<code class="descname">test_add_userstory_with_permission</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#UserStoryTest.test_add_userstory_with_permission"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.UserStoryTest.test_add_userstory_with_permission" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.tests.UserStoryTest.test_update_userstory_with_permission">
+<code class="descname">test_update_userstory_with_permission</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/tests.html#UserStoryTest.test_update_userstory_with_permission"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.tests.UserStoryTest.test_update_userstory_with_permission" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -702,7 +1434,7 @@ que hace que los permisos asociados al rol se asigne.
         <a href="administracion.migrations.html" class="btn btn-neutral float-right" title="administracion.migrations package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="autenticacion.html" class="btn btn-neutral" title="autenticacion package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Welcome to ProyectoIs2’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -733,7 +1465,7 @@ que hace que los permisos asociados al rol se asigne.
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.0',
+            VERSION:'3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

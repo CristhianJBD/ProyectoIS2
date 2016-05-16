@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>administracion.migrations package &mdash; documentación de is2Proyecto - 2.0</title>
+  <title>administracion.migrations package &mdash; documentación de ProyectoIs2 - 3.0</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="documentación de is2Proyecto - 2.0" href="index.html"/>
+    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="index.html"/>
         <link rel="up" title="administracion package" href="administracion.html"/>
         <link rel="prev" title="administracion package" href="administracion.html"/> 
 
@@ -50,7 +50,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> is2Proyecto
+            <a href="index.html" class="icon icon-home"> ProyectoIs2
           
 
           
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                2.0
+                3.0
               </div>
             
           
@@ -82,7 +82,6 @@
             
             
                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="autenticacion.html">autenticacion package</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="administracion.html">administracion package</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="administracion.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">administracion.migrations package</a><ul>
@@ -117,7 +116,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">is2Proyecto</a>
+        <a href="index.html">ProyectoIs2</a>
       </nav>
 
 
@@ -163,7 +162,7 @@
 <dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
 <dl class="attribute">
 <dt id="administracion.migrations.0001_initial.Migration.dependencies">
-<code class="descname">dependencies</code><em class="property"> = [('auth', '0007_alter_validators_add_error_messages'), ('auth', '__first__')]</em><a class="headerlink" href="#administracion.migrations.0001_initial.Migration.dependencies" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descname">dependencies</code><em class="property"> = [('auth', '__first__'), ('auth', '0007_alter_validators_add_error_messages')]</em><a class="headerlink" href="#administracion.migrations.0001_initial.Migration.dependencies" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -173,7 +172,7 @@
 
 <dl class="attribute">
 <dt id="administracion.migrations.0001_initial.Migration.operations">
-<code class="descname">operations</code><em class="property"> = [&lt;CreateModel  fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('nombre', &lt;django.db.models.fields.CharField&gt;), ('apellido', &lt;django.db.models.fields.CharField&gt;), ('email', &lt;django.db.models.fields.EmailField&gt;), ('telefono', &lt;django.db.models.fields.CharField&gt;), ('direccion', &lt;django.db.models.fields.CharField&gt;)], name='Cliente'&gt;, &lt;CreateModel  fields=[('id', &lt;django.db.models.fields.AutoField&gt;)], name='MiembroEquipo', options={'verbose_name_plural': 'miembros equipo', 'default_permissions': ()}&gt;, &lt;CreateModel  fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('nombre', &lt;django.db.models.fields.CharField&gt;), ('estado', &lt;django.db.models.fields.CharField&gt;), ('fecha_creacion', &lt;django.db.models.fields.DateTimeField&gt;), ('fecha_inicio', &lt;django.db.models.fields.DateTimeField&gt;), ('fecha_fin', &lt;django.db.models.fields.DateTimeField&gt;), ('equipo', &lt;django.db.models.fields.related.ManyToManyField&gt;)], name='Proyecto', options={'permissions': (('listar_proyectos', 'Listar todos los proyectos disponibles'), ('listar_proyectos_usuario', 'Listar todos los proyectos de un Usuario'), ('ver_proyecto', 'ver detalles del proyecto'), ('asignar_equipo', 'asignar los miembros del equipo'), ('aprobar_proyecto', 'permiso para aprobar el proyecto'))}&gt;, &lt;AddField  model_name='miembroequipo', name='proyecto', field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;, &lt;AddField  model_name='miembroequipo', name='roles', field=&lt;django.db.models.fields.related.ManyToManyField&gt;&gt;, &lt;AddField  model_name='miembroequipo', name='usuario', field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;, &lt;AddField  model_name='cliente', name='proyecto', field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;, &lt;AlterUniqueTogether  unique_together={('usuario', 'proyecto')}, name='miembroequipo'&gt;]</em><a class="headerlink" href="#administracion.migrations.0001_initial.Migration.operations" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descname">operations</code><em class="property"> = [&lt;CreateModel  options={'verbose_name_plural': 'actividades'}, fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('nombre', &lt;django.db.models.fields.CharField&gt;)], name='Actividad'&gt;, &lt;CreateModel  fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('nombre', &lt;django.db.models.fields.CharField&gt;), ('descripcion', &lt;django.db.models.fields.TextField&gt;), ('filename', &lt;django.db.models.fields.CharField&gt;), ('binario', &lt;django.db.models.fields.BinaryField&gt;), ('content_type', &lt;django.db.models.fields.CharField&gt;), ('creacion', &lt;django.db.models.fields.DateTimeField&gt;), ('tipo', &lt;django.db.models.fields.CharField&gt;), ('lenguaje', &lt;django.db.models.fields.CharField&gt;)], name='Adjunto'&gt;, &lt;CreateModel  options={'verbose_name_plural': 'flujos', 'default_permissions': ()}, fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('nombre', &lt;django.db.models.fields.CharField&gt;)], name='Flujo'&gt;, &lt;CreateModel  options={'verbose_name_plural': 'miembros equipo', 'default_permissions': ()}, fields=[('id', &lt;django.db.models.fields.AutoField&gt;)], name='MiembroEquipo'&gt;, &lt;CreateModel  options={'permissions': (('listar_proyectos', 'Listar Proyectos'), ('ver_proyecto', 'Ver detalles del proyecto'), ('asignar_equipo', 'Asignar los miembros del equipo'), ('aprobar_proyecto', 'Aprobar el proyecto'), ('crear_sprint', 'Agregar Sprint'), ('editar_sprint', 'Editar Sprint'), ('eliminar_sprint', 'Eliminar Sprint'), ('ver_sprint', 'Ver Sprint'), ('crear_flujo', 'Agregar Flujo'), ('editar_flujo', 'Editar Flujo'), ('eliminar_flujo', 'Eliminar Flujo'), ('ver_flujo', 'Ver Flujo'), ('crear_userstory', 'Agregar User Story'), ('editar_userstory', 'Editar User Story'), ('eliminar_userstory', 'Eliminar User Story'), ('registraractividad_userstory', 'Registrar avances en User Story'), ('aprobar_userstory', 'Aprobar User Story completado'), ('cancelar_userstory', 'Cancelar User Story completado'))}, fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('nombre', &lt;django.db.models.fields.CharField&gt;), ('estado', &lt;django.db.models.fields.CharField&gt;), ('fecha_creacion', &lt;django.db.models.fields.DateTimeField&gt;), ('fecha_inicio', &lt;django.db.models.fields.DateTimeField&gt;), ('fecha_fin', &lt;django.db.models.fields.DateTimeField&gt;), ('duracion_sprint', &lt;django.db.models.fields.PositiveIntegerField&gt;), ('equipo', &lt;django.db.models.fields.related.ManyToManyField&gt;)], name='Proyecto'&gt;, &lt;CreateModel  options={'verbose_name_plural': 'sprints', 'verbose_name': 'sprint', 'default_permissions': ()}, fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('nombre', &lt;django.db.models.fields.CharField&gt;), ('fecha_inicio', &lt;django.db.models.fields.DateTimeField&gt;), ('fecha_fin', &lt;django.db.models.fields.DateTimeField&gt;), ('proyecto', &lt;django.db.models.fields.related.ForeignKey&gt;)], name='Sprint'&gt;, &lt;CreateModel  options={'verbose_name_plural': 'user stories', 'permissions': (('editar_mi_userstory', 'Editar mis User Stories'), ('registraractividad_mi_userstory', 'Registrar avances en mis User Stories')), 'default_permissions': ()}, fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('nombre_corto', &lt;django.db.models.fields.CharField&gt;), ('nombre_largo', &lt;django.db.models.fields.CharField&gt;), ('descripcion', &lt;django.db.models.fields.TextField&gt;), ('valor_negocio', &lt;django.db.models.fields.IntegerField&gt;), ('valor_tecnico', &lt;django.db.models.fields.IntegerField&gt;), ('tiempo_estimado', &lt;django.db.models.fields.PositiveIntegerField&gt;), ('tiempo_registrado', &lt;django.db.models.fields.PositiveIntegerField&gt;), ('ultimo_cambio', &lt;django.db.models.fields.DateTimeField&gt;), ('estado', &lt;django.db.models.fields.IntegerField&gt;), ('estado_actividad', &lt;django.db.models.fields.IntegerField&gt;), ('actividad', &lt;django.db.models.fields.related.ForeignKey&gt;), ('desarrollador', &lt;django.db.models.fields.related.ForeignKey&gt;), ('proyecto', &lt;django.db.models.fields.related.ForeignKey&gt;), ('sprint', &lt;django.db.models.fields.related.ForeignKey&gt;)], name='UserStory'&gt;, &lt;AddField  field=&lt;django.db.models.fields.related.ForeignKey&gt;, name='proyecto', model_name='miembroequipo'&gt;, &lt;AddField  field=&lt;django.db.models.fields.related.ManyToManyField&gt;, name='roles', model_name='miembroequipo'&gt;, &lt;AddField  field=&lt;django.db.models.fields.related.ForeignKey&gt;, name='usuario', model_name='miembroequipo'&gt;, &lt;AddField  field=&lt;django.db.models.fields.related.ForeignKey&gt;, name='proyecto', model_name='flujo'&gt;, &lt;AddField  field=&lt;django.db.models.fields.related.ForeignKey&gt;, name='user_story', model_name='adjunto'&gt;, &lt;AddField  field=&lt;django.db.models.fields.related.ForeignKey&gt;, name='flujo', model_name='actividad'&gt;, &lt;AlterUniqueTogether  unique_together={('usuario', 'proyecto')}, name='miembroequipo'&gt;, &lt;AlterOrderWithRespectTo  name='actividad', order_with_respect_to='flujo'&gt;]</em><a class="headerlink" href="#administracion.migrations.0001_initial.Migration.operations" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -223,7 +222,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.0',
+            VERSION:'3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
