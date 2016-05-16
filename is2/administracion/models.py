@@ -25,8 +25,8 @@ class Proyecto(models.Model):
     nombre = models.CharField(max_length=40)
     estado = models.CharField(choices=opciones_estado, max_length=2, default='PE')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
-    fecha_inicio = models.DateTimeField(default=datetime.now())
-    fecha_fin = models.DateTimeField(default=datetime.now())
+    fecha_inicio = models.DateTimeField()
+    fecha_fin = models.DateTimeField()
     equipo = models.ManyToManyField(User, through='MiembroEquipo')
     duracion_sprint = models.PositiveIntegerField(default=30)
 

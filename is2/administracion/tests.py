@@ -4,8 +4,8 @@ from django.db.models.fields import DateTimeField
 from django.test import TestCase
 from django.utils import timezone
 from django.core.urlresolvers import reverse
-
-from administracion.models import Proyecto, Flujo, UserStory
+import datetime
+from administracion.models import Proyecto, Flujo, UserStory, Actividad, Sprint
 
 
 class RoleTest(TestCase):
@@ -138,29 +138,68 @@ class ProjectTest(TestCase):
 class FlujoTest(TestCase):
 
     def setUp(self):
-        u = User.objects.create_superuser('temp', 'temp@email.com', 'temp')
+        u = User.objects.create_superuser('test', 'temp@email.com', 'test')
         p = Permission.objects.get(codename='crear_flujo')
         u.user_permissions.add(p)
         p = Permission.objects.get(codename='editar_flujo')
         u.user_permissions.add(p)
         p = Permission.objects.get(codename='eliminar_flujo')
         u.user_permissions.add(p)
-        u = User.objects.create_user('fulano', 'temp@email.com', 'temp')
-        pro= Proyecto.objects.create(nombre='Proyecto', estado='PE', fecha_inicio=timezone.now(), fecha_fin=timezone.now())
+        u1 = User.objects.create_user('fulano','temp@email.com', 'temp')
+        pro= Proyecto.objects.create(nombre='Proyecto', estado='PE', fecha_inicio=timezone.now(), fecha_fin=timezone.now() + datetime.timedelta(days=30))
         f = Flujo.objects.create(nombre='Flujo1', proyecto=pro)
         Group.objects.create(name='rol')
 
+
     def test_permission_to_create_flujo(self):
         c = self.client
-        self.assertTrue(c.login(username='temp', password='temp'))
-        response = c.get('/proyectos/1/flujo/add/')
-        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a flujo/add')
+        login = c.login(username='test', password='test')
+        self.assertTrue(login)
+        p = Proyecto.objects.first()
+        #deberia existir
+        self.assertIsNotNone(p)
+        response = c.get(reverse('flujo_add', args=(str(p.id))))
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a agregar flujo')
+
+    def test_not_permission_to_create_flujo(self):
+        c = self.client
+        login = c.login(username='fulano', password='temp')
+        self.assertTrue(login)
+        p = Proyecto.objects.first()
+        #deberia existir
+        self.assertIsNotNone(p)
+        response = c.get(reverse('flujo_add', args=(str(p.id))))
+        self.assertEquals(response.status_code, 403)
+
+
+    def test_permission_to_change_flujo(self):
+        c = self.client
+        login = c.login(username='test', password='test')
+        self.assertTrue(login)
+        f = Flujo.objects.first()
+        #deberia existir
+        self.assertIsNotNone(f)
+        response = c.get(reverse('flujo_update', args=(str(f.id))))
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a editar flujo')
+
+    def test_not_permission_to_change_flujo(self):
+        c = self.client
+        login = c.login(username='fulano', password='temp')
+        self.assertTrue(login)
+        f = Flujo.objects.first()
+        #deberia existir
+        self.assertIsNotNone(f)
+        response = c.get(reverse('flujo_update', args=(str(f.id))))
+        self.assertEquals(response.status_code, 403)
+
+
+
 
 class UserStoryTest(TestCase):
     def setUp(self):
         u = User.objects.create_superuser('test', 'test@test.com', 'test') #Superusuario con todos los permisos
         u2 = User.objects.create_user('none', 'none@none.com', 'none') #Usuario sin permisos
-        pro= Proyecto.objects.create(nombre='Proyecto', estado='PE', fecha_inicio=timezone.now(), fecha_fin=timezone.now())
+        pro= Proyecto.objects.create(nombre='Proyecto', estado='PE', fecha_inicio=timezone.now(), fecha_fin=timezone.now() + datetime.timedelta(days=30))
 
     def test_add_userstory_with_permission(self):
         c = self.client
@@ -170,16 +209,16 @@ class UserStoryTest(TestCase):
         #deberia existir
         self.assertIsNotNone(p)
         response = c.get(reverse('userstory_add', args=(str(p.id))))
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a Agreagar detail')
         response = c.post(reverse('userstory_add', args=(str(p.id))),
             {'nombre_corto': 'Test US', 'nombre_largo': 'Test User story', 'descripcion': 'This is a User Story for testing purposes.',
              'valor_negocio': 10, 'valor_tecnico': 10, 'tiempo_estimado': 10}, follow=True)
         #deberia redirigir
-        self.assertRedirects(response, '/userstory/1/')
-        us = UserStory.objects.get(pk=1)
+        us = UserStory.objects.first()
         self.assertIsNotNone(us)
+        self.assertRedirects(response, '/userstory/{}/'.format(us.id))
         response = c.get(reverse('userstory_detail', args=(str(us.id))))
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a userstory detail')
 
 
     def test_update_userstory_with_permission(self):
@@ -195,18 +234,65 @@ class UserStoryTest(TestCase):
         self.assertIsNotNone(us)
         self.assertEquals(us.nombre_corto, 'Test US')
         response = c.get(reverse('userstory_detail', args=(str(us.id))))
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a userstory detail')
         #nos vamos a la página de edición de user story
         response = c.get(reverse('userstory_update', args=(str(us.id))))
         #debería retornar 200
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a editar user Story')
         response = c.post(reverse('userstory_update', args=(str(us.id))),
          {'nombre_corto': 'Test US2', 'nombre_largo': 'Test User story2', 'descripcion': 'This is a User Story2 for testing purposes.',
         'valor_negocio': 10, 'valor_tecnico': 10, 'tiempo_estimado': 10}, follow=True)
-        self.assertRedirects(response, '/userstory/2/')
         us = UserStory.objects.first()
         self.assertIsNotNone(us)
+        self.assertRedirects(response, '/userstory/{}/'.format(us.id))
         #vemos que el nombre ya no es el anterior
         self.assertNotEquals(us.nombre_corto, 'Test US1')
         self.assertEquals(us.nombre_corto, 'Test US2')
+
+
+class SprintTest(TestCase):
+
+    def setUp(self):
+        u = User.objects.create_superuser('temp','temp@email.com', 'temp')
+        pro = Proyecto.objects.create(nombre='Proyecto', estado='PE', fecha_inicio=timezone.now(), fecha_fin=timezone.now() + datetime.timedelta(days=30))
+        User.objects.create_user('tempdos', 'tempdos@email.com', 'tempdos')
+        UserStory.objects.create(nombre_corto= 'Test_Version',nombre_largo= 'Test_Version', descripcion= 'Test Description',
+                       valor_negocio= 10, valor_tecnico= 10, tiempo_estimado =10, proyecto = pro)
+        f = Flujo.objects.create(nombre ='flujo_test', proyecto= pro)
+        Actividad.objects.create(nombre ='actividad_test', flujo=f)
+        Sprint.objects.create(nombre='sprint_test',fecha_inicio=timezone.now(),fecha_fin=timezone.now(), proyecto=pro)
+
+    def test_to_create_sprint(self):
+        c = self.client
+        self.assertTrue(c.login(username='temp', password='temp'))
+        p= Proyecto.objects.first()
+        self.assertIsNotNone(p)
+        us=UserStory.objects.first()
+        self.assertIsNotNone(us)
+        d=User.objects.first()
+        self.assertIsNotNone(d)
+        f=User.objects.first()
+        self.assertIsNotNone(f)
+        response = c.get(reverse('sprint_add', args=(str(p.id))))
+        self.assertEquals(response.status_code, 200)
+        post_data = {
+        'nombre': 'Sprint_test',
+        'fecha_inicio': timezone.now(),
+        'proyecto':p,
+        'fecha_fin':timezone.now(),
+        'actividad': 1,
+        'tiempo_registrado': 4,
+        'estado_actividad': 1,
+        'form-INITIAL_FORMS': 0,
+        'form-MAX_NUM_FORMS': 1000,
+        'form-MIN_NUM_FORMS': 0,
+        'form-TOTAL_FORMS': 1,
+        'form-0-userStory': us.id,
+        'form-0-desarrollador':d.id,
+        'form-0-flujo':f.id,
+    }
+        response = c.post(reverse('sprint_add', args=(str(p.id))), post_data, follow=True)
+        self.assertEquals(response.status_code,200)
+        s=Sprint.objects.first()
+        self.assertIsNotNone(s)
 
