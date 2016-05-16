@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from administracion.views import views_rol, views_user, view_project, views, views_flujo, view_userstory
+from administracion.views import views_rol, views_user, view_project, views, views_flujo, view_userstory, views_sprints
 
 
 
@@ -40,6 +40,13 @@ urlpatterns = [
       url(r'^flujo/(?P<pk>\d+)/$', views_flujo.FlujoDetail.as_view(), name='flujo_detail'),
       url(r'^flujo/(?P<pk>\d+)/editar/$', views_flujo.UpdateFlujo.as_view(), name="flujo_update"),
       url(r'^flujo/(?P<pk>\d+)/eliminar/$', views_flujo.DeleteFlujo.as_view(), name="flujo_delete"),
+
+      # sprint dentro del proyecto FALTA BURNDOWN
+      url(r'^proyectos/(?P<project_pk>\d+)/sprint/$', views_sprints.SprintList.as_view(), name='sprint_list'),
+      url(r'^sprint/(?P<project_pk>\d+)/$', views_sprints.SprintDetail.as_view(), name='sprint_detail'),
+      url(r'^proyectos/(?P<project_pk>\d+)/sprint/add/$', views_sprints.AddSprintView.as_view(), name="sprint_add"),
+      url(r'^sprint/(?P<pk>\d+)/edit/$', views_sprints.UpdateSprintView.as_view(), name="sprint_update"),
+
 
       #user stories
       url(r'^proyectos/(?P<project_pk>\d+)/userstories/$', view_userstory.UserStoriesList.as_view(), name='product_backlog'),
