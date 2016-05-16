@@ -43,7 +43,7 @@ urlpatterns = [
 
       # sprint dentro del proyecto FALTA BURNDOWN
       url(r'^proyectos/(?P<project_pk>\d+)/sprint/$', views_sprints.SprintList.as_view(), name='sprint_list'),
-      url(r'^sprint/(?P<project_pk>\d+)/$', views_sprints.SprintDetail.as_view(), name='sprint_detail'),
+      url(r'^sprint/(?P<pk>\d+)/$', views_sprints.SprintDetail.as_view(), name='sprint_detail'),
       url(r'^proyectos/(?P<project_pk>\d+)/sprint/add/$', views_sprints.AddSprintView.as_view(), name="sprint_add"),
       url(r'^sprint/(?P<pk>\d+)/edit/$', views_sprints.UpdateSprintView.as_view(), name="sprint_update"),
 

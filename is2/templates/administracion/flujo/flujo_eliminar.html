@@ -1,5 +1,5 @@
-{% extends 'project/base.html' %}
-{% block title %}Eliminar Flujo{% endblock %}
+{% extends 'administracion/base.html' %}
+{% block contentbase %}
     <div class="row">
    <ol class="breadcrumb">
       <li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
@@ -26,7 +26,7 @@
 
 
 {% block header %}{{ flujo.nombre }} {% endblock %}
-{% block content %}
+
 <form action="" method="post" role="form">
     {% csrf_token %}
     <div class="form-group">

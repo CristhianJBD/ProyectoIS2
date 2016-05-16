@@ -207,7 +207,7 @@ class ApproveProject( LoginRequiredMixin, GlobalPermissionRequiredMixin, SingleO
         if self.request.POST.get('rechazar', '') == 'rechazar':
             #TODO Exactamente qué hacer
             pass
-            #p.estado = 'EP' #Vuelve al estado en desarrollo
+
         elif self.request.POST.get('aprobar', '') == 'aprobar':
             p.estado = 'AP' #Aprobado
         p.save()

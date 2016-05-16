@@ -3,6 +3,14 @@
 {% load guardian_tags %}
 {% block contentbase %}
 
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+			<ol class="breadcrumb">
+				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+				<li><a href="{% url "project_detail" view.project.pk %}">Detalles Proyectos</li></a>
+                <li>Lista de User Stories</li>
+
+			</ol>
+		</div><!--/.row-->
 
 
     <div class="page-header"><h1>Product Backlog</h1></div>

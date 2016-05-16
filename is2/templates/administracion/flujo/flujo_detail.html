@@ -73,42 +73,7 @@
 
                             {% for us in act_us %}
                                 {% for u in us %}
-                                    <tbody>
-                                        <tr>
 
-                                    <td class="text-center text-hide">
-                                         {% if  u.estado_actividad == 0 %}
-
-                                                 <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
-                                                 {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
-                                                 {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
-                                                 {% endif %}{{ u.nombre }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
-
-
-                                         {% endif %}
-                                    <td class="text-center">
-                                         {% if u.estado_actividad == 1 %}
-
-                                                 <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
-                                                     {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
-                                                     {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
-                                                     {% endif %}{{ u.nombre }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
-
-                                         {% endif %}
-                                         </td>
-                                         <td class="text-center">
-                                         {% if u.estado_actividad == 2 %}
-
-                                                 <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
-                                                     {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
-                                                     {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
-                                                     {% endif %}{{ u.nombre }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
-
-                                         {% endif %}
-                                         </td>
-                                    </td>
-                                    </tr>
-                                    </tbody>
 
 
 
