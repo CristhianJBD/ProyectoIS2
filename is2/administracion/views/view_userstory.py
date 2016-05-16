@@ -306,15 +306,15 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
             actual_fields.insert(1, 'actividad')
         return modelform_factory(UserStory, form=RegistrarActividadForm, fields=actual_fields)
 
-    def get_form(self):
-        '''
-        Personalización del form retornado
-        '''
-
-        form = super(RegistrarActividadUserStory, self).get_form()
-        if 'actividad' in form.fields:
-            form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
-        return form
+    # def get_form(self):
+    #     '''
+    #     Personalización del form retornado
+    #     '''
+    #
+    #     form = super(RegistrarActividadUserStory, self).get_form()
+    #     if 'actividad' in form.fields:
+    #         form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
+    #     return form
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

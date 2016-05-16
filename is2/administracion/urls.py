@@ -55,9 +55,9 @@ urlpatterns = [
       url(r'^userstory/(?P<pk>\d+)/version/$', view_userstory.VersionList.as_view(), name="version_list"),
       url(r'^userstory/(?P<pk>\d+)/editar/$', view_userstory.UpdateUserStory.as_view(), name="userstory_update"),
       url(r'^userstory/(?P<pk>\d+)/cancelar/$', view_userstory.CancelUserStory.as_view(), name="userstory_cancelar"),
-
-#no visto aun
       url(r'^userstory/(?P<pk>\d+)/registrar/$', view_userstory.RegistrarActividadUserStory.as_view(),name="userstory_registraractividad"),
+#no visto aun
+
       url(r'^userstory/(?P<pk>\d+)/aprobar/$', view_userstory.AprobarUserStory.as_view(), name="userstory_aprobar"),
       url(r'^userstory/(?P<pk>\d+)/rechazar/$', view_userstory.RechazarUserStory.as_view(), name="userstory_rechazar"),
       url(r'^proyectos/(?P<project_pk>\d+)/userstories/pendientes/$',view_userstory.AprobarPendientesUserStories.as_view(), name='pendientes_userstories'),

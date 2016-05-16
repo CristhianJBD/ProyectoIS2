@@ -129,7 +129,7 @@ class AddToSprintForm(forms.Form):
     """
     formulario para la agregacion de userStory, desarrollador y flujo a un Sprint
     """
-    #userStory = forms.ModelChoiceField(queryset=UserStory.objects.all())
+    userStory = forms.ModelChoiceField(queryset=UserStory.objects.all())
     desarrollador = forms.ModelChoiceField(queryset=User.objects.all())
     flujo = forms.ModelChoiceField(queryset=Flujo.objects.all())
 
@@ -141,7 +141,7 @@ class AddToSprintFormset(BaseFormSet):
         """
         if any(self.errors):
             return #si algún form del formset tiene errores, no se hace la validación
-'''
+
         userstories = []
         for form in self.forms:
             if 'userStory' in form.cleaned_data and not form in self.deleted_forms:
@@ -152,14 +152,6 @@ class AddToSprintFormset(BaseFormSet):
 
                 userstories.append(us)
 
-'''
-class MiembrosEquipoFormset(BaseInlineFormSet):
-  def clean(self):
-        super(MiembrosEquipoFormset, self).clean()
-        for form in self.forms:
-            if form in self.deleted_forms:
-                usuario = form.cleaned_data['usuario']
-                proyecto = form.cleaned_data['proyecto']
 
 class MiembrosEquipoFormset(BaseInlineFormSet):
   def clean(self):
@@ -168,6 +160,9 @@ class MiembrosEquipoFormset(BaseInlineFormSet):
             if form in self.deleted_forms:
                 usuario = form.cleaned_data['usuario']
                 proyecto = form.cleaned_data['proyecto']
+                if usuario.userstory_set.filter(proyecto=proyecto).count() != 0:
+                    raise forms.ValidationError("El usuario {0} tiene User Stories asignados en el proyecto.".format(usuario))
+
 
 class UsuarioFormset(BaseInlineFormSet):
   def clean(self):

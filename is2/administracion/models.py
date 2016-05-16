@@ -3,7 +3,7 @@ from guardian.shortcuts import assign_perm, remove_perm, get_perms_for_model, ge
 from django.contrib.auth.models import User, Group
 from django.core.exceptions import ValidationError
 from django.db import models
-from administracion.signals import add_permissions_team_member
+
 from django.core.urlresolvers import reverse_lazy
 # Create your models here.
 from base64 import b64encode
@@ -89,7 +89,6 @@ class Proyecto(models.Model):
         us_aprobados = self.userstory_set.filter(estado=3).count()
         progreso = float(us_aprobados) / us_total * 100 if us_total > 0 else 0
         return int(progreso)
-
     progreso = property(_get_progreso)
 '''
 class Usuario(models.Model):
@@ -267,6 +266,7 @@ reversion.register(UserStory,fields=['nombre_corto','nombre_largo', 'descripcion
 
 #Aqui se llama al models signals y su metodo add_permissions_team_member
 #para que se pueda asignar permisos de algun rol a un usuario de un proyecto
+from administracion.signals import add_permissions_team_member
 m2m_changed.connect(add_permissions_team_member, sender=MiembroEquipo.roles.through,
                     dispatch_uid='add_permissions_signal')
 

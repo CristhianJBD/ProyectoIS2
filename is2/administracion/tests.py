@@ -3,8 +3,9 @@ from django.db.models.expressions import Date
 from django.db.models.fields import DateTimeField
 from django.test import TestCase
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 
-from administracion.models import Proyecto
+from administracion.models import Proyecto, Flujo, UserStory
 
 
 class RoleTest(TestCase):
@@ -29,7 +30,7 @@ class RoleTest(TestCase):
         #intentamos crear un rol developer que pueda crear, editar y borrar proyectos
         response = c.post('/roles/add/', {'name':'scrum', 'perms_proyecto':[u'add_proyecto', u'change_proyecto', u'delete_proyecto']}, follow=True)
         #deberia redirigir
-        self.assertRedirects(response, '/roles/1/')
+        self.assertRedirects(response, '/roles/')
 
 
     def test_delete_role(self):
@@ -37,10 +38,9 @@ class RoleTest(TestCase):
         self.assertTrue(c.login(username='admin', password='admin'))
         response = c.post('/roles/add/', {'name':'developer', 'perms_proyecto':[u'add_proyecto', u'change_proyecto', u'delete_proyecto']}, follow=True)
         #deberia redirigir
-        self.assertRedirects(response, '/roles/2/')
+        self.assertRedirects(response, '/roles/')
         #eliminamos el rol
         response = c.post('/roles/2/delete/', {'Confirmar':True}, follow=True)
-        self.assertRedirects(response, '/roles/')
         #ahora ya no deberia existir el registro
         response = c.get('/roles/2/')
         self.assertEquals(response.status_code, 404)
@@ -110,9 +110,6 @@ class UserTest(TestCase):
         self.assertFalse(u.is_active)
 
 
-
-
-
 class ProjectTest(TestCase):
 
     def setUp(self):
@@ -128,14 +125,88 @@ class ProjectTest(TestCase):
     def test_permission_to_create_proyecto(self):
         c = self.client
         self.assertTrue(c.login(username='temp', password='temp'))
-        response = c.get('/proyecto/agregar/')
+        response = c.get('/proyectos/agregar/')
         self.assertEquals(response.status_code, 200)
 
     def test_not_permission_to_create_proyecto(self):
         c = self.client
         self.assertTrue(c.login(username='fulano', password='temp'))
-        response = c.get('/proyecto/agregar/')
+        response = c.get('/proyectos/agregar/')
         self.assertEquals(response.status_code, 403)
 
 
+class FlujoTest(TestCase):
+
+    def setUp(self):
+        u = User.objects.create_superuser('temp', 'temp@email.com', 'temp')
+        p = Permission.objects.get(codename='crear_flujo')
+        u.user_permissions.add(p)
+        p = Permission.objects.get(codename='editar_flujo')
+        u.user_permissions.add(p)
+        p = Permission.objects.get(codename='eliminar_flujo')
+        u.user_permissions.add(p)
+        u = User.objects.create_user('fulano', 'temp@email.com', 'temp')
+        pro= Proyecto.objects.create(nombre='Proyecto', estado='PE', fecha_inicio=timezone.now(), fecha_fin=timezone.now())
+        f = Flujo.objects.create(nombre='Flujo1', proyecto=pro)
+        Group.objects.create(name='rol')
+
+    def test_permission_to_create_flujo(self):
+        c = self.client
+        self.assertTrue(c.login(username='temp', password='temp'))
+        response = c.get('/proyectos/1/flujo/add/')
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a flujo/add')
+
+class UserStoryTest(TestCase):
+    def setUp(self):
+        u = User.objects.create_superuser('test', 'test@test.com', 'test') #Superusuario con todos los permisos
+        u2 = User.objects.create_user('none', 'none@none.com', 'none') #Usuario sin permisos
+        pro= Proyecto.objects.create(nombre='Proyecto', estado='PE', fecha_inicio=timezone.now(), fecha_fin=timezone.now())
+
+    def test_add_userstory_with_permission(self):
+        c = self.client
+        login = c.login(username='test', password='test')
+        self.assertTrue(login)
+        p = Proyecto.objects.first()
+        #deberia existir
+        self.assertIsNotNone(p)
+        response = c.get(reverse('userstory_add', args=(str(p.id))))
+        self.assertEquals(response.status_code, 200)
+        response = c.post(reverse('userstory_add', args=(str(p.id))),
+            {'nombre_corto': 'Test US', 'nombre_largo': 'Test User story', 'descripcion': 'This is a User Story for testing purposes.',
+             'valor_negocio': 10, 'valor_tecnico': 10, 'tiempo_estimado': 10}, follow=True)
+        #deberia redirigir
+        self.assertRedirects(response, '/userstory/1/')
+        us = UserStory.objects.get(pk=1)
+        self.assertIsNotNone(us)
+        response = c.get(reverse('userstory_detail', args=(str(us.id))))
+        self.assertEquals(response.status_code, 200)
+
+
+    def test_update_userstory_with_permission(self):
+        c = self.client
+        login = c.login(username='test', password='test')
+        self.assertTrue(login)
+        p = Proyecto.objects.first()
+        #creamos un user story
+        response = c.post(reverse('userstory_add', args=(str(p.id))),
+        {'nombre_corto': 'Test US', 'nombre_largo': 'Test User story', 'descripcion': 'This is a User Story for testing purposes.',
+        'valor_negocio': 10, 'valor_tecnico': 10, 'tiempo_estimado': 10}, follow=True)
+        us = UserStory.objects.first()
+        self.assertIsNotNone(us)
+        self.assertEquals(us.nombre_corto, 'Test US')
+        response = c.get(reverse('userstory_detail', args=(str(us.id))))
+        self.assertEquals(response.status_code, 200)
+        #nos vamos a la página de edición de user story
+        response = c.get(reverse('userstory_update', args=(str(us.id))))
+        #debería retornar 200
+        self.assertEquals(response.status_code, 200)
+        response = c.post(reverse('userstory_update', args=(str(us.id))),
+         {'nombre_corto': 'Test US2', 'nombre_largo': 'Test User story2', 'descripcion': 'This is a User Story2 for testing purposes.',
+        'valor_negocio': 10, 'valor_tecnico': 10, 'tiempo_estimado': 10}, follow=True)
+        self.assertRedirects(response, '/userstory/2/')
+        us = UserStory.objects.first()
+        self.assertIsNotNone(us)
+        #vemos que el nombre ya no es el anterior
+        self.assertNotEquals(us.nombre_corto, 'Test US1')
+        self.assertEquals(us.nombre_corto, 'Test US2')
 

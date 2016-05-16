@@ -1,13 +1,13 @@
-{% extends "project/base.html" %}
+{% extends "administracion/base.html" %}
 {% load bootstrap3 %}
 {% load guardian_tags %}
 {% block title %}Registrar actividad en User Story{% endblock %}
 
 {% block breadcrumbs %}
-    <li><a href="{% url 'project:home' %}">Home</a></li>
-    <li><a href="{% url 'project:project_list' %}">Proyectos</a></li>
+    <li><a href="{% url 'index' %}">Index</a></li>
+    <li><a href="{% url 'project_list' %}">Proyectos</a></li>
     <li><a href="{{ userstory.proyecto.get_absolute_url }}">{{ userstory.proyecto }}</a></li>
-    <li><a href="{% url 'project:product_backlog' userstory.proyecto_id %}">User Stories</a></li>
+    <li><a href="{% url 'product_backlog' userstory.proyecto_id %}">User Stories</a></li>
     <li><a href="{{ userstory.get_absolute_url }}">{{ userstory }}</a></li>
     <li class="Active">Registrar Avance</li>
 {% endblock %}
@@ -20,7 +20,6 @@
         <div class="well">
             <p><strong>Proyecto Asociado:</strong> {{ userstory.proyecto }}</p>
             <p><strong>Nombre: </strong>{{ userstory.nombre }}</p>
-                    <p><strong>Prioridad: </strong>{{ userstory.get_prioridad_display }}</p>
                     <p><strong>Valor de negocio: </strong>{{ userstory.valor_negocio }}</p>
                     <p><strong>Valor Técnico: </strong>{{ userstory.valor_tecnico }}</p>
                     <p><strong>Último cambio: </strong>{{ userstory.ultimo_cambio }}</p>
