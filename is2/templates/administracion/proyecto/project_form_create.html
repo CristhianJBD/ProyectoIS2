@@ -4,6 +4,20 @@
 
 
 {% block contentbase %}
+
+
+        <div class="row">
+   <ol class="breadcrumb">
+      <li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+      <li><a href="{%url "project_list" %}">Lista de Proyectos</a></li>
+       <li class="active">Equipo de Proyecto</li>
+   </ol>
+</div><!--/.row-->
+
+
+
+
+
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 
 		<form role="search">

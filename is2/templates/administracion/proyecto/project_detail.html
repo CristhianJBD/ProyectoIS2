@@ -2,6 +2,20 @@
 {% load guardian_tags %}
 {% block contentbase %}
 
+
+
+    <div class="row">
+   <ol class="breadcrumb">
+      <li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+      <li><a href="{%url "project_list" %}">Lista de Proyectos</a></li>
+       <li class="active">Detalles de Proyecto</li>
+   </ol>
+</div><!--/.row-->
+
+
+
+
+
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 
 		<form role="search">
@@ -69,7 +83,23 @@
             </div>
 
 
-    </div>
+
+
+
+    <div class="col-lg-4">
+            <h4 class="list-group-item-heading"><a href="{% url 'sprint_list' proyecto.id %}">Sprints</a></h4>
+            <div class="list-group">
+
+                    {% for s in sprints %}
+                    <a href="{% url 'sprint_detail' s.id %}" class="list-group-item">{{ s.nombre }}
+                        <span class="badge" data-toggle="tooltip" data-placement="right"
+                              title="Fecha de Inicio">{{ s.userstory_set.count }}</span>
+                    </a>
+                {% endfor %}
+
+            </div>
+        </div>
+
 
     <div class="row">
 
@@ -86,6 +116,8 @@
             </div>
     </div>
     </div>
+
+        </div>
 
 
 {% endblock %}
