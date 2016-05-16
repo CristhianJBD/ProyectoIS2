@@ -90,24 +90,7 @@ class Proyecto(models.Model):
         progreso = float(us_aprobados) / us_total * 100 if us_total > 0 else 0
         return int(progreso)
     progreso = property(_get_progreso)
-'''
-class Usuario(models.Model):
-    """
-    Usuario con roles asociados
-    """
-    usuario = models.ForeignKey(User)
-    roles = models.ManyToManyField(Group)
 
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        super(Usuario, self).save(force_insert, force_update, using, update_fields)
-
-
-
-    class Meta:
-        default_roles = ()
-        verbose_name_plural = 'usuarios'
-        unique_together = ('usuario', 'roles')
-'''
 class MiembroEquipo(models.Model):
     """
     Miembros del equipo de un proyecto

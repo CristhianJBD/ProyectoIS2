@@ -2,9 +2,18 @@
 {% load guardian_tags %}
 
 {% block contentbase %}
+
+
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+			<ol class="breadcrumb">
+				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+				<li><a href="{% url "product_backlog" userstory.proyecto.id %}">Lista de User Stories</li></a>
+                <li>Detalles User Stories</li>
+
+			</ol>
+		</div><!--/.row-->
+
 <div class="page-header"><h1>{{ userstory.nombre_largo | title}}</h1></div>
-
-
     <ul class="list-inline" xmlns="http://www.w3.org/1999/html">
         {% get_obj_perms user for userstory.proyecto as "proyecto_perms" %}
         {% get_obj_perms user for userstory as "us_perms" %}
@@ -13,9 +22,6 @@
 
             {% if "registraractividad_userstory" in proyecto_perms or 'registraractividad_mi_userstory' in us_perms %}<li><a href="{% url 'userstory_registraractividad'  userstory.id %}" class="fa fa-pencil-square-o"> Registrar Avance</a></li>{% endif %}
             {% if "editar_userstory" in proyecto_perms or 'editar_mi_userstory' in us_perms%}<li><a href="{% url 'version_list' userstory.id %}" class="fa fa-clock-o"> Historial</a></li>{% endif %}
-        {% elif userstory.estado == 2 %}
-            {% if "aprobar_userstory" in proyecto_perms %}<li><a href="{% url 'userstory_aprobar' userstory.id %}" class="fa fa-check-circle"> Aprobar User Story</a></li>{% endif %}
-            {% if "aprobar_userstory" in proyecto_perms %}<li><a href="{% url 'userstory_rechazar' userstory.id %}" class="fa fa-times-circle"> Rechazar User Story</a></li>{% endif %}
         {% endif %}
 
 

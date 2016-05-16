@@ -194,7 +194,7 @@ class DeleteFlujo(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissi
     Vista de Eliminacion de Flujos
     """
     model = Flujo
-    template_name = 'administracion/flujo/flujo_delete.html'
+    template_name = 'administracion/flujo/flujo_eliminar.html'
     permission_required = 'administracion.eliminar_flujo'
     context_object_name = 'flujo'
 

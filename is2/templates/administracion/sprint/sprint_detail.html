@@ -1,22 +1,22 @@
 {{% extends 'administracion/base.html' %}
 {% load guardian_tags %}
-{% block title %}{{ sprint }}{% endblock %}
+
 
 {% block contentbase %}
 
 
+<div class="page-header"><h1>{{ sprint.nombre | title }} </h1></div>
 
-{% block header %}{{ sprint.nombre | title }} {% endblock %}
-{% block content %}
+
     <ul class="list-inline">
         {% get_obj_perms user for sprint.proyecto as "proyecto_perms" %}
-        {% if "edit_sprint" in proyecto_perms %}
-            <li><a href="{% url 'sprint_update'  sprint.id %}" class="fa fa-pencil"> Edit</a></li>
+        {% if "editar_sprint" in proyecto_perms %}
+            <li><a href="{% url 'sprint_update'  sprint.id %}" class="glyphicon glyphicon-pencil"> Editar</a></li>
         {% endif %}
      </ul>
     <p><strong>Nombre:</strong> {{ sprint.nombre }}</p>
-    <p><strong>Fecha Inicio:</strong>{{ sprint.inicio }}</p>
-    <p><strong>Fecha fin:</strong>{{ sprint.fin }}</p>
+    <p><strong>Fecha Inicio:</strong>{{ sprint.fecha_inicio }}</p>
+    <p><strong>Fecha fin:</strong>{{ sprint.fecha_fin }}</p>
     <p><strong>Proyecto Asociado:</strong> {{ sprint.proyecto }}</p>
 
     <h3>User Stories</h3>
@@ -29,9 +29,9 @@
     <div id="userstoriespanels">
         {% for u in userStory %}
             <div class="col-lg-3">
-                    <div class="panel panel-{% if u.prioridad == 0 %}green{% elif u.prioridad == 1 %}yellow{% else %}red{% endif %}">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <div class="panel-title"> <a href="{% url 'userstory_detail' u.id %}" style="color:#ffffff;">{{ u.nombre }}</a></div>
+                        <div class="panel-title"> <a href="{% url 'userstory_detail' u.id %}" style="color:#ffffff;">{{ u.nombre_largo }}</a></div>
                     </div>
                     <div class="panel-body">
                         <strong>Desarrollador: </strong>
@@ -42,31 +42,29 @@
                         {% endif %}
                         </br>
                         {% if u.actividad %}
-                            <strong>Flujo: </strong><a href="{% url 'flujo_detail' u.actividad.flujo_id %}">{{ u.actividad.flujo }}</a><br/>
+
                             <strong>Actividad: </strong>{{ u.actividad }} - {{ u.get_estado_actividad_display }}<br/>
                         {% endif %}
-                        <strong>Prioriodad: </strong>{{ u.get_prioridad_display }}
+
                     </div>
                     <div class="panel-footer">
-                        <a href="{% url 'userstory_detail' u.id %}"><i class="fa fa-eye fa-fw"></i></a>
-                        {% if "edit_userstory" in proyecto_perms %}<a href="{% url 'userstory_update' u.id %}"><i
-                                class="fa fa-pencil fa-fw"></i></a>{% endif %}
-                        {% if "remove_userstory" in proyecto_perms %}<a href="{% url 'userstory_delete' u.id %}"><i
-                                class="fa fa-trash-o fa-fw"></i></a>{% endif %}
+                        <a href="{% url 'userstory_detail' u.id %}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        {% if "editar_userstory" in proyecto_perms %}<a href="{% url 'userstory_update' u.id %}"><i
+                                class="glyphicon glyphicon-pencil"></i></a>{% endif %}
                         {% if u.estado != 4  and u.estado != 3%}
-                        {% if "cancelar_userstory" in proyecto_perms %}<a href="{% url 'userstory_cancelar' u.id %}"><i class="fa fa-times"></i></a> {% endif %}
+                        {% if "cancelar_userstory" in proyecto_perms %}<a href="{% url 'userstory_cancelar' u.id %}"><i class="glyphicon glyphicon-remove"></i></a> {% endif %}
                         {% endif %}
                     </div>
+                </div>
                 </div>
             </div>
         {% endfor %}
     </div>
     <div class="col-lg-12">
-    <p><a class="fa fa-file" href="{% url 'project_detail' sprint.proyecto.id %}"> Volver al Proyecto {{ sprint.proyecto.nombre_corto }}</a></p>
+    <p><a class="glyphicon glyphicon-circle-arrow-left" href="{% url 'project_detail' sprint.proyecto.id %}"> Volver al Proyecto {{ sprint.proyecto.nombre_corto }}</a></p>
     </div>
 
-{% endblock %}
-{% block extra_js %}
+
     <script type="text/javascript">
         $(document).ready(function () {
             $("#filtro").keyup(function () {
@@ -81,7 +79,5 @@
             });
         });
     </script>
-
-{% endblock %}
 
 {% endblock %}
