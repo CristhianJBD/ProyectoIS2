@@ -19,7 +19,7 @@ class FlujoList(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.ListV
     """
     model = Flujo
     template_name = 'administracion/flujo/flujo_list.html'
-    permission_required = 'proyecto.ver_proyecto'
+    permission_required = 'administracion.ver_proyecto'
     context_object_name = 'flujos'
     project = None
 
@@ -45,7 +45,7 @@ class FlujoDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.Det
     """
     model = Flujo
     template_name = 'administracion/flujo/flujo_detail.html'
-    permission_required = 'proyecto.ver_proyecto'
+    permission_required = 'administracion.ver_proyecto'
     context_object_name = 'flujo'
 
     def get_permission_object(self):
@@ -79,7 +79,7 @@ class AddFlujo(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPermiss
     model = Flujo
     template_name = 'administracion/flujo/flujo_form.html'
     form_class = FlujosCreateForm
-    permission_required = 'proyecto.crear_flujo'
+    permission_required = 'administracion.crear_flujo'
 
     def get_proyecto(self):
         if not self.proyecto:
@@ -142,7 +142,7 @@ class UpdateFlujo(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissi
     model = Flujo
     template_name = 'administracion/flujo/flujo_form.html'
     form_class = FlujosCreateForm
-    permission_required = 'proyecto.editar_flujo'
+    permission_required = 'administracion.editar_flujo'
 
     def get_proyecto(self):
         return self.get_object().proyecto
@@ -195,7 +195,7 @@ class DeleteFlujo(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissi
     """
     model = Flujo
     template_name = 'administracion/flujo/flujo_delete.html'
-    permission_required = 'proyecto.eliminar_flujo'
+    permission_required = 'administracion.eliminar_flujo'
     context_object_name = 'flujo'
 
     def get_proyecto(self):

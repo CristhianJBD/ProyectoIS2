@@ -48,7 +48,6 @@
                                         <th>Fecha de Modificacion</th>
                                         <th>Comentario</th>
                                         <th>Usuario</th>
-                                        <th>Deshacer</th>
                                    {% endblock %}
                                     {% block tbody %}
 
@@ -59,7 +58,6 @@
                                             <td>{{ v.revision.date_created }}</td>
                                             <td>{{ v.revision.comment }}</td>
                                             <td>{{ v.revision.user }}</td>
-                                            <th><a href="{% url 'version_revert' v.object_id v.id %}" class="glyphicon glyphicon-repeat"></a></th>
                                         </tr>
                                     {% endfor %}
 
