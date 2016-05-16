@@ -14,6 +14,7 @@ from administracion.models import Sprint, Proyecto, Actividad, Flujo
 from administracion.views.views import CreateViewPermissionRequiredMixin, GlobalPermissionRequiredMixin, ActiveProjectRequiredMixin
 from django.views import generic
 from django.core.urlresolvers import reverse
+from administracion.models import UserStory
 import datetime
 
 class SprintList(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.ListView):
@@ -127,8 +128,8 @@ class AddSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPe
     def __filtrar_formset__(self, formset):
         for userformset in formset.forms:
             userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.proyecto)
-            userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.proyecto)
-          #  userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.proyecto), Q(estado=1) | Q(estado=0))
+            #userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.proyecto)
+            userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.proyecto), Q(estado=1) | Q(estado=0))
 
     def get_context_data(self, **kwargs):
         """
@@ -156,23 +157,23 @@ class AddSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPe
         self.proyecto = self.get_proyecto()
         self.object= form.save(commit=False)
         self.object.fecha_fin= self.object.fecha_inicio + datetime.timedelta(days=self.proyecto.duracion_sprint)
-        self.proyecto.estado = 'EP'
+        self.proyecto.estado = 'PE'
         self.proyecto.save()
         self.object.save()
         formsetb= self.formset(self.request.POST)
         if formsetb.has_changed():
             if formsetb.is_valid():
                 for subform in formsetb:
-                    #new_userStory = subform.cleaned_data['userStory']
-                    new_flujo = subform.cleaned_data['flujo']
-                    self.flujo = new_flujo
+                    new_userStory = subform.cleaned_data['userStory']
+                    #new_flujo = subform.cleaned_data['flujo']
+                    #self.flujo = new_flujo
                     new_desarrollador = subform.cleaned_data['desarrollador']
-                    #new_userStory.desarrollador= new_desarrollador
-                    #new_userStory.sprint= self.object
+                    new_userStory.desarrollador= new_desarrollador
+                    new_userStory.sprint= self.object
                     #new_userStory.actividad=self.flujo.actividad_set.first()
                     #new_userStory.estado_actividad = 0
-                    #new_userStory.estado = 1 #El User Story pasa a estar en curso por incluirse en el Sprint
-                    #new_userStory.save()
+                    new_userStory.estado = 1 #El User Story pasa a estar en curso por incluirse en el Sprint
+                    new_userStory.save()
                 return HttpResponseRedirect(self.get_success_url())
             else:
                 return render(self.request, self.get_template_names(), {'form': form, 'formset': formsetb},

@@ -220,8 +220,8 @@ class UserStory(models.Model):
     sprint = models.ForeignKey(Sprint, null=True, blank=True)
     actividad = models.ForeignKey(Actividad, null=True, blank=True)
 
-    def __unicode__(self):
-        return self.nombre
+    def __str__(self):
+        return self.nombre_largo
 
     def _get_progreso(self):
         progreso = float(self.tiempo_registrado) / self.tiempo_estimado * 100
