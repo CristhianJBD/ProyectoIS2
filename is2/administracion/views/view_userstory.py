@@ -244,7 +244,6 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
     model = UserStory
     template_name = 'administracion/userstory/userstory_registraractividad_form.html'
     error_template = 'administracion/userstory/userstory_error.html'
-    #TODO: quitar fecha del formset. solo para debug
 
 
     def get_proyecto(self):
@@ -270,15 +269,15 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
             actual_fields.insert(1, 'actividad')
         return modelform_factory(UserStory, form=RegistrarActividadForm, fields=actual_fields)
 
-    # def get_form(self, form_class):
-    #     '''
-    #     Personalización del form retornado
-    #     '''
-    #
-    #     form = super(RegistrarActividadUserStory, self).get_form(form_class)
-    #     if 'actividad' in form.fields:
-    #         form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
-    #     return form
+    def get_form(self, form_class = None):
+        '''
+        Personalización del form retornado
+        '''
+
+        form = super(RegistrarActividadUserStory, self).get_form(form_class)
+        if 'actividad' in form.fields:
+            form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
+        return form
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

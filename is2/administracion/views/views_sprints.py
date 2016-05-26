@@ -129,7 +129,7 @@ class AddSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPe
         for userformset in formset.forms:
             userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.proyecto)
             userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.proyecto)
-            userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.proyecto), Q(estado=1) | Q(estado=0))
+            userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.proyecto), Q(estado=0))
 
     def get_context_data(self, **kwargs):
         """
@@ -215,7 +215,7 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
         for userformset in formset.forms:
             userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.object.proyecto)
             userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.object.proyecto)
-            userformset.fields['userStory'].queryset = UserStory.objects.filter(proyecto=self.object.proyecto)
+            userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.proyecto), Q(estado=0))
 
     def get_context_data(self, **kwargs):
         """
@@ -225,7 +225,7 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
         """
         context= super(UpdateSprintView,self).get_context_data(**kwargs)
         current_us = self.get_object().userstory_set.all()
-        formset= self.UserStoryFormset(self.request.POST if self.request.method == 'POST' else None, initial=[{'userStory':us, 'desarrollador':us.desarrollador} for us in current_us])
+        formset= self.UserStoryFormset(self.request.POST if self.request.method == 'POST' else None, initial=[{'userStory':us,'flujo':us.actividad.flujo, 'desarrollador':us.desarrollador} for us in current_us])
         self.__filtrar_formset__(formset)
         context['current_action'] = 'Editar'
         context['formset'] = formset

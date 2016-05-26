@@ -280,10 +280,10 @@ class Adjunto(models.Model):
         return b64encode(force_bytes(self.binario))
 
     def get_absolute_url(self):
-        return reverse_lazy('project:file_detail', args=[self.pk])
+        return reverse_lazy('file_detail', args=[self.pk])
 
     def get_download_url(self):
-        return reverse_lazy('project:download_attachment', args=[self.pk])
+        return reverse_lazy('download_attachment', args=[self.pk])
 
 
 
