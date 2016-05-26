@@ -283,7 +283,6 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.tiempo_registrado = self.object.tiempo_registrado + form.cleaned_data['horas_a_registrar']
-        nota_form = self.NoteFormset(self.request.POST)
         new_estado = 0
         #movemos el User Story a la sgte actividad en caso de que haya llegado a Done
         if form.cleaned_data['estado_actividad'] == 2:
@@ -299,19 +298,6 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
             self.object.estado_actividad = new_estado
 
         self.object.save()
-
-        if nota_form.is_valid():
-            for f in nota_form.forms:
-                n = f.save(commit=False)
-                n.horas_a_registrar = form.cleaned_data['horas_a_registrar']
-                n.tiempo_registrado = self.object.tiempo_registrado
-                n.desarrollador = self.request.user
-                n.sprint = self.object.sprint
-                n.actividad = self.object.actividad
-                n.estado = self.object.estado
-                n.estado_actividad = self.object.estado_actividad
-                n.user_story = self.object
-                n.save()
 
         return HttpResponseRedirect(self.get_success_url())
 
