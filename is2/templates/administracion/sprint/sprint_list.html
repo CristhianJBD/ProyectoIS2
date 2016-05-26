@@ -7,16 +7,15 @@
         <div class="row" xmlns="http://www.w3.org/1999/html">
 			<ol class="breadcrumb">
 				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-				<li><a href="{% url "user_list" %}">Lista de Proyectos</li></a>
+				<li><a href="{% url "user_list" %}">Lista de Proyectos </a></li>
                 <li>Sprint</li>
 
 			</ol>
 		</div><!--/.row-->
 
-
+ {% if "crear_sprint" in proyecto_perms %}
 <p><a href="{% url 'sprint_add' view.kwargs.project_pk %}" class="glyphicon glyphicon-plus-sign">Agregar</a></p>
-
-
+   {% endif %}
 
 
 
@@ -42,7 +41,6 @@
 
 
     <h4><strong>Proyecto: </strong><td>{{ view.project }}</td></h4>
-   {% if "create_sprint" in proyecto_perms %} <p><a href="{% url 'sprint_add' view.kwargs.project_pk %}" class="fa fa-plus-circle"> Agregar</a></p>{% endif %}
 
 
 
@@ -68,7 +66,7 @@
 
                                      </i>
                                      <span class="caret"></span>
-
+                                 </button>
                              </div>
                          </div>
                          <div class="pull-right search"><input class="form-control" type="text" placeholder="Search"></div>
@@ -81,9 +79,9 @@
                                     <th>Nombre</th>
                                     <th>UserStories</th>
                                     <th>Ver</th>
-{#                                   {% if "edit_sprint" in proyecto_perms %}#}
+                                  {% if "editar_sprint" in proyecto_perms %}
                                        <th>Editar Sprint</th>
-{#                                    {% endif %}#}
+                                    {% endif %}
                                 </tr>
 
 
@@ -92,9 +90,9 @@
         <td>{{ s.nombre }}</td>
         <td>{{ s.userstory_set.count }}</td>
         <td ><a href="{% url 'sprint_detail'  s.id %}"><button type="submit" class="btn btn-default btn-md">Ver</button> <i class="fa fa-eye fa-fw"></i></a> </td>
-{#        {% if "edit_sprint" in proyecto_perms %}#}
+           {% if "editar_sprint" in proyecto_perms %}
             <td><a href="{% url 'sprint_update' s.id %}"><button type="submit" class="btn btn-warning btn-md">Editar</button> <i class="fa fa-eye fa-fw"></i></a> </td>
-{#        {% endif %}#}
+          {% endif %}
 
     </tr>
     {% endfor %}

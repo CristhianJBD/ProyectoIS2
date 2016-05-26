@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.forms import CheckboxSelectMultiple
 from django.forms import inlineformset_factory
 from django.forms.extras import SelectDateWidget
@@ -139,7 +139,7 @@ class ProjectUpdate( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
                             remove_perm(perm, user, proyecto)
 
             formset.save()
-            return HttpResponseRedirect(self.get_success_url())
+            return HttpResponseRedirect(reverse('project_list'))
 
         return render(self.request, self.get_template_names(), {'form': form, 'formset': formset},
                       context_instance=RequestContext(self.request))
@@ -181,36 +181,5 @@ class ProjectDelete( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
             self.object.save(update_fields=['estado'])
         return HttpResponseRedirect(success_url)
 
-class ApproveProject( LoginRequiredMixin, GlobalPermissionRequiredMixin, SingleObjectTemplateResponseMixin, detail.BaseDetailView):
-    """
-    Vista de Aprobación o rechazo de User Stories
-    """
-    model = Proyecto
-    template_name = 'administracion/proyecto/project_approve.html'
-    permission_required = 'administracion.aprobar_proyecto'
-    context_object_name = 'proyecto'
 
-    def get_proyecto(self):
-        return self.get_object()
-
-    def dispatch(self, request, *args, **kwargs):
-        instance = self.get_object()
-        if instance.estado == 'CO':
-            return super(ApproveProject, self).dispatch(request, *args, **kwargs)
-        raise Http404
-
-    def get_success_url(self):
-        return reverse_lazy('administracion:project_detail', kwargs={'pk': self.get_object().id})
-
-    def post(self, request, *args, **kwargs):
-        p = self.get_object()
-        if self.request.POST.get('rechazar', '') == 'rechazar':
-            #TODO Exactamente qué hacer
-            pass
-
-        elif self.request.POST.get('aprobar', '') == 'aprobar':
-            p.estado = 'AP' #Aprobado
-        p.save()
-
-        return HttpResponseRedirect(self.get_success_url())
 

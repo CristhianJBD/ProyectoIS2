@@ -186,11 +186,11 @@ class UserStory(models.Model):
     """
     estado_actividad_choices = ((0, 'ToDo'), (1, 'Doing'), (2, 'Done'), )
     estado_choices = ((0, 'Inactivo'), (1, 'En curso'), (2, 'Pendiente Aprobacion'), (3, 'Aprobado'), (4,'Cancelado'),)
-    #priority_choices = ((0, 'Baja'), (1, 'Media'), (2, 'Alta'))
+    priority_choices = ((0, 'Baja'), (1, 'Media'), (2, 'Alta'))
     nombre_corto = models.CharField(max_length=20)
     nombre_largo = models.CharField(max_length=80)
     descripcion = models.TextField()
-    #prioridad = models.IntegerField(choices=priority_choices, default=0)
+    prioridad = models.IntegerField(choices=priority_choices, default=0)
     valor_negocio = models.IntegerField()
     valor_tecnico = models.IntegerField()
     tiempo_estimado = models.PositiveIntegerField()

@@ -1,4 +1,4 @@
-{% extends 'project/base.html' %}
+{% extends 'administracion/base.html' %}
 {% load guardian_tags %}
 {% block title %}Error {{ userstory }}{% endblock %}
 
@@ -21,7 +21,7 @@
                     <div class="panel-body">
                         {% if error == "SPRINT_VENCIDO" %}
                             <p>No puede registrar su avance en el User Story <strong>{{ userstory.nombre | title }}</strong> debido a que el último sprint al cual se ha asociado el mismo ya <strong>ha llegado a su fecha de finalización.</strong> Este User Story estará disponible recien cuando se lo incluya en un nuevo sprint.</p>
-                            <p>El último sprint al que fue incorporado el mismo fue <a href="{% url 'project:sprint_detail' userstory.sprint.pk %}"> {{ userstory.sprint }}</a> </p>
+                            <p>El último sprint al que fue incorporado el mismo fue <a href="{% url 'sprint_detail' userstory.sprint.pk %}"> {{ userstory.sprint }}</a> </p>
                         {% endif %}
                         {% if error == "MENOR_PRIORIDAD" %}
                             <p>No puede registrar su avance en el User Story <strong>{{ userstory.nombre | title }}</strong> debido a que en la actividad <strong>{{ userstory.actividad }}</strong> del flujo <strong>{{ userstory.flujo }}</strong> en el sprint actual <strong>({{ userstory.sprint }})</strong> hay otros User Story de mayor prioridad.</p>
@@ -33,6 +33,6 @@
                     </div>
                 </div>
     </div>
-    <p><a class="fa fa-step-backward" href="{% url 'project:product_backlog' userstory.proyecto.id %}"> Volver a User Stories</a></p>
+    <p><a class="fa fa-step-backward" href="{% url 'product_backlog' userstory.proyecto.id %}"> Volver a User Stories</a></p>
 
 {% endblock %}

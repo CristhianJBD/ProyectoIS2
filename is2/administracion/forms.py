@@ -131,7 +131,7 @@ class AddToSprintForm(forms.Form):
     """
     userStory = forms.ModelChoiceField(queryset=UserStory.objects.all())
     desarrollador = forms.ModelChoiceField(queryset=User.objects.all())
-    #flujo = forms.ModelChoiceField(queryset=Flujo.objects.all())
+    flujo = forms.ModelChoiceField(queryset=Flujo.objects.all())
 
 
 class AddToSprintFormset(BaseFormSet):

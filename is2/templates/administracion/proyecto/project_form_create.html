@@ -84,20 +84,20 @@
                                                     {% if subform.instance.pk %}
                                                         {% bootstrap_field subform.DELETE %}{% endif %}
                                                     {% bootstrap_field subform.usuario %}
-
-
-                                                    {% if user.is_superuser == True %}
-                                                     {% for roli in subform.roles%}
-                                                         {% if forloop.first %}
-                                                        {{ roli  }}
-                                                         {% endif %}
-                                                    {% endfor %}
-                                                    {% elif user.is_superuser == False and not forloop.first %}
-                                                        {% for roli in subform.roles%}
-                                                        {{ roli  }}
-                                                        {% endfor %}
-
-                                                    {% endif %}
+                                                     {% bootstrap_field subform.roles %}
+{##}
+{#                                                    {% if user.is_superuser == True %}#}
+{#                                                     {% for roli in subform.roles%}#}
+{#                                                         {% if forloop.first %}#}
+{#                                                        {{ roli  }}#}
+{#                                                         {% endif %}#}
+{#                                                    {% endfor %}#}
+{#                                                    {% elif user.is_superuser == False and not forloop.first %}#}
+{#                                                        {% for roli in subform.roles%}#}
+{#                                                        {{ roli  }}#}
+{#                                                        {% endfor %}#}
+{##}
+{#                                                    {% endif %}#}
 
 
 

@@ -19,6 +19,10 @@
     <p><strong>Fecha fin:</strong>{{ sprint.fecha_fin }}</p>
     <p><strong>Proyecto Asociado:</strong> {{ sprint.proyecto }}</p>
 
+
+
+
+
     <h3>User Stories</h3>
     <!-- Buscador -->
     <form id="buscador" action="" class="styled" method="post">
@@ -27,32 +31,37 @@
         </div>
     </form>
     <div id="userstoriespanels">
-        {% for u in userStory %}
+        {% for us in userStory %}
             <div class="col-lg-3">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <div class="panel-title"> <a href="{% url 'userstory_detail' u.id %}" style="color:#ffffff;">{{ u.nombre_largo }}</a></div>
+                        <div class="panel-title"> <a href="{% url 'userstory_detail' us.id %}" style="color:#ffffff;">{{ us.nombre_largo }}</a></div>
                     </div>
                     <div class="panel-body">
+                        <strong>Estado actual: </strong>{{ us.get_estado_display }}<br/>
+                        <strong>Prioridad: </strong>{{ us.get_prioridad_display }}<br/>
                         <strong>Desarrollador: </strong>
-                        {% if u.desarrollador %}
-                            <a href="{% url 'user_detail' u.desarrollador_id %}">{{ u.desarrollador }}</a>
+                        {% if us.desarrollador %}
+                            <a href="{% url 'user_detail' us.desarrollador_id %}">{{ us.desarrollador }}</a><br/>
                         {% else %}
                             Ninguno
                         {% endif %}
+                        {% if us.sprint %}
+                            <strong>Sprint: </strong><a href="{% url 'sprint_detail' us.sprint.id %}">{{ us.sprint }}</a><br/>
+                        {% endif %}
                         </br>
-                        {% if u.actividad %}
-
-                            <strong>Actividad: </strong>{{ u.actividad }} - {{ u.get_estado_actividad_display }}<br/>
+                        {% if us.actividad %}
+                            <strong>Flujo: </strong><a href="{% url 'flujo_detail' us.actividad.flujo_id %}">{{ us.actividad.flujo }}</a><br/>
+                            <strong>Actividad: </strong>{{ us.actividad }} - {{ us.get_estado_actividad_display }}<br/>
                         {% endif %}
 
                     </div>
                     <div class="panel-footer">
-                        <a href="{% url 'userstory_detail' u.id %}"><i class="glyphicon glyphicon-eye-open"></i></a>
-                        {% if "editar_userstory" in proyecto_perms %}<a href="{% url 'userstory_update' u.id %}"><i
+                        <a href="{% url 'userstory_detail' us.id %}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        {% if "editar_userstory" in proyecto_perms %}<a href="{% url 'userstory_update' us.id %}"><i
                                 class="glyphicon glyphicon-pencil"></i></a>{% endif %}
-                        {% if u.estado != 4  and u.estado != 3%}
-                        {% if "cancelar_userstory" in proyecto_perms %}<a href="{% url 'userstory_cancelar' u.id %}"><i class="glyphicon glyphicon-remove"></i></a> {% endif %}
+                        {% if us.estado != 4  and us.estado != 3%}
+                        {% if "cancelar_userstory" in proyecto_perms %}<a href="{% url 'userstory_cancelar' us.id %}"><i class="glyphicon glyphicon-remove"></i></a> {% endif %}
                         {% endif %}
                     </div>
                 </div>

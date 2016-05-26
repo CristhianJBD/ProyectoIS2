@@ -97,7 +97,7 @@ class AddUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPer
     def get_form_class(self):
         project = get_object_or_404(Proyecto, id=self.kwargs['project_pk'])
         form_fields = ['nombre_corto','nombre_largo', 'descripcion', 'valor_negocio', 'valor_tecnico', 'tiempo_estimado']
-
+        form_fields.insert(2, 'prioridad')
         form_class = modelform_factory(UserStory, fields=form_fields)
         return form_class
 
@@ -158,7 +158,7 @@ class UpdateUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.Up
     def get_form_class(self):
         project = self.get_object().proyecto
         form_fields = ['nombre_corto','nombre_largo', 'descripcion', 'valor_negocio', 'valor_tecnico', 'tiempo_estimado']
-
+        form_fields.insert(2, 'prioridad')
         form_class = modelform_factory(UserStory, fields=form_fields)
         return form_class
 
@@ -257,6 +257,7 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
 
 
 
+
     def get_form_class(self):
         """
         Retorna el tipo de formulario que se mostrará en el template. En caso de que
@@ -269,11 +270,20 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
             actual_fields.insert(1, 'actividad')
         return modelform_factory(UserStory, form=RegistrarActividadForm, fields=actual_fields)
 
+    # def get_form(self, form_class):
+    #     '''
+    #     Personalización del form retornado
+    #     '''
+    #
+    #     form = super(RegistrarActividadUserStory, self).get_form(form_class)
+    #     if 'actividad' in form.fields:
+    #         form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
+    #     return form
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.tiempo_registrado = self.object.tiempo_registrado + form.cleaned_data['horas_a_registrar']
-
+        nota_form = self.NoteFormset(self.request.POST)
         new_estado = 0
         #movemos el User Story a la sgte actividad en caso de que haya llegado a Done
         if form.cleaned_data['estado_actividad'] == 2:
@@ -290,12 +300,38 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
 
         self.object.save()
 
-
+        if nota_form.is_valid():
+            for f in nota_form.forms:
+                n = f.save(commit=False)
+                n.horas_a_registrar = form.cleaned_data['horas_a_registrar']
+                n.tiempo_registrado = self.object.tiempo_registrado
+                n.desarrollador = self.request.user
+                n.sprint = self.object.sprint
+                n.actividad = self.object.actividad
+                n.estado = self.object.estado
+                n.estado_actividad = self.object.estado_actividad
+                n.user_story = self.object
+                n.save()
 
         return HttpResponseRedirect(self.get_success_url())
 
 
+class DeleteUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.DeleteView):
+    """
+    Vista de Eliminacion de User Stories
+    """
+    model = UserStory
+    template_name = 'administracion/userstory/userstory_delete.html'
+    permission_required = 'administracion.eliminar_userstory'
+    context_object_name = 'userstory'
 
+    def get_proyecto(self):
+        return self.get_object().proyecto
+    def get_permission_object(self):
+        return self.get_proyecto()
+
+    def get_success_url(self):
+        return reverse_lazy('product_backlog', kwargs={'project_pk': self.get_object().proyecto.id})
 
 
 

@@ -111,14 +111,17 @@
                                                 <td style>{{ p.fecha_fin|date:"SHORT_DATE_FORMAT" }}</td>
 
                                                 <td style>
+                                                {% if p.estado == 'EJ' or p.estado == 'PL'  %}
                                                     {% if "ver_proyecto" in proyecto_perms %}
                                                          <a href="{{ p.get_absolute_url }}"><button type="submit" class="btn btn-default btn-md">Ver</button></a>
                                                      {% endif %}
+                                                {% endif %}
                                                 </td>
                                                 <td style>
                                                     {% if "change_proyecto" in proyecto_perms %}
                                                          <a href="{% url 'project_update' p.id %}"><button type="submit" class="btn btn-warning btn-md">Editar</button></a>
                                                     {% endif %}
+
                                                 </td>
                                             </tr>
 

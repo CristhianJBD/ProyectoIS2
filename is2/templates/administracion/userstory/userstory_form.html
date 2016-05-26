@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="panel-body">
-
+                                            {% if form.prioridad %}<div class="col-lg-3">{% bootstrap_field form.prioridad layout='horizontal' %}</div>{% endif %}
                                             <div class="col-lg-3">{% bootstrap_field form.valor_negocio layout='horizontal' %}</div>
                                             <div class="col-lg-3">{% bootstrap_field form.valor_tecnico layout='horizontal' %}</div>
                                             <div class="col-lg-3">{% bootstrap_field form.tiempo_estimado layout='horizontal' %}</div>

@@ -9,7 +9,7 @@ from django.views import generic
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from guardian.shortcuts import get_perms
 from administracion.forms import ActividadFormSet, FlujosCreateForm
-from administracion.models import Flujo, Proyecto, Sprint
+from administracion.models import Flujo, Proyecto, Sprint, UserStory
 from administracion.views.views import CreateViewPermissionRequiredMixin, GlobalPermissionRequiredMixin, ActiveProjectRequiredMixin
 
 
@@ -62,9 +62,29 @@ class FlujoDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.Det
         """
         context = super(FlujoDetail, self).get_context_data(**kwargs)
         context['actividades'] = [[a, a.userstory_set.count()]for a in self.object.actividad_set.all()]
-        context['act_us'] = [a.userstory_set.order_by('-nombre_corto') for a in self.object.actividad_set.all()]
+        context['act_us'] = [a.userstory_set.order_by('-prioridad') for a in self.object.actividad_set.all()]
         us = self.object.proyecto.userstory_set.filter(actividad__flujo=self.object) #User Stories del Flujo
         time = us.aggregate(registrado=Sum('tiempo_registrado'), estimado=Sum('tiempo_estimado')) #Aggregate retorna None en vez de 0
+        context.update(time)
+        return context
+
+
+class FlujoDetailSprint(FlujoDetail):
+    sprint = None
+
+    def get_context_data(self, **kwargs):
+        """
+        Agregar lista de actividades al contexto
+        :param kwargs: diccionario de argumentos claves
+        :return: contexto
+        """
+        self.sprint = get_object_or_404(UserStory, pk=self.kwargs['sprint_pk'])
+        context = super(generic.DetailView, self).get_context_data(**kwargs)
+        context['actividades'] = [[a, a.userstory_set.filter(sprint=self.sprint).count()] for a in self.object.actividad_set.all()]
+        context['sprint'] = self.sprint
+        context['act_us'] = [a.userstory_set.filter(sprint=self.sprint).order_by('-prioridad') for a in self.object.actividad_set.all()]
+        us = self.object.proyecto.userstory_set.filter(actividad__flujo=self.object, sprint=self.sprint) #User Stories del Flujo
+        time = us.aggregate(registrado=Sum('tiempo_registrado'), estimado=Sum('tiempo_estimado'))
         context.update(time)
         return context
 

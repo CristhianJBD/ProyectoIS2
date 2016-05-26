@@ -38,11 +38,15 @@
                     </div>
                     <div class="panel-body">
                         <strong>Estado actual: </strong>{{ us.get_estado_display }}<br/>
+                        <strong>Prioridad: </strong>{{ us.get_prioridad_display }}<br/>
                         <strong>Desarrollador: </strong>
                         {% if us.desarrollador %}
-                            <a href="{% url 'user_detail' us.desarrollador_id %}">{{ us.desarrollador }}</a>
+                            <a href="{% url 'user_detail' us.desarrollador_id %}">{{ us.desarrollador }}</a><br/>
                         {% else %}
                             Ninguno
+                        {% endif %}
+                        {% if us.sprint %}
+                            <strong>Sprint: </strong><a href="{% url 'sprint_detail' us.sprint.id %}">{{ us.sprint }}</a><br/>
                         {% endif %}
                         </br>
                         {% if us.actividad %}

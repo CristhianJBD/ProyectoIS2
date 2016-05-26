@@ -28,11 +28,10 @@ urlpatterns = [
       # proyecto
       url(r'^proyectos/$', view_project.ProjectList.as_view(), name='project_list'),
       url(r'^proyectos/agregar/$', view_project.ProjectCreate.as_view(), name='project_create'),
-      url(r'^proyecto/$', views.projectPersonal, name='project'),
+      url(r'^proyectos/$', views.projectPersonal, name='project'),
       url(r'^proyectos/(?P<pk>\d+)/$', view_project.ProjectDetail.as_view(), name='project_detail'),
       url(r'^proyectos/(?P<pk>\d+)/editar/$', view_project.ProjectUpdate.as_view(), name='project_update'),
       url(r'^proyectos/(?P<pk>\d+)/eliminar/$', view_project.ProjectDelete.as_view(), name='project_delete'),
-      url(r'^proyectos/(?P<pk>\d+)/aprobar/$', view_project.ApproveProject.as_view(), name='project_aprobar'),
 
       # flujos dentro del proyecto
       url(r'^proyectos/(?P<project_pk>\d+)/flujo/add/$', views_flujo.AddFlujo.as_view(), name="flujo_add"),
