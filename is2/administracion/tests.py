@@ -228,7 +228,7 @@ class UserStoryTest(TestCase):
         p = Proyecto.objects.first()
         #creamos un user story
         response = c.post(reverse('userstory_add', args=(str(p.id))),
-        {'nombre_corto': 'Test US', 'nombre_largo': 'Test User story', 'descripcion': 'This is a User Story for testing purposes.',
+        {'nombre_corto': 'Test US', 'nombre_largo': 'Test User story', 'descripcion': 'This is a User Story for testing purposes.', 'prioridad':1,
         'valor_negocio': 10, 'valor_tecnico': 10, 'tiempo_estimado': 10}, follow=True)
         us = UserStory.objects.first()
         self.assertIsNotNone(us)

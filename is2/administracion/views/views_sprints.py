@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db.models import Q
 from django.forms import formset_factory, HiddenInput
 from django.forms.extras import SelectDateWidget
@@ -126,10 +126,11 @@ class AddSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPe
         return reverse('sprint_detail', kwargs={'pk': self.object.id})
 
     def __filtrar_formset__(self, formset):
+
         for userformset in formset.forms:
-            userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.get_proyecto())
+            userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.get_proyecto()).filter(miembroequipo__roles__name__exact='Desarrollador')
             userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.get_proyecto())
-            userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.get_proyecto()), Q(estado=0) | Q(estado=1))
+            userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.get_proyecto()), Q(estado=0)).order_by('-prioridadFormula')
 
     def get_context_data(self, **kwargs):
         """
@@ -212,12 +213,10 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
         return reverse('sprint_detail', kwargs={'pk': self.object.id})
 
     def __filtrar_formset__(self, formset):
-        for userformset in formset.forms:
-
-            userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.object.proyecto)
-            userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.object.proyecto)
-
-            userformset.fields['userStory'].queryset = UserStory.objects.filter(proyecto=self.object.proyecto)
+            for userformset in formset.forms:
+                userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.get_proyecto()).filter(miembroequipo__roles__name__exact='Desarrollador')
+                userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.get_proyecto())
+                userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.get_proyecto()), Q(estado=0) | Q(estado=1)).order_by('-prioridadFormula')
 
     def get_context_data(self, **kwargs):
         """
