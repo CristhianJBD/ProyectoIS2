@@ -80,7 +80,7 @@ class SprintDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.De
         :return: retorna el contexto
         """
         context = super(SprintDetail, self).get_context_data(**kwargs)
-        context['userStory'] = self.object.userstory_set.order_by('-nombre_corto')
+        context['userStory'] = self.object.userstory_set.order_by('-prioridad')
         return context
 
 
@@ -129,7 +129,7 @@ class AddSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPe
         for userformset in formset.forms:
             userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.proyecto)
             userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.proyecto)
-            userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.proyecto), Q(estado=0))
+            userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.object.proyecto), Q(estado=0) | Q(estado=1))
 
     def get_context_data(self, **kwargs):
         """
@@ -215,7 +215,7 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
         for userformset in formset.forms:
             userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.object.proyecto)
             userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.object.proyecto)
-            userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.proyecto), Q(estado=0))
+            userformset.fields['userStory'].queryset = UserStory.objects.filter(proyecto=self.object.proyecto)
 
     def get_context_data(self, **kwargs):
         """
@@ -250,16 +250,18 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
                         # desaciamos los user story que se eliminaron del form
                         new_userStory.desarrollador = None
                         new_userStory.sprint = None
-
+                        new_userStory.actividad = None
 
                     else:
-
+                        new_flujo = subform.cleaned_data['flujo']
+                        self.flujo = new_flujo
                         new_desarrollador = subform.cleaned_data['desarrollador']
-                        if new_userStory.estado!=3 and new_userStory.estado!=4: #si el user story no ha finalizado
+                        if new_userStory.estado != 3 and new_userStory.estado != 4:  # si el user story no ha finalizado
                             new_userStory.desarrollador = new_desarrollador
                             new_userStory.sprint = self.object
-
+                            new_userStory.actividad = self.flujo.actividad_set.first()
                             new_userStory.estado = 1
+                            new_userStory.estado_actividad = 0
 
                     new_userStory.save()
                     proccessed_forms.append(new_userStory)

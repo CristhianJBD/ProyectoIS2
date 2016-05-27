@@ -30,7 +30,7 @@
     <div id="userstoriespanels">
     {% for us in userstories %}
         {% get_obj_perms user for us as "us_perms" %}
-    <tr class="odd gradeX">
+
        <div class="col-lg-3">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -48,7 +48,7 @@
                         {% if us.sprint %}
                             <strong>Sprint: </strong><a href="{% url 'sprint_detail' us.sprint.id %}">{{ us.sprint }}</a><br/>
                         {% endif %}
-                        </br>
+
                         {% if us.actividad %}
                             <strong>Flujo: </strong><a href="{% url 'flujo_detail' us.actividad.flujo_id %}">{{ us.actividad.flujo }}</a><br/>
                             <strong>Actividad: </strong>{{ us.actividad }} - {{ us.get_estado_actividad_display }}<br/>

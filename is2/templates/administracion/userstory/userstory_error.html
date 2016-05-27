@@ -1,18 +1,8 @@
 {% extends 'administracion/base.html' %}
 {% load guardian_tags %}
-{% block title %}Error {{ userstory }}{% endblock %}
 
-{% block breadcrumbs %}
-    <li><a href="{% url 'project:home' %}">Home</a></li>
-    <li><a href="{% url 'project:project_list' %}">Proyectos</a></li>
-    <li><a href="{{ userstory.proyecto.get_absolute_url }}">{{ userstory.proyecto }}</a></li>
-    <li><a href="{% url 'project:product_backlog' userstory.proyecto_id %}">User Stories</a></li>
-    <li><a href="{{ userstory.get_absolute_url }}">{{ userstory }}</a></li>
-    <li class="Active">Registrar Avance</li>
-{% endblock %}
-
-{% block header %}Error en {{ userstory.nombre | title}} {% endblock %}
-{% block content %}
+{% block contentbase %}
+    <div class="page-header"><h1>Error en {{ userstory.nombre_largo | title}}</h1></div>
     <div class="row center-block">
         <div class="panel panel-red">
                     <div class="panel-heading">
