@@ -5,28 +5,28 @@
 {% block contentbase %}
 
     <div class="row">
-   <ol class="breadcrumb">
-      <li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-      <li><a href="{%url "project_list" %}">Lista de Proyectos</a></li>
-       <li><a href="">Flujos</a></li>
-       <li class="active">Detalles de Flujo</li>
+       <ol class="breadcrumb">
+          <li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+          <li><a href="{%url "project_list" %}">Lista de Proyectos</a></li>
+           <li><a href="">Flujos</a></li>
+           <li class="active">Detalles de Flujo</li>
 
-   </ol>
-</div><!--/.row-->
+       </ol>
+    </div><!--/.row-->
 
 
-      <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-<form role="search">
-   <div class="form-group">
-      <input type="text" class="form-control" placeholder="Search">
-   </div>
-</form>
-<ul class="nav menu">
-   <li class="active"><a href="{% url 'project_list' %}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Proyectos</a></li>
-          <li><a href="{% url 'user_list' %}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
-          <li><a href="{% url 'rol_list' %}"><svg class="glyph stroked key "><use xlink:href="#stroked-key"/></svg> Roles</a></li>
-      </ul>
-  </div>
+          <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+            <form role="search">
+               <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+               </div>
+            </form>
+            <ul class="nav menu">
+               <li class="active"><a href="{% url 'project_list' %}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Proyectos</a></li>
+                  <li><a href="{% url 'user_list' %}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
+                  <li><a href="{% url 'rol_list' %}"><svg class="glyph stroked key "><use xlink:href="#stroked-key"/></svg> Roles</a></li>
+              </ul>
+            </div>
 
 
 
@@ -72,12 +72,51 @@
                                                 </thead>
 
                             {% for us in act_us %}
-                                {% for u in us %}
+
+                                {% if a.0 == us.0 %}
+                                {% for u in us.1 %}
 
 
+                                    <tbody>
+                                    <tr>
+
+                                        <td class="text-center text-hide">
+                                             {% if  u.estado_actividad == 0 %}
+
+                                                     <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
+                                                     {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
+                                                     {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
+                                                     {% endif %}{{ u.nombre_largo }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
+
+
+                                             {% endif %}
+                                        <td class="text-center">
+                                             {% if u.estado_actividad == 1 %}
+
+                                                     <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
+                                                         {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
+                                                         {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
+                                                         {% endif %}{{ u.nombre_largo }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
+
+                                             {% endif %}
+                                             </td>
+                                             <td class="text-center">
+                                             {% if u.estado_actividad == 2 %}
+
+                                                     <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
+                                                         {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
+                                                         {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
+                                                         {% endif %}{{ u.nombre_largo }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
+
+                                             {% endif %}
+                                             </td>
+                                        </td>
+                                    </tr>
+                                    </tbody>
 
 
                                 {% endfor %}
+                                {% endif %}
                             {% endfor %}
 
                                             </table>

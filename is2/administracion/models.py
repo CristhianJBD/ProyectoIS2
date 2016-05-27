@@ -61,7 +61,7 @@ class Proyecto(models.Model):
             ('registraractividad_userstory', 'Registrar avances en User Story'),
             ('aprobar_userstory', 'Aprobar User Story completado'),
             ('cancelar_userstory', 'Cancelar User Story completado'),
-
+            ('priorizar_userstory', 'asignar prioridad a userstories'),
         )
 
     def __str__(self):

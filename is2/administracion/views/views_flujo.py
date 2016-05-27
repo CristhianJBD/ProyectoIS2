@@ -61,8 +61,9 @@ class FlujoDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.Det
         :return: contexto
         """
         context = super(FlujoDetail, self).get_context_data(**kwargs)
+        #actividades[nombre de actividad, contador de us en actividad]
         context['actividades'] = [[a, a.userstory_set.count()]for a in self.object.actividad_set.all()]
-        context['act_us'] = [a.userstory_set.order_by('-prioridad') for a in self.object.actividad_set.all()]
+        context['act_us'] = [[a, a.userstory_set.order_by('-prioridad')] for a in self.object.actividad_set.all()]
         us = self.object.proyecto.userstory_set.filter(actividad__flujo=self.object) #User Stories del Flujo
         time = us.aggregate(registrado=Sum('tiempo_registrado'), estimado=Sum('tiempo_estimado')) #Aggregate retorna None en vez de 0
         context.update(time)
@@ -139,7 +140,7 @@ class AddFlujo(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPermiss
         """
         self.object = form.save(commit=False)
         self.object.proyecto = self.get_proyecto()
-        self.object.proyecto.estado = 'PE'
+        self.object.proyecto.estado = 'EJ'
         self.object.proyecto.save()
         self.object.save()
         actividad_form = ActividadFormSet(self.request.POST, instance=self.object)
