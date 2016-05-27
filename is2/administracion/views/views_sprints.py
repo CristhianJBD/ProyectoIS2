@@ -127,9 +127,9 @@ class AddSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPe
 
     def __filtrar_formset__(self, formset):
         for userformset in formset.forms:
-            userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.proyecto)
-            userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.proyecto)
-            userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.object.proyecto), Q(estado=0) | Q(estado=1))
+            userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.get_proyecto())
+            userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.get_proyecto())
+            userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.get_proyecto()), Q(estado=0) | Q(estado=1))
 
     def get_context_data(self, **kwargs):
         """
@@ -213,8 +213,10 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
 
     def __filtrar_formset__(self, formset):
         for userformset in formset.forms:
+
             userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.object.proyecto)
             userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.object.proyecto)
+
             userformset.fields['userStory'].queryset = UserStory.objects.filter(proyecto=self.object.proyecto)
 
     def get_context_data(self, **kwargs):
