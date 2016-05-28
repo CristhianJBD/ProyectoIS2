@@ -30,7 +30,9 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="index.html"/> 
+    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="index.html"/>
+        <link rel="next" title="autenticacion package" href="autenticacion.html"/>
+        <link rel="prev" title="views_user module" href="views_user.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -79,8 +81,16 @@
           
             
             
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="administracion.html">administracion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="view_project.html">view_project module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">views module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_flujo.html">views_flujo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_rol.html">views_rol module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_sprints.html">views_sprints module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_user.html">views_user module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">view_userstory module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autenticacion.html">autenticacion package</a></li>
 </ul>
 
             
@@ -319,6 +329,49 @@
 </dd></dl>
 
 <dl class="class">
+<dt id="administracion.views.view_userstory.DeleteUserStory">
+<em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">DeleteUserStory</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#DeleteUserStory"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.DeleteUserStory" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="views.html#administracion.views.views.ActiveProjectRequiredMixin" title="administracion.views.views.ActiveProjectRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.ActiveProjectRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.DeleteView</span></code></p>
+<p>Vista de Eliminacion de User Stories</p>
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.DeleteUserStory.context_object_name">
+<code class="descname">context_object_name</code><em class="property"> = 'userstory'</em><a class="headerlink" href="#administracion.views.view_userstory.DeleteUserStory.context_object_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.DeleteUserStory.get_permission_object">
+<code class="descname">get_permission_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#DeleteUserStory.get_permission_object"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.DeleteUserStory.get_permission_object" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.DeleteUserStory.get_proyecto">
+<code class="descname">get_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#DeleteUserStory.get_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.DeleteUserStory.get_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.DeleteUserStory.get_success_url">
+<code class="descname">get_success_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#DeleteUserStory.get_success_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.DeleteUserStory.get_success_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.DeleteUserStory.model">
+<code class="descname">model</code><a class="headerlink" href="#administracion.views.view_userstory.DeleteUserStory.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">UserStory</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.DeleteUserStory.permission_required">
+<code class="descname">permission_required</code><em class="property"> = 'administracion.eliminar_userstory'</em><a class="headerlink" href="#administracion.views.view_userstory.DeleteUserStory.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.view_userstory.DeleteUserStory.template_name">
+<code class="descname">template_name</code><em class="property"> = 'administracion/userstory/userstory_delete.html'</em><a class="headerlink" href="#administracion.views.view_userstory.DeleteUserStory.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="administracion.views.view_userstory.RechazarUserStory">
 <em class="property">class </em><code class="descclassname">administracion.views.view_userstory.</code><code class="descname">RechazarUserStory</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RechazarUserStory"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RechazarUserStory" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Clases base: <a class="reference internal" href="views.html#administracion.views.views.ActiveProjectRequiredMixin" title="administracion.views.views.ActiveProjectRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.ActiveProjectRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.UpdateView</span></code></p>
@@ -395,6 +448,12 @@
 <dt id="administracion.views.view_userstory.RegistrarActividadUserStory.get_context_data">
 <code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RegistrarActividadUserStory.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RegistrarActividadUserStory.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="administracion.views.view_userstory.RegistrarActividadUserStory.get_form">
+<code class="descname">get_form</code><span class="sig-paren">(</span><em>form_class=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_userstory.html#RegistrarActividadUserStory.get_form"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_userstory.RegistrarActividadUserStory.get_form" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Personalización del form retornado</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="administracion.views.view_userstory.RegistrarActividadUserStory.get_form_class">
@@ -646,6 +705,15 @@ del User Story.</p>
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="autenticacion.html" class="btn btn-neutral float-right" title="autenticacion package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="views_user.html" class="btn btn-neutral" title="views_user module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

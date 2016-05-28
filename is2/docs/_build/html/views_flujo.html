@@ -30,7 +30,9 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="index.html"/> 
+    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="index.html"/>
+        <link rel="next" title="views_rol module" href="views_rol.html"/>
+        <link rel="prev" title="views module" href="views.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -79,8 +81,16 @@
           
             
             
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="administracion.html">administracion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="view_project.html">view_project module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">views module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">views_flujo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_rol.html">views_rol module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_sprints.html">views_sprints module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_user.html">views_user module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="view_userstory.html">view_userstory module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autenticacion.html">autenticacion package</a></li>
 </ul>
 
             
@@ -276,6 +286,25 @@
 </dd></dl>
 
 <dl class="class">
+<dt id="administracion.views.views_flujo.FlujoDetailSprint">
+<em class="property">class </em><code class="descclassname">administracion.views.views_flujo.</code><code class="descname">FlujoDetailSprint</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#FlujoDetailSprint"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.FlujoDetailSprint" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="#administracion.views.views_flujo.FlujoDetail" title="administracion.views.views_flujo.FlujoDetail"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views_flujo.FlujoDetail</span></code></a></p>
+<dl class="method">
+<dt id="administracion.views.views_flujo.FlujoDetailSprint.get_context_data">
+<code class="descname">get_context_data</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#FlujoDetailSprint.get_context_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.FlujoDetailSprint.get_context_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Agregar lista de actividades al contexto
+:param kwargs: diccionario de argumentos claves
+:return: contexto</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.views.views_flujo.FlujoDetailSprint.sprint">
+<code class="descname">sprint</code><em class="property"> = None</em><a class="headerlink" href="#administracion.views.views_flujo.FlujoDetailSprint.sprint" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="administracion.views.views_flujo.FlujoList">
 <em class="property">class </em><code class="descclassname">administracion.views.views_flujo.</code><code class="descname">FlujoList</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/views_flujo.html#FlujoList"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.views_flujo.FlujoList" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.list.ListView</span></code></p>
@@ -391,6 +420,15 @@
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="views_rol.html" class="btn btn-neutral float-right" title="views_rol module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="views.html" class="btn btn-neutral" title="views module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

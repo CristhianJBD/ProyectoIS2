@@ -81,7 +81,7 @@ class SprintDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.De
         :return: retorna el contexto
         """
         context = super(SprintDetail, self).get_context_data(**kwargs)
-        context['userStory'] = self.object.userstory_set.order_by('-prioridad')
+        context['userStory'] = self.object.userstory_set.order_by('-prioridadFormula')
         return context
 
 
@@ -252,6 +252,7 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
                     new_userStory = subform.cleaned_data['userStory']
                     if subform in formsetb.deleted_forms and not new_userStory in proccessed_forms:
                         # desaciamos los user story que se eliminaron del form
+                        print("entro us")
                         new_userStory.desarrollador = None
                         new_userStory.sprint = None
                         new_userStory.actividad = None
@@ -266,7 +267,6 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
                             new_userStory.actividad = self.flujo.actividad_set.first()
                             new_userStory.estado = 1
                             new_userStory.estado_actividad = 0
-
                     new_userStory.save()
                     proccessed_forms.append(new_userStory)
             return HttpResponseRedirect(self.get_success_url())

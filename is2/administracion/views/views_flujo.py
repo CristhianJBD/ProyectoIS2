@@ -64,7 +64,7 @@ class FlujoDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.Det
         context = super(FlujoDetail, self).get_context_data(**kwargs)
         #actividades[nombre de actividad, contador de us en actividad]
         context['actividades'] = [[a, a.userstory_set.count()]for a in self.object.actividad_set.all()]
-        context['act_us'] = [[a, a.userstory_set.order_by('-prioridad')] for a in self.object.actividad_set.all()]
+        context['act_us'] = [[a, a.userstory_set.order_by('-prioridadFormula')] for a in self.object.actividad_set.all()]
         us = self.object.proyecto.userstory_set.filter(actividad__flujo=self.object) #User Stories del Flujo
         time = us.aggregate(registrado=Sum('tiempo_registrado'), estimado=Sum('tiempo_estimado')) #Aggregate retorna None en vez de 0
         context.update(time)
@@ -84,7 +84,7 @@ class FlujoDetailSprint(FlujoDetail):
         context = super(generic.DetailView, self).get_context_data(**kwargs)
         context['actividades'] = [[a, a.userstory_set.filter(sprint=self.sprint).count()] for a in self.object.actividad_set.all()]
         context['sprint'] = self.sprint
-        context['act_us'] = [a.userstory_set.filter(sprint=self.sprint).order_by('-prioridad') for a in self.object.actividad_set.all()]
+        context['act_us'] = [[a, a.userstory_set.filter(sprint=self.sprint).order_by('-prioridadFormula')] for a in self.object.actividad_set.all()]
         us = self.object.proyecto.userstory_set.filter(actividad__flujo=self.object, sprint=self.sprint) #User Stories del Flujo
         time = us.aggregate(registrado=Sum('tiempo_registrado'), estimado=Sum('tiempo_estimado'))
         context.update(time)

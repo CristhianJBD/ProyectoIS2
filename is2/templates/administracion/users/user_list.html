@@ -107,7 +107,7 @@
                                             <th>Estado</th>
                                             <th>Detalles del usuario</th>
                                             <th>Editar usuario</th>
-                                            <th>Eliminar usuario</th>
+                                            <th>Desactivar usuario</th>
                                         </tr>
 
                                         {% for u in usuario %}
@@ -124,7 +124,7 @@
                                             {% if perms.auth.change_user %}<a href="{% url 'user_edit' u.id %}"><button type="submit" class="btn btn-warning btn-md">Editar</button></a>{% endif %}
                                             </td>
                                             <td>
-                                             {% if perms.auth.delete_user %}<a href="{% url 'user_delete' u.id %}"><button type="submit" class="btn btn-danger btn-md">Eliminar</button></a>{% endif %}
+                                             {% if perms.auth.delete_user %}<a href="{% url 'user_delete' u.id %}"><button type="submit" class="btn btn-danger btn-md">Desactivar</button></a>{% endif %}
                                             </td>
                                            </tr>
                                         {% endfor %}
