@@ -82,8 +82,11 @@
                         {% endif %}
                     </div>
                 </div>
-            </div>
+        </div>
+
     {% endfor %}
+    </div>
+
     <div class="col-lg-12">
     <p><a class="fa fa-file" href="{% url 'project_detail' view.project.id %}"> Volver al Proyecto {{ view.project.nombre}}</a></p>
     </div>
