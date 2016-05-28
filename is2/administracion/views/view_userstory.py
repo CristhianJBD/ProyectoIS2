@@ -83,8 +83,11 @@ class AddUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPer
     model = UserStory
     template_name = 'administracion/userstory/userstory_form.html'
     permission_required = 'administracion.crear_userstory'
+    project = None
 
     def get_context_data(self, **kwargs):
+        if self.project is None:
+            self.project = self.get_proyecto()
         context = super(AddUserStory, self).get_context_data(**kwargs)
 
         context['current_action'] = 'Crear'

@@ -29,6 +29,7 @@ class FlujoList(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.ListV
         return self.project
 
     def get_context_data(self, **kwargs):
+
         context = super(FlujoList, self).get_context_data(**kwargs)
         context['proyecto_perms'] = get_perms(self.request.user, self.project)
         return context
@@ -114,6 +115,8 @@ class AddFlujo(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPermiss
         return get_object_or_404(Proyecto, id=self.kwargs['project_pk'])
 
     def get_context_data(self, **kwargs):
+        self.proyecto = get_object_or_404(Proyecto, pk=self.kwargs['project_pk'])
+
         """
         Agregar datos al contexto
         :param kwargs: argumentos clave

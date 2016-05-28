@@ -6,8 +6,8 @@
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-                <li><a href="{% url "rol_list" %}">Roles</a></li>
-				<li class="active">Lista</li>
+                <li><a href="{% url "rol_list" %}"> Lista de Roles</a></li>
+				<li class="active">Listado de permisos para {{ roles.name }}</li>
 			</ol>
 		</div><!--/.row-->
 
@@ -28,7 +28,7 @@
 	</div><!--/.sidebar-->
 
 
-    <h3>Permisos: </h3>
+    <h3>Permisos para {{ roles.name }} </h3>
     <ul>
     {% for p in roles.permissions.all %}
         <li>{{ p.name }}</li>

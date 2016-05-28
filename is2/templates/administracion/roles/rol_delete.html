@@ -4,8 +4,8 @@
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-                <li><a href="{% url "rol_list" %}">Roles</a></li>
-				<li class="active">Delete</li>
+                <li><a href="{% url "rol_list" %}">Listado de Roles</a></li>
+				<li class="active">Eliminar rol {{ group.name }}</li>
 			</ol>
 		</div><!--/.row-->
 
@@ -35,6 +35,6 @@
         <p>Seguro de que desea eliminar el rol <strong>{{ group }}</strong>?</p>
     </div>
 
-    <input type="submit" value="Confirmar" class="btn btn-default"/>
+    <input type="submit" value="Confirmar" class="btn btn-danger"/>
 </form>
 {% endblock %}
