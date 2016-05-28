@@ -85,10 +85,10 @@
                                                         {% bootstrap_field subform.DELETE %}{% endif %}
                                                     {% bootstrap_field subform.usuario %}
                                                      {% bootstrap_field subform.roles %}
-{##}
-{#                                                    {% if user.is_superuser == True %}#}
-{#                                                     {% for roli in subform.roles%}#}
-{#                                                         {% if forloop.first %}#}
+
+                                                    {% if user.is_superuser == True %}#}
+                                                     {% for roli in subform.roles%}#}
+                                                         {% if forloop.first %}#}
 {#                                                        {{ roli  }}#}
 {#                                                         {% endif %}#}
 {#                                                    {% endfor %}#}
