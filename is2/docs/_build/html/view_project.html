@@ -30,7 +30,9 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="index.html"/> 
+    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="index.html"/>
+        <link rel="next" title="views module" href="views.html"/>
+        <link rel="prev" title="administracion.migrations package" href="administracion.migrations.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -79,8 +81,16 @@
           
             
             
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="administracion.html">administracion package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">view_project module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">views module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_flujo.html">views_flujo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_rol.html">views_rol module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_sprints.html">views_sprints module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_user.html">views_user module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="view_userstory.html">view_userstory module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autenticacion.html">autenticacion package</a></li>
 </ul>
 
             
@@ -128,57 +138,9 @@
   <div class="section" id="module-administracion.views.view_project">
 <span id="view-project-module"></span><h1>view_project module<a class="headerlink" href="#module-administracion.views.view_project" title="Enlazar permanentemente con este título">¶</a></h1>
 <dl class="class">
-<dt id="administracion.views.view_project.ApproveProject">
-<em class="property">class </em><code class="descclassname">administracion.views.view_project.</code><code class="descname">ApproveProject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_project.html#ApproveProject"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_project.ApproveProject" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.SingleObjectTemplateResponseMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.BaseDetailView</span></code></p>
-<p>Vista de Aprobación o rechazo de User Stories</p>
-<dl class="attribute">
-<dt id="administracion.views.view_project.ApproveProject.context_object_name">
-<code class="descname">context_object_name</code><em class="property"> = 'proyecto'</em><a class="headerlink" href="#administracion.views.view_project.ApproveProject.context_object_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="administracion.views.view_project.ApproveProject.dispatch">
-<code class="descname">dispatch</code><span class="sig-paren">(</span><em>request</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_project.html#ApproveProject.dispatch"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_project.ApproveProject.dispatch" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="administracion.views.view_project.ApproveProject.get_proyecto">
-<code class="descname">get_proyecto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_project.html#ApproveProject.get_proyecto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_project.ApproveProject.get_proyecto" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="administracion.views.view_project.ApproveProject.get_success_url">
-<code class="descname">get_success_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_project.html#ApproveProject.get_success_url"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_project.ApproveProject.get_success_url" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="administracion.views.view_project.ApproveProject.model">
-<code class="descname">model</code><a class="headerlink" href="#administracion.views.view_project.ApproveProject.model" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>alias de <code class="xref py py-class docutils literal"><span class="pre">Proyecto</span></code></p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="administracion.views.view_project.ApproveProject.permission_required">
-<code class="descname">permission_required</code><em class="property"> = 'administracion.aprobar_proyecto'</em><a class="headerlink" href="#administracion.views.view_project.ApproveProject.permission_required" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="administracion.views.view_project.ApproveProject.post">
-<code class="descname">post</code><span class="sig-paren">(</span><em>request</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_project.html#ApproveProject.post"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_project.ApproveProject.post" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="administracion.views.view_project.ApproveProject.template_name">
-<code class="descname">template_name</code><em class="property"> = 'administracion/proyecto/project_approve.html'</em><a class="headerlink" href="#administracion.views.view_project.ApproveProject.template_name" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="administracion.views.view_project.ProjectCreate">
 <em class="property">class </em><code class="descclassname">administracion.views.view_project.</code><code class="descname">ProjectCreate</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_project.html#ProjectCreate"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_project.ProjectCreate" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.CreateViewPermissionRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.CreateView</span></code></p>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.CreateViewPermissionRequiredMixin" title="administracion.views.views.CreateViewPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.CreateViewPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.CreateView</span></code></p>
 <p>Permite la creacion de Proyectos</p>
 <dl class="attribute">
 <dt id="administracion.views.view_project.ProjectCreate.TeamMemberInlineFormSet">
@@ -232,7 +194,7 @@
 <dl class="class">
 <dt id="administracion.views.view_project.ProjectDelete">
 <em class="property">class </em><code class="descclassname">administracion.views.view_project.</code><code class="descname">ProjectDelete</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_project.html#ProjectDelete"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_project.ProjectDelete" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.DeleteView</span></code></p>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.DeleteView</span></code></p>
 <p>Vista para la cancelacion de proyectos</p>
 <dl class="method">
 <dt id="administracion.views.view_project.ProjectDelete.delete">
@@ -272,7 +234,7 @@ y luego redirige a la url exitosa.</p>
 <dl class="class">
 <dt id="administracion.views.view_project.ProjectDetail">
 <em class="property">class </em><code class="descclassname">administracion.views.view_project.</code><code class="descname">ProjectDetail</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_project.html#ProjectDetail"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_project.ProjectDetail" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.DetailView</span></code></p>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.DetailView</span></code></p>
 <p>Vista de Detalles de Proyecto</p>
 <dl class="attribute">
 <dt id="administracion.views.view_project.ProjectDetail.context_object_name">
@@ -338,7 +300,7 @@ y luego redirige a la url exitosa.</p>
 <dl class="class">
 <dt id="administracion.views.view_project.ProjectUpdate">
 <em class="property">class </em><code class="descclassname">administracion.views.view_project.</code><code class="descname">ProjectUpdate</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/administracion/views/view_project.html#ProjectUpdate"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#administracion.views.view_project.ProjectUpdate" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.UpdateView</span></code></p>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">guardian.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="views.html#administracion.views.views.GlobalPermissionRequiredMixin" title="administracion.views.views.GlobalPermissionRequiredMixin"><code class="xref py py-class docutils literal"><span class="pre">administracion.views.views.GlobalPermissionRequiredMixin</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.UpdateView</span></code></p>
 <p>Permite la Edicion de Proyectos</p>
 <dl class="attribute">
 <dt id="administracion.views.view_project.ProjectUpdate.TeamMemberInlineFormSet">
@@ -396,6 +358,15 @@ y luego redirige a la url exitosa.</p>
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="views.html" class="btn btn-neutral float-right" title="views module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="administracion.migrations.html" class="btn btn-neutral" title="administracion.migrations package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

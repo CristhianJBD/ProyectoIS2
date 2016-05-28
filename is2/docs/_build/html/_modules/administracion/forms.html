@@ -267,8 +267,8 @@
 <span class="sd">    formulario para la agregacion de userStory, desarrollador y flujo a un Sprint</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">userStory</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelChoiceField</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">UserStory</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
-    <span class="n">desarrollador</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelChoiceField</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span></div>
-    <span class="c1">#flujo = forms.ModelChoiceField(queryset=Flujo.objects.all())</span>
+    <span class="n">desarrollador</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelChoiceField</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+    <span class="n">flujo</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelChoiceField</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">Flujo</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="AddToSprintFormset"><a class="viewcode-back" href="../../administracion.html#administracion.forms.AddToSprintFormset">[documentos]</a><span class="k">class</span> <span class="nc">AddToSprintFormset</span><span class="p">(</span><span class="n">BaseFormSet</span><span class="p">):</span>

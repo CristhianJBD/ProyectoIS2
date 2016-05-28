@@ -4,10 +4,13 @@
 {% block contentbase %}
 
 
+
+
         <div class="row" xmlns="http://www.w3.org/1999/html">
 			<ol class="breadcrumb">
 				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-				<li><a href="{% url "user_list" %}">Lista de Proyectos </a></li>
+				<li><a href="{% url "project_list"  %}">Lista de Proyectos</li></a>
+				<li><a href="{% url "project_detail" view.project.pk %}">Detalles de Proyecto</li></a>
                 <li>Sprint</li>
 
 			</ol>

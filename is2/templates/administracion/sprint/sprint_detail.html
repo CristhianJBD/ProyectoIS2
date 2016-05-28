@@ -5,20 +5,45 @@
 {% block contentbase %}
 
 
-<div class="page-header"><h1>{{ sprint.nombre | title }} </h1></div>
+
+           <div class="row" xmlns="http://www.w3.org/1999/html">
+			<ol class="breadcrumb">
+      <li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+      <li><a href="{%url "project_list" %}">Lista de Proyectos</a></li>
+       <li><a href="">Detalles de Proyecto</li></a>
+       <li><a href="">Lista de Sprint</a></li>
+   </ol>
+</div><!--/.row-->
 
 
+        <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li class="active"><a href="{% url 'project_list' %}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Proyectos</a></li>
+            <li><a href="{% url 'user_list' %}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
+            <li><a href="{% url 'rol_list' %}"><svg class="glyph stroked key "><use xlink:href="#stroked-key"/></svg> Roles</a></li>
+
+        </ul>
+    </div>
+
+
+    <div class="page-header"><h1>{{ sprint.nombre | title }} </h1></div>
     <ul class="list-inline">
         {% get_obj_perms user for sprint.proyecto as "proyecto_perms" %}
         {% if "editar_sprint" in proyecto_perms %}
             <li><a href="{% url 'sprint_update'  sprint.id %}" class="glyphicon glyphicon-pencil"> Editar</a></li>
         {% endif %}
      </ul>
+
     <p><strong>Nombre:</strong> {{ sprint.nombre }}</p>
     <p><strong>Fecha Inicio:</strong>{{ sprint.fecha_inicio }}</p>
     <p><strong>Fecha fin:</strong>{{ sprint.fecha_fin }}</p>
     <p><strong>Proyecto Asociado:</strong> {{ sprint.proyecto }}</p>
-
 
 
 
