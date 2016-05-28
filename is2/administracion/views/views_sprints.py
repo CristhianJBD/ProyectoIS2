@@ -65,6 +65,7 @@ class SprintDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.De
     template_name = 'administracion/sprint/sprint_detail.html'
     context_object_name = 'sprint'
 
+
     def get_permission_object(self):
         """
         Obtener el permiso de un objeto
@@ -132,6 +133,8 @@ class AddSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPe
             userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.get_proyecto()), Q(estado=0) | Q(estado=1))
 
     def get_context_data(self, **kwargs):
+        self.proyecto = get_object_or_404(Proyecto, pk=self.kwargs['project_pk'])
+
         """
         Agregar datos al contexto como los desarrolladores del projecto, el flujo y los userStory
         :param:**kwargs : argumentos clave
