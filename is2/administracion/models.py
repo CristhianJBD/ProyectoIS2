@@ -193,6 +193,7 @@ class UserStory(models.Model):
     prioridad = models.IntegerField(choices=priority_choices, default=0)
     valor_negocio = models.IntegerField()
     valor_tecnico = models.IntegerField()
+    prioridadFormula=models.FloatField(null=True, blank=True)
     tiempo_estimado = models.PositiveIntegerField()
     tiempo_registrado = models.PositiveIntegerField(default=0)
     ultimo_cambio = models.DateTimeField(auto_now=True)
@@ -217,6 +218,8 @@ class UserStory(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        self.prioridadFormula = (self.valor_negocio + self.prioridad + 2 * self.valor_tecnico) / 4
+
         old_developer = None
 
         if self.pk is not None:

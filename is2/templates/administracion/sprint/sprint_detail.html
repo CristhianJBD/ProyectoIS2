@@ -67,6 +67,7 @@
                     <div class="panel-body">
                         <strong>Estado actual: </strong>{{ us.get_estado_display }}<br/>
                         <strong>Prioridad: </strong>{{ us.get_prioridad_display }}<br/>
+                        <strong>Prioridad por Formula: </strong>{{ us.prioridadFormula }}<br/>
                         <strong>Desarrollador: </strong>
                         {% if us.desarrollador %}
                             <a href="{% url 'user_detail' us.desarrollador_id %}">{{ us.desarrollador }}</a><br/>

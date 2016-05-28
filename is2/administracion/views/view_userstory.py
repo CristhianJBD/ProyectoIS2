@@ -189,6 +189,7 @@ class UpdateUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.Up
         :param form: formulario recibido
         :return: URL de redireccion
         """
+    
         if form.has_changed():
             with transaction.atomic(), reversion.create_revision():
                 self.object = form.save()
