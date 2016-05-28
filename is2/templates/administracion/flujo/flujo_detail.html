@@ -43,9 +43,9 @@
 
     <p><strong>Proyecto Asociado:</strong> {{ flujo.proyecto }}</p>
     <ul class="nav nav-pills">
-        <li {% if not sprint %}class="active"{% endif %}><a href="{% url 'flujo_detail' flujo.id %}">Ver Todos</a></li>
+        <li {% if not sprint %}class="active"{% endif %}><a href="{% url 'flujo_detail' flujo.id %}">Ver Todos los sprints</a></li>
         {% for s in flujo.proyecto.sprint_set.all %}
-            <li {% if s.id == sprint.id %}class="active"{% endif %}><a href="#">{{ s }}</a></li>
+            <li {% if s.id == sprint.id %}class="active"{% endif %}></li>
         {% endfor %}
     </ul>
     <p><strong>Proyecto Asociado:</strong> {{ flujo.proyecto }}</p>
@@ -82,32 +82,31 @@
 
                                         <td class="text-center text-hide">
                                              {% if  u.estado_actividad == 0 %}
-
-                                                     <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
-                                                     {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
-                                                     {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
-                                                     {% endif %}{{ u.nombre_largo }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
-
+                                                {% with p=u.prioridadFormula %}
+                                                     <a href="{% url 'userstory_detail' u.id %}" class="btn
+                                                     bg-{% if p <= 3 %}info{% elif p <= 5 %}warning{% elif p <= 9 %}danger{% endif %}
+                                                     btn-block">{% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>{% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li> {% endif %}{{ u.nombre_largo }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})<li>Sprint: {{ u.sprint }}</li><li>Desarrollador: {{ u.desarrollador }}</li></a>
+                                                 {% endwith %}
 
                                              {% endif %}
                                         <td class="text-center">
                                              {% if u.estado_actividad == 1 %}
 
-                                                     <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
-                                                         {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
-                                                         {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
-                                                         {% endif %}{{ u.nombre_largo }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
-
+                                                     {% with p=u.prioridadFormula %}
+                                                         <a href="{% url 'userstory_detail' u.id %}" class="btn
+                                                         bg-{% if p <= 3 %}info{% elif p <= 5 %}warning{% elif p <= 9 %}danger{% endif %}
+                                                         btn-block">{% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>{% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li> {% endif %}{{ u.nombre_largo }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})<li>Sprint: {{ u.sprint }}</li><li>Desarrollador: {{ u.desarrollador }}</li></a>
+                                                     {% endwith %}
                                              {% endif %}
                                              </td>
                                              <td class="text-center">
                                              {% if u.estado_actividad == 2 %}
 
-                                                     <a href="{% url 'userstory_detail' u.id %}" class="btn btn-block">
-                                                         {% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>
-                                                         {% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li>
-                                                         {% endif %}{{ u.nombre_largo }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})</a>
-
+                                                     {% with p=u.prioridadFormula %}
+                                                         <a href="{% url 'userstory_detail' u.id %}" class="btn btn-outline
+                                                         btn-{% if p == 0 %}primary{% elif p == 1 %}warning{% elif p == 2 %}danger{% endif %}
+                                                         btn-sm btn-block">{% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>{% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li> {% endif %}{{ u.nombre }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})<li>Sprint: {{ u.sprint }}</li><li>Desarrollador: {{ u.desarrollador }}</li></a>
+                                                     {% endwith %}
                                              {% endif %}
                                              </td>
                                         </td>
@@ -130,10 +129,29 @@
         {% endfor %}
 
 
+
+
     {% endblock %}
 
 
-
+            <div class="row">
+            <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Observacion
+                </div>
+                <div class="panel-body">
+                    <p style="color: #d33333" >User story de prioridad  alta: mayor a 5 menor a 9</p>
+                    <p style="color: orange">User story de prioridad media: mayor a 3 menor a 5</p>
+                    <p style="color: #0044DD"> User story de prioridad baja: menor a 3</p>
+                    <p class="glyphicon glyphicon-remove-circle">User Story cancelado </p>
+                </div>
+                <div class="panel-footer">
+                    Los colores representan la prioridad
+                </div>
+            </div>
+            </div>
+        </div>
 
 
 

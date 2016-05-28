@@ -22,8 +22,6 @@ urlpatterns = [
 
 
 
-      ##url(r'^projects/$', view_project.ProjectList.as_view(), name='project_list'),
-      ##url(r'^projects/add/$', view_project.ProjectCreate.as_view(), name='project_create'),
 
       # proyecto
       url(r'^proyectos/$', view_project.ProjectList.as_view(), name='project_list'),
@@ -39,6 +37,7 @@ urlpatterns = [
       url(r'^flujo/(?P<pk>\d+)/$', views_flujo.FlujoDetail.as_view(), name='flujo_detail'),
       url(r'^flujo/(?P<pk>\d+)/editar/$', views_flujo.UpdateFlujo.as_view(), name="flujo_update"),
       url(r'^flujo/(?P<pk>\d+)/eliminar/$', views_flujo.DeleteFlujo.as_view(), name="flujo_delete"),
+      url(r'^flujo/(?P<pk>\d+)/sprint/(?P<sprint_pk>\d+)/$', views_flujo.FlujoDetailSprint.as_view(),name='flujo_detail_sprint'),
 
       # sprint dentro del proyecto FALTA BURNDOWN
       url(r'^proyectos/(?P<project_pk>\d+)/sprint/$', views_sprints.SprintList.as_view(), name='sprint_list'),

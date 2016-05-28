@@ -98,6 +98,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-administracion">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="view_project.html">view_project module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">views module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_flujo.html">views_flujo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_rol.html">views_rol module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_sprints.html">views_sprints module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_user.html">views_user module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="view_userstory.html">view_userstory module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autenticacion.html">autenticacion package</a></li>
 </ul>
 
             
@@ -290,7 +298,7 @@
 
 <dl class="attribute">
 <dt id="administracion.forms.AddSprintBaseForm.base_fields">
-<code class="descclassname">AddSprintBaseForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('nombre', &lt;django.forms.fields.CharField object at 0x2b2003425358&gt;), ('fecha_inicio', &lt;django.forms.fields.DateTimeField object at 0x2b2003425438&gt;), ('proyecto', &lt;django.forms.models.ModelChoiceField object at 0x2b20034254e0&gt;)])</em><a class="headerlink" href="#administracion.forms.AddSprintBaseForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">AddSprintBaseForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('nombre', &lt;django.forms.fields.CharField object at 0x2aedffcd6ac8&gt;), ('fecha_inicio', &lt;django.forms.fields.DateTimeField object at 0x2aedffcd9080&gt;), ('proyecto', &lt;django.forms.models.ModelChoiceField object at 0x2aedffcd9128&gt;)])</em><a class="headerlink" href="#administracion.forms.AddSprintBaseForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -318,12 +326,12 @@
 <p>formulario para la agregacion de userStory, desarrollador y flujo a un Sprint</p>
 <dl class="attribute">
 <dt id="administracion.forms.AddToSprintForm.base_fields">
-<code class="descname">base_fields</code><em class="property"> = OrderedDict([('userStory', &lt;django.forms.models.ModelChoiceField object at 0x2b2003425668&gt;), ('desarrollador', &lt;django.forms.models.ModelChoiceField object at 0x2b20034257b8&gt;)])</em><a class="headerlink" href="#administracion.forms.AddToSprintForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descname">base_fields</code><em class="property"> = OrderedDict([('userStory', &lt;django.forms.models.ModelChoiceField object at 0x2aedffcd92b0&gt;), ('desarrollador', &lt;django.forms.models.ModelChoiceField object at 0x2aedffcd9400&gt;), ('flujo', &lt;django.forms.models.ModelChoiceField object at 0x2aedffcd9550&gt;)])</em><a class="headerlink" href="#administracion.forms.AddToSprintForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="administracion.forms.AddToSprintForm.declared_fields">
-<code class="descname">declared_fields</code><em class="property"> = OrderedDict([('userStory', &lt;django.forms.models.ModelChoiceField object at 0x2b2003425668&gt;), ('desarrollador', &lt;django.forms.models.ModelChoiceField object at 0x2b20034257b8&gt;)])</em><a class="headerlink" href="#administracion.forms.AddToSprintForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descname">declared_fields</code><em class="property"> = OrderedDict([('userStory', &lt;django.forms.models.ModelChoiceField object at 0x2aedffcd92b0&gt;), ('desarrollador', &lt;django.forms.models.ModelChoiceField object at 0x2aedffcd9400&gt;), ('flujo', &lt;django.forms.models.ModelChoiceField object at 0x2aedffcd9550&gt;)])</em><a class="headerlink" href="#administracion.forms.AddToSprintForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -369,7 +377,7 @@
 
 <dl class="attribute">
 <dt id="administracion.forms.FlujosCreateForm.base_fields">
-<code class="descclassname">FlujosCreateForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('nombre', &lt;django.forms.fields.CharField object at 0x2b2003422208&gt;)])</em><a class="headerlink" href="#administracion.forms.FlujosCreateForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">FlujosCreateForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('nombre', &lt;django.forms.fields.CharField object at 0x2aedffcd6da0&gt;)])</em><a class="headerlink" href="#administracion.forms.FlujosCreateForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -419,12 +427,12 @@
 
 <dl class="attribute">
 <dt id="administracion.forms.RegistrarActividadForm.base_fields">
-<code class="descclassname">RegistrarActividadForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('estado_actividad', &lt;django.forms.fields.TypedChoiceField object at 0x2b2003425978&gt;), ('horas_a_registrar', &lt;django.forms.fields.IntegerField object at 0x2b2003425860&gt;)])</em><a class="headerlink" href="#administracion.forms.RegistrarActividadForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">RegistrarActividadForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('estado_actividad', &lt;django.forms.fields.TypedChoiceField object at 0x2aedffcd9710&gt;), ('horas_a_registrar', &lt;django.forms.fields.IntegerField object at 0x2aedffcd95f8&gt;)])</em><a class="headerlink" href="#administracion.forms.RegistrarActividadForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="administracion.forms.RegistrarActividadForm.declared_fields">
-<code class="descclassname">RegistrarActividadForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('horas_a_registrar', &lt;django.forms.fields.IntegerField object at 0x2b2003425860&gt;)])</em><a class="headerlink" href="#administracion.forms.RegistrarActividadForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">RegistrarActividadForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('horas_a_registrar', &lt;django.forms.fields.IntegerField object at 0x2aedffcd95f8&gt;)])</em><a class="headerlink" href="#administracion.forms.RegistrarActividadForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -458,12 +466,12 @@
 
 <dl class="attribute">
 <dt id="administracion.forms.RolForm.base_fields">
-<code class="descclassname">RolForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('name', &lt;django.forms.fields.CharField object at 0x2b2003422a58&gt;), ('perms_proyecto', &lt;django.forms.fields.MultipleChoiceField object at 0x2b200341ef98&gt;), ('perms_userstory', &lt;django.forms.fields.MultipleChoiceField object at 0x2b200341ee48&gt;), ('perms_flujo', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003367240&gt;), ('perms_sprint', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003418d30&gt;)])</em><a class="headerlink" href="#administracion.forms.RolForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">RolForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('name', &lt;django.forms.fields.CharField object at 0x2aedffcd6c50&gt;), ('perms_proyecto', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffcb2940&gt;), ('perms_userstory', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffccdb00&gt;), ('perms_flujo', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffccf4e0&gt;), ('perms_sprint', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffccfa20&gt;)])</em><a class="headerlink" href="#administracion.forms.RolForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="administracion.forms.RolForm.declared_fields">
-<code class="descclassname">RolForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('perms_proyecto', &lt;django.forms.fields.MultipleChoiceField object at 0x2b200341ef98&gt;), ('perms_userstory', &lt;django.forms.fields.MultipleChoiceField object at 0x2b200341ee48&gt;), ('perms_flujo', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003367240&gt;), ('perms_sprint', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003418d30&gt;)])</em><a class="headerlink" href="#administracion.forms.RolForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">RolForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('perms_proyecto', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffcb2940&gt;), ('perms_userstory', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffccdb00&gt;), ('perms_flujo', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffccf4e0&gt;), ('perms_sprint', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffccfa20&gt;)])</em><a class="headerlink" href="#administracion.forms.RolForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -488,7 +496,7 @@
 
 <dl class="attribute">
 <dt id="administracion.forms.RolForm.perms_userstories_list">
-<code class="descclassname">RolForm.</code><code class="descname">perms_userstories_list</code><em class="property"> = [('aprobar_userstory', 'Aprobar User Story completado'), ('cancelar_userstory', 'Cancelar User Story completado'), ('crear_userstory', 'Agregar User Story'), ('editar_userstory', 'Editar User Story'), ('eliminar_userstory', 'Eliminar User Story'), ('registraractividad_userstory', 'Registrar avances en User Story'), ('editar_mi_userstory', 'Editar mis User Stories'), ('registraractividad_mi_userstory', 'Registrar avances en mis User Stories')]</em><a class="headerlink" href="#administracion.forms.RolForm.perms_userstories_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">RolForm.</code><code class="descname">perms_userstories_list</code><em class="property"> = [('aprobar_userstory', 'Aprobar User Story completado'), ('cancelar_userstory', 'Cancelar User Story completado'), ('crear_userstory', 'Agregar User Story'), ('editar_userstory', 'Editar User Story'), ('eliminar_userstory', 'Eliminar User Story'), ('priorizar_userstory', 'asignar prioridad a userstories'), ('registraractividad_userstory', 'Registrar avances en User Story'), ('editar_mi_userstory', 'Editar mis User Stories'), ('registraractividad_mi_userstory', 'Registrar avances en mis User Stories')]</em><a class="headerlink" href="#administracion.forms.RolForm.perms_userstories_list" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -517,12 +525,12 @@
 
 <dl class="attribute">
 <dt id="administracion.forms.UserCreateForm.base_fields">
-<code class="descclassname">UserCreateForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('first_name', &lt;django.forms.fields.CharField object at 0x2b2003371438&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b20033716d8&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b2003371b70&gt;), ('username', &lt;django.forms.fields.CharField object at 0x2b2003371be0&gt;), ('password1', &lt;django.forms.fields.CharField object at 0x2b2002ebe048&gt;), ('password2', &lt;django.forms.fields.CharField object at 0x2b2002ebe4a8&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003406ba8&gt;)])</em><a class="headerlink" href="#administracion.forms.UserCreateForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">UserCreateForm.</code><code class="descname">base_fields</code><em class="property"> = OrderedDict([('first_name', &lt;django.forms.fields.CharField object at 0x2aedffc94b00&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2aedffc94b70&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2aedffc94be0&gt;), ('username', &lt;django.forms.fields.CharField object at 0x2aedffc94c88&gt;), ('password1', &lt;django.forms.fields.CharField object at 0x2aedff6eb0f0&gt;), ('password2', &lt;django.forms.fields.CharField object at 0x2aedff6eb550&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffc8f4e0&gt;)])</em><a class="headerlink" href="#administracion.forms.UserCreateForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="administracion.forms.UserCreateForm.declared_fields">
-<code class="descclassname">UserCreateForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('password1', &lt;django.forms.fields.CharField object at 0x2b2002ebe048&gt;), ('password2', &lt;django.forms.fields.CharField object at 0x2b2002ebe4a8&gt;), ('first_name', &lt;django.forms.fields.CharField object at 0x2b2003371438&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b20033716d8&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b2003371b70&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003406ba8&gt;)])</em><a class="headerlink" href="#administracion.forms.UserCreateForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descclassname">UserCreateForm.</code><code class="descname">declared_fields</code><em class="property"> = OrderedDict([('password1', &lt;django.forms.fields.CharField object at 0x2aedff6eb0f0&gt;), ('password2', &lt;django.forms.fields.CharField object at 0x2aedff6eb550&gt;), ('first_name', &lt;django.forms.fields.CharField object at 0x2aedffc94b00&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2aedffc94b70&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2aedffc94be0&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffc8f4e0&gt;)])</em><a class="headerlink" href="#administracion.forms.UserCreateForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -544,12 +552,12 @@
 <p>Formulario para edición de usuarios</p>
 <dl class="attribute">
 <dt id="administracion.forms.UserEditForm.base_fields">
-<code class="descname">base_fields</code><em class="property"> = OrderedDict([('password', &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x2b2002ebe908&gt;), ('last_login', &lt;django.forms.fields.DateTimeField object at 0x2b2003418ef0&gt;), ('is_superuser', &lt;django.forms.fields.BooleanField object at 0x2b20034186a0&gt;), ('groups', &lt;django.forms.models.ModelMultipleChoiceField object at 0x2b2003418b38&gt;), ('user_permissions', &lt;django.forms.models.ModelMultipleChoiceField object at 0x2b2003418f98&gt;), ('username', &lt;django.forms.fields.CharField object at 0x2b200341e160&gt;), ('first_name', &lt;django.forms.fields.CharField object at 0x2b200341e278&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2b200341e390&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2b200341e4a8&gt;), ('is_staff', &lt;django.forms.fields.BooleanField object at 0x2b200341e5c0&gt;), ('is_active', &lt;django.forms.fields.BooleanField object at 0x2b200341e668&gt;), ('date_joined', &lt;django.forms.fields.DateTimeField object at 0x2b200341e710&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003406cf8&gt;)])</em><a class="headerlink" href="#administracion.forms.UserEditForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descname">base_fields</code><em class="property"> = OrderedDict([('password', &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x2aedff6eb9b0&gt;), ('last_login', &lt;django.forms.fields.DateTimeField object at 0x2aedffccdac8&gt;), ('is_superuser', &lt;django.forms.fields.BooleanField object at 0x2aedffccd780&gt;), ('groups', &lt;django.forms.models.ModelMultipleChoiceField object at 0x2aedffccda20&gt;), ('user_permissions', &lt;django.forms.models.ModelMultipleChoiceField object at 0x2aedffccdbe0&gt;), ('username', &lt;django.forms.fields.CharField object at 0x2aedffccdd68&gt;), ('first_name', &lt;django.forms.fields.CharField object at 0x2aedffccde80&gt;), ('last_name', &lt;django.forms.fields.CharField object at 0x2aedffccdf98&gt;), ('email', &lt;django.forms.fields.EmailField object at 0x2aedffccf0f0&gt;), ('is_staff', &lt;django.forms.fields.BooleanField object at 0x2aedffccf208&gt;), ('is_active', &lt;django.forms.fields.BooleanField object at 0x2aedffccf2b0&gt;), ('date_joined', &lt;django.forms.fields.DateTimeField object at 0x2aedffccf358&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffc20a90&gt;)])</em><a class="headerlink" href="#administracion.forms.UserEditForm.base_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="administracion.forms.UserEditForm.declared_fields">
-<code class="descname">declared_fields</code><em class="property"> = OrderedDict([('password', &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x2b2002ebe908&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2b2003406cf8&gt;)])</em><a class="headerlink" href="#administracion.forms.UserEditForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<code class="descname">declared_fields</code><em class="property"> = OrderedDict([('password', &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x2aedff6eb9b0&gt;), ('general_perms', &lt;django.forms.fields.MultipleChoiceField object at 0x2aedffc20a90&gt;)])</em><a class="headerlink" href="#administracion.forms.UserEditForm.declared_fields" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1201,9 +1209,19 @@ one-to-one relation.</p>
 <code class="descclassname">UserStory.</code><code class="descname">get_previous_by_ultimo_cambio</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.UserStory.get_previous_by_ultimo_cambio" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="method">
+<dt id="administracion.models.UserStory.get_prioridad_display">
+<code class="descclassname">UserStory.</code><code class="descname">get_prioridad_display</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#administracion.models.UserStory.get_prioridad_display" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
 <dt id="administracion.models.UserStory.objects">
 <code class="descclassname">UserStory.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#administracion.models.UserStory.objects" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="administracion.models.UserStory.priority_choices">
+<code class="descclassname">UserStory.</code><code class="descname">priority_choices</code><em class="property"> = ((0, 'Baja'), (1, 'Media'), (2, 'Alta'))</em><a class="headerlink" href="#administracion.models.UserStory.priority_choices" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
