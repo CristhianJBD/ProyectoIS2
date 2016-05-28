@@ -211,7 +211,7 @@ class UserStoryTest(TestCase):
         response = c.get(reverse('userstory_add', args=(str(p.id))))
         self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a Agreagar detail')
         response = c.post(reverse('userstory_add', args=(str(p.id))),
-            {'nombre_corto': 'Test US', 'nombre_largo': 'Test User story', 'descripcion': 'This is a User Story for testing purposes.',
+            {'nombre_corto': 'Test US', 'nombre_largo': 'Test User story', 'descripcion': 'This is a User Story for testing purposes.','prioridad':1,
              'valor_negocio': 10, 'valor_tecnico': 10, 'tiempo_estimado': 10}, follow=True)
         #deberia redirigir
         us = UserStory.objects.first()
@@ -240,14 +240,67 @@ class UserStoryTest(TestCase):
         #debería retornar 200
         self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a editar user Story')
         response = c.post(reverse('userstory_update', args=(str(us.id))),
-         {'nombre_corto': 'Test US2', 'nombre_largo': 'Test User story2', 'descripcion': 'This is a User Story2 for testing purposes.',
+         {'nombre_corto': 'Test US2', 'nombre_largo': 'Test User story2', 'descripcion': 'This is a User Story2 for testing purposes.','prioridad':1,
         'valor_negocio': 10, 'valor_tecnico': 10, 'tiempo_estimado': 10}, follow=True)
         us = UserStory.objects.first()
         self.assertIsNotNone(us)
-        self.assertRedirects(response, '/userstory/{}/'.format(us.id))
         #vemos que el nombre ya no es el anterior
-        self.assertNotEquals(us.nombre_corto, 'Test US1')
+        self.assertNotEquals(us.nombre_corto, 'Test US')
         self.assertEquals(us.nombre_corto, 'Test US2')
+
+
+    def test_registraractividad_userstory_with_permission(self):
+        c = self.client
+        login = c.login(username='test', password='test')
+        self.assertTrue(login)
+        p = Proyecto.objects.first()
+        #creamos un user story
+        response = c.post(reverse('userstory_add', args=(str(p.id))),
+            {'nombre_corto':'First Value US', 'nombre_largo': 'Test User story', 'descripcion':'This is a User Story for testing purposes.', 'prioridad': 1,
+             'valor_negocio': 10, 'valor_tecnico': 10, 'tiempo_estimado': 10}, follow=True)
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a agregar user Story')
+        us = UserStory.objects.first()
+        self.assertIsNotNone(us)
+        self.assertEquals(us.nombre_corto, 'First Value US')
+        s = Sprint.objects.create(nombre="Sprint 1", fecha_inicio=timezone.now(), fecha_fin=timezone.now() + datetime.timedelta(days=30), proyecto=p)
+        f = Flujo.objects.create(nombre="Desarrollo", proyecto=p)
+        a1 = Actividad.objects.create(nombre="Analisis", flujo=f)
+        a2 = Actividad.objects.create(nombre="Diseno", flujo=f)
+        us.actividad = a2
+        us.estado = 1 #Estado en curso
+        us.sprint = s
+        us.desarrollador = p.equipo.first()
+        us.save()
+        response = c.get(reverse('userstory_detail', args=(str(us.id))))
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a userstory detail')
+        #nos vamos a la página de registrar actividad de user story
+        response = c.get(reverse('userstory_registraractividad', args=(str(us.id))))
+        #debería retornar 200
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a registrar actividad user story')
+
+        post_data = {
+            'horas_a_registrar': 4,
+            'actividad': 1,
+            'estado_actividad':1,
+            'form-INITIAL_FORMS': 0,
+            'form-MAX_NUM_FORMS': 1000,
+            'form-MIN_NUM_FORMS': 0,
+            'form-TOTAL_FORMS': 1,
+        }
+        response = c.post(reverse('userstory_registraractividad', args=(str(us.id))), post_data, follow=True)
+        us = UserStory.objects.first()
+        self.assertIsNotNone(us)
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a registrar actividad user story' )
+
+
+    def test_list_userstories_with_permission(self):
+        c = self.client
+        login = c.login(username='test', password='test')
+        self.assertTrue(login)
+        p = Proyecto.objects.first()
+        #listamos user stories del proyecto
+        response = c.get(reverse('product_backlog', args=(str(p.id))))
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a registrar actividad user story')
 
 
 class SprintTest(TestCase):
@@ -257,7 +310,7 @@ class SprintTest(TestCase):
         pro = Proyecto.objects.create(nombre='Proyecto', estado='PE', fecha_inicio=timezone.now(), fecha_fin=timezone.now() + datetime.timedelta(days=30))
         User.objects.create_user('tempdos', 'tempdos@email.com', 'tempdos')
         UserStory.objects.create(nombre_corto= 'Test_Version',nombre_largo= 'Test_Version', descripcion= 'Test Description',
-                       valor_negocio= 10, valor_tecnico= 10, tiempo_estimado =10, proyecto = pro)
+                       valor_negocio= 10, valor_tecnico = 10, tiempo_estimado = 10, proyecto = pro)
         f = Flujo.objects.create(nombre ='flujo_test', proyecto= pro)
         Actividad.objects.create(nombre ='actividad_test', flujo=f)
         Sprint.objects.create(nombre='sprint_test',fecha_inicio=timezone.now(),fecha_fin=timezone.now(), proyecto=pro)
@@ -265,13 +318,13 @@ class SprintTest(TestCase):
     def test_to_create_sprint(self):
         c = self.client
         self.assertTrue(c.login(username='temp', password='temp'))
-        p= Proyecto.objects.first()
+        p = Proyecto.objects.first()
         self.assertIsNotNone(p)
-        us=UserStory.objects.first()
+        us = UserStory.objects.first()
         self.assertIsNotNone(us)
-        d=User.objects.first()
+        d = User.objects.first()
         self.assertIsNotNone(d)
-        f=User.objects.first()
+        f = User.objects.first()
         self.assertIsNotNone(f)
         response = c.get(reverse('sprint_add', args=(str(p.id))))
         self.assertEquals(response.status_code, 200)
