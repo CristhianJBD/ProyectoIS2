@@ -41,8 +41,10 @@
      </ul>
 
     <p><strong>Nombre:</strong> {{ sprint.nombre }}</p>
-    <p><strong>Fecha Inicio:</strong>{{ sprint.fecha_inicio }}</p>
-    <p><strong>Fecha fin:</strong>{{ sprint.fecha_fin }}</p>
+    <p><strong>Estado:</strong> {{ sprint.estado }}</p>
+    <p><strong>Duracion(Dias):</strong> {{ sprint.duracion_sprint }}</p>
+    <p><strong>Tiempo en Horas:</strong> {{ sprint.horasDuracionSprint }}  -  <strong>Tiempo Acumulado en Horas:</strong> {{ sprint.horasRegistradaSprint }}</p>
+    <p><strong>Fecha Inicio:</strong>{{ sprint.fecha_inicio }} - <strong>Fecha fin:</strong>{{ sprint.fecha_fin }}</p>
     <p><strong>Proyecto Asociado:</strong> {{ sprint.proyecto }}</p>
 
 
@@ -66,6 +68,8 @@
                     </div>
                     <div class="panel-body">
                         <strong>Estado actual: </strong>{{ us.get_estado_display }}<br/>
+                        <strong>Tiempo estimado: </strong>{{ us.tiempo_estimado }}<br/>
+                        <strong>Tiempo registrado: </strong>{{ us.tiempo_registrado }}<br/>
                         <strong>Prioridad: </strong>{{ us.get_prioridad_display }}<br/>
                         <strong>Prioridad por Formula: </strong>{{ us.prioridadFormula }}<br/>
                         <strong>Desarrollador: </strong>

@@ -9,8 +9,8 @@
         <div class="row" xmlns="http://www.w3.org/1999/html">
 			<ol class="breadcrumb">
 				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-				<li><a href="{% url "project_list"  %}">Lista de Proyectos</li></a>
-                <li><a href="">Detalles de Proyecto</li></a>
+				<li><a href="{% url "project_list"  %}">Lista de Proyectos</a></li>
+                <li><a href="">Detalles de Proyecto</a></li>
 {#				<li><a href="{% url "project_detail" view.proyecto.pk %}">Detalles de Proyecto</li></a>#}
                 <li> Añadir Sprint</li>
 
@@ -51,8 +51,6 @@
             });
         })
     </script>
-
-
     <style>
         .empty-form {
             display: none;
@@ -67,8 +65,20 @@
             <div class="col-lg-5">
                 {% bootstrap_field form.fecha_inicio %}
             </div>
+            <div class="col-lg-3">
+                {% bootstrap_field form.duracion_sprint %}
+            </div>
+            <div class="col-lg-3">
+                {% bootstrap_field form.estado %}
+            </div>
+            {% if current_action == 'Agregar' %}
+            <div class="col-lg-3">
+                {% bootstrap_field form.equipo %}
+            </div>
+            {% endif %}
             {%  bootstrap_field form.proyecto %}
         </div>
+        {% if current_action == 'Editar' %}
         <fieldset>
             <legend>Agregar UserStory</legend>
             {{ formset.management_form }}
@@ -85,6 +95,7 @@
                 {% endfor %}
             </div>
         </fieldset>
+     {% endif %}
         <input type="submit" value="Agregar" class="btn btn-default"/>
     </form>
 

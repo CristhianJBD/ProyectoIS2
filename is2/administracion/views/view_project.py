@@ -66,11 +66,11 @@ class ProjectCreate(LoginRequiredMixin, CreateViewPermissionRequiredMixin, gener
     permission_required = 'administracion.add_proyecto'
     form_class = modelform_factory(Proyecto,
                                    widgets={'fecha_inicio': SelectDateWidget, 'fecha_fin': SelectDateWidget},
-                                   fields=('nombre', 'fecha_inicio', 'fecha_fin', 'duracion_sprint', 'estado'),)
+                                   fields=('nombre', 'fecha_inicio', 'fecha_fin', 'estado'),)
 
     template_name = 'administracion/proyecto/project_form_create.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
-                                                    fields=['usuario', 'roles'],
+                                                    fields=['usuario', 'roles','horasDeTrabajo'],
                                                     extra=1,
                                                     widgets={'roles': CheckboxSelectMultiple})
 
@@ -105,12 +105,12 @@ class ProjectUpdate( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
     permission_required = 'administracion.change_proyecto'
     template_name = 'administracion/proyecto/project_form_create.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
-                                                    fields=['usuario', 'roles'],
+                                                    fields=['usuario', 'roles', 'horasDeTrabajo'],
                                                     extra=1,
                                                     widgets={'roles': CheckboxSelectMultiple})
     form_class = modelform_factory(Proyecto,
                                    widgets={'fecha_inicio': SelectDateWidget, 'fecha_fin': SelectDateWidget},
-                                   fields=('nombre', 'fecha_inicio', 'fecha_fin', 'duracion_sprint', 'estado'),
+                                   fields=('nombre', 'fecha_inicio', 'fecha_fin', 'estado'),
                                    )
 
     def get_proyecto(self):

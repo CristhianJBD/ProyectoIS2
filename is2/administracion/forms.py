@@ -98,7 +98,7 @@ class AddSprintBaseForm(forms.ModelForm):
 
     class Meta:
         model= Sprint
-        fields = ['nombre', 'fecha_inicio', 'proyecto']
+        fields = ['nombre', 'fecha_inicio','duracion_sprint','estado', 'equipo','proyecto']
 
     def clean(self):
         """
@@ -107,10 +107,11 @@ class AddSprintBaseForm(forms.ModelForm):
         if any(self.errors):
             return
 
-        if 'fecha_inicio' and 'proyecto' in self.cleaned_data:
+        if 'fecha_inicio' and 'proyecto' and 'duracion_sprint' in self.cleaned_data:
             fecha_inicio = self.cleaned_data['fecha_inicio']
             proyecto = self.cleaned_data['proyecto']
-            fecha_fin = fecha_inicio + datetime.timedelta(days=proyecto.duracion_sprint)
+            duracion_sprint = self.cleaned_data['duracion_sprint']
+            fecha_fin = fecha_inicio + datetime.timedelta(days=duracion_sprint)
             today = timezone.now().date()
             sprint = proyecto.sprint_set.filter(fecha_inicio__lte=fecha_fin, fecha_fin__gte=fecha_inicio).exclude(pk=self.instance.pk)
             if (fecha_inicio.date() < today) & (fecha_inicio != self.instance.fecha_inicio):

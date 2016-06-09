@@ -28,7 +28,6 @@ class Proyecto(models.Model):
     fecha_inicio = models.DateTimeField()
     fecha_fin = models.DateTimeField()
     equipo = models.ManyToManyField(User, through='MiembroEquipo')
-    duracion_sprint = models.PositiveIntegerField(default=30)
 
 
 
@@ -62,6 +61,7 @@ class Proyecto(models.Model):
             ('aprobar_userstory', 'Aprobar User Story completado'),
             ('cancelar_userstory', 'Cancelar User Story completado'),
             ('priorizar_userstory', 'asignar prioridad a userstories'),
+            ('add_us_sprint', 'Agregar User Story a Sprint')
         )
 
     def __str__(self):
@@ -91,6 +91,10 @@ class Proyecto(models.Model):
         return int(progreso)
     progreso = property(_get_progreso)
 
+
+
+
+
 class MiembroEquipo(models.Model):
     """
     Miembros del equipo de un proyecto
@@ -99,8 +103,10 @@ class MiembroEquipo(models.Model):
     usuario = models.ForeignKey(User)
     proyecto = models.ForeignKey(Proyecto)
     roles = models.ManyToManyField(Group)
+    horasDeTrabajo=models.PositiveIntegerField(default=0)
 
-    # nota: si se quiere eliminar o guardar se llama al delete o save de cada objeto
+    def __str__(self):
+        return self.usuario.username
 
     def save(self, force_insert=False, force_update=False, using=None,update_fields=None):
         super(MiembroEquipo, self).save(force_insert, force_update, using, update_fields)
@@ -122,17 +128,29 @@ class Sprint(models.Model):
     """
     Manejo de los sprints del proyecto
     """
+    opciones_estado = (('PL', 'Planificacion'), ('EJ', 'Ejecutandose'), ('PE', 'Pendiente'), ('CA', 'Cancelado'), ('TE', 'Terminado'))
     nombre = models.CharField(max_length=20)
     fecha_inicio = models.DateTimeField()
     fecha_fin = models.DateTimeField()
     proyecto = models.ForeignKey(Proyecto, null=False, blank=True)
-
-
+    estado = models.CharField(choices=opciones_estado, max_length=2, default='PE')
+    equipo = models.ManyToManyField(MiembroEquipo)
+    duracion_sprint = models.PositiveIntegerField(default=30)
+    horasRegistradaSprint = models.PositiveIntegerField(default=0)
+    horasDuracionSprint = models.PositiveIntegerField(default=0)
 
     class Meta:
         default_permissions = ()
         verbose_name = 'sprint'
         verbose_name_plural = 'sprints'
+
+    # def save(self, force_insert=False, force_update=False, using=None,
+    #          update_fields=None):
+    #     for miembro in self.equipo.all():
+    #             self.horasDuracionSprint += miembro.horasDeTrabajo
+    #     self.horasDuracionSprint *= self.duracion_sprint
+    #     super(Sprint, self).save(force_insert, force_update, using, update_fields)
+
 
     def __str__(self):
         return self.nombre
