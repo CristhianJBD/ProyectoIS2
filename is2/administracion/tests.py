@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Permission, Group
-from django.db.models.expressions import Date
+#from django.db.models.expressions import Date
 from django.db.models.fields import DateTimeField
 from django.test import TestCase
 from django.utils import timezone

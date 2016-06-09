@@ -2,7 +2,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import Group, Permission, User
 from guardian.shortcuts import get_perms_for_model
-from administracion.models import Proyecto, Sprint, Flujo, Actividad, UserStory
+from administracion.models import Proyecto, Sprint, Flujo, Actividad, UserStory, Adjunto
 from django import forms
 from django.forms.models import BaseInlineFormSet, inlineformset_factory
 import datetime
@@ -171,6 +171,16 @@ class UsuarioFormset(BaseInlineFormSet):
         for form in self.forms:
             if form in self.deleted_forms:
                 usuario = form.cleaned_data['usuario']
+
+class FileUploadForm(forms.ModelForm):
+    """
+    Formulario para adjuntar un archivo.
+    """
+    archivo = forms.FileField()
+
+    class Meta:
+        model = Adjunto
+        fields = ['nombre', 'descripcion']
 
 class RegistrarActividadForm(forms.ModelForm):
     '''

@@ -40,6 +40,7 @@
             {% if "editar_userstory" in proyecto_perms or 'editar_mi_userstory' in us_perms%}<li><a href="{% url 'version_list' userstory.id %}" class="fa fa-clock-o"> Historial</a></li>{% endif %}
         {% endif %}
 
+         <li><a href="{% url 'file_list' userstory.id %}"><i class="fa fa-file"></i> Adjuntos</a></li>
 
 
         {%  if userstory.estado != 4 and userstory.estado != 3 %}

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db.models.signals import m2m_changed
 from guardian.shortcuts import assign_perm, remove_perm, get_perms_for_model, get_perms
 from django.contrib.auth.models import User, Group
@@ -10,7 +11,7 @@ from base64 import b64encode
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.utils.encoding import force_bytes
-from reversion import revisions as reversion
+import reversion
 from datetime import datetime
 from django.db.models import Sum
 
@@ -64,7 +65,7 @@ class Proyecto(models.Model):
             ('add_us_sprint', 'Agregar User Story a Sprint')
         )
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nombre
 
     def clean(self):
@@ -105,7 +106,7 @@ class MiembroEquipo(models.Model):
     roles = models.ManyToManyField(Group)
     horasDeTrabajo=models.PositiveIntegerField(default=0)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.usuario.username
 
     def save(self, force_insert=False, force_update=False, using=None,update_fields=None):
@@ -152,7 +153,7 @@ class Sprint(models.Model):
     #     super(Sprint, self).save(force_insert, force_update, using, update_fields)
 
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nombre
 
     def get_absolute_url(self):
@@ -165,7 +166,7 @@ class Flujo(models.Model):
     nombre = models.CharField(max_length=20)
     proyecto = models.ForeignKey(Proyecto, null=True, blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nombre
 
     class Meta:
@@ -185,7 +186,7 @@ class Actividad(models.Model):
     nombre = models.CharField(max_length=20)
     flujo = models.ForeignKey(Flujo)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nombre
 
     class Meta:
@@ -222,7 +223,7 @@ class UserStory(models.Model):
     sprint = models.ForeignKey(Sprint, null=True, blank=True)
     actividad = models.ForeignKey(Actividad, null=True, blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nombre_largo
 
     def _get_progreso(self):

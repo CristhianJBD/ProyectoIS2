@@ -82,9 +82,9 @@
                                                 <div class="teammember" id="teammember-{{ forloop.counter0 }}">
                                                     {% if subform.instance.pk %}
                                                         {% bootstrap_field subform.DELETE %}{% endif %}
-                                                    {% bootstrap_field subform.usuario %}
-                                                     {% bootstrap_field subform.roles %}
-                                                   {% bootstrap_field subform.horasDeTrabajo %}
+                                                        {% bootstrap_field subform.usuario %}
+                                                        {% bootstrap_field subform.roles %}
+                                                        {% bootstrap_field subform.horasDeTrabajo %}
 {#                                                    {% if user.is_superuser == True %}#}
 {#                                                     {% for roli in subform.roles%}#}
 {#                                                         {% if forloop.first %}#}

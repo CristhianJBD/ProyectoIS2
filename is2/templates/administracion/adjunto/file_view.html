@@ -1,0 +1,113 @@
+{% extends 'administracion/base.html' %}
+{% load staticfiles %}
+{% block contentbase %}
+
+
+
+{% block extra_css %}
+    {% if adjunto.tipo == 'src' %}
+        <link href="{% static 'prism.css' %}" rel="stylesheet"/>{% endif %}
+{% endblock %}
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li class="active"><a href="{% url 'project_list' %}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Proyectos</a></li>
+            <li><a href="{% url 'user_list' %}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
+            <li><a href="{% url 'rol_list' %}"><svg class="glyph stroked key "><use xlink:href="#stroked-key"/></svg> Roles</a></li>
+
+        </ul>
+    </div>
+
+  <div class="page-header"><h1>{{ adjunto.nombre }}</h1></div>
+
+
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="well">
+                {% if adjunto.tipo == 'img' %}
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                                <a href="{{ adjunto.get_download_url }}"><img
+                                        src="data:{{ adjunto.content_type }};base64,{{ adjunto.img64 }}" alt="{{ adjunto.nombre }}"
+                                        class="img-responsive"></a>
+
+                                <div class="well">
+                                    <h3>{{ adjunto.nombre }}</h3>
+
+                                    <p>{{ adjunto.descripcion }}</p>
+
+                                    <p><a href="{{ adjunto.get_download_url }}" class="btn btn-primary" role="button">Descargar</a>
+                                    </p>
+
+                                    <p><strong>User Story: </strong><a
+                                            href="{% url 'userstory_detail' adjunto.user_story_id %}">{{ adjunto.user_story }}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% elif adjunto.tipo == 'src' %}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{{ adjunto.nombre }}</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p>{{ adjunto.descripcion }}</p>
+                                    <pre><code class="language-{{ adjunto.lenguaje }}">{{ adjunto.binario }}</code></pre>
+                                    <p><strong>User Story: </strong><a
+                                            href="{% url 'userstory_detail' adjunto.user_story_id %}">{{ adjunto.user_story }}</a>
+                                    </p>
+                                    <p><strong>Lenguaje: </strong>{{ adjunto.get_lenguaje_display }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="{{ adjunto.get_download_url }}" class="btn btn-primary" role="button">Descargar</a>
+                {% elif adjunto.tipo == 'text' %}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="well">
+                                <p>{{ adjunto.binario|linebreaks }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>{{ adjunto.descripcion }}</p>
+
+                    <p><a href="{{ adjunto.get_download_url }}" class="btn btn-primary" role="button">Descargar</a></p>
+                    <p><strong>User Story: </strong><a
+                            href="{% url 'userstory_detail' adjunto.user_story_id %}">{{ adjunto.user_story }}</a></p>
+                {% else %}
+                    <h3>{{ adjunto.descripcion }}</h3>
+                    <p><a href="{{ adjunto.get_download_url }}" class="btn btn-primary" role="button">Descargar</a></p>
+                {% endif %}
+
+                <p><strong>Content type: </strong>{{ adjunto.content_type }}</p>
+                <p><strong>Tipo: </strong>{{ adjunto.get_tipo_display }}</p>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <a href="{% url 'file_list' adjunto.user_story_id %}"><i class="fa fa-step-backward"></i> Volver a Adjuntos</a>
+
+
+{% block extra_js %}
+    {% if adjunto.tipo == 'src' %}
+        <script src="{% static 'prism.js' %}"></script>{% endif %}
+{% endblock %}
+
+{% endblock %}

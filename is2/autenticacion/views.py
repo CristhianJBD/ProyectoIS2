@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponsePermanentRedirect
 from django.contrib.auth import authenticate, login
-from django.template.context_processors import csrf
+from django.core.context_processors import csrf
 
 
 

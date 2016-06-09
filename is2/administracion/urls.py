@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from administracion.views import views_rol, views_user, view_project, views, views_flujo, view_userstory, views_sprints
+from administracion.views import views_rol, views_user, view_project, views, views_flujo, view_userstory, views_sprints, views_adjunto
 
 
 
@@ -56,7 +56,14 @@ urlpatterns = [
       url(r'^userstory/(?P<pk>\d+)/editar/$', view_userstory.UpdateUserStory.as_view(), name="userstory_update"),
       url(r'^userstory/(?P<pk>\d+)/cancelar/$', view_userstory.CancelUserStory.as_view(), name="userstory_cancelar"),
       url(r'^userstory/(?P<pk>\d+)/registrar/$', view_userstory.RegistrarActividadUserStory.as_view(),name="userstory_registraractividad"),
-#no visto aun
+
+      # adjunto
+      url(r'^adjuntoarchivo/(?P<pk>\d+)/$', views_adjunto.download_attachment, name='download_attachment'),
+      url(r'^userstory/(?P<pk>\d+)/archivos/$', views_adjunto.FileList.as_view(), name="file_list"),
+      url(r'^userstory/(?P<pk>\d+)/archivos/subir/$', views_adjunto.UploadFileView.as_view(), name="file_upload"),
+      url(r'^archivo/(?P<pk>\d+)/$', views_adjunto.FileDetail.as_view(), name="file_detail"),
+
+      #no visto aun
 
       url(r'^userstory/(?P<pk>\d+)/aprobar/$', view_userstory.AprobarUserStory.as_view(), name="userstory_aprobar"),
       url(r'^userstory/(?P<pk>\d+)/rechazar/$', view_userstory.RechazarUserStory.as_view(), name="userstory_rechazar"),

@@ -70,7 +70,7 @@ class ProjectCreate(LoginRequiredMixin, CreateViewPermissionRequiredMixin, gener
 
     template_name = 'administracion/proyecto/project_form_create.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
-                                                    fields=['usuario', 'roles','horasDeTrabajo'],
+                                                    fields=['usuario', 'roles', 'horasDeTrabajo'],
                                                     extra=1,
                                                     widgets={'roles': CheckboxSelectMultiple})
 

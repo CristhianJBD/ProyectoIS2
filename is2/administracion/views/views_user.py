@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.forms import modelform_factory
+from django.forms.models import modelform_factory
 from django.http import HttpResponseRedirect
 from django.views import generic
 from django.views.generic import ListView

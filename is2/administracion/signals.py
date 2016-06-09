@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 from guardian.shortcuts import assign_perm, get_perms, remove_perm
 
 from administracion.models import UserStory

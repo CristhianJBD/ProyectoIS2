@@ -15,7 +15,7 @@ from django.views.generic.detail import SingleObjectTemplateResponseMixin
 from guardian.mixins import LoginRequiredMixin
 from guardian.shortcuts import get_perms, get_perms_for_model, assign_perm
 from guardian.utils import get_403_or_None
-from reversion import revisions as reversion
+import reversion
 from administracion.forms import RegistrarActividadForm
 from administracion.models import UserStory, Proyecto, Actividad
 from administracion.views.views import CreateViewPermissionRequiredMixin, GlobalPermissionRequiredMixin, ActiveProjectRequiredMixin
