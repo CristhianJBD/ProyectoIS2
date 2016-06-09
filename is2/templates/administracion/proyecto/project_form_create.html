@@ -66,7 +66,6 @@
                                         <p class="help-block">Fecha de inicio debe ser menor o igual al de finalizacion.</p>
                                         {% bootstrap_field form.fecha_inicio %}
                                         {% bootstrap_field form.fecha_fin %}
-                                        {% bootstrap_field form.duracion_sprint %}
                                         {% bootstrap_field form.estado %}
                                     </div>
 
@@ -85,7 +84,7 @@
                                                         {% bootstrap_field subform.DELETE %}{% endif %}
                                                     {% bootstrap_field subform.usuario %}
                                                      {% bootstrap_field subform.roles %}
-
+                                                   {% bootstrap_field subform.horasDeTrabajo %}
 {#                                                    {% if user.is_superuser == True %}#}
 {#                                                     {% for roli in subform.roles%}#}
 {#                                                         {% if forloop.first %}#}
