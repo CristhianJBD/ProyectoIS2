@@ -62,7 +62,6 @@ class Proyecto(models.Model):
             ('aprobar_userstory', 'Aprobar User Story completado'),
             ('cancelar_userstory', 'Cancelar User Story completado'),
             ('priorizar_userstory', 'asignar prioridad a userstories'),
-            ('add_us_sprint', 'Agregar User Story a Sprint')
         )
 
     def __unicode__(self):
