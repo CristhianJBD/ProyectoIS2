@@ -17,7 +17,7 @@ from guardian.shortcuts import get_perms, get_perms_for_model, assign_perm
 from guardian.utils import get_403_or_None
 import reversion
 from administracion.forms import RegistrarActividadForm
-from administracion.models import UserStory, Proyecto, Actividad
+from administracion.models import UserStory, Proyecto, Actividad, Nota
 from administracion.views.views import CreateViewPermissionRequiredMixin, GlobalPermissionRequiredMixin, ActiveProjectRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 
@@ -195,17 +195,31 @@ class UpdateUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.Up
                 self.object = form.save()
                 reversion.set_user(self.request.user)
                 reversion.set_comment("Modificacion: {}".format(str.join(', ', form.changed_data)))
-
+        self.notify(self.object, form.changed_data)
 
         return HttpResponseRedirect(self.get_success_url())
 
-
+    def notify(self, user_story, changes):
+        proyecto = user_story.proyecto
+        changelist = [c.replace('_', ' ').title() for c in changes]
+        subject = 'Cambios en User Story: {} - {}'.format(user_story, proyecto)
+        domain = get_current_site(self.request).domain
+        message = render_to_string('administracion/mail/change_mail.html',
+                                   {'proyecto': proyecto, 'us': user_story, 'domain': domain,
+                                    'cambios': changelist})
+        recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('administracion.aprobar_userstory', proyecto)]
+        #print recipients
+        if user_story.desarrollador and user_story.desarrollador.email not in recipients:
+            recipients.append(user_story.desarrollador.email)
+            #print recipients
+        send_mail(subject, message, 'proyectois2.2016@gmail.com', recipients, html_message=message)
+        #send_mail(subject, message, 'proyectois2.2016@gmail.com', ['ing.delgadomontiel@gmail.com'], html_message=message)
 
 class CancelUserStory(LoginRequiredMixin, ActiveProjectRequiredMixin, generic.FormView):
     """
     Vista cancelacion de User Stories
     """
-    form_class = modelform_factory(UserStory, fields=[])
+    form_class = modelform_factory(Nota, fields=['mensaje'])
     template_name = 'administracion/userstory/userstory_cancel.html'
     user_story = None
 
@@ -236,10 +250,10 @@ class CancelUserStory(LoginRequiredMixin, ActiveProjectRequiredMixin, generic.Fo
         return super(CancelUserStory, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        form.save(commit=False)
+        nota = form.save(commit=False)
         self.get_user_story().estado = 4
         self.user_story.save()
-
+        crearNota(self.user_story, self.request.user, "Cancelado: {}".format(nota.mensaje))
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -250,7 +264,7 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
     model = UserStory
     template_name = 'administracion/userstory/userstory_registraractividad_form.html'
     error_template = 'administracion/userstory/userstory_error.html'
-
+    NoteFormset = modelformset_factory(Nota, fields=('mensaje', 'fecha'), extra=1)
 
     def get_proyecto(self):
         return self.get_object().proyecto
@@ -288,6 +302,7 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.tiempo_registrado = self.object.tiempo_registrado + form.cleaned_data['horas_a_registrar']
+        nota_form = self.NoteFormset(self.request.POST)
         new_estado = 0
         #movemos el User Story a la sgte actividad en caso de que haya llegado a Done
         if form.cleaned_data['estado_actividad'] == 2:
@@ -304,7 +319,30 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
 
         self.object.save()
 
+        if nota_form.is_valid():
+            for f in nota_form.forms:
+                n = f.save(commit=False)
+                n.horas_a_registrar = form.cleaned_data['horas_a_registrar']
+                n.tiempo_registrado = self.object.tiempo_registrado
+                n.desarrollador = self.request.user
+                n.sprint = self.object.sprint
+                n.actividad = self.object.actividad
+                n.estado = self.object.estado
+                n.estado_actividad = self.object.estado_actividad
+                n.user_story = self.object
+                n.save()
+            self.notify(n)
+
         return HttpResponseRedirect(self.get_success_url())
+
+    def notify(self, nota):
+        proyecto = nota.user_story.proyecto
+        subject = 'Registro de Actividad: {} - {}'.format(nota.user_story, proyecto)
+        domain = get_current_site(self.request).domain
+        message = render_to_string('administracion/mail/notification_mail.html',
+                                   {'proyecto': proyecto, 'nota': nota, 'us': nota.user_story, 'domain': domain})
+        recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('administracion.aprobar_userstory', proyecto)]
+        send_mail(subject, message, 'noreply.proyectois2.2016@gmail.com', recipients, html_message=message)
 
 
 class DeleteUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.DeleteView):
@@ -367,11 +405,21 @@ class AprobarUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
             p.estado = 'TE'
             p.save()
         us.save()
-
+        crearNota(us, user, "User Story {} por {}".format(action, user.get_full_name()))
+        self.notify(us, user, action)
 
         return HttpResponseRedirect(self.get_success_url())
 
-
+    def notify(self, user_story, user, action):
+        proyecto = user_story.proyecto
+        subject = 'Se ha {} el User Story: {} - {}'.format(action, user_story, proyecto)
+        domain = get_current_site(self.request).domain
+        message = render_to_string('administracion/mail/approved_email.html',
+                                   {'proyecto': proyecto, 'us': user_story, 'domain': domain, 'u': user, 'act': action})
+        recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('administracion.aprobar_userstory', proyecto)]
+        if user_story.desarrollador and user_story.desarrollador.email not in recipients:
+            recipients.append(user_story.desarrollador.email)
+        send_mail(subject, message, 'proyectois2.2016@gamil.com', recipients, html_message=message)
 
 
 class RechazarUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.UpdateView):
@@ -481,4 +529,7 @@ class UpdateVersion(UpdateUserStory):
 
         return HttpResponseRedirect(self.get_success_url())
 
-
+def crearNota(us, user, msg):
+    nota = Nota(desarrollador=user, sprint=us.sprint, tiempo_registrado=us.tiempo_registrado, actividad=us.actividad,
+                    estado=us.estado, estado_actividad=us.estado_actividad, user_story=us, mensaje=msg)
+    nota.save()

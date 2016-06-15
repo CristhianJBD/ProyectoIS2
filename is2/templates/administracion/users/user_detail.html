@@ -1,9 +1,17 @@
 {% extends 'administracion/base.html' %}
 {% block contentbase %}
 
+    <div class="row">
+               <ol class="breadcrumb">
+                  <li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                  <li><a href="{%url "user_list" %}">Lista de Usuarios</a></li>
+                   <li class="active">Detalles de {{ usuario.username }}</li>
+               </ol>
+    </div><!--/.row-->
 
+    <div class="page-header"><h1>Detalles del Usuario</h1></div>
+    <div class="page-header"><h1>{{ usuario.first_name | title}} {{ usuario.last_name }} </h1></div>
 
-{% block header %}{{ usuario.first_name | title}} {{ usuario.last_name }}{% endblock %}
      <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 
 		<form role="search">
@@ -19,23 +27,24 @@
         </ul>
     </div>
 
-        <div class="row">
-   <ol class="breadcrumb">
-      <li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-      <li><a href="{%url "user_list" %}">Lista de Usuarios</a></li>
-       <li class="active">Detalles de {{ usuario.username }}</li>
-   </ol>
-</div><!--/.row-->
+
 
     <ul class="list-inline">
         {% if perms.auth.change_user %}<li><a href="{% url 'user_edit' usuario.id%}" class="btn btn-warning"><h4> Editar</h4></a></li>{% endif %}
         {% if perms.auth.delete_user %}<li><a href="{% url 'user_delete' usuario.id %}" class="btn btn-danger"> <h4>Desactivar</h4></a></li>{% endif %}
 
     </ul>
-<p><strong>Nombre:</strong> {{ usuario.first_name }}</p>
-<p><strong>Apellido:</strong> {{ usuario.last_name }}</p>
-<p><strong>Username:</strong> {{ usuario.username }}</p>
-<p><strong>Email:</strong> {{ usuario.email }}</p>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="well">
+
+                <p><strong>Nombre:</strong> {{ usuario.first_name }}</p>
+                <p><strong>Apellido:</strong> {{ usuario.last_name }}</p>
+                <p><strong>Username:</strong> {{ usuario.username }}</p>
+                <p><strong>Email:</strong> {{ usuario.email }}</p>
+            </div>
+        </div>
+    </div>
 <h3>Proyectos</h3>
     <div class="row">
         <div class="col-lg-6">

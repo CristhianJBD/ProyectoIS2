@@ -306,6 +306,26 @@ class Adjunto(models.Model):
     def get_download_url(self):
         return reverse_lazy('download_attachment', args=[self.pk])
 
+class Nota(models.Model):
+    """
+    Manejo de notas adjuntas relacionadas a un User Story, estás entradas representan
+    constancias de los cambios, como cantidad de horas trabajadas, en un user story.
+    """
+    estado_choices = ((0, 'Inactivo'), (1, 'En curso'), (2, 'Pendiente Aprobacion'), (3, 'Aprobado'), (4,'Cancelado'),)
+    mensaje = models.TextField(help_text='Mensaje de descripcion de los avances o motivo de cancelacion', null=True, blank=True)
+    fecha = models.DateTimeField(default=timezone.now)
+    tiempo_registrado = models.IntegerField(default=0)
+    horas_a_registrar = models.IntegerField(default=0)
+    desarrollador = models.ForeignKey(User, null=True)
+    sprint = models.ForeignKey(Sprint, null=True)
+    actividad = models.ForeignKey(Actividad, null=True)
+    estado = models.IntegerField(choices=estado_choices, default=0)
+    estado_actividad = models.IntegerField(choices=UserStory.estado_actividad_choices, null=True)
+    user_story = models.ForeignKey(UserStory)
+
+    def __unicode__(self):
+        return '{}({}): {}'.format(self.desarrollador, self.fecha, self.horas_a_registrar)
+
 
 
 
