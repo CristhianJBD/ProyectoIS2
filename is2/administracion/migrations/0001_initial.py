@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import django.utils.timezone
 from django.conf import settings
 
 
@@ -71,8 +72,25 @@ class Migration(migrations.Migration):
                 ('horasDeTrabajo', models.PositiveIntegerField(default=0)),
             ],
             options={
-                'verbose_name_plural': 'miembros equipo',
+                'verbose_name_plural': 'miembros equipo sprint',
                 'default_permissions': (),
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Nota',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('mensaje', models.TextField(help_text=b'Mensaje de descripcion de los avances o motivo de cancelacion', null=True, blank=True)),
+                ('fecha', models.DateTimeField(default=django.utils.timezone.now)),
+                ('tiempo_registrado', models.IntegerField(default=0)),
+                ('horas_a_registrar', models.IntegerField(default=0)),
+                ('estado', models.IntegerField(default=0, choices=[(0, b'Inactivo'), (1, b'En curso'), (2, b'Pendiente Aprobacion'), (3, b'Aprobado'), (4, b'Cancelado')])),
+                ('estado_actividad', models.IntegerField(null=True, choices=[(0, b'ToDo'), (1, b'Doing'), (2, b'Done')])),
+                ('actividad', models.ForeignKey(to='administracion.Actividad', null=True)),
+                ('desarrollador', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
+            ],
+            options={
             },
             bases=(models.Model,),
         ),
@@ -140,6 +158,18 @@ class Migration(migrations.Migration):
                 'permissions': (('editar_mi_userstory', 'Editar mis User Stories'), ('registraractividad_mi_userstory', 'Registrar avances en mis User Stories')),
             },
             bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='nota',
+            name='sprint',
+            field=models.ForeignKey(to='administracion.Sprint', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='nota',
+            name='user_story',
+            field=models.ForeignKey(to='administracion.UserStory'),
+            preserve_default=True,
         ),
         migrations.AddField(
             model_name='miembroequiposprint',
