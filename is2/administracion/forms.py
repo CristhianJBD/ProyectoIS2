@@ -95,10 +95,9 @@ class AddSprintBaseForm(forms.ModelForm):
     """
     Formulario base para la creacion de Sprints
     """
-
     class Meta:
         model= Sprint
-        fields = ['nombre', 'fecha_inicio','duracion_sprint','estado', 'equipo','proyecto']
+        fields = ['nombre', 'fecha_inicio','duracion_sprint','estado','proyecto']
 
     def clean(self):
         """
@@ -155,13 +154,23 @@ class AddToSprintFormset(BaseFormSet):
 
 
 class MiembrosEquipoFormset(BaseInlineFormSet):
-  def clean(self):
+    def clean(self):
         super(MiembrosEquipoFormset, self).clean()
         for form in self.forms:
             if form in self.deleted_forms:
                 usuario = form.cleaned_data['usuario']
                 proyecto = form.cleaned_data['proyecto']
                 if usuario.userstory_set.filter(proyecto=proyecto).count() != 0:
+                    raise forms.ValidationError("El usuario {0} tiene User Stories asignados en el proyecto.".format(usuario))
+
+class MiembrosEquipoSprintFormset(BaseInlineFormSet):
+    def clean(self):
+        super(MiembrosEquipoSprintFormset, self).clean()
+        for form in self.forms:
+            if form in self.deleted_forms:
+                usuario = form.cleaned_data['usuario']
+                sprint = form.cleaned_data['sprint']
+                if usuario.userstory_set.filter(sprint=sprint).count() != 0:
                     raise forms.ValidationError("El usuario {0} tiene User Stories asignados en el proyecto.".format(usuario))
 
 

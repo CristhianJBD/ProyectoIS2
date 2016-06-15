@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import User, Group
 from django.db.models import Q
+from django.db.models.aggregates import Sum
 from django.forms import formset_factory, HiddenInput, CheckboxSelectMultiple
 from django.forms.extras import SelectDateWidget
 from django.forms.models import modelform_factory, modelformset_factory, inlineformset_factory
@@ -9,8 +10,9 @@ from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
 from guardian.mixins import LoginRequiredMixin
 from guardian.shortcuts import get_perms
-from administracion.forms import AddToSprintForm, AddToSprintFormset, AddSprintBaseForm
-from administracion.models import Sprint, Proyecto, Actividad, Flujo
+from administracion.forms import AddToSprintForm, AddToSprintFormset, AddSprintBaseForm, MiembrosEquipoFormset, \
+    MiembrosEquipoSprintFormset
+from administracion.models import Sprint, Proyecto, Actividad, Flujo, MiembroEquipoSprint
 from administracion.views.views import CreateViewPermissionRequiredMixin, GlobalPermissionRequiredMixin, ActiveProjectRequiredMixin
 from django.views import generic
 from django.core.urlresolvers import reverse
@@ -82,6 +84,8 @@ class SprintDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.De
         """
         context = super(SprintDetail, self).get_context_data(**kwargs)
         context['userStory'] = self.object.userstory_set.order_by('-prioridadFormula')
+        self.object.sumarHoras()
+        self.object.registrarHoras()
         return context
 
 
@@ -95,10 +99,11 @@ class AddSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPe
     template_name = 'administracion/sprint/sprint_form.html'
     permission_required = 'administracion.crear_sprint'
     form_class = modelform_factory(Sprint,form=AddSprintBaseForm,
-                                   widgets={'fecha_inicio': SelectDateWidget,'equipo': CheckboxSelectMultiple, 'proyecto':HiddenInput},
-                                   fields={'nombre', 'fecha_inicio','duracion_sprint','estado', 'equipo', 'proyecto'})
-    formset = formset_factory(AddToSprintForm, formset=AddToSprintFormset, extra=1)
-
+                                   widgets={'fecha_inicio': SelectDateWidget, 'proyecto':HiddenInput},
+                                   fields={'nombre', 'fecha_inicio','duracion_sprint','estado', 'proyecto'})
+    TeamMemberInlineFormSet = inlineformset_factory(Sprint, MiembroEquipoSprint, formset=MiembrosEquipoSprintFormset, can_delete=True,
+                                                    fields=['usuario', 'horasDeTrabajo'],
+                                                    extra=1)
     proyecto = None
 
     def get_proyecto(self):
@@ -133,8 +138,16 @@ class AddSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPe
         :return: los datos de contexto
         """
         context= super(AddSprintView,self).get_context_data(**kwargs)
+
         context['current_action'] = 'Agregar'
+        context['formset'] = self.TeamMemberInlineFormSet(self.request.POST if self.request.method == 'POST' else None)
+        self.__filtrar_formset__(context['formset'])
         return context
+
+    def __filtrar_formset__(self, formset):
+        for userformset in formset.forms:
+            userformset.fields['usuario'].queryset = User.objects.filter(miembroequipo__roles__name__exact='Desarrollador', miembroequipo__proyecto=self.get_proyecto())
+
 
     def form_valid(self, form):
         """
@@ -149,11 +162,13 @@ class AddSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, CreateViewPe
         self.proyecto.estado = 'EJ'
         self.proyecto.save()
         self.object.save()
-        for miembro in self.object.equipo.all():
-                self.horasDuracionSprint += miembro.horasDeTrabajo
-        self.object.horasDuracionSprint *= self.object.duracion_sprint
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        formset = self.TeamMemberInlineFormSet(self.request.POST, instance=self.object)
+        if formset.is_valid():
+            formset.save()
+            return HttpResponseRedirect(self.get_success_url())
+
+        return render(self.request, self.get_template_names(), {'form': form, 'formset': formset},
+                      context_instance=RequestContext(self.request))
 
 
 class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.UpdateView):
@@ -187,9 +202,9 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
 
     def __filtrar_formset__(self, formset):
             for userformset in formset.forms:
-                userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequipo__proyecto=self.get_proyecto()).filter(miembroequipo__roles__name__exact='Desarrollador')
+                userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequiposprint__sprint=self.object)
                 userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.get_proyecto())
-                userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.get_proyecto()), Q(estado=0) | Q(estado=1)).order_by('-prioridadFormula')
+                userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.get_proyecto()), Q(estado=0)).order_by('-prioridadFormula')
 
     def get_context_data(self, **kwargs):
         """
@@ -199,7 +214,7 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
         """
         context= super(UpdateSprintView,self).get_context_data(**kwargs)
         current_us = self.get_object().userstory_set.all()
-        formset= self.UserStoryFormset(self.request.POST if self.request.method == 'POST' else None, initial=[{'userStory':us,'flujo':us.actividad.flujo, 'desarrollador':us.desarrollador} for us in current_us])
+        formset= self.UserStoryFormset(self.request.POST if self.request.method == 'POST' else None)
         self.__filtrar_formset__(formset)
         context['current_action'] = 'Editar'
         context['formset'] = formset
@@ -213,6 +228,8 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
         """
         self.object= form.save(commit=False)
         self.object.fecha_fin= self.object.fecha_inicio + datetime.timedelta(days=self.object.duracion_sprint)
+        self.object.sumarHoras()
+        self.object.registrarHoras()
         self.object.save()
         formsetb= self.UserStoryFormset(self.request.POST)
         if formsetb.is_valid():

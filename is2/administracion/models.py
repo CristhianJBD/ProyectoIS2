@@ -91,10 +91,6 @@ class Proyecto(models.Model):
         return int(progreso)
     progreso = property(_get_progreso)
 
-
-
-
-
 class MiembroEquipo(models.Model):
     """
     Miembros del equipo de un proyecto
@@ -103,7 +99,6 @@ class MiembroEquipo(models.Model):
     usuario = models.ForeignKey(User)
     proyecto = models.ForeignKey(Proyecto)
     roles = models.ManyToManyField(Group)
-    horasDeTrabajo=models.PositiveIntegerField(default=0)
 
     def __unicode__(self):
         return self.usuario.username
@@ -124,6 +119,7 @@ class MiembroEquipo(models.Model):
         verbose_name_plural = 'miembros equipo'
         unique_together = ('usuario', 'proyecto')
 
+
 class Sprint(models.Model):
     """
     Manejo de los sprints del proyecto
@@ -134,7 +130,7 @@ class Sprint(models.Model):
     fecha_fin = models.DateTimeField()
     proyecto = models.ForeignKey(Proyecto, null=False, blank=True)
     estado = models.CharField(choices=opciones_estado, max_length=2, default='PE')
-    equipo = models.ManyToManyField(MiembroEquipo)
+    equipo = models.ManyToManyField(User, through='MiembroEquipoSprint')
     duracion_sprint = models.PositiveIntegerField(default=30)
     horasRegistradaSprint = models.PositiveIntegerField(default=0)
     horasDuracionSprint = models.PositiveIntegerField(default=0)
@@ -144,19 +140,40 @@ class Sprint(models.Model):
         verbose_name = 'sprint'
         verbose_name_plural = 'sprints'
 
-    # def save(self, force_insert=False, force_update=False, using=None,
-    #          update_fields=None):
-    #     for miembro in self.equipo.all():
-    #             self.horasDuracionSprint += miembro.horasDeTrabajo
-    #     self.horasDuracionSprint *= self.duracion_sprint
-    #     super(Sprint, self).save(force_insert, force_update, using, update_fields)
+    def sumarHoras(self):
+        self.horasDuracionSprint = 0
+        for miembro in MiembroEquipoSprint.objects.filter(sprint=self):
+             self.horasDuracionSprint += miembro.horasDeTrabajo
+        self.horasDuracionSprint *= self.duracion_sprint
 
+    def registrarHoras(self):
+        self.horasRegistradaSprint = 0
+        for us in UserStory.objects.filter(sprint=self):
+            self.horasRegistradaSprint += us.tiempo_estimado
 
     def __unicode__(self):
         return self.nombre
 
     def get_absolute_url(self):
         return reverse_lazy('sprint_detail', args=[self.pk])
+
+
+class MiembroEquipoSprint(models.Model):
+    """
+    Miembros del equipo de un sprint
+    """
+    usuario = models.ForeignKey(User)
+    sprint = models.ForeignKey(Sprint)
+    horasDeTrabajo=models.PositiveIntegerField(default=0)
+
+    def __unicode__(self):
+        return self.usuario.username
+
+    class Meta:
+        default_permissions = ()
+        verbose_name_plural = 'miembros equipo sprint'
+        unique_together = ('usuario', 'sprint')
+
 
 class Flujo(models.Model):
     """
