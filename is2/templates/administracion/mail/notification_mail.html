@@ -36,7 +36,7 @@
                     <p><strong>Flujo: </strong>{{ nota.actividad.flujo }}</p>
                     <p><strong>Actividad: </strong>{{ nota.actividad }}</p>
                     <p><strong>Estado: </strong>{{ nota.get_estado_actividad_display }}</p>
-                    <a href="http://{{ domain }}{% url 'project:userstory_detail' us.id %}" class="btn btn-primary btn-block">Ver en Projectium</a>
+                    <a href="http://{{ domain }}{% url 'userstory_detail' us.id %}" class="btn btn-primary btn-block">Ver en ProyectoIS2</a>
                </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
     <br/>
     <hr/>
     <footer>
-        <p>Projectium 2015 ©</p>
+        <p>Proyecto IS2 2016 ©</p>
     </footer>
 </body>
 </html>

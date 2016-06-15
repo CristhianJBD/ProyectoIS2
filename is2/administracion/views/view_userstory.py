@@ -271,7 +271,7 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
 
     def get_context_data(self, **kwargs):
         context = super(RegistrarActividadUserStory, self).get_context_data(**kwargs)
-
+        context['formset'] = self.NoteFormset(queryset=Nota.objects.none())
         return context
 
 
@@ -289,7 +289,7 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
             actual_fields.insert(1, 'actividad')
         return modelform_factory(UserStory, form=RegistrarActividadForm, fields=actual_fields)
 
-    def get_form(self, form_class = None):
+    def get_form(self, form_class):
         '''
         Personalización del form retornado
         '''
