@@ -1,8 +1,10 @@
 from django.contrib import admin
 from guardian.admin import GuardedModelAdmin
 
-from .models import Proyecto, MiembroEquipo,MiembroEquipoSprint,Actividad, Flujo, Sprint, UserStory, Adjunto
-from reversion import revisions as reversion
+
+from .models import Proyecto, MiembroEquipo, MiembroEquipoSprint,Actividad, Flujo, Sprint, UserStory, Adjunto, Nota
+import reversion
+
 # Register your models here.
 
 class MiembroEquipoInLine(admin.TabularInline):
@@ -29,6 +31,9 @@ class UserStoryAdmin(GuardedModelAdmin):
 class SprintAdmin(GuardedModelAdmin):
     inlines = [MiembroEquipoSprintInLine]
 
+class NotaAdmin(reversion.VersionAdmin):
+    pass
+
 #admin.site.register(Usuario)
 admin.site.register(UserStory, UserStoryAdmin)
 admin.site.register(Proyecto, ProyectoAdmin)
@@ -38,3 +43,4 @@ admin.site.register(Flujo, ActividadAdmin)
 admin.site.register(Actividad)
 admin.site.register(Sprint, SprintAdmin)
 admin.site.register(Adjunto)
+admin.site.register(Nota, NotaAdmin)

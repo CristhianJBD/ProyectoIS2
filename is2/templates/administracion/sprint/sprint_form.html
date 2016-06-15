@@ -42,7 +42,7 @@
 
     <script src="{% static 'lumino/js/jquery-ui.min.js' %}"></script>
     <script src="{% static 'lumino/js/jquery.formset.js' %}"></script>
-     <script type="text/javascript">
+    <script type="text/javascript">
         $(function () {
             $('.teammember').formset({
                 prefix: '{{ formset.prefix }}',
@@ -103,11 +103,18 @@
             <div class="row top-buffer team-members">
                 {% for form in formset %}
                     {{ form.id }}
+
                     <div class="teammember" id="teammember-{{ forloop.counter0 }}">
                         {% if form.instance.pk %}{% bootstrap_field form.DELETE %}{% endif %}
-                        {% bootstrap_form form %}
+                        <div class="row">
+                            <div class="col-lg-3">{% bootstrap_field form.userStory %}</div>
+                            <div class="col-lg-3">{% bootstrap_field form.desarrollador %}</div>
+                            <div class="col-lg-3">{% bootstrap_field form.flujo %}</div>
 
+
+                        </div>
                     </div>
+
 
                 {% endfor %}
             </div>
