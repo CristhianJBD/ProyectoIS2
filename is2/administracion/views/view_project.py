@@ -70,7 +70,7 @@ class ProjectCreate(LoginRequiredMixin, CreateViewPermissionRequiredMixin, gener
 
     template_name = 'administracion/proyecto/project_form_create.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
-                                                    fields=['usuario', 'roles', 'horasDeTrabajo'],
+                                                    fields=['usuario', 'roles'],
                                                     extra=1,
                                                     widgets={'roles': CheckboxSelectMultiple})
 
@@ -105,7 +105,7 @@ class ProjectUpdate( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
     permission_required = 'administracion.change_proyecto'
     template_name = 'administracion/proyecto/project_form_create.html'
     TeamMemberInlineFormSet = inlineformset_factory(Proyecto, MiembroEquipo, formset=MiembrosEquipoFormset, can_delete=True,
-                                                    fields=['usuario', 'roles', 'horasDeTrabajo'],
+                                                    fields=['usuario', 'roles'],
                                                     extra=1,
                                                     widgets={'roles': CheckboxSelectMultiple})
     form_class = modelform_factory(Proyecto,
@@ -155,7 +155,7 @@ class ProjectUpdate( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.
         return context
 
 
-class ProjectDelete( LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.DeleteView):
+class ProjectDelete(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.DeleteView):
     """
     Vista para la cancelacion de proyectos
     """

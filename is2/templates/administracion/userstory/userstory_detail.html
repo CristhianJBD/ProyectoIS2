@@ -22,9 +22,9 @@
     <div class="row" xmlns="http://www.w3.org/1999/html">
 			<ol class="breadcrumb">
 				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-				<li><a href="{% url "project_list" %}">Lista de Proyectos</li></a>
-                <li><a href="">Detalles de Proyectos</li></a>
-                <li><a href="">Product Backlog</li></a>
+				<li><a href="{% url "project_list" %}">Lista de Proyectos</a></li>
+                <li><a href="">Detalles de Proyectos</a></li>
+                <li><a href="">Product Backlog</a></li>
                 <li>Detalles de {{ userstory.nombre_corto }}</li>
 			</ol>
 		</div><!--/.row-->
@@ -34,10 +34,13 @@
         {% get_obj_perms user for userstory.proyecto as "proyecto_perms" %}
         {% get_obj_perms user for userstory as "us_perms" %}
         {% if "editar_userstory" in proyecto_perms or 'editar_mi_userstory' in us_perms%}<li><a href="{% url 'userstory_update'  userstory.id %}" class="fa fa-pencil"> Editar</a></li>{% endif %}
-        {% if userstory.estado == 1 %}{# Si el User Story está en curso #}
-
-            {% if "registraractividad_userstory" in proyecto_perms or 'registraractividad_mi_userstory' in us_perms %}<li><a href="{% url 'userstory_registraractividad'  userstory.id %}" class="fa fa-pencil-square-o"> Registrar Avance</a></li>{% endif %}
-            {% if "editar_userstory" in proyecto_perms or 'editar_mi_userstory' in us_perms%}<li><a href="{% url 'version_list' userstory.id %}" class="fa fa-clock-o"> Historial</a></li>{% endif %}
+        {% if userstory.estado == 1 and userstory.sprint.estado == 'EJ' %}{# Si el User Story está en curso #}
+            {% if "registraractividad_userstory" in proyecto_perms or 'registraractividad_mi_userstory' in us_perms %}
+                <li><a href="{% url 'userstory_registraractividad'  userstory.id %}" class="fa fa-pencil-square-o"> Registrar Avance</a></li>
+            {% endif %}
+            {% if "editar_userstory" in proyecto_perms or 'editar_mi_userstory' in us_perms%}<li>
+                <a href="{% url 'version_list' userstory.id %}" class="fa fa-clock-o"> Historial</a></li>
+            {% endif %}
         {% endif %}
 
          <li><a href="{% url 'file_list' userstory.id %}"><i class="fa fa-file"></i> Adjuntos</a></li>
