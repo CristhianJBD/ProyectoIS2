@@ -18,6 +18,9 @@ from django.views import generic
 from django.core.urlresolvers import reverse
 from administracion.models import UserStory
 import datetime
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import send_mail
+from django.template.loader import get_template, render_to_string
 
 class SprintList(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.ListView):
     """
@@ -253,10 +256,24 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
                             new_userStory.actividad = self.flujo.actividad_set.first()
                             new_userStory.estado = 1
                             new_userStory.estado_actividad = 0
+
+                    self.notify(new_userStory)
                     new_userStory.save()
                     proccessed_forms.append(new_userStory)
             return HttpResponseRedirect(self.get_success_url())
 
         self.__filtrar_formset__(formsetb)
+
         return render(self.request, self.get_template_names(), {'form': form, 'formset': formsetb},
                       context_instance=RequestContext(self.request))
+
+    def notify(self, userstory):
+        proyecto = userstory.proyecto
+        subject = 'Asignacion a User Story: {} - {}'.format(userstory, proyecto)
+        domain = get_current_site(self.request).domain
+        message = render_to_string('administracion/mail/notificacion_asignacion.html',
+                                   {'proyecto': proyecto, 'us': userstory, 'domain': domain})
+        recipients = [userstory.desarrollador.email]
+
+
+        send_mail(subject, message, 'proyectois2.2016@gmail.com', recipients, html_message=message)

@@ -201,6 +201,7 @@ class UpdateUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.Up
 
     def notify(self, user_story, changes):
         proyecto = user_story.proyecto
+
         changelist = [c.replace('_', ' ').title() for c in changes]
         subject = 'Cambios en User Story: {} - {}'.format(user_story, proyecto)
         domain = get_current_site(self.request).domain
@@ -208,12 +209,12 @@ class UpdateUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.Up
                                    {'proyecto': proyecto, 'us': user_story, 'domain': domain,
                                     'cambios': changelist})
         recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('administracion.aprobar_userstory', proyecto)]
-        #print recipients
+
         if user_story.desarrollador and user_story.desarrollador.email not in recipients:
             recipients.append(user_story.desarrollador.email)
-            #print recipients
+
         send_mail(subject, message, 'proyectois2.2016@gmail.com', recipients, html_message=message)
-        #send_mail(subject, message, 'proyectois2.2016@gmail.com', ['ing.delgadomontiel@gmail.com'], html_message=message)
+
 
 class CancelUserStory(LoginRequiredMixin, ActiveProjectRequiredMixin, generic.FormView):
     """
@@ -300,6 +301,12 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
         #     form.fields['desarrollador']=User.objects.filter(miembroequiposprint__sprint=self.object.sprint)
         if 'actividad' in form.fields:
             form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
+        # estado_actual= self.get_object().estado_actividad
+        # print estado_actual
+        # estado_act= []
+        # if estado_actual == 0
+        #     estado_act.a
+        # form.fields['estado_actividad'].ChoiceField()
         return form
 
     def form_valid(self, form):
@@ -339,31 +346,20 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
         return HttpResponseRedirect(self.get_success_url())
 
     def notify(self, nota):
+        #Notificaciones para el desarrollador del user story si
+        #se registra una actividad en el user story
         proyecto = nota.user_story.proyecto
+        desarrollador= nota.desarrollador
         subject = 'Registro de Actividad: {} - {}'.format(nota.user_story, proyecto)
         domain = get_current_site(self.request).domain
         message = render_to_string('administracion/mail/notification_mail.html',
                                    {'proyecto': proyecto, 'nota': nota, 'us': nota.user_story, 'domain': domain})
-        recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('administracion.aprobar_userstory', proyecto)]
+        recipients = [desarrollador.email]
+        #print recipients
         send_mail(subject, message, 'noreply.proyectois2.2016@gmail.com', recipients, html_message=message)
 
 
-class DeleteUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.DeleteView):
-    """
-    Vista de Eliminacion de User Stories
-    """
-    model = UserStory
-    template_name = 'administracion/userstory/userstory_delete.html'
-    permission_required = 'administracion.eliminar_userstory'
-    context_object_name = 'userstory'
 
-    def get_proyecto(self):
-        return self.get_object().proyecto
-    def get_permission_object(self):
-        return self.get_proyecto()
-
-    def get_success_url(self):
-        return reverse_lazy('product_backlog', kwargs={'project_pk': self.get_object().proyecto.id})
 
 
 

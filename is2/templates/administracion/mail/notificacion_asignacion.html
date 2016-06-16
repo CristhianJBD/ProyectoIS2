@@ -18,20 +18,21 @@
 <body>
     <h1>Proyecto: {{ proyecto }}</h1>
     <hr/>
-    <p>El User Story '{{ us }}' ha sido aprobado por '{{ u.get_full_name }}'<p></p>
+    <p>Se le ha asignado el User Story: '{{ us }}'.<p></p>
     <div class="row">
         <div class="col-lg-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{ us }}</h3>
+                    <h3 class="panel-title">User Story</h3>
                 </div>
                 <div class="panel-body">
-                    <p><strong>Desarrollador: </strong>{{ us.desarrollador }}</p>
+
                     <p><strong>Prioridad: </strong>{{ us.get_prioridad_display }}</p>
-                    <p><strong>Sprint: </strong>{{ us.sprint }}</p>
-                    <p><strong>Flujo: </strong>{{ us.actividad.flujo }}</p>
-                    <p><strong>Actividad: </strong>{{ us.actividad }}</p>
-                    <a href="http://{{ domain }}{% url 'userstory_detail' us.id %}" class="btn btn-primary btn-block">Ver en Proyecto IS2</a>
+                    <p><strong>Valor de Negocio: </strong>{{ us.valor_negocio }}</p>
+                    <p><strong>Valor Tecnico: </strong>{{ us.valor_tecnico }}</p>
+                    <p><strong>Tiempo Estimado: </strong>{{ us.tiempo_estimado }}</p>
+
+                    <a href="http://{{ domain }}{% url 'userstory_detail' us.id %}" class="btn btn-primary btn-block">Ver en ProyectoIS2</a>
                </div>
             </div>
         </div>
@@ -39,7 +40,7 @@
     <br/>
     <hr/>
     <footer>
-        <p>Proyecto 2016 ©</p>
+        <p>Proyecto IS2 2016 ©</p>
     </footer>
 </body>
 </html>
