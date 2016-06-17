@@ -1,0 +1,49 @@
+{% extends 'administracion/base.html' %}
+
+
+{% block contentbase %}
+      <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li class="active"><a href="{% url 'project_list' %}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Proyectos</a></li>
+            <li><a href="{% url 'user_list' %}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
+            <li><a href="{% url 'rol_list' %}"><svg class="glyph stroked key "><use xlink:href="#stroked-key"/></svg> Roles</a></li>
+
+        </ul>
+    </div>
+        <div class="page-header"><h1>Avance - {{ nota.user_story }}</h1></div>
+
+    <p><strong>Proyecto Asociado: </strong><a href="{{ nota.user_story.proyecto.get_absolute_url }}">{{ nota.user_story.proyecto }}</a></p>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Avance
+                </div>
+                <div class="panel-body">
+                    <p><strong>Desarrollador:</strong><a href="{% url 'user_detail' nota.desarrollador_id %}"> {{ nota.desarrollador }}</a></p>
+                    <p><strong>Fecha:</strong> {{ nota.fecha|date }}</p>
+                    <p><strong>Hora:</strong> {{ nota.fecha|time }}</p>
+                    <p><strong>Estado de User Story: </strong>{{ nota.get_estado_display }}</p>
+                    <p><strong>Tiempo trabajado:</strong> {{ nota.horas_a_registrar }}</p>
+                    <p><strong>Tiempo registrado hasta la fecha:</strong> {{ nota.tiempo_registrado }}</p>
+                    <p><strong>Sprint: </strong><a href="{% url 'sprint_detail' nota.sprint_id %}">{{ nota.sprint }}</a></p>
+                    <p><strong>Flujo: </strong><a href="{% url 'flujo_detail' nota.actividad.flujo_id %}">{{ nota.actividad.flujo }}</a></p>
+                    <p><strong>Actividad: </strong>{{ nota.actividad }} | {{ nota.get_estado_actividad_display }}</p>
+               </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="well">
+                <h4>Mensaje</h4>
+                <p>{{ nota.mensaje }}</p>
+            </div>
+        </div>
+    </div>
+    <p><a class="fa fa-step-backward" href="{% url 'userstory_registrodeactividad' nota.user_story_id %}"> Volver a Avances</a></p>
+{% endblock %}

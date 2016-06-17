@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from administracion.views import views_rol, views_user, view_project, views, views_flujo, view_userstory, views_sprints, views_adjunto
+from administracion.views import views_rol, views_user, view_project, views, views_flujo, view_userstory, views_sprints, views_adjunto, nota_views
 
 
 
@@ -44,6 +44,8 @@ urlpatterns = [
       url(r'^sprint/(?P<pk>\d+)/$', views_sprints.SprintDetail.as_view(), name='sprint_detail'),
       url(r'^proyectos/(?P<project_pk>\d+)/sprint/add/$', views_sprints.AddSprintView.as_view(), name="sprint_add"),
       url(r'^sprint/(?P<pk>\d+)/edit/$', views_sprints.UpdateSprintView.as_view(), name="sprint_update"),
+      url(r'^sprint/(?P<pk>\d+)/eliminarus/$', views_sprints.DeleteUsSprintView.as_view(), name="sprint_delete_us"),
+      url(r'^sprint/(?P<pk>\d+)/reasignarus/$', views_sprints.Reasignar.as_view(), name="sprint_reasignar_us"),
       #url(r'^sprint/(?P<pk>\d+)/addUS/$', views_sprints.AddUsSprint.as_view(), name="add_US_sprint"),
 
 
@@ -56,6 +58,10 @@ urlpatterns = [
       url(r'^userstory/(?P<pk>\d+)/editar/$', view_userstory.UpdateUserStory.as_view(), name="userstory_update"),
       url(r'^userstory/(?P<pk>\d+)/cancelar/$', view_userstory.CancelUserStory.as_view(), name="userstory_cancelar"),
       url(r'^userstory/(?P<pk>\d+)/registrar/$', view_userstory.RegistrarActividadUserStory.as_view(),name="userstory_registraractividad"),
+      url(r'^userstory/(?P<pk>\d+)/registrodeactividad/$', nota_views.NotaList.as_view(),name="userstory_registrodeactividad"),
+      url(r'^nota/(?P<pk>\d+)/$', nota_views.NotaDetail.as_view(), name='nota_detail'),
+      url(r'^userstory/(?P<pk>\d+)/eliminardesprint/$', views_sprints.DeleteUsSprintView.as_view(), name="userstory_delete"),
+
 
       # adjunto
       url(r'^adjuntoarchivo/(?P<pk>\d+)/$', views_adjunto.download_attachment, name='download_attachment'),
