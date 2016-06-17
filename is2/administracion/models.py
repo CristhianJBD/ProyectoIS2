@@ -248,7 +248,7 @@ class UserStory(models.Model):
     actividad = models.ForeignKey(Actividad, null=True, blank=True)
 
     def __unicode__(self):
-        return self.nombre_largo
+        return "{} - Prioridad: {} - Duracion: {}".format(self.nombre_largo, self.prioridadFormula, self.tiempo_estimado)
 
     def _get_progreso(self):
         progreso = float(self.tiempo_registrado) / self.tiempo_estimado * 100
