@@ -226,18 +226,20 @@ class UserStoryTest(TestCase):
         login = c.login(username='test', password='test')
         self.assertTrue(login)
         p = Proyecto.objects.first()
-        #creamos un user story
+        self.assertIsNotNone(p)
         response = c.post(reverse('userstory_add', args=(str(p.id))),
         {'nombre_corto': 'Test US', 'nombre_largo': 'Test User story', 'descripcion': 'This is a User Story for testing purposes.', 'prioridad':1,
         'valor_negocio': 10, 'valor_tecnico': 10, 'tiempo_estimado': 10}, follow=True)
         us = UserStory.objects.first()
         self.assertIsNotNone(us)
         self.assertEquals(us.nombre_corto, 'Test US')
+        self.assertRedirects(response, '/userstory/{}/'.format(us.id))
+
         response = c.get(reverse('userstory_detail', args=(str(us.id))))
         self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a userstory detail')
-        #nos vamos a la página de edición de user story
+        #nos vamos a la pagina de edicion de user story
         response = c.get(reverse('userstory_update', args=(str(us.id))))
-        #debería retornar 200
+        #deberia retornar 200
         self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a editar user Story')
         response = c.post(reverse('userstory_update', args=(str(us.id))),
          {'nombre_corto': 'Test US2', 'nombre_largo': 'Test User story2', 'descripcion': 'This is a User Story2 for testing purposes.','prioridad':1,
@@ -273,9 +275,9 @@ class UserStoryTest(TestCase):
         us.save()
         response = c.get(reverse('userstory_detail', args=(str(us.id))))
         self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a userstory detail')
-        #nos vamos a la página de registrar actividad de user story
+        #nos vamos a la pagina de registrar actividad de user story
         response = c.get(reverse('userstory_registraractividad', args=(str(us.id))))
-        #debería retornar 200
+        #deberia retornar 200
         self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a registrar actividad user story')
 
         post_data = {
@@ -291,7 +293,8 @@ class UserStoryTest(TestCase):
         us = UserStory.objects.first()
         self.assertIsNotNone(us)
         self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a registrar actividad user story' )
-
+        response = c.get(reverse('file_upload', args=(str(us.id))))
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a subir archivo' )
 
     def test_list_userstories_with_permission(self):
         c = self.client
@@ -303,11 +306,12 @@ class UserStoryTest(TestCase):
         self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a registrar actividad user story')
 
 
+
 class SprintTest(TestCase):
 
     def setUp(self):
         u = User.objects.create_superuser('temp','temp@email.com', 'temp')
-        pro = Proyecto.objects.create(nombre='Proyecto', estado='PE', fecha_inicio=timezone.now(), fecha_fin=timezone.now() + datetime.timedelta(days=30))
+        pro = Proyecto.objects.create(nombre='Proyecto', estado='EJ', fecha_inicio=timezone.now(), fecha_fin=timezone.now() + datetime.timedelta(days=30))
         User.objects.create_user('tempdos', 'tempdos@email.com', 'tempdos')
         UserStory.objects.create(nombre_corto= 'Test_Version',nombre_largo= 'Test_Version', descripcion= 'Test Description',
                        valor_negocio= 10, valor_tecnico = 10, tiempo_estimado = 10, proyecto = pro)
@@ -320,32 +324,10 @@ class SprintTest(TestCase):
         self.assertTrue(c.login(username='temp', password='temp'))
         p = Proyecto.objects.first()
         self.assertIsNotNone(p)
-        us = UserStory.objects.first()
-        self.assertIsNotNone(us)
-        d = User.objects.first()
-        self.assertIsNotNone(d)
-        f = User.objects.first()
-        self.assertIsNotNone(f)
         response = c.get(reverse('sprint_add', args=(str(p.id))))
-        self.assertEquals(response.status_code, 200)
-        post_data = {
-        'nombre': 'Sprint_test',
-        'fecha_inicio': timezone.now(),
-        'proyecto':p,
-        'fecha_fin':timezone.now(),
-        'actividad': 1,
-        'tiempo_registrado': 4,
-        'estado_actividad': 1,
-        'form-INITIAL_FORMS': 0,
-        'form-MAX_NUM_FORMS': 1000,
-        'form-MIN_NUM_FORMS': 0,
-        'form-TOTAL_FORMS': 1,
-        'form-0-userStory': us.id,
-        'form-0-desarrollador':d.id,
-        'form-0-flujo':f.id,
-    }
-        response = c.post(reverse('sprint_add', args=(str(p.id))), post_data, follow=True)
-        self.assertEquals(response.status_code,200)
-        s=Sprint.objects.first()
-        self.assertIsNotNone(s)
+        self.assertEquals(response.status_code, 200,  'No se pudo redirigir correctamente a agregar sprint')
+        response = c.get(reverse('sprint_add', args=(str(p.id))),{'nombre': 'sprint1','fecha_inicio':timezone.now(),'proyecto': p, 'estado':'EJ'}, follow=True)
+        self.assertEquals(response.status_code, 200, 'No se pudo redirigir correctamente a agregar sprint')
+
+
 
