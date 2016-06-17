@@ -328,7 +328,7 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
         #se registra una actividad en el user story o al scrum si esque se llega a estado Done
         proyecto = nota.user_story.proyecto
         desarrollador= nota.desarrollador
-        sprint= self.object.sprint
+
         est_act= nota.estado_actividad
 
         if(est_act == 2):
