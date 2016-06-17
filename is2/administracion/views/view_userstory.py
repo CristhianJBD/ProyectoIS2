@@ -345,7 +345,7 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
             message = render_to_string('administracion/mail/notification_mail.html',
                                        {'proyecto': proyecto, 'nota': nota, 'us': nota.user_story, 'domain': domain})
             recipients = [desarrollador.email]
-            #print recipients
+
             send_mail(subject, message, 'noreply.proyectois2.2016@gmail.com', recipients, html_message=message)
 
 
