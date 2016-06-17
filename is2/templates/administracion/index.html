@@ -19,7 +19,7 @@
 
                             <ul class="dropdown-menu" role="menu">
 
-							<li><a href='/logout/'><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+							<li><a href='/logout/'><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Salir</a></li>
 						</ul>
 
 					</li>
@@ -47,8 +47,8 @@
 							<svg class="glyph stroked bag"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stroked-bag"></use></svg>
 						</div>
 						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large">120</div>
-							<div class="text-muted">New Orders</div>
+							<div class="large">{{ proyectos }}</div>
+							<div class="text-muted">Proyectos</div>
 						</div>
 					</div>
 				</div>
@@ -60,8 +60,8 @@
 							<svg class="glyph stroked empty-message"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stroked-empty-message"></use></svg>
 						</div>
 						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large">52</div>
-							<div class="text-muted">Comments</div>
+							<div class="large">{{ notas }}</div>
+							<div class="text-muted">Actividades</div>
 						</div>
 					</div>
 				</div>
@@ -73,8 +73,8 @@
 							<svg class="glyph stroked male-user"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stroked-male-user"></use></svg>
 						</div>
 						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large">24</div>
-							<div class="text-muted">New Users</div>
+							<div class="large">{{ usuarios }}</div>
+							<div class="text-muted">Usuarios</div>
 						</div>
 					</div>
 				</div>
@@ -86,8 +86,8 @@
 							<svg class="glyph stroked app-window-with-content"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stroked-app-window-with-content"></use></svg>
 						</div>
 						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large">25.2k</div>
-							<div class="text-muted">Page Views</div>
+							<div class="large">{{ sprints }}</div>
+							<div class="text-muted">Sprints</div>
 						</div>
 					</div>
 				</div>
@@ -96,7 +96,7 @@
 
     <div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">Site Traffic Overview</div>
+					<div class="panel-heading"></div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
 							<canvas class="main-chart" id="line-chart" height="337" width="1013" style="width: 1013px; height: 337px;"></canvas>
@@ -105,43 +105,6 @@
 				</div>
 			</div>
 
-    <div class="row">
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>New Orders</h4>
-						<div class="easypiechart" id="easypiechart-blue" data-percent="92"><span class="percent">92%</span>
-						<canvas height="110" width="110"></canvas></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Comments</h4>
-						<div class="easypiechart" id="easypiechart-orange" data-percent="65"><span class="percent">65%</span>
-						<canvas height="110" width="110"></canvas></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>New Users</h4>
-						<div class="easypiechart" id="easypiechart-teal" data-percent="56"><span class="percent">56%</span>
-						<canvas height="110" width="110"></canvas></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Visitors</h4>
-						<div class="easypiechart" id="easypiechart-red" data-percent="27"><span class="percent">27%</span>
-						<canvas height="110" width="110"></canvas></div>
-					</div>
-				</div>
-			</div>
-		</div>
+
 
 {% endblock %}
