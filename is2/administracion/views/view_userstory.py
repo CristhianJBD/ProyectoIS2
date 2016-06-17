@@ -286,8 +286,7 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
         del User Story.
         """
         actual_fields = ['estado_actividad']
-        if 'editar_userstory' in get_perms(self.request.user, self.get_object().proyecto) or \
-                        'editar_mi_userstory' in get_perms(self.request.user, self.get_object()):
+        if 'aprobar_userstory' in get_perms(self.request.user, self.get_object().proyecto):
             actual_fields.insert(1, 'actividad')
 
         return modelform_factory(UserStory, form=RegistrarActividadForm, fields=actual_fields)
@@ -298,32 +297,14 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
         '''
 
         form = super(RegistrarActividadUserStory, self).get_form(form_class)
-        # if 'desarrollador' in form.fields:
-        #      form.fields['desarrollador']=User.objects.filter(miembroequiposprint__sprint=self.object.sprint)
         if 'actividad' in form.fields:
             form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
-
-        form.fields['estado_actividad'].widget.attrs['readonly']=True
         return form
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.tiempo_registrado = self.object.tiempo_registrado + form.cleaned_data['horas_a_registrar']
         nota_form = self.NoteFormset(self.request.POST)
-        new_estado = 0
-        #movemos el User Story a la sgte actividad en caso de que haya llegado a Done
-        if form.cleaned_data['estado_actividad'] == 2:
-            new_estado = 0
-            try:
-                next_actividad = self.object.actividad.get_next_in_order()
-            except ObjectDoesNotExist:
-                next_actividad = self.object.actividad
-                self.object.estado = 2 #Lo marcamos como pendiente de aprobación
-                new_estado = 2
-
-            self.object.actividad = next_actividad
-            self.object.estado_actividad = new_estado
-
         self.object.save()
 
         if nota_form.is_valid():
