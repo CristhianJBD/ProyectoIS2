@@ -12,7 +12,7 @@
 				<li><a href="{% url "project_list"  %}">Lista de Proyectos</a></li>
                 <li><a href="">Detalles de Proyecto</a></li>
 {#				<li><a href="{% url "project_detail" view.proyecto.pk %}">Detalles de Proyecto</li></a>#}
-                <li> Delete User Story</li>
+                <li> Reasignar Desarrollador</li>
 
 			</ol>
 		</div><!--/.row-->
@@ -37,20 +37,11 @@
     </div>
 
 
-    <div class="page-header"><h1>Sprint</h1></div>
+    <div class="page-header"><h1>Reasignar Desarrollador</h1></div>
 
 
     <script src="{% static 'lumino/js/jquery-ui.min.js' %}"></script>
     <script src="{% static 'lumino/js/jquery.formset.js' %}"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('.teammember').formset({
-                prefix: '{{ formset.prefix }}',
-                addText: 'Agregar',
-                deleteText: 'Eliminar'
-            });
-        })
-    </script>
     <style>
         .empty-form {
             display: none;
@@ -108,7 +99,7 @@
                     {{ form.id }}
 
                     <div class="teammember" id="teammember-{{ forloop.counter0 }}">
-                        {% if form.instance.pk %}{% bootstrap_field form.DELETE %}{% endif %}
+
                         <div class="row">
                             <div class="col-lg-3">{% bootstrap_field form.userStory %}</div>
                             <div class="col-lg-3">{% bootstrap_field form.desarrollador %}</div>

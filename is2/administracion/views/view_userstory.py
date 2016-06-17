@@ -17,7 +17,7 @@ from guardian.shortcuts import get_perms, get_perms_for_model, assign_perm
 from guardian.utils import get_403_or_None
 import reversion
 from administracion.forms import RegistrarActividadForm
-from administracion.models import UserStory, Proyecto, Actividad, Nota
+from administracion.models import UserStory, Proyecto, Actividad, Nota, Sprint
 from administracion.views.views import CreateViewPermissionRequiredMixin, GlobalPermissionRequiredMixin, ActiveProjectRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 
@@ -69,6 +69,7 @@ class UserStoryDetail(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic
     permission_required = 'administracion.ver_proyecto'
     template_name = 'administracion/userstory/userstory_detail.html'
     context_object_name = 'userstory'
+
 
     def get_permission_object(self):
         '''

@@ -45,6 +45,7 @@ urlpatterns = [
       url(r'^proyectos/(?P<project_pk>\d+)/sprint/add/$', views_sprints.AddSprintView.as_view(), name="sprint_add"),
       url(r'^sprint/(?P<pk>\d+)/edit/$', views_sprints.UpdateSprintView.as_view(), name="sprint_update"),
       url(r'^sprint/(?P<pk>\d+)/eliminarus/$', views_sprints.DeleteUsSprintView.as_view(), name="sprint_delete_us"),
+      url(r'^sprint/(?P<pk>\d+)/reasignarus/$', views_sprints.Reasignar.as_view(), name="sprint_reasignar_us"),
       #url(r'^sprint/(?P<pk>\d+)/addUS/$', views_sprints.AddUsSprint.as_view(), name="add_US_sprint"),
 
 

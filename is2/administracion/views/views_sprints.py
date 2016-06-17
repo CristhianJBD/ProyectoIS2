@@ -281,7 +281,7 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
 
 class DeleteUsSprintView(LoginRequiredMixin, ActiveProjectRequiredMixin, generic.FormView):
     """
-    Vista cancelacion de User Stories
+    Vista eliminacion de User Stories en sprint
     """
     form_class = modelform_factory(Nota, fields=['mensaje'])
     template_name = 'administracion/sprint/userstory_eliminar.html'
@@ -322,3 +322,194 @@ class DeleteUsSprintView(LoginRequiredMixin, ActiveProjectRequiredMixin, generic
         self.user_story.save()
 
         return HttpResponseRedirect(self.get_success_url())
+
+    class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissionRequiredMixin,
+                           generic.UpdateView):
+        """
+        Vista para actualizar los datos del Sprint y  del UserStory que son el desarrollador, la actividad y el Sprint
+        """
+        model = Sprint
+        permission_required = 'administracion.editar_sprint'
+        template_name = 'administracion/sprint/sprint_form.html'
+        form_class = modelform_factory(Sprint, form=AddSprintBaseForm,
+                                       widgets={'fecha_inicio': SelectDateWidget, 'proyecto': HiddenInput},
+                                       fields={'nombre', 'fecha_inicio', 'duracion_sprint', 'estado', 'proyecto'})
+        UserStoryFormset = formset_factory(AddToSprintForm, formset=AddToSprintFormset, can_delete=True, extra=1)
+        formset = None
+
+        def get_proyecto(self):
+            return self.get_object().proyecto
+
+        def get_permission_object(self):
+            """
+            permiso para add, edit o delete
+            :return: los permisos
+            """
+            return self.get_object().proyecto
+
+        def get_success_url(self):
+            """
+            :return:la url de redireccion a la vista de los detalles del sprint modificado.
+            """
+            return reverse('sprint_detail', kwargs={'pk': self.object.id})
+
+        def __filtrar_formset__(self, formset):
+            for userformset in formset.forms:
+                userformset.fields['desarrollador'].queryset = User.objects.filter(
+                    miembroequiposprint__sprint=self.object)
+                userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.get_proyecto())
+                userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.get_proyecto()),
+                                                                                    Q(estado=0)).order_by(
+                    '-prioridadFormula')
+
+        def get_context_data(self, **kwargs):
+            """
+            Especifica los datos de contexto a pasar al template
+            :param kwargs: Diccionario con parametros con nombres clave
+            :return: los datos de contexto
+            """
+            context = super(UpdateSprintView, self).get_context_data(**kwargs)
+            current_us = self.get_object().userstory_set.all()
+            formset = self.UserStoryFormset(self.request.POST if self.request.method == 'POST' else None)
+            self.__filtrar_formset__(formset)
+            context['current_action'] = 'Editar'
+            context['formset'] = formset
+            return context
+
+        def form_valid(self, form):
+            """
+            Guarda el desarrollador, actividad y sprint asociado al un projecto dentro de un User Story
+            :param form: formulario del sprint
+            :return: vuelve a la pagina de detalle del sprint
+            """
+            self.object = form.save(commit=False)
+            self.object.fecha_fin = self.object.fecha_inicio + datetime.timedelta(days=self.object.duracion_sprint)
+            self.object.sumarHoras()
+            self.object.registrarHoras()
+            self.object.save()
+            formsetb = self.UserStoryFormset(self.request.POST)
+            if formsetb.is_valid():
+                proccessed_forms = []
+                for subform in formsetb:
+                    if subform.has_changed() and 'userStory' in subform.cleaned_data:
+                        new_userStory = subform.cleaned_data['userStory']
+                        if subform in formsetb.deleted_forms and not new_userStory in proccessed_forms:
+                            # desaciamos los user story que se eliminaron del form
+                            new_userStory.desarrollador = None
+                            new_userStory.sprint = None
+                            new_userStory.actividad = None
+
+                        else:
+                            new_flujo = subform.cleaned_data['flujo']
+                            self.flujo = new_flujo
+                            new_desarrollador = subform.cleaned_data['desarrollador']
+                            if new_userStory.estado != 3 and new_userStory.estado != 4:  # si el user story no ha finalizado
+                                new_userStory.desarrollador = new_desarrollador
+                                new_userStory.sprint = self.object
+                                new_userStory.actividad = self.flujo.actividad_set.first()
+                                new_userStory.estado = 1
+                                new_userStory.estado_actividad = 0
+
+                        self.notify(new_userStory)
+                        new_userStory.save()
+                        proccessed_forms.append(new_userStory)
+                return HttpResponseRedirect(self.get_success_url())
+
+            self.__filtrar_formset__(formsetb)
+
+            return render(self.request, self.get_template_names(), {'form': form, 'formset': formsetb},
+                          context_instance=RequestContext(self.request))
+
+class Reasignar(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.UpdateView):
+    """
+        Reasigna desarrollador
+    """
+    model = Sprint
+    permission_required = 'administracion.editar_sprint'
+    template_name = 'administracion/sprint/sprint_form_delete.html'
+    form_class = modelform_factory(Sprint,form=AddSprintBaseForm,
+                                   widgets={'fecha_inicio': SelectDateWidget,'proyecto': HiddenInput},
+                                   fields={'nombre', 'fecha_inicio','duracion_sprint','estado','proyecto'})
+    UserStoryFormset = formset_factory(AddToSprintForm, formset=AddToSprintFormset, can_delete=True, extra=0)
+    formset = None
+
+    def get_proyecto(self):
+        return self.get_object().proyecto
+
+    def get_permission_object(self):
+        """
+        permiso para add, edit o delete
+        :return: los permisos
+        """
+        return self.get_object().proyecto
+
+    def get_success_url(self):
+        """
+        :return:la url de redireccion a la vista de los detalles del sprint modificado.
+        """
+        return reverse('sprint_detail', kwargs={'pk': self.object.id})
+
+    def __filtrar_formset__(self, formset):
+            for userformset in formset.forms:
+                userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequiposprint__sprint=self.object)
+                userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.get_proyecto())
+                userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.get_proyecto()), Q(estado=1)).order_by('-prioridadFormula')
+                userformset.fields['flujo'].widget.attrs['readonly'] = True
+                userformset.fields['userStory'].widget.attrs['readonly'] = True
+    def get_context_data(self, **kwargs):
+        """
+        Especifica los datos de contexto a pasar al template
+        :param kwargs: Diccionario con parametros con nombres clave
+        :return: los datos de contexto
+        """
+        context= super(Reasignar,self).get_context_data(**kwargs)
+        current_us = self.get_object().userstory_set.all()
+        formset= self.UserStoryFormset(self.request.POST if self.request.method == 'POST' else None, initial=[{'userStory':us, 'flujo':us.actividad.flujo, 'desarrollador':us.desarrollador} for us in current_us])
+        self.__filtrar_formset__(formset)
+        context['current_action'] = 'Editar'
+        context['formset'] = formset
+        return context
+
+    def form_valid(self, form):
+        """
+        Guarda el desarrollador, actividad y sprint asociado al un projecto dentro de un User Story
+        :param form: formulario del sprint
+        :return: vuelve a la pagina de detalle del sprint
+        """
+        self.object= form.save(commit=False)
+        self.object.fecha_fin= self.object.fecha_inicio + datetime.timedelta(days=self.object.duracion_sprint)
+        self.object.sumarHoras()
+        self.object.registrarHoras()
+        self.object.save()
+        formsetb= self.UserStoryFormset(self.request.POST)
+        if formsetb.is_valid():
+            proccessed_forms = []
+            for subform in formsetb:
+                if subform.has_changed() and 'userStory' in subform.cleaned_data:
+                    new_userStory = subform.cleaned_data['userStory']
+                    if subform in formsetb.deleted_forms and not new_userStory in proccessed_forms:
+                        # desaciamos los user story que se eliminaron del form
+                        new_userStory.desarrollador = None
+                        new_userStory.sprint = None
+                        new_userStory.actividad = None
+
+                    else:
+                        new_flujo = subform.cleaned_data['flujo']
+                        self.flujo = new_flujo
+                        new_desarrollador = subform.cleaned_data['desarrollador']
+                        if new_userStory.estado != 3 and new_userStory.estado != 4:  # si el user story no ha finalizado
+                            new_userStory.desarrollador = new_desarrollador
+                            new_userStory.sprint = self.object
+                            new_userStory.actividad = self.flujo.actividad_set.first()
+                            new_userStory.estado = 1
+                            new_userStory.estado_actividad = 0
+
+
+                    new_userStory.save()
+                    proccessed_forms.append(new_userStory)
+            return HttpResponseRedirect(self.get_success_url())
+
+        self.__filtrar_formset__(formsetb)
+
+        return render(self.request, self.get_template_names(), {'form': form, 'formset': formsetb},
+                      context_instance=RequestContext(self.request))
