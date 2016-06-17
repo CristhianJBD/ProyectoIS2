@@ -140,6 +140,14 @@ class Sprint(models.Model):
         verbose_name = 'sprint'
         verbose_name_plural = 'sprints'
 
+    def clean(self):
+        aux = Sprint.objects.filter(estado='EJ', proyecto=self.proyecto)
+        try:
+            if aux != self and self.estado == 'EJ' and aux.count() > 0:
+                raise ValidationError({'estado': 'Ya existe un sprint ejecutandose'})
+        except TypeError:
+            pass  # error si una de las fechas es null
+
     def sumarHoras(self):
         self.horasDuracionSprint = 0
         for miembro in MiembroEquipoSprint.objects.filter(sprint=self):

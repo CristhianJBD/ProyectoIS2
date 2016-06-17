@@ -43,7 +43,10 @@
     <p><strong>Nombre:</strong> {{ sprint.nombre }}</p>
     <p><strong>Estado:</strong> {{ sprint.estado }}</p>
     <p><strong>Duracion(Dias):</strong> {{ sprint.duracion_sprint }}</p>
-    <p><strong>Tiempo Estimado :</strong> {{ sprint.horasDuracionSprint }} Horas  -  <strong>Tiempo Registrado:</strong> {{ sprint.horasRegistradaSprint }} Horas</p>
+    {% if sprint.horasDuracionSprint < sprint.horasRegistradaSprint %}
+        <div class="alert alert-warning">Se ha superado la cantidad de horas del sprint</div>
+    {% endif %}
+    <p><strong>Tiempo Estimado :</strong> {{ sprint.horasDuracionSprint }} Horas - <strong>Tiempo Registrado:</strong> {{ sprint.horasRegistradaSprint }} Horas</p>
     <p><strong>Fecha Inicio:</strong>{{ sprint.fecha_inicio }} - <strong>Fecha fin:</strong>{{ sprint.fecha_fin }}</p>
     <p><strong>Proyecto Asociado:</strong> {{ sprint.proyecto }}</p>
 
