@@ -37,7 +37,7 @@
     </div>
 
 
-    <div class="page-header"><h1>Reasignar Desarrollador</h1></div>
+    <div class="page-header"><h1>Sprint</h1></div>
 
 
     <script src="{% static 'lumino/js/jquery-ui.min.js' %}"></script>
@@ -49,7 +49,7 @@
     </style>
     <form action="" method="post">
         {% csrf_token %}
-        <div class="row">
+         <div class="row">
             <div class="col-lg-3">
                 {% bootstrap_field form.nombre %}
             </div>
@@ -67,31 +67,10 @@
     <form action="" method="post">
         {% csrf_token %}
 
-        {% if current_action == 'Agregar' %}
-        <div class="row">
-            <div class="col-lg-6">
-                <h3 id="equipo">Miembros del Equipo</h3>
-                {{ formset.management_form }}
-                <div class="row top-buffer team-members">
-                    {% bootstrap_formset_errors formset %}
-                    {% for subform in formset %}
-                        {% bootstrap_form_errors subform %}
-                        {{ subform.id }}
-                        <div class="teammember" id="teammember-{{ forloop.counter0 }}">
-                            {% if subform.instance.pk %}{% bootstrap_field subform.DELETE %}{% endif %}
-                            {% bootstrap_field subform.usuario %}
-                            {% bootstrap_field subform.horasDeTrabajo %}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
 
         {% if current_action == 'Editar' %}
         <fieldset>
-            <legend>Quitar UserStory</legend>
+            <legend>Reasignar Desarrollador</legend>
             {{ formset.management_form }}
             {{ formset.non_form_errors }}
             <div class="row top-buffer team-members">
