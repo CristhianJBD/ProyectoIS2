@@ -39,9 +39,10 @@
                 <li><a href="{% url 'userstory_registraractividad'  userstory.id %}" class="fa fa-pencil-square-o"> Registrar Avance</a></li>
             {% endif %}
             {% if "editar_userstory" in proyecto_perms or 'editar_mi_userstory' in us_perms%}<li>
-                <a href="{% url 'version_list' userstory.id %}" class="fa fa-clock-o"> Historial</a></li>
+                <a href="{% url 'version_list' userstory.id %}" class="fa fa-clock-o"> Historial de Cambios</a></li>
             {% endif %}
         {% endif %}
+         <li><a href="{% url 'userstory_registrodeactividad'  userstory.id %}" class="fa fa-pencil-square-o"> Registro de Avances</a></li>
 
          <li><a href="{% url 'file_list' userstory.id %}"><i class="fa fa-file"></i> Adjuntos</a></li>
 

@@ -12,7 +12,7 @@ from guardian.mixins import LoginRequiredMixin
 from guardian.shortcuts import get_perms
 from administracion.forms import AddToSprintForm, AddToSprintFormset, AddSprintBaseForm, MiembrosEquipoFormset, \
     MiembrosEquipoSprintFormset
-from administracion.models import Sprint, Proyecto, Actividad, Flujo, MiembroEquipoSprint
+from administracion.models import Sprint, Proyecto, Actividad, Flujo, MiembroEquipoSprint, Nota
 from administracion.views.views import CreateViewPermissionRequiredMixin, GlobalPermissionRequiredMixin, ActiveProjectRequiredMixin
 from django.views import generic
 from django.core.urlresolvers import reverse
@@ -21,6 +21,7 @@ import datetime
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.template.loader import get_template, render_to_string
+from django.core.urlresolvers import reverse, reverse_lazy
 
 class SprintList(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.ListView):
     """
@@ -277,3 +278,47 @@ class UpdateSprintView(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPer
 
 
         send_mail(subject, message, 'proyectois2.2016@gmail.com', recipients, html_message=message)
+
+class DeleteUsSprintView(LoginRequiredMixin, ActiveProjectRequiredMixin, generic.FormView):
+    """
+    Vista cancelacion de User Stories
+    """
+    form_class = modelform_factory(Nota, fields=['mensaje'])
+    template_name = 'administracion/sprint/userstory_eliminar.html'
+    user_story = None
+
+    def get_user_story(self):
+        if not self.user_story:
+            self.user_story = get_object_or_404(UserStory, pk=self.kwargs['pk'])
+        return self.user_story
+
+    def get_proyecto(self):
+        return self.get_user_story().proyecto
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteUsSprintView, self).get_context_data(**kwargs)
+        context['userstory'] = self.get_user_story()
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('product_backlog', kwargs={'project_pk': self.get_proyecto().id})
+
+    def dispatch(self, request, *args, **kwargs):
+        """
+        Comprobacion de permisos hecha antes de la llamada al dispatch que inicia el proceso de respuesta al request de la url
+        :param request: request hecho por el cliente
+        :param args: argumentos adicionales posicionales
+        :param kwargs: argumentos adicionales en forma de diccionario
+        :return: PermissionDenied si el usuario no cuenta con permisos
+        """
+        return super(DeleteUsSprintView, self).dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        nota = form.save(commit=False)
+        self.get_user_story().estado = 0
+        self.get_user_story().desarrollador = None
+        self.get_user_story().sprint= None
+        self.get_user_story().actividad = None
+        self.user_story.save()
+
+        return HttpResponseRedirect(self.get_success_url())

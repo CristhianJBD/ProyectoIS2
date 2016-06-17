@@ -37,6 +37,7 @@
         {% get_obj_perms user for sprint.proyecto as "proyecto_perms" %}
         {% if "editar_sprint" in proyecto_perms %}
             <li><a href="{% url 'sprint_update'  sprint.id %}" class="glyphicon glyphicon-pencil"> Editar</a></li>
+            <li><a href="{% url 'sprint_delete_us'  sprint.id %}" class="glyphicon glyphicon-pencil"> No solucionado aun</a></li>
         {% endif %}
      </ul>
 
@@ -94,6 +95,9 @@
                                 class="glyphicon glyphicon-pencil"></i></a>{% endif %}
                         {% if us.estado != 4  and us.estado != 3%}
                         {% if "cancelar_userstory" in proyecto_perms %}<a href="{% url 'userstory_cancelar' us.id %}"><i class="glyphicon glyphicon-remove"></i></a> {% endif %}
+                        {% endif %}
+                        {% if us.estado != 4  and us.estado != 3%}
+                        {% if "aprobar_userstory" in proyecto_perms %}<a href="{% url 'userstory_delete' us.id %}"><i class="glyphicon glyphicon-remove-circle"></i></a> {% endif %}
                         {% endif %}
                     </div>
                 </div>

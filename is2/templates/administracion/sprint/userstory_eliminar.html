@@ -1,0 +1,49 @@
+{% extends "administracion/base.html" %}
+{% load bootstrap3 %}
+{% load guardian_tags %}
+
+
+
+
+{% block contentbase %}
+            <div class="row">
+   <ol class="breadcrumb">
+      <li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+      <li><a href="{%url "project_list" %}">Lista de Proyectos</a></li>
+       <li><a href="">Sprint Detail</a></li>
+       <li class="active">Eliminar User Stories</li>
+   </ol>
+</div>
+
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li class="active"><a href="{% url 'project_list' %}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Proyectos</a></li>
+            <li><a href="{% url 'user_list' %}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
+            <li><a href="{% url 'rol_list' %}"><svg class="glyph stroked key "><use xlink:href="#stroked-key"/></svg> Roles</a></li>
+
+        </ul>
+    </div>
+    <div class="page-header"><h1>Eliminar User Story del sprint</h1></div>
+
+    <p><strong>Desea eliminar el User Story: {{ userstory.nombre_largo }} ? </strong></p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-4">
+                {% bootstrap_form form layout="inline" %}
+            </div>
+        </div>
+        {% buttons submit='Si' %}
+            <a href="javascript:history.back()">
+                <button type="button" class="btn btn-danger">No</button>
+            </a>
+        {% endbuttons %}
+    </form>
+    </div>
+{% endblock %}

@@ -288,7 +288,7 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
         if 'editar_userstory' in get_perms(self.request.user, self.get_object().proyecto) or \
                         'editar_mi_userstory' in get_perms(self.request.user, self.get_object()):
             actual_fields.insert(1, 'actividad')
-            actual_fields.insert(2,'desarrollador')
+
         return modelform_factory(UserStory, form=RegistrarActividadForm, fields=actual_fields)
 
     def get_form(self, form_class):
@@ -298,15 +298,11 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
 
         form = super(RegistrarActividadUserStory, self).get_form(form_class)
         # if 'desarrollador' in form.fields:
-        #     form.fields['desarrollador']=User.objects.filter(miembroequiposprint__sprint=self.object.sprint)
+        #      form.fields['desarrollador']=User.objects.filter(miembroequiposprint__sprint=self.object.sprint)
         if 'actividad' in form.fields:
             form.fields['actividad'].queryset = Actividad.objects.filter(flujo=self.get_object().actividad.flujo)
-        # estado_actual= self.get_object().estado_actividad
-        # print estado_actual
-        # estado_act= []
-        # if estado_actual == 0
-        #     estado_act.a
-        # form.fields['estado_actividad'].ChoiceField()
+
+        form.fields['estado_actividad'].widget.attrs['readonly']=True
         return form
 
     def form_valid(self, form):

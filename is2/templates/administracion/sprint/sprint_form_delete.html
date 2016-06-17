@@ -1,0 +1,129 @@
+{% extends "administracion/base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+
+
+{% block contentbase %}
+
+
+        <div class="row" xmlns="http://www.w3.org/1999/html">
+			<ol class="breadcrumb">
+				<li><a href="{% url "index" %}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+				<li><a href="{% url "project_list"  %}">Lista de Proyectos</a></li>
+                <li><a href="">Detalles de Proyecto</a></li>
+{#				<li><a href="{% url "project_detail" view.proyecto.pk %}">Detalles de Proyecto</li></a>#}
+                <li> Delete User Story</li>
+
+			</ol>
+		</div><!--/.row-->
+
+
+
+
+
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li class="active"><a href="{% url 'project_list' %}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Proyectos</a></li>
+            <li><a href="{% url 'user_list' %}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
+            <li><a href="{% url 'rol_list' %}"><svg class="glyph stroked key "><use xlink:href="#stroked-key"/></svg> Roles</a></li>
+
+        </ul>
+    </div>
+
+
+    <div class="page-header"><h1>Sprint</h1></div>
+
+
+    <script src="{% static 'lumino/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'lumino/js/jquery.formset.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.teammember').formset({
+                prefix: '{{ formset.prefix }}',
+                addText: 'Agregar',
+                deleteText: 'Eliminar'
+            });
+        })
+    </script>
+    <style>
+        .empty-form {
+            display: none;
+        }
+    </style>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-3">
+                {% bootstrap_field form.nombre %}
+            </div>
+            <div class="col-lg-5">
+                {% bootstrap_field form.fecha_inicio %}
+            </div>
+            <div class="col-lg-3">
+                {% bootstrap_field form.duracion_sprint %}
+            </div>
+            <div class="col-lg-3">
+                {% bootstrap_field form.estado %}
+            </div>
+            {%  bootstrap_field form.proyecto %}
+        </div>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% if current_action == 'Agregar' %}
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 id="equipo">Miembros del Equipo</h3>
+                {{ formset.management_form }}
+                <div class="row top-buffer team-members">
+                    {% bootstrap_formset_errors formset %}
+                    {% for subform in formset %}
+                        {% bootstrap_form_errors subform %}
+                        {{ subform.id }}
+                        <div class="teammember" id="teammember-{{ forloop.counter0 }}">
+                            {% if subform.instance.pk %}{% bootstrap_field subform.DELETE %}{% endif %}
+                            {% bootstrap_field subform.usuario %}
+                            {% bootstrap_field subform.horasDeTrabajo %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+        {% if current_action == 'Editar' %}
+        <fieldset>
+            <legend>Quitar UserStory</legend>
+            {{ formset.management_form }}
+            {{ formset.non_form_errors }}
+            <div class="row top-buffer team-members">
+                {% for form in formset %}
+                    {{ form.id }}
+
+                    <div class="teammember" id="teammember-{{ forloop.counter0 }}">
+                        {% if form.instance.pk %}{% bootstrap_field form.DELETE %}{% endif %}
+                        <div class="row">
+                            <div class="col-lg-3">{% bootstrap_field form.userStory %}</div>
+                            <div class="col-lg-3">{% bootstrap_field form.desarrollador %}</div>
+                            <div class="col-lg-3">{% bootstrap_field form.flujo %}</div>
+
+
+                        </div>
+                    </div>
+
+
+                {% endfor %}
+            </div>
+        </fieldset>
+     {% endif %}
+        <input type="submit" value="Aceptar" class="btn btn-default"/>
+    </form>
+
+{% endblock %}
