@@ -330,9 +330,9 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
         desarrollador= nota.desarrollador
         sprint= self.object.sprint
         est_act= nota.estado_actividad
-        print est_act
+
         if(est_act == 2):
-            print 'entro1'
+
             subject = 'Se llego al estado Done con el us: {} del proyecto: {}'.format(nota.user_story, proyecto)
             domain = get_current_site(self.request).domain
             message = render_to_string('administracion/mail/notification_mail.html',
@@ -341,7 +341,7 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
             print recipients
             send_mail(subject, message, 'noreply.proyectois2.2016@gmail.com', recipients, html_message=message)
         else:
-            print 'entro2'
+
             subject = 'Registro de Actividad: {} - {}'.format(nota.user_story, proyecto)
             domain = get_current_site(self.request).domain
             message = render_to_string('administracion/mail/notification_mail.html',
