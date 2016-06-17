@@ -454,8 +454,8 @@ class Reasignar(ActiveProjectRequiredMixin, LoginRequiredMixin, GlobalPermission
                 userformset.fields['desarrollador'].queryset = User.objects.filter(miembroequiposprint__sprint=self.object)
                 userformset.fields['flujo'].queryset = Flujo.objects.filter(proyecto=self.get_proyecto())
                 userformset.fields['userStory'].queryset = UserStory.objects.filter(Q(proyecto=self.get_proyecto()), Q(estado=1)).order_by('-prioridadFormula')
-                userformset.fields['flujo'].widget.attrs['readonly'] = True
-                userformset.fields['userStory'].widget.attrs['readonly'] = True
+                userformset.fields['flujo'].widget.attrs['readonly'] = 'readonly'
+                userformset.fields['userStory'].widget.attrs['readonly'] = 'readonly'
     def get_context_data(self, **kwargs):
         """
         Especifica los datos de contexto a pasar al template

@@ -202,14 +202,14 @@ class UpdateUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin, generic.Up
 
     def notify(self, user_story, changes):
         proyecto = user_story.proyecto
-
+        sprint = user_story.sprint
         changelist = [c.replace('_', ' ').title() for c in changes]
         subject = 'Cambios en User Story: {} - {}'.format(user_story, proyecto)
         domain = get_current_site(self.request).domain
         message = render_to_string('administracion/mail/change_mail.html',
                                    {'proyecto': proyecto, 'us': user_story, 'domain': domain,
                                     'cambios': changelist})
-        recipients = [u.email for u in proyecto.equipo.all() if u.has_perm('administracion.aprobar_userstory', proyecto)]
+        recipients = [u.email for u in sprint.equipo.all() if u.has_perm('administracion.aprobar_userstory', proyecto)]
 
         if user_story.desarrollador and user_story.desarrollador.email not in recipients:
             recipients.append(user_story.desarrollador.email)
@@ -328,13 +328,25 @@ class RegistrarActividadUserStory(ActiveProjectRequiredMixin, LoginRequiredMixin
         #se registra una actividad en el user story
         proyecto = nota.user_story.proyecto
         desarrollador= nota.desarrollador
-        subject = 'Registro de Actividad: {} - {}'.format(nota.user_story, proyecto)
-        domain = get_current_site(self.request).domain
-        message = render_to_string('administracion/mail/notification_mail.html',
-                                   {'proyecto': proyecto, 'nota': nota, 'us': nota.user_story, 'domain': domain})
-        recipients = [desarrollador.email]
-        #print recipients
-        send_mail(subject, message, 'noreply.proyectois2.2016@gmail.com', recipients, html_message=message)
+        sprint= self.object.sprint
+        est_act= nota.estado_actividad
+        if(est_act == 2):
+            subject = 'Se llego al estado Done el us: {} del proyecto: {}'.format(nota.user_story, proyecto)
+            domain = get_current_site(self.request).domain
+            message = render_to_string('administracion/mail/notification_mail.html',
+                                       {'proyecto': proyecto, 'nota': nota, 'us': nota.user_story, 'domain': domain})
+            recipients = [u.email for u in sprint.equipo.all() if u.has_perm('administracion.aprobar_userstory', proyecto)]
+            # print recipients
+            send_mail(subject, message, 'noreply.proyectois2.2016@gmail.com', recipients, html_message=message)
+        else:
+
+            subject = 'Registro de Actividad: {} - {}'.format(nota.user_story, proyecto)
+            domain = get_current_site(self.request).domain
+            message = render_to_string('administracion/mail/notification_mail.html',
+                                       {'proyecto': proyecto, 'nota': nota, 'us': nota.user_story, 'domain': domain})
+            recipients = [desarrollador.email]
+            #print recipients
+            send_mail(subject, message, 'noreply.proyectois2.2016@gmail.com', recipients, html_message=message)
 
 
 

@@ -103,9 +103,9 @@
                                              {% if u.estado_actividad == 2 %}
 
                                                      {% with p=u.prioridadFormula %}
-                                                         <a href="{% url 'userstory_detail' u.id %}" class="btn btn-outline
-                                                         btn-{% if p == 0 %}primary{% elif p == 1 %}warning{% elif p == 2 %}danger{% endif %}
-                                                         btn-sm btn-block">{% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>{% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li> {% endif %}{{ u.nombre }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})<li>Sprint: {{ u.sprint }}</li><li>Desarrollador: {{ u.desarrollador }}</li></a>
+                                                         <a href="{% url 'userstory_detail' u.id %}" class="btn
+                                                         bg-{% if p <= 3 %}info{% elif p <= 5 %}warning{% elif p <= 9 %}danger{% endif %}
+                                                         btn-block">{% if u.estado == 3 %}<li class="fa fa-check-circle fa-adjust"></li>{% elif u.estado == 4 %}<li class="fa fa-times-circle fa-adjust"></li> {% endif %}{{ u.nombre_largo }} ({{ u.tiempo_registrado }}/{{ u.tiempo_estimado }})<li>Sprint: {{ u.sprint }}</li><li>Desarrollador: {{ u.desarrollador }}</li></a>
                                                      {% endwith %}
                                              {% endif %}
                                              </td>

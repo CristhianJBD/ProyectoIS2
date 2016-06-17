@@ -2,6 +2,8 @@ from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponsePermanentRedirect
 from django.contrib.auth import authenticate, login
 from django.core.context_processors import csrf
+from django.contrib.auth.models import User
+from administracion.models import Proyecto, Sprint, Nota
 
 
 
@@ -47,7 +49,9 @@ def index(request):
 
      """
      if request.user.is_authenticated() and request.user.is_active == True:
-         return render_to_response('administracion/index.html', {'full_name': request.user.username})
+
+         return render_to_response('administracion/index.html', {'full_name': request.user.username, 'usuarios': User.objects.count(), 'proyectos': Proyecto.objects.count(), 'sprints': Sprint.objects.count(), 'notas': Nota.objects.count()})
+
      else:
          return HttpResponsePermanentRedirect('/login')
 
