@@ -143,7 +143,7 @@ class Sprint(models.Model):
     def clean(self):
         aux = Sprint.objects.filter(estado='EJ', proyecto=self.proyecto)
         try:
-            if aux != self and self.estado == 'EJ' and aux.count() > 0:
+            if aux.first() != self and self.estado == 'EJ' and aux.count() > 0:
                 raise ValidationError({'estado': 'Ya existe un sprint ejecutandose'})
         except TypeError:
             pass  # error si una de las fechas es null
