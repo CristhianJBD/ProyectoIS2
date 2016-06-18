@@ -5,7 +5,7 @@
 var1=$1
 source entornodesarrollop2/bin/activate
 cd is2		
-git clone ://github.com/CristhianJBD/ProyectoIS2.git
+git clone https://github.com/CristhianJBD/ProyectoIS2.git
 cd ProyectoIS2/is2
 chmod a+x poblardatabase.sh
 ./poblardatabase.sh

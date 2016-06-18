@@ -4,7 +4,7 @@
 # o cualquier letra si quiere crear uno nuevo
 var1=$1
 cd SCRIPTDESARROLLO		
-git clone ://github.com/CristhianJBD/ProyectoIS2.git
+git clone https://github.com/CristhianJBD/ProyectoIS2.git
 cd ..
 echo $var1
 if [ $var1 = "entornodesarrollop2" ]; then
