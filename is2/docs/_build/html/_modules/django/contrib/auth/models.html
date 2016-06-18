@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>django.contrib.auth.models &mdash; documentación de ProyectoIs2 - 3.0</title>
+  <title>django.contrib.auth.models &mdash; ProyectoIS2 5.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="../../../../index.html"/>
-        <link rel="up" title="Código de módulo" href="../../../index.html"/> 
+    <link rel="top" title="ProyectoIS2 5.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="Module code" href="../../../index.html"/> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../index.html" class="icon icon-home"> ProyectoIs2
+            <a href="../../../../index.html" class="icon icon-home"> ProyectoIS2
           
 
           
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                3.0
+                5.0
               </div>
             
           
@@ -81,15 +81,8 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../administracion.html">administracion package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../view_project.html">view_project module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../views.html">views module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../views_flujo.html">views_flujo module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../views_rol.html">views_rol module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../views_sprints.html">views_sprints module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../views_user.html">views_user module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../view_userstory.html">view_userstory module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../autenticacion.html">autenticacion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../administracion.html">Modulo administracion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../autenticacion.html">Modulo autenticacion</a></li>
 </ul>
 
             
@@ -103,7 +96,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../../../index.html">ProyectoIs2</a>
+        <a href="../../../../index.html">ProyectoIS2</a>
       </nav>
 
 
@@ -120,7 +113,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../../../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="../../../index.html">Código de módulo</a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
       
     <li>django.contrib.auth.models</li>
       <li class="wy-breadcrumbs-aside">
@@ -134,21 +127,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Código fuente para django.contrib.auth.models</h1><div class="highlight"><pre>
+  <h1>Source code for django.contrib.auth.models</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
 
-<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">auth</span>
-<span class="kn">from</span> <span class="nn">django.contrib.auth.base_user</span> <span class="kn">import</span> <span class="n">AbstractBaseUser</span><span class="p">,</span> <span class="n">BaseUserManager</span>
-<span class="kn">from</span> <span class="nn">django.contrib.auth.signals</span> <span class="kn">import</span> <span class="n">user_logged_in</span>
-<span class="kn">from</span> <span class="nn">django.contrib.contenttypes.models</span> <span class="kn">import</span> <span class="n">ContentType</span>
-<span class="kn">from</span> <span class="nn">django.core</span> <span class="kn">import</span> <span class="n">validators</span>
-<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">PermissionDenied</span>
 <span class="kn">from</span> <span class="nn">django.core.mail</span> <span class="kn">import</span> <span class="n">send_mail</span>
+<span class="kn">from</span> <span class="nn">django.core</span> <span class="kn">import</span> <span class="n">validators</span>
 <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django.db.models.manager</span> <span class="kn">import</span> <span class="n">EmptyManager</span>
-<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">six</span><span class="p">,</span> <span class="n">timezone</span>
-<span class="kn">from</span> <span class="nn">django.utils.encoding</span> <span class="kn">import</span> <span class="n">python_2_unicode_compatible</span>
+<span class="kn">from</span> <span class="nn">django.utils.crypto</span> <span class="kn">import</span> <span class="n">get_random_string</span><span class="p">,</span> <span class="n">salted_hmac</span>
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">six</span>
 <span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">timezone</span>
+
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">auth</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.hashers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">check_password</span><span class="p">,</span> <span class="n">make_password</span><span class="p">,</span> <span class="n">is_password_usable</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.signals</span> <span class="kn">import</span> <span class="n">user_logged_in</span>
+<span class="kn">from</span> <span class="nn">django.contrib.contenttypes.models</span> <span class="kn">import</span> <span class="n">ContentType</span>
+<span class="kn">from</span> <span class="nn">django.utils.encoding</span> <span class="kn">import</span> <span class="n">python_2_unicode_compatible</span>
 
 
 <span class="k">def</span> <span class="nf">update_last_login</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -162,12 +158,11 @@
 
 
 <span class="k">class</span> <span class="nc">PermissionManager</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Manager</span><span class="p">):</span>
-    <span class="n">use_in_migrations</span> <span class="o">=</span> <span class="bp">True</span>
-
     <span class="k">def</span> <span class="nf">get_by_natural_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">codename</span><span class="p">,</span> <span class="n">app_label</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
             <span class="n">codename</span><span class="o">=</span><span class="n">codename</span><span class="p">,</span>
-            <span class="n">content_type</span><span class="o">=</span><span class="n">ContentType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">db_manager</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">)</span><span class="o">.</span><span class="n">get_by_natural_key</span><span class="p">(</span><span class="n">app_label</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span>
+            <span class="n">content_type</span><span class="o">=</span><span class="n">ContentType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_by_natural_key</span><span class="p">(</span><span class="n">app_label</span><span class="p">,</span>
+                                                                <span class="n">model</span><span class="p">),</span>
         <span class="p">)</span>
 
 
@@ -195,12 +190,8 @@
 <span class="sd">    Three basic permissions -- add, change and delete -- are automatically</span>
 <span class="sd">    created for each Django model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
-    <span class="n">content_type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
-        <span class="n">ContentType</span><span class="p">,</span>
-        <span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span>
-        <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;content type&#39;</span><span class="p">),</span>
-    <span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">content_type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">ContentType</span><span class="p">)</span>
     <span class="n">codename</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;codename&#39;</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">objects</span> <span class="o">=</span> <span class="n">PermissionManager</span><span class="p">()</span>
 
@@ -226,8 +217,6 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The manager for the auth&#39;s Group model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">use_in_migrations</span> <span class="o">=</span> <span class="bp">True</span>
-
     <span class="k">def</span> <span class="nf">get_by_natural_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
@@ -251,11 +240,8 @@
 <span class="sd">    messages.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">permissions</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span>
-        <span class="n">Permission</span><span class="p">,</span>
-        <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;permissions&#39;</span><span class="p">),</span>
-        <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-    <span class="p">)</span>
+    <span class="n">permissions</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Permission</span><span class="p">,</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;permissions&#39;</span><span class="p">),</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
     <span class="n">objects</span> <span class="o">=</span> <span class="n">GroupManager</span><span class="p">()</span>
 
@@ -270,36 +256,135 @@
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,)</span>
 
 
-<span class="k">class</span> <span class="nc">UserManager</span><span class="p">(</span><span class="n">BaseUserManager</span><span class="p">):</span>
-    <span class="n">use_in_migrations</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="k">class</span> <span class="nc">BaseUserManager</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Manager</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">_create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">):</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">normalize_email</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Normalize the address by lowercasing the domain part of the email</span>
+<span class="sd">        address.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="n">email</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">email_name</span><span class="p">,</span> <span class="n">domain_part</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">email</span> <span class="o">=</span> <span class="s1">&#39;@&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">email_name</span><span class="p">,</span> <span class="n">domain_part</span><span class="o">.</span><span class="n">lower</span><span class="p">()])</span>
+        <span class="k">return</span> <span class="n">email</span>
+
+    <span class="k">def</span> <span class="nf">make_random_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                             <span class="n">allowed_chars</span><span class="o">=</span><span class="s1">&#39;abcdefghjkmnpqrstuvwxyz&#39;</span>
+                                           <span class="s1">&#39;ABCDEFGHJKLMNPQRSTUVWXYZ&#39;</span>
+                                           <span class="s1">&#39;23456789&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a random password with the given length and given</span>
+<span class="sd">        allowed_chars. Note that the default value of allowed_chars does not</span>
+<span class="sd">        have &quot;I&quot; or &quot;O&quot; or letters and digits that look similar -- just to</span>
+<span class="sd">        avoid confusion.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">get_random_string</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">allowed_chars</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_by_natural_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">USERNAME_FIELD</span><span class="p">:</span> <span class="n">username</span><span class="p">})</span>
+
+
+<span class="k">class</span> <span class="nc">UserManager</span><span class="p">(</span><span class="n">BaseUserManager</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">_create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span>
+                     <span class="n">is_staff</span><span class="p">,</span> <span class="n">is_superuser</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates and saves a User with the given username, email and password.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The given username must be set&#39;</span><span class="p">)</span>
         <span class="n">email</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">)</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span>
+                          <span class="n">is_staff</span><span class="o">=</span><span class="n">is_staff</span><span class="p">,</span> <span class="n">is_active</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                          <span class="n">is_superuser</span><span class="o">=</span><span class="n">is_superuser</span><span class="p">,</span> <span class="n">last_login</span><span class="o">=</span><span class="n">now</span><span class="p">,</span>
+                          <span class="n">date_joined</span><span class="o">=</span><span class="n">now</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">)</span>
         <span class="n">user</span><span class="o">.</span><span class="n">set_password</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
         <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">using</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">user</span>
 
     <span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">):</span>
-        <span class="n">extra_fields</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;is_staff&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
-        <span class="n">extra_fields</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;is_superuser&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span>
+                                 <span class="o">**</span><span class="n">extra_fields</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">create_superuser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">):</span>
-        <span class="n">extra_fields</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;is_staff&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
-        <span class="n">extra_fields</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;is_superuser&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span>
+                                 <span class="o">**</span><span class="n">extra_fields</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">extra_fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;is_staff&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Superuser must have is_staff=True.&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">extra_fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;is_superuser&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Superuser must have is_superuser=True.&#39;</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_fields</span><span class="p">)</span>
+<span class="nd">@python_2_unicode_compatible</span>
+<span class="k">class</span> <span class="nc">AbstractBaseUser</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+    <span class="n">last_login</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;last login&#39;</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+
+    <span class="n">is_active</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="n">REQUIRED_FIELDS</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">abstract</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">get_username</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;Return the identifying username for this User&quot;</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">USERNAME_FIELD</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_username</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">natural_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_username</span><span class="p">(),)</span>
+
+    <span class="k">def</span> <span class="nf">is_anonymous</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Always returns False. This is a way of comparing User objects to</span>
+<span class="sd">        anonymous users.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">is_authenticated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Always return True. This is a way to tell if the user has been</span>
+<span class="sd">        authenticated in templates.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">set_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_password</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">make_password</span><span class="p">(</span><span class="n">raw_password</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_password</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a boolean of whether the raw_password was correct. Handles</span>
+<span class="sd">        hashing formats behind the scenes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">setter</span><span class="p">(</span><span class="n">raw_password</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_password</span><span class="p">(</span><span class="n">raw_password</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">update_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">check_password</span><span class="p">(</span><span class="n">raw_password</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">,</span> <span class="n">setter</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_unusable_password</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Sets a value that will never be a valid hash</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">make_password</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">has_usable_password</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">is_password_usable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_full_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;subclasses of AbstractBaseUser must provide a get_full_name() method&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_short_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;subclasses of AbstractBaseUser must provide a get_short_name() method.&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_session_auth_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an HMAC of the password field.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key_salt</span> <span class="o">=</span> <span class="s2">&quot;django.contrib.auth.models.AbstractBaseUser.get_session_auth_hash&quot;</span>
+        <span class="k">return</span> <span class="n">salted_hmac</span><span class="p">(</span><span class="n">key_salt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
 
 
 <span class="c1"># A few helper functions for common logic between User and AnonymousUser.</span>
@@ -312,32 +397,18 @@
 
 
 <span class="k">def</span> <span class="nf">_user_has_perm</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">perm</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A backend can raise `PermissionDenied` to short-circuit permission checking.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">auth</span><span class="o">.</span><span class="n">get_backends</span><span class="p">():</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="s1">&#39;has_perm&#39;</span><span class="p">):</span>
-            <span class="k">continue</span>
-        <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="s2">&quot;has_perm&quot;</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">backend</span><span class="o">.</span><span class="n">has_perm</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">perm</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">except</span> <span class="n">PermissionDenied</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
     <span class="k">return</span> <span class="bp">False</span>
 
 
 <span class="k">def</span> <span class="nf">_user_has_module_perms</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">app_label</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A backend can raise `PermissionDenied` to short-circuit permission checking.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">auth</span><span class="o">.</span><span class="n">get_backends</span><span class="p">():</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="s1">&#39;has_module_perms&#39;</span><span class="p">):</span>
-            <span class="k">continue</span>
-        <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="s2">&quot;has_module_perms&quot;</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">backend</span><span class="o">.</span><span class="n">has_module_perms</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">app_label</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">except</span> <span class="n">PermissionDenied</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
     <span class="k">return</span> <span class="bp">False</span>
 
 
@@ -346,33 +417,18 @@
 <span class="sd">    A mixin class that adds the fields and methods necessary to support</span>
 <span class="sd">    Django&#39;s Group and Permission model using the ModelBackend.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">is_superuser</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span>
-        <span class="n">_</span><span class="p">(</span><span class="s1">&#39;superuser status&#39;</span><span class="p">),</span>
-        <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-        <span class="n">help_text</span><span class="o">=</span><span class="n">_</span><span class="p">(</span>
-            <span class="s1">&#39;Designates that this user has all permissions without &#39;</span>
-            <span class="s1">&#39;explicitly assigning them.&#39;</span>
-        <span class="p">),</span>
-    <span class="p">)</span>
-    <span class="n">groups</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span>
-        <span class="n">Group</span><span class="p">,</span>
-        <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;groups&#39;</span><span class="p">),</span>
-        <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-        <span class="n">help_text</span><span class="o">=</span><span class="n">_</span><span class="p">(</span>
-            <span class="s1">&#39;The groups this user belongs to. A user will get all permissions &#39;</span>
-            <span class="s1">&#39;granted to each of their groups.&#39;</span>
-        <span class="p">),</span>
-        <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;user_set&quot;</span><span class="p">,</span>
-        <span class="n">related_query_name</span><span class="o">=</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">user_permissions</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span>
-        <span class="n">Permission</span><span class="p">,</span>
-        <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;user permissions&#39;</span><span class="p">),</span>
-        <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">is_superuser</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;superuser status&#39;</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">help_text</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Designates that this user has all permissions without &#39;</span>
+                    <span class="s1">&#39;explicitly assigning them.&#39;</span><span class="p">))</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Group</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;groups&#39;</span><span class="p">),</span>
+        <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;The groups this user belongs to. A user will &#39;</span>
+                                <span class="s1">&#39;get all permissions granted to each of &#39;</span>
+                                <span class="s1">&#39;his/her group.&#39;</span><span class="p">),</span>
+        <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;user_set&quot;</span><span class="p">,</span> <span class="n">related_query_name</span><span class="o">=</span><span class="s2">&quot;user&quot;</span><span class="p">)</span>
+    <span class="n">user_permissions</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Permission</span><span class="p">,</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;user permissions&#39;</span><span class="p">),</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
         <span class="n">help_text</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Specific permissions for this user.&#39;</span><span class="p">),</span>
-        <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;user_set&quot;</span><span class="p">,</span>
-        <span class="n">related_query_name</span><span class="o">=</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
+        <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;user_set&quot;</span><span class="p">,</span> <span class="n">related_query_name</span><span class="o">=</span><span class="s2">&quot;user&quot;</span><span class="p">)</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">abstract</span> <span class="o">=</span> <span class="bp">True</span>
@@ -436,40 +492,23 @@
 <span class="sd">    An abstract base class implementing a fully featured User model with</span>
 <span class="sd">    admin-compliant permissions.</span>
 
-<span class="sd">    Username and password are required. Other fields are optional.</span>
+<span class="sd">    Username, password and email are required. Other fields are optional.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">username</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
-        <span class="n">_</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">),</span>
-        <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-        <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-        <span class="n">help_text</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.&#39;</span><span class="p">),</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">help_text</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Required. 30 characters or fewer. Letters, digits and &#39;</span>
+                    <span class="s1">&#39;@/./+/-/_ only.&#39;</span><span class="p">),</span>
         <span class="n">validators</span><span class="o">=</span><span class="p">[</span>
-            <span class="n">validators</span><span class="o">.</span><span class="n">RegexValidator</span><span class="p">(</span>
-                <span class="s1">r&#39;^[\w.@+-]+$&#39;</span><span class="p">,</span>
-                <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Enter a valid username. This value may contain only &#39;</span>
-                  <span class="s1">&#39;letters, numbers &#39;</span> <span class="s1">&#39;and @/./+/-/_ characters.&#39;</span><span class="p">)</span>
-            <span class="p">),</span>
-        <span class="p">],</span>
-        <span class="n">error_messages</span><span class="o">=</span><span class="p">{</span>
-            <span class="s1">&#39;unique&#39;</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;A user with that username already exists.&quot;</span><span class="p">),</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
+            <span class="n">validators</span><span class="o">.</span><span class="n">RegexValidator</span><span class="p">(</span><span class="s1">r&#39;^[\w.@+-]+$&#39;</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Enter a valid username.&#39;</span><span class="p">),</span> <span class="s1">&#39;invalid&#39;</span><span class="p">)</span>
+        <span class="p">])</span>
     <span class="n">first_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;first name&#39;</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">last_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;last name&#39;</span><span class="p">),</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">email</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;email address&#39;</span><span class="p">),</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">is_staff</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span>
-        <span class="n">_</span><span class="p">(</span><span class="s1">&#39;staff status&#39;</span><span class="p">),</span>
-        <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-        <span class="n">help_text</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Designates whether the user can log into this admin site.&#39;</span><span class="p">),</span>
-    <span class="p">)</span>
-    <span class="n">is_active</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span>
-        <span class="n">_</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">),</span>
-        <span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-        <span class="n">help_text</span><span class="o">=</span><span class="n">_</span><span class="p">(</span>
-            <span class="s1">&#39;Designates whether this user should be treated as active. &#39;</span>
-            <span class="s1">&#39;Unselect this instead of deleting accounts.&#39;</span>
-        <span class="p">),</span>
-    <span class="p">)</span>
+    <span class="n">is_staff</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;staff status&#39;</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">help_text</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Designates whether the user can log into this admin &#39;</span>
+                    <span class="s1">&#39;site.&#39;</span><span class="p">))</span>
+    <span class="n">is_active</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">help_text</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Designates whether this user should be treated as &#39;</span>
+                    <span class="s1">&#39;active. Unselect this instead of deleting accounts.&#39;</span><span class="p">))</span>
     <span class="n">date_joined</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;date joined&#39;</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
 
     <span class="n">objects</span> <span class="o">=</span> <span class="n">UserManager</span><span class="p">()</span>
@@ -580,9 +619,6 @@
 
     <span class="k">def</span> <span class="nf">is_authenticated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">False</span>
-
-    <span class="k">def</span> <span class="nf">get_username</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">username</span>
 </pre></div>
 
            </div>
@@ -616,7 +652,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'3.0',
+            VERSION:'5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -625,7 +661,6 @@
       <script type="text/javascript" src="../../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../../../_static/translations.js"></script>
 
   
 

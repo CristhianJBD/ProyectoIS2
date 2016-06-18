@@ -1,12 +1,12 @@
-administracion package
+Modulo administracion
 ======================
 
-Subpackages
+Submodulos
 -----------
 
 .. toctree::
 
-    administracion.migrations
+    administracion.views
 
 Submodules
 ----------

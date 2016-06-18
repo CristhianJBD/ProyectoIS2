@@ -1,0 +1,86 @@
+administracion.views package
+============================
+
+Submodules
+----------
+
+administracion.views.nota_views module
+--------------------------------------
+
+.. automodule:: administracion.views.nota_views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+administracion.views.view_project module
+----------------------------------------
+
+.. automodule:: administracion.views.view_project
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+administracion.views.view_userstory module
+------------------------------------------
+
+.. automodule:: administracion.views.view_userstory
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+administracion.views.views module
+---------------------------------
+
+.. automodule:: administracion.views.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+administracion.views.views_adjunto module
+-----------------------------------------
+
+.. automodule:: administracion.views.views_adjunto
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+administracion.views.views_flujo module
+---------------------------------------
+
+.. automodule:: administracion.views.views_flujo
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+administracion.views.views_rol module
+-------------------------------------
+
+.. automodule:: administracion.views.views_rol
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+administracion.views.views_sprints module
+-----------------------------------------
+
+.. automodule:: administracion.views.views_sprints
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+administracion.views.views_user module
+--------------------------------------
+
+.. automodule:: administracion.views.views_user
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: administracion.views
+    :members:
+    :undoc-members:
+    :show-inheritance:

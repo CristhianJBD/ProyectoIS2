@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>administracion.views.view_userstory &mdash; documentación de ProyectoIs2 - 3.0</title>
+  <title>administracion.views.view_userstory &mdash; ProyectoIS2 5.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="../../../index.html"/>
-        <link rel="up" title="Código de módulo" href="../../index.html"/> 
+    <link rel="top" title="ProyectoIS2 5.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> ProyectoIs2
+            <a href="../../../index.html" class="icon icon-home"> ProyectoIS2
           
 
           
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                3.0
+                5.0
               </div>
             
           
@@ -81,15 +81,8 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../administracion.html">administracion package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../view_project.html">view_project module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views.html">views module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_flujo.html">views_flujo module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_rol.html">views_rol module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_sprints.html">views_sprints module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_user.html">views_user module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../view_userstory.html">view_userstory module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../autenticacion.html">autenticacion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../administracion.html">Modulo administracion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autenticacion.html">Modulo autenticacion</a></li>
 </ul>
 
             
@@ -103,7 +96,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../../index.html">ProyectoIs2</a>
+        <a href="../../../index.html">ProyectoIS2</a>
       </nav>
 
 
@@ -120,7 +113,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="../../index.html">Código de módulo</a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
       
     <li>administracion.views.view_userstory</li>
       <li class="wy-breadcrumbs-aside">
@@ -134,7 +127,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Código fuente para administracion.views.view_userstory</h1><div class="highlight"><pre>
+  <h1>Source code for administracion.views.view_userstory</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
 <span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">PermissionDenied</span><span class="p">,</span> <span class="n">ObjectDoesNotExist</span>
@@ -152,14 +145,14 @@
 <span class="kn">from</span> <span class="nn">guardian.mixins</span> <span class="kn">import</span> <span class="n">LoginRequiredMixin</span>
 <span class="kn">from</span> <span class="nn">guardian.shortcuts</span> <span class="kn">import</span> <span class="n">get_perms</span><span class="p">,</span> <span class="n">get_perms_for_model</span><span class="p">,</span> <span class="n">assign_perm</span>
 <span class="kn">from</span> <span class="nn">guardian.utils</span> <span class="kn">import</span> <span class="n">get_403_or_None</span>
-<span class="kn">from</span> <span class="nn">reversion</span> <span class="kn">import</span> <span class="n">revisions</span> <span class="k">as</span> <span class="n">reversion</span>
+<span class="kn">import</span> <span class="nn">reversion</span>
 <span class="kn">from</span> <span class="nn">administracion.forms</span> <span class="kn">import</span> <span class="n">RegistrarActividadForm</span>
-<span class="kn">from</span> <span class="nn">administracion.models</span> <span class="kn">import</span> <span class="n">UserStory</span><span class="p">,</span> <span class="n">Proyecto</span><span class="p">,</span> <span class="n">Actividad</span>
+<span class="kn">from</span> <span class="nn">administracion.models</span> <span class="kn">import</span> <span class="n">UserStory</span><span class="p">,</span> <span class="n">Proyecto</span><span class="p">,</span> <span class="n">Actividad</span><span class="p">,</span> <span class="n">Nota</span><span class="p">,</span> <span class="n">Sprint</span>
 <span class="kn">from</span> <span class="nn">administracion.views.views</span> <span class="kn">import</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">ActiveProjectRequiredMixin</span>
 <span class="kn">from</span> <span class="nn">django.contrib.sites.shortcuts</span> <span class="kn">import</span> <span class="n">get_current_site</span>
 
 
-<div class="viewcode-block" id="UserStoriesList"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UserStoriesList">[documentos]</a><span class="k">class</span> <span class="nc">UserStoriesList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
+<div class="viewcode-block" id="UserStoriesList"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UserStoriesList">[docs]</a><span class="k">class</span> <span class="nc">UserStoriesList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Lista de User Stories del proyecto</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -169,36 +162,36 @@
     <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;userstories&#39;</span>
     <span class="n">project</span> <span class="o">=</span> <span class="bp">None</span>
 
-<div class="viewcode-block" id="UserStoriesList.get_permission_object"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UserStoriesList.get_permission_object">[documentos]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UserStoriesList.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UserStoriesList.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;project_pk&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span></div>
 
-<div class="viewcode-block" id="UserStoriesList.get_context_data"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UserStoriesList.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="UserStoriesList.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UserStoriesList.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">UserStoriesList</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;proyecto_perms&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_perms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">context</span></div>
 
-<div class="viewcode-block" id="UserStoriesList.get_queryset"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UserStoriesList.get_queryset">[documentos]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UserStoriesList.get_queryset"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UserStoriesList.get_queryset">[docs]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">manager</span> <span class="o">=</span> <span class="n">UserStory</span><span class="o">.</span><span class="n">objects</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;project_pk&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">manager</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">proyecto</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span></div></div>
 
-<div class="viewcode-block" id="AprobarPendientesUserStories"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AprobarPendientesUserStories">[documentos]</a><span class="k">class</span> <span class="nc">AprobarPendientesUserStories</span><span class="p">(</span><span class="n">UserStoriesList</span><span class="p">):</span>
+<div class="viewcode-block" id="AprobarPendientesUserStories"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AprobarPendientesUserStories">[docs]</a><span class="k">class</span> <span class="nc">AprobarPendientesUserStories</span><span class="p">(</span><span class="n">UserStoriesList</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista que sirve para aprobar user storys pendientes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.aprobar_userstory&#39;</span>
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/userstory/userstory_pendiente.html&#39;</span>
 
-<div class="viewcode-block" id="AprobarPendientesUserStories.get_queryset"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AprobarPendientesUserStories.get_queryset">[documentos]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AprobarPendientesUserStories.get_queryset"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AprobarPendientesUserStories.get_queryset">[docs]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">manager</span> <span class="o">=</span> <span class="n">UserStory</span><span class="o">.</span><span class="n">objects</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;project_pk&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">manager</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">proyecto</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">estado</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div></div>
 
-<div class="viewcode-block" id="UserStoryDetail"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UserStoryDetail">[documentos]</a><span class="k">class</span> <span class="nc">UserStoryDetail</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">):</span>
+<div class="viewcode-block" id="UserStoryDetail"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UserStoryDetail">[docs]</a><span class="k">class</span> <span class="nc">UserStoryDetail</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista de Detalles de un user story</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -207,31 +200,35 @@
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/userstory/userstory_detail.html&#39;</span>
     <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;userstory&#39;</span>
 
-<div class="viewcode-block" id="UserStoryDetail.get_permission_object"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UserStoryDetail.get_permission_object">[documentos]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="UserStoryDetail.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UserStoryDetail.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Retorna el objeto al cual corresponde el permiso</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span></div></div>
 
-<div class="viewcode-block" id="AddUserStory"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AddUserStory">[documentos]</a><span class="k">class</span> <span class="nc">AddUserStory</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">CreateView</span><span class="p">):</span>
+<div class="viewcode-block" id="AddUserStory"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AddUserStory">[docs]</a><span class="k">class</span> <span class="nc">AddUserStory</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">CreateView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    View que agrega un user story al sistema</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">UserStory</span>
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/userstory/userstory_form.html&#39;</span>
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.crear_userstory&#39;</span>
+    <span class="n">project</span> <span class="o">=</span> <span class="bp">None</span>
 
-<div class="viewcode-block" id="AddUserStory.get_context_data"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AddUserStory.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="AddUserStory.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AddUserStory.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_proyecto</span><span class="p">()</span>
         <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">AddUserStory</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;current_action&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Crear&#39;</span>
         <span class="k">return</span> <span class="n">context</span></div>
 
-<div class="viewcode-block" id="AddUserStory.get_proyecto"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AddUserStory.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AddUserStory.get_proyecto"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AddUserStory.get_proyecto">[docs]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">proyecto</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;project_pk&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="AddUserStory.get_form_class"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AddUserStory.get_form_class">[documentos]</a>    <span class="k">def</span> <span class="nf">get_form_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AddUserStory.get_form_class"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AddUserStory.get_form_class">[docs]</a>    <span class="k">def</span> <span class="nf">get_form_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">project</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;project_pk&#39;</span><span class="p">])</span>
         <span class="n">form_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nombre_corto&#39;</span><span class="p">,</span><span class="s1">&#39;nombre_largo&#39;</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;valor_negocio&#39;</span><span class="p">,</span> <span class="s1">&#39;valor_tecnico&#39;</span><span class="p">,</span> <span class="s1">&#39;tiempo_estimado&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="s1">&#39;priorizar_userstory&#39;</span> <span class="ow">in</span> <span class="n">get_perms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">project</span><span class="p">):</span>
@@ -239,19 +236,19 @@
         <span class="n">form_class</span> <span class="o">=</span> <span class="n">modelform_factory</span><span class="p">(</span><span class="n">UserStory</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">form_fields</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">form_class</span></div>
 
-<div class="viewcode-block" id="AddUserStory.get_permission_object"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AddUserStory.get_permission_object">[documentos]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AddUserStory.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AddUserStory.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Objeto por el cual comprobar el permiso</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_proyecto</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="AddUserStory.get_success_url"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AddUserStory.get_success_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AddUserStory.get_success_url"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AddUserStory.get_success_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :return:la url de redireccion a la vista de los detalles del user story agregado.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;userstory_detail&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">id</span><span class="p">})</span></div>
 
-<div class="viewcode-block" id="AddUserStory.form_valid"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AddUserStory.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<div class="viewcode-block" id="AddUserStory.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AddUserStory.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Comprobar validez del formulario.</span>
 <span class="sd">        :param form: formulario recibido</span>
@@ -268,17 +265,17 @@
 
         <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div></div>
 
-<div class="viewcode-block" id="UpdateUserStory"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UpdateUserStory">[documentos]</a><span class="k">class</span> <span class="nc">UpdateUserStory</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateUserStory"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UpdateUserStory">[docs]</a><span class="k">class</span> <span class="nc">UpdateUserStory</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    View que actualiza un user story del sistema</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">UserStory</span>
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/userstory/userstory_form.html&#39;</span>
 
-<div class="viewcode-block" id="UpdateUserStory.get_proyecto"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UpdateUserStory.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateUserStory.get_proyecto"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UpdateUserStory.get_proyecto">[docs]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="UpdateUserStory.dispatch"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UpdateUserStory.dispatch">[documentos]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateUserStory.dispatch"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UpdateUserStory.dispatch">[docs]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Comprobación de permisos hecha antes de la llamada al dispatch que inicia el proceso de respuesta al request de la url</span>
 <span class="sd">        :param request: request hecho por el cliente</span>
@@ -293,7 +290,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">PermissionDenied</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="UpdateUserStory.get_form_class"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UpdateUserStory.get_form_class">[documentos]</a>    <span class="k">def</span> <span class="nf">get_form_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateUserStory.get_form_class"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UpdateUserStory.get_form_class">[docs]</a>    <span class="k">def</span> <span class="nf">get_form_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">project</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span>
         <span class="n">form_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nombre_corto&#39;</span><span class="p">,</span><span class="s1">&#39;nombre_largo&#39;</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;valor_negocio&#39;</span><span class="p">,</span> <span class="s1">&#39;valor_tecnico&#39;</span><span class="p">,</span> <span class="s1">&#39;tiempo_estimado&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="s1">&#39;priorizar_userstory&#39;</span> <span class="ow">in</span> <span class="n">get_perms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">project</span><span class="p">):</span>
@@ -301,7 +298,7 @@
         <span class="n">form_class</span> <span class="o">=</span> <span class="n">modelform_factory</span><span class="p">(</span><span class="n">UserStory</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">form_fields</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">form_class</span></div>
 
-<div class="viewcode-block" id="UpdateUserStory.get_context_data"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UpdateUserStory.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateUserStory.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UpdateUserStory.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Agregar datos al contexto</span>
 <span class="sd">        :param kwargs: argumentos clave</span>
@@ -311,13 +308,13 @@
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;current_action&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Editar&quot;</span>
         <span class="k">return</span> <span class="n">context</span></div>
 
-<div class="viewcode-block" id="UpdateUserStory.get_success_url"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UpdateUserStory.get_success_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateUserStory.get_success_url"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UpdateUserStory.get_success_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :return:la url de redireccion a la vista de los detalles del user story agregado.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;userstory_detail&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">id</span><span class="p">})</span></div>
 
-<div class="viewcode-block" id="UpdateUserStory.form_valid"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UpdateUserStory.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateUserStory.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UpdateUserStory.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Comprobar validez del formulario. Crea una instancia de user story</span>
 <span class="sd">        :param form: formulario recibido</span>
@@ -329,37 +326,52 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">object</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
                 <span class="n">reversion</span><span class="o">.</span><span class="n">set_user</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
                 <span class="n">reversion</span><span class="o">.</span><span class="n">set_comment</span><span class="p">(</span><span class="s2">&quot;Modificacion: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="n">form</span><span class="o">.</span><span class="n">changed_data</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="p">,</span> <span class="n">form</span><span class="o">.</span><span class="n">changed_data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="UpdateUserStory.notify"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UpdateUserStory.notify">[docs]</a>    <span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_story</span><span class="p">,</span> <span class="n">changes</span><span class="p">):</span>
+        <span class="n">proyecto</span> <span class="o">=</span> <span class="n">user_story</span><span class="o">.</span><span class="n">proyecto</span>
+        <span class="n">sprint</span> <span class="o">=</span> <span class="n">user_story</span><span class="o">.</span><span class="n">sprint</span>
+        <span class="n">changelist</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">changes</span><span class="p">]</span>
+        <span class="n">subject</span> <span class="o">=</span> <span class="s1">&#39;Cambios en User Story: {} - {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user_story</span><span class="p">,</span> <span class="n">proyecto</span><span class="p">)</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">get_current_site</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">domain</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">render_to_string</span><span class="p">(</span><span class="s1">&#39;administracion/mail/change_mail.html&#39;</span><span class="p">,</span>
+                                   <span class="p">{</span><span class="s1">&#39;proyecto&#39;</span><span class="p">:</span> <span class="n">proyecto</span><span class="p">,</span> <span class="s1">&#39;us&#39;</span><span class="p">:</span> <span class="n">user_story</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="n">domain</span><span class="p">,</span>
+                                    <span class="s1">&#39;cambios&#39;</span><span class="p">:</span> <span class="n">changelist</span><span class="p">})</span>
+        <span class="n">recipients</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">email</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">equipo</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">has_perm</span><span class="p">(</span><span class="s1">&#39;administracion.aprobar_userstory&#39;</span><span class="p">,</span> <span class="n">proyecto</span><span class="p">)]</span>
+
+        <span class="k">if</span> <span class="n">user_story</span><span class="o">.</span><span class="n">desarrollador</span> <span class="ow">and</span> <span class="n">user_story</span><span class="o">.</span><span class="n">desarrollador</span><span class="o">.</span><span class="n">email</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">recipients</span><span class="p">:</span>
+            <span class="n">recipients</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_story</span><span class="o">.</span><span class="n">desarrollador</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+
+        <span class="n">send_mail</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="s1">&#39;proyectois2.2016@gmail.com&#39;</span><span class="p">,</span> <span class="n">recipients</span><span class="p">,</span> <span class="n">html_message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span></div></div>
 
 
-        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div></div>
-
-
-
-<div class="viewcode-block" id="CancelUserStory"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.CancelUserStory">[documentos]</a><span class="k">class</span> <span class="nc">CancelUserStory</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">FormView</span><span class="p">):</span>
+<div class="viewcode-block" id="CancelUserStory"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.CancelUserStory">[docs]</a><span class="k">class</span> <span class="nc">CancelUserStory</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">FormView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista cancelacion de User Stories</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">form_class</span> <span class="o">=</span> <span class="n">modelform_factory</span><span class="p">(</span><span class="n">UserStory</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="n">modelform_factory</span><span class="p">(</span><span class="n">Nota</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mensaje&#39;</span><span class="p">])</span>
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/userstory/userstory_cancel.html&#39;</span>
     <span class="n">user_story</span> <span class="o">=</span> <span class="bp">None</span>
 
-<div class="viewcode-block" id="CancelUserStory.get_user_story"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.CancelUserStory.get_user_story">[documentos]</a>    <span class="k">def</span> <span class="nf">get_user_story</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CancelUserStory.get_user_story"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.CancelUserStory.get_user_story">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_story</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">UserStory</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span></div>
 
-<div class="viewcode-block" id="CancelUserStory.get_proyecto"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.CancelUserStory.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CancelUserStory.get_proyecto"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.CancelUserStory.get_proyecto">[docs]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_user_story</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="CancelUserStory.get_context_data"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.CancelUserStory.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="CancelUserStory.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.CancelUserStory.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">CancelUserStory</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;userstory&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_user_story</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">context</span></div>
 
-<div class="viewcode-block" id="CancelUserStory.get_success_url"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.CancelUserStory.get_success_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CancelUserStory.get_success_url"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.CancelUserStory.get_success_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;product_backlog&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;project_pk&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_proyecto</span><span class="p">()</span><span class="o">.</span><span class="n">id</span><span class="p">})</span></div>
 
-<div class="viewcode-block" id="CancelUserStory.dispatch"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.CancelUserStory.dispatch">[documentos]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="CancelUserStory.dispatch"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.CancelUserStory.dispatch">[docs]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Comprobacion de permisos hecha antes de la llamada al dispatch que inicia el proceso de respuesta al request de la url</span>
 <span class="sd">        :param request: request hecho por el cliente</span>
@@ -369,47 +381,47 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">CancelUserStory</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CancelUserStory.form_valid"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.CancelUserStory.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
-        <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="viewcode-block" id="CancelUserStory.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.CancelUserStory.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+        <span class="n">nota</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_user_story</span><span class="p">()</span><span class="o">.</span><span class="n">estado</span> <span class="o">=</span> <span class="mi">4</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-
+        <span class="n">crearNota</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_story</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="s2">&quot;Cancelado: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nota</span><span class="o">.</span><span class="n">mensaje</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div></div>
 
 
-<div class="viewcode-block" id="RegistrarActividadUserStory"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RegistrarActividadUserStory">[documentos]</a><span class="k">class</span> <span class="nc">RegistrarActividadUserStory</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistrarActividadUserStory"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RegistrarActividadUserStory">[docs]</a><span class="k">class</span> <span class="nc">RegistrarActividadUserStory</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    View que permite registrar los cambios aplicados a un user story</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">UserStory</span>
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/userstory/userstory_registraractividad_form.html&#39;</span>
     <span class="n">error_template</span> <span class="o">=</span> <span class="s1">&#39;administracion/userstory/userstory_error.html&#39;</span>
+    <span class="n">NoteFormset</span> <span class="o">=</span> <span class="n">modelformset_factory</span><span class="p">(</span><span class="n">Nota</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;mensaje&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha&#39;</span><span class="p">),</span> <span class="n">extra</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-
-<div class="viewcode-block" id="RegistrarActividadUserStory.get_proyecto"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RegistrarActividadUserStory.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistrarActividadUserStory.get_proyecto"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RegistrarActividadUserStory.get_proyecto">[docs]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="RegistrarActividadUserStory.get_context_data"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RegistrarActividadUserStory.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistrarActividadUserStory.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RegistrarActividadUserStory.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">RegistrarActividadUserStory</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;formset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NoteFormset</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">Nota</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">none</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">context</span></div>
 
 
 
 
-<div class="viewcode-block" id="RegistrarActividadUserStory.get_form_class"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RegistrarActividadUserStory.get_form_class">[documentos]</a>    <span class="k">def</span> <span class="nf">get_form_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistrarActividadUserStory.get_form_class"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RegistrarActividadUserStory.get_form_class">[docs]</a>    <span class="k">def</span> <span class="nf">get_form_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retorna el tipo de formulario que se mostrará en el template. En caso de que</span>
 <span class="sd">        el usuario cuente con el permiso de editar userstory se le permitirá cambiar la actividad</span>
 <span class="sd">        del User Story.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">actual_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;estado_actividad&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;editar_userstory&#39;</span> <span class="ow">in</span> <span class="n">get_perms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span><span class="p">)</span> <span class="ow">or</span> \
-                        <span class="s1">&#39;editar_mi_userstory&#39;</span> <span class="ow">in</span> <span class="n">get_perms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()):</span>
+        <span class="k">if</span> <span class="s1">&#39;aprobar_userstory&#39;</span> <span class="ow">in</span> <span class="n">get_perms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span><span class="p">):</span>
             <span class="n">actual_fields</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;actividad&#39;</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">modelform_factory</span><span class="p">(</span><span class="n">UserStory</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">RegistrarActividadForm</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">actual_fields</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RegistrarActividadUserStory.get_form"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RegistrarActividadUserStory.get_form">[documentos]</a>    <span class="k">def</span> <span class="nf">get_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form_class</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistrarActividadUserStory.get_form"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RegistrarActividadUserStory.get_form">[docs]</a>    <span class="k">def</span> <span class="nf">get_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form_class</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Personalización del form retornado</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -419,49 +431,62 @@
             <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;actividad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">Actividad</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">flujo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">actividad</span><span class="o">.</span><span class="n">flujo</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">form</span></div>
 
-<div class="viewcode-block" id="RegistrarActividadUserStory.form_valid"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RegistrarActividadUserStory.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<div class="viewcode-block" id="RegistrarActividadUserStory.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RegistrarActividadUserStory.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">object</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">tiempo_registrado</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">tiempo_registrado</span> <span class="o">+</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;horas_a_registrar&#39;</span><span class="p">]</span>
-        <span class="n">new_estado</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="c1">#movemos el User Story a la sgte actividad en caso de que haya llegado a Done</span>
-        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;estado_actividad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">new_estado</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">next_actividad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">actividad</span><span class="o">.</span><span class="n">get_next_in_order</span><span class="p">()</span>
-            <span class="k">except</span> <span class="n">ObjectDoesNotExist</span><span class="p">:</span>
-                <span class="n">next_actividad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">actividad</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">estado</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">#Lo marcamos como pendiente de aprobación</span>
-                <span class="n">new_estado</span> <span class="o">=</span> <span class="mi">2</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">actividad</span> <span class="o">=</span> <span class="n">next_actividad</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">estado_actividad</span> <span class="o">=</span> <span class="n">new_estado</span>
-
+        <span class="n">nota_form</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NoteFormset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div></div>
+        <span class="k">if</span> <span class="n">nota_form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">nota_form</span><span class="o">.</span><span class="n">forms</span><span class="p">:</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">horas_a_registrar</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;horas_a_registrar&#39;</span><span class="p">]</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">tiempo_registrado</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">tiempo_registrado</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">desarrollador</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">sprint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">sprint</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">actividad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">actividad</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">estado</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">estado</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">estado_actividad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">estado_actividad</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">user_story</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span>
+                <span class="n">n</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notify</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="RegistrarActividadUserStory.notify"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RegistrarActividadUserStory.notify">[docs]</a>    <span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nota</span><span class="p">):</span>
+        <span class="c1">#Notificaciones para el desarrollador del user story si</span>
+        <span class="c1">#se registra una actividad en el user story o al scrum si esque se llega a estado Done</span>
+        <span class="n">proyecto</span> <span class="o">=</span> <span class="n">nota</span><span class="o">.</span><span class="n">user_story</span><span class="o">.</span><span class="n">proyecto</span>
+        <span class="n">desarrollador</span><span class="o">=</span> <span class="n">nota</span><span class="o">.</span><span class="n">desarrollador</span>
+
+        <span class="n">est_act</span><span class="o">=</span> <span class="n">nota</span><span class="o">.</span><span class="n">estado_actividad</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">est_act</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+
+            <span class="n">subject</span> <span class="o">=</span> <span class="s1">&#39;Se llego al estado Done con el us: {} del proyecto: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nota</span><span class="o">.</span><span class="n">user_story</span><span class="p">,</span> <span class="n">proyecto</span><span class="p">)</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="n">get_current_site</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">domain</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">render_to_string</span><span class="p">(</span><span class="s1">&#39;administracion/mail/notification_mail.html&#39;</span><span class="p">,</span>
+                                       <span class="p">{</span><span class="s1">&#39;proyecto&#39;</span><span class="p">:</span> <span class="n">proyecto</span><span class="p">,</span> <span class="s1">&#39;nota&#39;</span><span class="p">:</span> <span class="n">nota</span><span class="p">,</span> <span class="s1">&#39;us&#39;</span><span class="p">:</span> <span class="n">nota</span><span class="o">.</span><span class="n">user_story</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="n">domain</span><span class="p">})</span>
+            <span class="n">recipients</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">email</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">equipo</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">has_perm</span><span class="p">(</span><span class="s1">&#39;aprobar_userstory&#39;</span><span class="p">,</span> <span class="n">proyecto</span><span class="p">)]</span>
+            <span class="k">print</span> <span class="n">recipients</span>
+            <span class="n">send_mail</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="s1">&#39;noreply.proyectois2.2016@gmail.com&#39;</span><span class="p">,</span> <span class="n">recipients</span><span class="p">,</span> <span class="n">html_message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="n">subject</span> <span class="o">=</span> <span class="s1">&#39;Registro de Actividad: {} - {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nota</span><span class="o">.</span><span class="n">user_story</span><span class="p">,</span> <span class="n">proyecto</span><span class="p">)</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="n">get_current_site</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">domain</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">render_to_string</span><span class="p">(</span><span class="s1">&#39;administracion/mail/notification_mail.html&#39;</span><span class="p">,</span>
+                                       <span class="p">{</span><span class="s1">&#39;proyecto&#39;</span><span class="p">:</span> <span class="n">proyecto</span><span class="p">,</span> <span class="s1">&#39;nota&#39;</span><span class="p">:</span> <span class="n">nota</span><span class="p">,</span> <span class="s1">&#39;us&#39;</span><span class="p">:</span> <span class="n">nota</span><span class="o">.</span><span class="n">user_story</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="n">domain</span><span class="p">})</span>
+            <span class="n">recipients</span> <span class="o">=</span> <span class="p">[</span><span class="n">desarrollador</span><span class="o">.</span><span class="n">email</span><span class="p">]</span>
+
+            <span class="n">send_mail</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="s1">&#39;noreply.proyectois2.2016@gmail.com&#39;</span><span class="p">,</span> <span class="n">recipients</span><span class="p">,</span> <span class="n">html_message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="DeleteUserStory"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.DeleteUserStory">[documentos]</a><span class="k">class</span> <span class="nc">DeleteUserStory</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DeleteView</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Vista de Eliminacion de User Stories</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">UserStory</span>
-    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/userstory/userstory_delete.html&#39;</span>
-    <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.eliminar_userstory&#39;</span>
-    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;userstory&#39;</span>
-
-<div class="viewcode-block" id="DeleteUserStory.get_proyecto"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.DeleteUserStory.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span></div>
-<div class="viewcode-block" id="DeleteUserStory.get_permission_object"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.DeleteUserStory.get_permission_object">[documentos]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_proyecto</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="DeleteUserStory.get_success_url"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.DeleteUserStory.get_success_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;product_backlog&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;project_pk&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span><span class="o">.</span><span class="n">id</span><span class="p">})</span></div></div>
 
 
 
 
-<div class="viewcode-block" id="AprobarUserStory"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AprobarUserStory">[documentos]</a><span class="k">class</span> <span class="nc">AprobarUserStory</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">SingleObjectTemplateResponseMixin</span><span class="p">,</span> <span class="n">detail</span><span class="o">.</span><span class="n">BaseDetailView</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AprobarUserStory"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AprobarUserStory">[docs]</a><span class="k">class</span> <span class="nc">AprobarUserStory</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">SingleObjectTemplateResponseMixin</span><span class="p">,</span> <span class="n">detail</span><span class="o">.</span><span class="n">BaseDetailView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista de Aprobación de User Story</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -470,23 +495,23 @@
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.aprobar_userstory&#39;</span>
     <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;userstory&#39;</span>
 
-<div class="viewcode-block" id="AprobarUserStory.get_proyecto"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AprobarUserStory.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AprobarUserStory.get_proyecto"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AprobarUserStory.get_proyecto">[docs]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">proyecto</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="AprobarUserStory.dispatch"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AprobarUserStory.dispatch">[documentos]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="AprobarUserStory.dispatch"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AprobarUserStory.dispatch">[docs]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">AprobarUserStory</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">raise</span> <span class="n">Http404</span></div>
 
-<div class="viewcode-block" id="AprobarUserStory.get_permission_object"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AprobarUserStory.get_permission_object">[documentos]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AprobarUserStory.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AprobarUserStory.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_proyecto</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="AprobarUserStory.get_success_url"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AprobarUserStory.get_success_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AprobarUserStory.get_success_url"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AprobarUserStory.get_success_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;product_backlog&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;project_pk&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span><span class="o">.</span><span class="n">id</span><span class="p">})</span></div>
 
-<div class="viewcode-block" id="AprobarUserStory.post"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.AprobarUserStory.post">[documentos]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="AprobarUserStory.post"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AprobarUserStory.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">us</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
         <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span>
 
@@ -501,30 +526,40 @@
             <span class="n">p</span><span class="o">.</span><span class="n">estado</span> <span class="o">=</span> <span class="s1">&#39;TE&#39;</span>
             <span class="n">p</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
         <span class="n">us</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">crearNota</span><span class="p">(</span><span class="n">us</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="s2">&quot;User Story {} por {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">get_full_name</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notify</span><span class="p">(</span><span class="n">us</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="AprobarUserStory.notify"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.AprobarUserStory.notify">[docs]</a>    <span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_story</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="n">proyecto</span> <span class="o">=</span> <span class="n">user_story</span><span class="o">.</span><span class="n">proyecto</span>
+        <span class="n">subject</span> <span class="o">=</span> <span class="s1">&#39;Se ha {} el User Story: {} - {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">user_story</span><span class="p">,</span> <span class="n">proyecto</span><span class="p">)</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">get_current_site</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">domain</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">render_to_string</span><span class="p">(</span><span class="s1">&#39;administracion/mail/approved_email.html&#39;</span><span class="p">,</span>
+                                   <span class="p">{</span><span class="s1">&#39;proyecto&#39;</span><span class="p">:</span> <span class="n">proyecto</span><span class="p">,</span> <span class="s1">&#39;us&#39;</span><span class="p">:</span> <span class="n">user_story</span><span class="p">,</span> <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="n">domain</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">,</span> <span class="s1">&#39;act&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">})</span>
+        <span class="n">recipients</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">email</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">proyecto</span><span class="o">.</span><span class="n">equipo</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">has_perm</span><span class="p">(</span><span class="s1">&#39;administracion.aprobar_userstory&#39;</span><span class="p">,</span> <span class="n">proyecto</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">user_story</span><span class="o">.</span><span class="n">desarrollador</span> <span class="ow">and</span> <span class="n">user_story</span><span class="o">.</span><span class="n">desarrollador</span><span class="o">.</span><span class="n">email</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">recipients</span><span class="p">:</span>
+            <span class="n">recipients</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_story</span><span class="o">.</span><span class="n">desarrollador</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">send_mail</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="s1">&#39;proyectois2.2016@gamil.com&#39;</span><span class="p">,</span> <span class="n">recipients</span><span class="p">,</span> <span class="n">html_message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span></div></div>
 
 
-        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div></div>
-
-
-
-
-<div class="viewcode-block" id="RechazarUserStory"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RechazarUserStory">[documentos]</a><span class="k">class</span> <span class="nc">RechazarUserStory</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
+<div class="viewcode-block" id="RechazarUserStory"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RechazarUserStory">[docs]</a><span class="k">class</span> <span class="nc">RechazarUserStory</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">UserStory</span>
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/userstory/userstory_rechazar.html&#39;</span>
     <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;actividad&#39;</span><span class="p">,</span> <span class="s1">&#39;estado_actividad&#39;</span><span class="p">]</span>
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.aprobar_userstory&#39;</span>
     <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;userstory&#39;</span>
 
-<div class="viewcode-block" id="RechazarUserStory.get_proyecto"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RechazarUserStory.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RechazarUserStory.get_proyecto"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RechazarUserStory.get_proyecto">[docs]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="RechazarUserStory.dispatch"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RechazarUserStory.dispatch">[documentos]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="RechazarUserStory.dispatch"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RechazarUserStory.dispatch">[docs]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">RechazarUserStory</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">raise</span> <span class="n">Http404</span></div>
 
-<div class="viewcode-block" id="RechazarUserStory.get_form"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RechazarUserStory.get_form">[documentos]</a>    <span class="k">def</span> <span class="nf">get_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RechazarUserStory.get_form"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RechazarUserStory.get_form">[docs]</a>    <span class="k">def</span> <span class="nf">get_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Personalización del form retornado</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -533,10 +568,10 @@
         <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;actividad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">Actividad</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">flujo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">actividad</span><span class="o">.</span><span class="n">flujo</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">form</span></div>
 
-<div class="viewcode-block" id="RechazarUserStory.get_permission_object"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RechazarUserStory.get_permission_object">[documentos]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RechazarUserStory.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RechazarUserStory.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_proyecto</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="RechazarUserStory.form_valid"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.RechazarUserStory.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<div class="viewcode-block" id="RechazarUserStory.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.RechazarUserStory.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">object</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">estado</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
@@ -545,7 +580,7 @@
         <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div></div>
 
 
-<div class="viewcode-block" id="VersionList"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.VersionList">[documentos]</a><span class="k">class</span> <span class="nc">VersionList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
+<div class="viewcode-block" id="VersionList"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.VersionList">[docs]</a><span class="k">class</span> <span class="nc">VersionList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista que devuelve una lista de versiones del User Story deseado.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -554,7 +589,7 @@
     <span class="n">permission_required</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;administracion.editar_userstory&#39;</span><span class="p">,</span> <span class="s1">&#39;administracion.editar_mi_userstory&#39;</span><span class="p">]</span>
     <span class="n">us</span> <span class="o">=</span> <span class="bp">None</span>
 
-<div class="viewcode-block" id="VersionList.dispatch"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.VersionList.dispatch">[documentos]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="VersionList.dispatch"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.VersionList.dispatch">[docs]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Comprobación de permisos hecha antes de la llamada al dispatch que inicia el proceso de respuesta al request de la url</span>
 <span class="sd">        :param request: request hecho por el cliente</span>
@@ -570,13 +605,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">PermissionDenied</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="VersionList.get_queryset"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.VersionList.get_queryset">[documentos]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="VersionList.get_queryset"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.VersionList.get_queryset">[docs]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Obtiene el user story y sus versiones</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">reversion</span><span class="o">.</span><span class="n">get_for_object</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">us</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="VersionList.get_context_data"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.VersionList.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="VersionList.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.VersionList.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Agrega el user story al contexto.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -585,13 +620,13 @@
         <span class="k">return</span> <span class="n">context</span></div></div>
 
 
-<div class="viewcode-block" id="UpdateVersion"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UpdateVersion">[documentos]</a><span class="k">class</span> <span class="nc">UpdateVersion</span><span class="p">(</span><span class="n">UpdateUserStory</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateVersion"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UpdateVersion">[docs]</a><span class="k">class</span> <span class="nc">UpdateVersion</span><span class="p">(</span><span class="n">UpdateUserStory</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Vista que permite revertir un User Story a una version anterior.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">version</span> <span class="o">=</span> <span class="bp">None</span>
 
-<div class="viewcode-block" id="UpdateVersion.get_initial"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UpdateVersion.get_initial">[documentos]</a>    <span class="k">def</span> <span class="nf">get_initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateVersion.get_initial"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UpdateVersion.get_initial">[docs]</a>    <span class="k">def</span> <span class="nf">get_initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Obtiene la version deseada del User Story.</span>
 <span class="sd">        :return: diccionarnio con los datos de la version anterior.</span>
@@ -601,7 +636,7 @@
         <span class="n">initial</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">field_dict</span>
         <span class="k">return</span> <span class="n">initial</span></div>
 
-<div class="viewcode-block" id="UpdateVersion.form_valid"><a class="viewcode-back" href="../../../view_userstory.html#administracion.views.view_userstory.UpdateVersion.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateVersion.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.UpdateVersion.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Comprobar validez del formulario. Crea una instancia de user story</span>
 <span class="sd">        :param form: formulario recibido</span>
@@ -615,7 +650,10 @@
 
         <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div></div>
 
-
+<div class="viewcode-block" id="crearNota"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_userstory.crearNota">[docs]</a><span class="k">def</span> <span class="nf">crearNota</span><span class="p">(</span><span class="n">us</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+    <span class="n">nota</span> <span class="o">=</span> <span class="n">Nota</span><span class="p">(</span><span class="n">desarrollador</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">sprint</span><span class="o">=</span><span class="n">us</span><span class="o">.</span><span class="n">sprint</span><span class="p">,</span> <span class="n">tiempo_registrado</span><span class="o">=</span><span class="n">us</span><span class="o">.</span><span class="n">tiempo_registrado</span><span class="p">,</span> <span class="n">actividad</span><span class="o">=</span><span class="n">us</span><span class="o">.</span><span class="n">actividad</span><span class="p">,</span>
+                    <span class="n">estado</span><span class="o">=</span><span class="n">us</span><span class="o">.</span><span class="n">estado</span><span class="p">,</span> <span class="n">estado_actividad</span><span class="o">=</span><span class="n">us</span><span class="o">.</span><span class="n">estado_actividad</span><span class="p">,</span> <span class="n">user_story</span><span class="o">=</span><span class="n">us</span><span class="p">,</span> <span class="n">mensaje</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+    <span class="n">nota</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
 </pre></div>
 
            </div>
@@ -649,7 +687,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'3.0',
+            VERSION:'5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -658,7 +696,6 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../../_static/translations.js"></script>
 
   
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>autenticacion.tests &mdash; documentación de ProyectoIs2 - 3.0</title>
+  <title>autenticacion.tests &mdash; ProyectoIS2 5.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="../../index.html"/>
-        <link rel="up" title="Código de módulo" href="../index.html"/> 
+    <link rel="top" title="ProyectoIS2 5.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> ProyectoIs2
+            <a href="../../index.html" class="icon icon-home"> ProyectoIS2
           
 
           
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                3.0
+                5.0
               </div>
             
           
@@ -81,15 +81,8 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../administracion.html">administracion package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../view_project.html">view_project module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views.html">views module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_flujo.html">views_flujo module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_rol.html">views_rol module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_sprints.html">views_sprints module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_user.html">views_user module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../view_userstory.html">view_userstory module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../autenticacion.html">autenticacion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../administracion.html">Modulo administracion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autenticacion.html">Modulo autenticacion</a></li>
 </ul>
 
             
@@ -103,7 +96,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">ProyectoIs2</a>
+        <a href="../../index.html">ProyectoIS2</a>
       </nav>
 
 
@@ -120,7 +113,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="../index.html">Código de módulo</a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
       
     <li>autenticacion.tests</li>
       <li class="wy-breadcrumbs-aside">
@@ -134,18 +127,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Código fuente para autenticacion.tests</h1><div class="highlight"><pre>
+  <h1>Source code for autenticacion.tests</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span><span class="p">,</span> <span class="n">RequestFactory</span>
 <span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="c1"># Create your tests here.</span>
 
 
-<div class="viewcode-block" id="test"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.tests.test">[documentos]</a><span class="k">class</span> <span class="nc">test</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="test"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.tests.test">[docs]</a><span class="k">class</span> <span class="nc">test</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
 
-<div class="viewcode-block" id="test.setUp"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.tests.test.setUp">[documentos]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test.setUp"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.tests.test.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="test.test_login"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.tests.test.test_login">[documentos]</a>    <span class="k">def</span> <span class="nf">test_login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test.test_login"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.tests.test.test_login">[docs]</a>    <span class="k">def</span> <span class="nf">test_login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">         el test muestra que al dirigir a la pagina login, este envia un response, con codigo</span>
 <span class="sd">         200, que significa que la pagina cargo correctamente</span>
@@ -155,7 +148,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertNotAlmostEquals</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">301</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="test.test_ver_loginPage"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.tests.test.test_ver_loginPage">[documentos]</a>    <span class="k">def</span> <span class="nf">test_ver_loginPage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test.test_ver_loginPage"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.tests.test.test_ver_loginPage">[docs]</a>    <span class="k">def</span> <span class="nf">test_ver_loginPage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">         el test muestra que al dirigir a la pagina login, este envia un response, con el template</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -163,7 +156,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;autenticacion/login_view.html&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="test.test_logout"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.tests.test.test_logout">[documentos]</a>    <span class="k">def</span> <span class="nf">test_logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test.test_logout"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.tests.test.test_logout">[docs]</a>    <span class="k">def</span> <span class="nf">test_logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
          <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        indica que que la redireccion es temporal por lo tanto envia un codigo 302</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -203,7 +196,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'3.0',
+            VERSION:'5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -212,7 +205,6 @@
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/translations.js"></script>
 
   
 

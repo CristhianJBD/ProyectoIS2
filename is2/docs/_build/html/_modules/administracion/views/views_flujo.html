@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>administracion.views.views_flujo &mdash; documentación de ProyectoIs2 - 3.0</title>
+  <title>administracion.views.views_flujo &mdash; ProyectoIS2 5.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="../../../index.html"/>
-        <link rel="up" title="Código de módulo" href="../../index.html"/> 
+    <link rel="top" title="ProyectoIS2 5.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> ProyectoIs2
+            <a href="../../../index.html" class="icon icon-home"> ProyectoIS2
           
 
           
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                3.0
+                5.0
               </div>
             
           
@@ -81,15 +81,8 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../administracion.html">administracion package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../view_project.html">view_project module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views.html">views module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_flujo.html">views_flujo module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_rol.html">views_rol module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_sprints.html">views_sprints module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_user.html">views_user module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../view_userstory.html">view_userstory module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../autenticacion.html">autenticacion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../administracion.html">Modulo administracion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autenticacion.html">Modulo autenticacion</a></li>
 </ul>
 
             
@@ -103,7 +96,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../../index.html">ProyectoIs2</a>
+        <a href="../../../index.html">ProyectoIS2</a>
       </nav>
 
 
@@ -120,7 +113,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="../../index.html">Código de módulo</a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
       
     <li>administracion.views.views_flujo</li>
       <li class="wy-breadcrumbs-aside">
@@ -134,7 +127,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Código fuente para administracion.views.views_flujo</h1><div class="highlight"><pre>
+  <h1>Source code for administracion.views.views_flujo</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">PermissionDenied</span>
 <span class="kn">from</span> <span class="nn">django.core.urlresolvers</span> <span class="kn">import</span> <span class="n">reverse</span><span class="p">,</span> <span class="n">reverse_lazy</span>
@@ -150,7 +143,7 @@
 <span class="kn">from</span> <span class="nn">administracion.views.views</span> <span class="kn">import</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">ActiveProjectRequiredMixin</span>
 
 
-<div class="viewcode-block" id="FlujoList"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.FlujoList">[documentos]</a><span class="k">class</span> <span class="nc">FlujoList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
+<div class="viewcode-block" id="FlujoList"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.FlujoList">[docs]</a><span class="k">class</span> <span class="nc">FlujoList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista de Listado de Flujos en el sistema de acuerdo a un proyecto</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -160,23 +153,24 @@
     <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;flujos&#39;</span>
     <span class="n">project</span> <span class="o">=</span> <span class="bp">None</span>
 
-<div class="viewcode-block" id="FlujoList.get_permission_object"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.FlujoList.get_permission_object">[documentos]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FlujoList.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.FlujoList.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;project_pk&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span></div>
 
-<div class="viewcode-block" id="FlujoList.get_context_data"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.FlujoList.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="FlujoList.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.FlujoList.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
         <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">FlujoList</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;proyecto_perms&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_perms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">context</span></div>
 
-<div class="viewcode-block" id="FlujoList.get_queryset"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.FlujoList.get_queryset">[documentos]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FlujoList.get_queryset"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.FlujoList.get_queryset">[docs]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;project_pk&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">Flujo</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">proyecto</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="FlujoDetail"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.FlujoDetail">[documentos]</a><span class="k">class</span> <span class="nc">FlujoDetail</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">):</span>
+<div class="viewcode-block" id="FlujoDetail"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.FlujoDetail">[docs]</a><span class="k">class</span> <span class="nc">FlujoDetail</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista de Detalles de un flujo</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -185,13 +179,13 @@
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.ver_proyecto&#39;</span>
     <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;flujo&#39;</span>
 
-<div class="viewcode-block" id="FlujoDetail.get_permission_object"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.FlujoDetail.get_permission_object">[documentos]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FlujoDetail.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.FlujoDetail.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Objeto por el cual comprobar el permiso</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="FlujoDetail.get_context_data"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.FlujoDetail.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="FlujoDetail.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.FlujoDetail.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Agregar lista de actividades al contexto</span>
 <span class="sd">        :param kwargs: diccionario de argumentos claves</span>
@@ -207,10 +201,10 @@
         <span class="k">return</span> <span class="n">context</span></div></div>
 
 
-<div class="viewcode-block" id="FlujoDetailSprint"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.FlujoDetailSprint">[documentos]</a><span class="k">class</span> <span class="nc">FlujoDetailSprint</span><span class="p">(</span><span class="n">FlujoDetail</span><span class="p">):</span>
+<div class="viewcode-block" id="FlujoDetailSprint"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.FlujoDetailSprint">[docs]</a><span class="k">class</span> <span class="nc">FlujoDetailSprint</span><span class="p">(</span><span class="n">FlujoDetail</span><span class="p">):</span>
     <span class="n">sprint</span> <span class="o">=</span> <span class="bp">None</span>
 
-<div class="viewcode-block" id="FlujoDetailSprint.get_context_data"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.FlujoDetailSprint.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="FlujoDetailSprint.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.FlujoDetailSprint.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Agregar lista de actividades al contexto</span>
 <span class="sd">        :param kwargs: diccionario de argumentos claves</span>
@@ -230,7 +224,7 @@
 
 
 
-<div class="viewcode-block" id="AddFlujo"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.AddFlujo">[documentos]</a><span class="k">class</span> <span class="nc">AddFlujo</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">CreateView</span><span class="p">):</span>
+<div class="viewcode-block" id="AddFlujo"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.AddFlujo">[docs]</a><span class="k">class</span> <span class="nc">AddFlujo</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">CreateView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    View que agrega un flujo al sistema</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -239,18 +233,20 @@
     <span class="n">form_class</span> <span class="o">=</span> <span class="n">FlujosCreateForm</span>
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.crear_flujo&#39;</span>
 
-<div class="viewcode-block" id="AddFlujo.get_proyecto"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.AddFlujo.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AddFlujo.get_proyecto"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.AddFlujo.get_proyecto">[docs]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">proyecto</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">proyecto</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;project_pk&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="AddFlujo.get_permission_object"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.AddFlujo.get_permission_object">[documentos]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AddFlujo.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.AddFlujo.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Objeto por el cual comprobar el permiso</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;project_pk&#39;</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="AddFlujo.get_context_data"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.AddFlujo.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="AddFlujo.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.AddFlujo.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proyecto</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;project_pk&#39;</span><span class="p">])</span>
+
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Agregar datos al contexto</span>
 <span class="sd">        :param kwargs: argumentos clave</span>
@@ -262,13 +258,13 @@
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;actividad_form&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ActividadFormSet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="k">else</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">context</span></div>
 
-<div class="viewcode-block" id="AddFlujo.get_success_url"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.AddFlujo.get_success_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AddFlujo.get_success_url"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.AddFlujo.get_success_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :return:la url de redireccion a la vista de los detalles del flujo agregado.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;flujo_detail&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">id</span><span class="p">})</span></div>
 
-<div class="viewcode-block" id="AddFlujo.form_valid"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.AddFlujo.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<div class="viewcode-block" id="AddFlujo.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.AddFlujo.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Comprobar validez del formulario. Crea una instancia de flujo para asociar con la actividad</span>
 <span class="sd">        :param form: formulario recibido</span>
@@ -293,7 +289,7 @@
                            <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">))</span></div></div>
 
 
-<div class="viewcode-block" id="UpdateFlujo"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.UpdateFlujo">[documentos]</a><span class="k">class</span> <span class="nc">UpdateFlujo</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateFlujo"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.UpdateFlujo">[docs]</a><span class="k">class</span> <span class="nc">UpdateFlujo</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    View que agrega un flujo al sistema</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -302,13 +298,13 @@
     <span class="n">form_class</span> <span class="o">=</span> <span class="n">FlujosCreateForm</span>
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.editar_flujo&#39;</span>
 
-<div class="viewcode-block" id="UpdateFlujo.get_proyecto"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.UpdateFlujo.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateFlujo.get_proyecto"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.UpdateFlujo.get_proyecto">[docs]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="UpdateFlujo.get_permission_object"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.UpdateFlujo.get_permission_object">[documentos]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateFlujo.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.UpdateFlujo.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="UpdateFlujo.get_context_data"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.UpdateFlujo.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateFlujo.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.UpdateFlujo.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Agregar datos al contexto</span>
 <span class="sd">        :param kwargs: argumentos clave</span>
@@ -320,13 +316,13 @@
 
         <span class="k">return</span> <span class="n">context</span></div>
 
-<div class="viewcode-block" id="UpdateFlujo.get_success_url"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.UpdateFlujo.get_success_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateFlujo.get_success_url"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.UpdateFlujo.get_success_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :return:la url de redireccion a la vista de los detalles del flujo agregado.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;flujo_detail&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">id</span><span class="p">})</span></div>
 
-<div class="viewcode-block" id="UpdateFlujo.form_valid"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.UpdateFlujo.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateFlujo.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.UpdateFlujo.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Comprobar validez del formulario. Crea una instancia de flujo para asociar con la actividad</span>
 <span class="sd">        :param form: formulario recibido</span>
@@ -347,7 +343,7 @@
                            <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">))</span></div></div>
 
 
-<div class="viewcode-block" id="DeleteFlujo"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.DeleteFlujo">[documentos]</a><span class="k">class</span> <span class="nc">DeleteFlujo</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DeleteView</span><span class="p">):</span>
+<div class="viewcode-block" id="DeleteFlujo"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.DeleteFlujo">[docs]</a><span class="k">class</span> <span class="nc">DeleteFlujo</span><span class="p">(</span><span class="n">ActiveProjectRequiredMixin</span><span class="p">,</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DeleteView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista de Eliminacion de Flujos</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -356,13 +352,13 @@
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.eliminar_flujo&#39;</span>
     <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;flujo&#39;</span>
 
-<div class="viewcode-block" id="DeleteFlujo.get_proyecto"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.DeleteFlujo.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DeleteFlujo.get_proyecto"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.DeleteFlujo.get_proyecto">[docs]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="DeleteFlujo.get_permission_object"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.DeleteFlujo.get_permission_object">[documentos]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DeleteFlujo.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.DeleteFlujo.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span></div>
 
-<div class="viewcode-block" id="DeleteFlujo.get_success_url"><a class="viewcode-back" href="../../../views_flujo.html#administracion.views.views_flujo.DeleteFlujo.get_success_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DeleteFlujo.get_success_url"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_flujo.DeleteFlujo.get_success_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;flujo_list&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;project_pk&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">proyecto</span><span class="o">.</span><span class="n">id</span><span class="p">})</span></div></div>
 
 
@@ -399,7 +395,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'3.0',
+            VERSION:'5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -408,7 +404,6 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../../_static/translations.js"></script>
 
   
 

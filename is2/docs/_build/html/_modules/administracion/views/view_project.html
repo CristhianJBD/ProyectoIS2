@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>administracion.views.view_project &mdash; documentación de ProyectoIs2 - 3.0</title>
+  <title>administracion.views.view_project &mdash; ProyectoIS2 5.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="../../../index.html"/>
-        <link rel="up" title="Código de módulo" href="../../index.html"/> 
+    <link rel="top" title="ProyectoIS2 5.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> ProyectoIs2
+            <a href="../../../index.html" class="icon icon-home"> ProyectoIS2
           
 
           
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                3.0
+                5.0
               </div>
             
           
@@ -81,15 +81,8 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../administracion.html">administracion package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../view_project.html">view_project module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views.html">views module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_flujo.html">views_flujo module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_rol.html">views_rol module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_sprints.html">views_sprints module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_user.html">views_user module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../view_userstory.html">view_userstory module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../autenticacion.html">autenticacion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../administracion.html">Modulo administracion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autenticacion.html">Modulo autenticacion</a></li>
 </ul>
 
             
@@ -103,7 +96,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../../index.html">ProyectoIs2</a>
+        <a href="../../../index.html">ProyectoIS2</a>
       </nav>
 
 
@@ -120,7 +113,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="../../index.html">Código de módulo</a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
       
     <li>administracion.views.view_project</li>
       <li class="wy-breadcrumbs-aside">
@@ -134,7 +127,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Código fuente para administracion.views.view_project</h1><div class="highlight"><pre>
+  <h1>Source code for administracion.views.view_project</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
 <span class="kn">from</span> <span class="nn">django.contrib.sites.shortcuts</span> <span class="kn">import</span> <span class="n">get_current_site</span>
@@ -161,7 +154,7 @@
 <span class="kn">from</span> <span class="nn">administracion.views.views</span> <span class="kn">import</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">CreateViewPermissionRequiredMixin</span>
 
 
-<div class="viewcode-block" id="ProjectList"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectList">[documentos]</a><span class="k">class</span> <span class="nc">ProjectList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">ListView</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectList"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectList">[docs]</a><span class="k">class</span> <span class="nc">ProjectList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">ListView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Listado de Proyectos</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -170,10 +163,10 @@
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/proyecto/project_list.html&#39;</span>
     <span class="n">show_cancelled</span> <span class="o">=</span> <span class="bp">False</span>
 
-<div class="viewcode-block" id="ProjectList.get_absolute_url"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectList.get_absolute_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectList.get_absolute_url"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectList.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;project_detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="p">])</span></div></div>
 
-<div class="viewcode-block" id="ProjectDetail"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectDetail">[documentos]</a><span class="k">class</span> <span class="nc">ProjectDetail</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">DetailView</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDetail"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectDetail">[docs]</a><span class="k">class</span> <span class="nc">ProjectDetail</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">DetailView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista de Detalles de Proyecto</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -182,7 +175,7 @@
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.ver_proyecto&#39;</span>
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/proyecto/project_detail.html&#39;</span>
 
-<div class="viewcode-block" id="ProjectDetail.get_context_data"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectDetail.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDetail.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectDetail.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ProjectDetail</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;team&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">miembroequipo_set</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;flujos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">flujo_set</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
@@ -195,7 +188,7 @@
         <span class="k">return</span> <span class="n">context</span></div></div>
 
 
-<div class="viewcode-block" id="ProjectCreate"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectCreate">[documentos]</a><span class="k">class</span> <span class="nc">ProjectCreate</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">CreateView</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectCreate"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectCreate">[docs]</a><span class="k">class</span> <span class="nc">ProjectCreate</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">CreateView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Permite la creacion de Proyectos</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -203,7 +196,7 @@
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.add_proyecto&#39;</span>
     <span class="n">form_class</span> <span class="o">=</span> <span class="n">modelform_factory</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span>
                                    <span class="n">widgets</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fecha_inicio&#39;</span><span class="p">:</span> <span class="n">SelectDateWidget</span><span class="p">,</span> <span class="s1">&#39;fecha_fin&#39;</span><span class="p">:</span> <span class="n">SelectDateWidget</span><span class="p">},</span>
-                                   <span class="n">fields</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;nombre&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha_inicio&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha_fin&#39;</span><span class="p">,</span> <span class="s1">&#39;duracion_sprint&#39;</span><span class="p">,</span> <span class="s1">&#39;estado&#39;</span><span class="p">),)</span>
+                                   <span class="n">fields</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;nombre&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha_inicio&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha_fin&#39;</span><span class="p">,</span> <span class="s1">&#39;estado&#39;</span><span class="p">),)</span>
 
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/proyecto/project_form_create.html&#39;</span>
     <span class="n">TeamMemberInlineFormSet</span> <span class="o">=</span> <span class="n">inlineformset_factory</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">MiembroEquipo</span><span class="p">,</span> <span class="n">formset</span><span class="o">=</span><span class="n">MiembrosEquipoFormset</span><span class="p">,</span> <span class="n">can_delete</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
@@ -211,13 +204,13 @@
                                                     <span class="n">extra</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                                                     <span class="n">widgets</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;roles&#39;</span><span class="p">:</span> <span class="n">CheckboxSelectMultiple</span><span class="p">})</span>
 
-<div class="viewcode-block" id="ProjectCreate.get_context_data"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectCreate.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectCreate.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectCreate.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ProjectCreate</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Crear&#39;</span>
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;formset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">TeamMemberInlineFormSet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span> <span class="k">else</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">context</span></div>
 
-<div class="viewcode-block" id="ProjectCreate.form_valid"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectCreate.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectCreate.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectCreate.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Guarda los miembros de equipo especificados asociados al proyecto.</span>
 
@@ -234,7 +227,7 @@
                       <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">))</span></div></div>
 
 
-<div class="viewcode-block" id="ProjectUpdate"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectUpdate">[documentos]</a><span class="k">class</span> <span class="nc">ProjectUpdate</span><span class="p">(</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectUpdate"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectUpdate">[docs]</a><span class="k">class</span> <span class="nc">ProjectUpdate</span><span class="p">(</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Permite la Edicion de Proyectos</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -247,13 +240,13 @@
                                                     <span class="n">widgets</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;roles&#39;</span><span class="p">:</span> <span class="n">CheckboxSelectMultiple</span><span class="p">})</span>
     <span class="n">form_class</span> <span class="o">=</span> <span class="n">modelform_factory</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span>
                                    <span class="n">widgets</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fecha_inicio&#39;</span><span class="p">:</span> <span class="n">SelectDateWidget</span><span class="p">,</span> <span class="s1">&#39;fecha_fin&#39;</span><span class="p">:</span> <span class="n">SelectDateWidget</span><span class="p">},</span>
-                                   <span class="n">fields</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;nombre&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha_inicio&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha_fin&#39;</span><span class="p">,</span> <span class="s1">&#39;duracion_sprint&#39;</span><span class="p">,</span> <span class="s1">&#39;estado&#39;</span><span class="p">),</span>
+                                   <span class="n">fields</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;nombre&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha_inicio&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha_fin&#39;</span><span class="p">,</span> <span class="s1">&#39;estado&#39;</span><span class="p">),</span>
                                    <span class="p">)</span>
 
-<div class="viewcode-block" id="ProjectUpdate.get_proyecto"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectUpdate.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectUpdate.get_proyecto"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectUpdate.get_proyecto">[docs]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ProjectUpdate.form_valid"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectUpdate.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectUpdate.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectUpdate.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">       # actualiza los miembros del equipo del proyecto que se hayan especifico</span>
 
@@ -281,7 +274,7 @@
         <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_template_names</span><span class="p">(),</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">,</span> <span class="s1">&#39;formset&#39;</span><span class="p">:</span> <span class="n">formset</span><span class="p">},</span>
                       <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="ProjectUpdate.get_context_data"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectUpdate.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectUpdate.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectUpdate.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        #Especifica los datos de contexto a pasar al template</span>
 <span class="sd">        #:param kwargs: Diccionario con parametros con nombres clave</span>
@@ -292,7 +285,7 @@
         <span class="k">return</span> <span class="n">context</span></div></div>
 
 
-<div class="viewcode-block" id="ProjectDelete"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectDelete">[documentos]</a><span class="k">class</span> <span class="nc">ProjectDelete</span><span class="p">(</span> <span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DeleteView</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDelete"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectDelete">[docs]</a><span class="k">class</span> <span class="nc">ProjectDelete</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DeleteView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista para la cancelacion de proyectos</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -301,10 +294,10 @@
     <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;project_list&#39;</span><span class="p">)</span>
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.delete_proyecto&#39;</span>
 
-<div class="viewcode-block" id="ProjectDelete.get_proyecto"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectDelete.get_proyecto">[documentos]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDelete.get_proyecto"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectDelete.get_proyecto">[docs]</a>    <span class="k">def</span> <span class="nf">get_proyecto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ProjectDelete.delete"><a class="viewcode-back" href="../../../view_project.html#administracion.views.view_project.ProjectDelete.delete">[documentos]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDelete.delete"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.view_project.ProjectDelete.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Llama al metodo delete() del objeto</span>
 <span class="sd">        y luego redirige a la url exitosa.</span>
@@ -353,7 +346,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'3.0',
+            VERSION:'5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -362,7 +355,6 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../../_static/translations.js"></script>
 
   
 

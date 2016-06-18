@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>administracion.views.views_adjunto &mdash; ProyectoIS2 5.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="ProyectoIS2 5.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ProyectoIS2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../administracion.html">Modulo administracion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autenticacion.html">Modulo autenticacion</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">ProyectoIS2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>administracion.views.views_adjunto</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for administracion.views.views_adjunto</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">PermissionDenied</span>
+<span class="kn">from</span> <span class="nn">django.views</span> <span class="kn">import</span> <span class="n">generic</span>
+<span class="kn">from</span> <span class="nn">django.core.urlresolvers</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponseRedirect</span><span class="p">,</span> <span class="n">HttpResponse</span><span class="p">,</span> <span class="n">HttpResponseForbidden</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">get_object_or_404</span>
+<span class="kn">from</span> <span class="nn">guardian.decorators</span> <span class="kn">import</span> <span class="n">permission_required_or_403</span>
+<span class="kn">from</span> <span class="nn">guardian.mixins</span> <span class="kn">import</span> <span class="n">LoginRequiredMixin</span>
+<span class="kn">from</span> <span class="nn">guardian.shortcuts</span> <span class="kn">import</span> <span class="n">get_perms</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">splitext</span>
+<span class="kn">from</span> <span class="nn">administracion.forms</span> <span class="kn">import</span> <span class="n">FileUploadForm</span>
+<span class="kn">from</span> <span class="nn">administracion.models</span> <span class="kn">import</span> <span class="n">UserStory</span><span class="p">,</span> <span class="n">Adjunto</span><span class="p">,</span> <span class="n">Proyecto</span>
+<span class="kn">from</span> <span class="nn">administracion.views.views</span> <span class="kn">import</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span>
+
+
+<span class="n">lang</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;.c&#39;</span><span class="p">:</span> <span class="s1">&#39;clike&#39;</span><span class="p">,</span> <span class="s1">&#39;.py&#39;</span><span class="p">:</span> <span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;.rb&#39;</span><span class="p">:</span> <span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;.css&#39;</span><span class="p">:</span> <span class="s1">&#39;css&#39;</span><span class="p">,</span> <span class="s1">&#39;.php&#39;</span><span class="p">:</span> <span class="s1">&#39;php&#39;</span><span class="p">,</span> <span class="s1">&#39;.scala&#39;</span><span class="p">:</span> <span class="s1">&#39;scala&#39;</span><span class="p">,</span> <span class="s1">&#39;.sql&#39;</span><span class="p">:</span> <span class="s1">&#39;sql&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;.sh&#39;</span><span class="p">:</span> <span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;.js&#39;</span><span class="p">:</span> <span class="s1">&#39;javascript&#39;</span><span class="p">,</span> <span class="s1">&#39;.html&#39;</span><span class="p">:</span> <span class="s1">&#39;markup&#39;</span><span class="p">}</span>
+
+
+
+<div class="viewcode-block" id="UploadFileView"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_adjunto.UploadFileView">[docs]</a><span class="k">class</span> <span class="nc">UploadFileView</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">FormView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Visa que permite subir un archivo adjunto</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/adjunto/upload.html&#39;</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="n">FileUploadForm</span>
+    <span class="n">user_story</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="UploadFileView.dispatch"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_adjunto.UploadFileView.dispatch">[docs]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Comprobacion de permisos hecha antes de la llamada al dispatch que inicia el proceso de respuesta al request de la url</span>
+<span class="sd">        :param request: request hecho por el cliente</span>
+<span class="sd">        :param args: argumentos adicionales posicionales</span>
+<span class="sd">        :param kwargs: argumentos adicionales en forma de diccionario</span>
+<span class="sd">        :return: PermissionDenied si el usuario no cuenta con permisos</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">UserStory</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;editar_userstory&#39;</span> <span class="ow">in</span> <span class="n">get_perms</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span><span class="o">.</span><span class="n">proyecto</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">UploadFileView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s1">&#39;editar_mi_userstory&#39;</span> <span class="ow">in</span> <span class="n">get_perms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">UploadFileView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PermissionDenied</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="UploadFileView.upload_handler"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_adjunto.UploadFileView.upload_handler">[docs]</a>    <span class="k">def</span> <span class="nf">upload_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attachment</span><span class="p">,</span> <span class="n">uploaded_file</span><span class="p">):</span>
+        <span class="n">attachment</span><span class="o">.</span><span class="n">user_story</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span>
+        <span class="n">attachment</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">uploaded_file</span><span class="o">.</span><span class="n">name</span>
+
+        <span class="k">if</span> <span class="n">uploaded_file</span><span class="o">.</span><span class="n">content_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">):</span>
+            <span class="n">attachment</span><span class="o">.</span><span class="n">tipo</span> <span class="o">=</span> <span class="s1">&#39;img&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">splitext</span><span class="p">(</span><span class="n">uploaded_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">lang</span><span class="p">:</span>
+                <span class="n">attachment</span><span class="o">.</span><span class="n">lenguaje</span> <span class="o">=</span> <span class="n">lang</span><span class="p">[</span><span class="n">ext</span><span class="p">]</span>
+                <span class="n">attachment</span><span class="o">.</span><span class="n">tipo</span> <span class="o">=</span> <span class="s1">&#39;src&#39;</span>
+            <span class="k">elif</span> <span class="n">uploaded_file</span><span class="o">.</span><span class="n">content_type</span> <span class="o">==</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">:</span>
+                <span class="n">attachment</span><span class="o">.</span><span class="n">tipo</span> <span class="o">=</span> <span class="s1">&#39;text&#39;</span>
+
+        <span class="n">attachment</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="n">uploaded_file</span><span class="o">.</span><span class="n">content_type</span>
+        <span class="n">attachment</span><span class="o">.</span><span class="n">binario</span> <span class="o">=</span> <span class="n">uploaded_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">attachment</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="UploadFileView.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_adjunto.UploadFileView.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+        <span class="n">attachment</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upload_handler</span><span class="p">(</span><span class="n">attachment</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">&#39;archivo&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="n">attachment</span><span class="o">.</span><span class="n">get_absolute_url</span><span class="p">())</span></div></div>
+
+
+<div class="viewcode-block" id="FileDetail"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_adjunto.FileDetail">[docs]</a><span class="k">class</span> <span class="nc">FileDetail</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Adjunto</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/adjunto/file_view.html&#39;</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;adjunto&#39;</span>
+    <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.ver_proyecto&#39;</span>
+
+<div class="viewcode-block" id="FileDetail.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_adjunto.FileDetail.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna el objeto al cual corresponde el permiso</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">user_story</span><span class="o">.</span><span class="n">proyecto</span></div></div>
+
+
+<div class="viewcode-block" id="FileList"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_adjunto.FileList">[docs]</a><span class="k">class</span> <span class="nc">FileList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vista que lista los adjuntos del user story</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Adjunto</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/adjunto/file_list.html&#39;</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;adjuntos&#39;</span>
+    <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.ver_proyecto&#39;</span>
+    <span class="n">user_story</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="FileList.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_adjunto.FileList.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna el objeto al cual corresponde el permiso</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">UserStory</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span><span class="o">.</span><span class="n">proyecto</span></div>
+
+<div class="viewcode-block" id="FileList.get_queryset"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_adjunto.FileList.get_queryset">[docs]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span><span class="o">.</span><span class="n">adjunto_set</span><span class="o">.</span><span class="n">all</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="FileList.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_adjunto.FileList.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">FileList</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;user_story&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_story</span>
+        <span class="k">return</span> <span class="n">context</span></div></div>
+
+
+<span class="nd">@login_required</span>
+<div class="viewcode-block" id="download_attachment"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_adjunto.download_attachment">[docs]</a><span class="k">def</span> <span class="nf">download_attachment</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vista que permite la descarga de un archivo adjunto de la base de datos</span>
+<span class="sd">    :param request: request del cliente</span>
+<span class="sd">    :param pk: id del adjunto</span>
+<span class="sd">    :return: respuesta http con el archivo adjunto</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">attachment</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Adjunto</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">has_perm</span><span class="p">(</span><span class="s1">&#39;administracion.ver_proyecto&#39;</span><span class="p">,</span> <span class="n">attachment</span><span class="o">.</span><span class="n">user_story</span><span class="o">.</span><span class="n">proyecto</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">attachment</span><span class="o">.</span><span class="n">binario</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="n">attachment</span><span class="o">.</span><span class="n">content_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">attachment</span><span class="o">.</span><span class="n">tipo</span> <span class="o">==</span> <span class="s1">&#39;img&#39;</span><span class="p">:</span>
+            <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;filename=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">attachment</span><span class="o">.</span><span class="n">filename</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;attachment; filename=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">attachment</span><span class="o">.</span><span class="n">filename</span>
+        <span class="k">return</span> <span class="n">response</span>
+    <span class="k">raise</span> <span class="n">PermissionDenied</span><span class="p">()</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Christian Delgado, Cristhian Benitez, Fernando Britez, Isidro Gaona.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'5.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
