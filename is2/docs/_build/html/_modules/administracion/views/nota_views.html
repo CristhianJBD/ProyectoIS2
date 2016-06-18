@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>administracion.views.nota_views &mdash; ProyectoIS2 5.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="ProyectoIS2 5.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ProyectoIS2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../administracion.html">Modulo administracion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autenticacion.html">Modulo autenticacion</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">ProyectoIS2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>administracion.views.nota_views</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for administracion.views.nota_views</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">PermissionDenied</span><span class="p">,</span> <span class="n">ObjectDoesNotExist</span>
+<span class="kn">from</span> <span class="nn">django.core.urlresolvers</span> <span class="kn">import</span> <span class="n">reverse</span><span class="p">,</span> <span class="n">reverse_lazy</span>
+<span class="kn">from</span> <span class="nn">django.forms.models</span> <span class="kn">import</span> <span class="n">modelform_factory</span><span class="p">,</span> <span class="n">inlineformset_factory</span><span class="p">,</span> <span class="n">modelformset_factory</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponseRedirect</span><span class="p">,</span> <span class="n">HttpResponseForbidden</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">transaction</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">get_object_or_404</span><span class="p">,</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">timezone</span>
+<span class="kn">from</span> <span class="nn">django.views</span> <span class="kn">import</span> <span class="n">generic</span>
+<span class="kn">from</span> <span class="nn">guardian.mixins</span> <span class="kn">import</span> <span class="n">LoginRequiredMixin</span>
+<span class="kn">from</span> <span class="nn">guardian.shortcuts</span> <span class="kn">import</span> <span class="n">get_perms</span><span class="p">,</span> <span class="n">get_perms_for_model</span><span class="p">,</span> <span class="n">assign_perm</span>
+<span class="kn">import</span> <span class="nn">reversion</span>
+<span class="kn">from</span> <span class="nn">administracion.models</span> <span class="kn">import</span> <span class="n">UserStory</span><span class="p">,</span> <span class="n">Proyecto</span><span class="p">,</span> <span class="n">MiembroEquipo</span><span class="p">,</span> <span class="n">Sprint</span><span class="p">,</span> <span class="n">Actividad</span><span class="p">,</span> <span class="n">Nota</span>
+<span class="kn">from</span> <span class="nn">administracion.views.views</span> <span class="kn">import</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span>
+
+
+<div class="viewcode-block" id="NotaDetail"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.nota_views.NotaDetail">[docs]</a><span class="k">class</span> <span class="nc">NotaDetail</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vista de Detalles de una nota</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Nota</span>
+    <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion.ver_proyecto&#39;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/nota/nota_detail.html&#39;</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;nota&#39;</span>
+
+<div class="viewcode-block" id="NotaDetail.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.nota_views.NotaDetail.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Retorna el objeto al cual corresponde el permiso</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span><span class="o">.</span><span class="n">user_story</span><span class="o">.</span><span class="n">proyecto</span></div></div>
+
+<div class="viewcode-block" id="NotaList"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.nota_views.NotaList">[docs]</a><span class="k">class</span> <span class="nc">NotaList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vista que devuelve una lista de notas del User Story deseado.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;notas&#39;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;administracion/nota/nota_list.html&#39;</span>
+    <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;administracion_ver_proyecto&#39;</span>
+    <span class="n">us</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="NotaList.get_permission_object"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.nota_views.NotaList.get_permission_object">[docs]</a>    <span class="k">def</span> <span class="nf">get_permission_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Obtiene el user story</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">us_pk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">us</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">UserStory</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">us_pk</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">us</span><span class="o">.</span><span class="n">proyecto</span></div>
+
+<div class="viewcode-block" id="NotaList.get_queryset"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.nota_views.NotaList.get_queryset">[docs]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Obtiene el user story y sus versiones</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">us</span><span class="o">.</span><span class="n">nota_set</span><span class="o">.</span><span class="n">all</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="NotaList.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.nota_views.NotaList.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Agrega el user story al contexto.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">NotaList</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;userstory&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">us</span>
+        <span class="k">return</span> <span class="n">context</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Christian Delgado, Cristhian Benitez, Fernando Britez, Isidro Gaona.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'5.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

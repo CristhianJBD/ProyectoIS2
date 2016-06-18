@@ -1,12 +1,5 @@
-autenticacion package
+Modulo autenticacion
 =====================
-
-Subpackages
------------
-
-.. toctree::
-
-    autenticacion.migrations
 
 Submodules
 ----------

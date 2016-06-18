@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>administracion.admin &mdash; documentación de ProyectoIs2 - 3.0</title>
+  <title>administracion.admin &mdash; ProyectoIS2 5.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="../../index.html"/>
-        <link rel="up" title="Código de módulo" href="../index.html"/> 
+    <link rel="top" title="ProyectoIS2 5.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> ProyectoIs2
+            <a href="../../index.html" class="icon icon-home"> ProyectoIS2
           
 
           
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                3.0
+                5.0
               </div>
             
           
@@ -81,15 +81,8 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../administracion.html">administracion package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../view_project.html">view_project module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views.html">views module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_flujo.html">views_flujo module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_rol.html">views_rol module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_sprints.html">views_sprints module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_user.html">views_user module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../view_userstory.html">view_userstory module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../autenticacion.html">autenticacion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../administracion.html">Modulo administracion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autenticacion.html">Modulo autenticacion</a></li>
 </ul>
 
             
@@ -103,7 +96,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">ProyectoIs2</a>
+        <a href="../../index.html">ProyectoIS2</a>
       </nav>
 
 
@@ -120,7 +113,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="../index.html">Código de módulo</a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
       
     <li>administracion.admin</li>
       <li class="wy-breadcrumbs-aside">
@@ -134,38 +127,53 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Código fuente para administracion.admin</h1><div class="highlight"><pre>
+  <h1>Source code for administracion.admin</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
 <span class="kn">from</span> <span class="nn">guardian.admin</span> <span class="kn">import</span> <span class="n">GuardedModelAdmin</span>
 
-<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Proyecto</span><span class="p">,</span> <span class="n">MiembroEquipo</span><span class="p">,</span><span class="n">Actividad</span><span class="p">,</span> <span class="n">Flujo</span><span class="p">,</span> <span class="n">Sprint</span><span class="p">,</span> <span class="n">UserStory</span>
-<span class="kn">from</span> <span class="nn">reversion</span> <span class="kn">import</span> <span class="n">revisions</span> <span class="k">as</span> <span class="n">reversion</span>
+
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Proyecto</span><span class="p">,</span> <span class="n">MiembroEquipo</span><span class="p">,</span> <span class="n">MiembroEquipoSprint</span><span class="p">,</span><span class="n">Actividad</span><span class="p">,</span> <span class="n">Flujo</span><span class="p">,</span> <span class="n">Sprint</span><span class="p">,</span> <span class="n">UserStory</span><span class="p">,</span> <span class="n">Adjunto</span><span class="p">,</span> <span class="n">Nota</span>
+<span class="kn">import</span> <span class="nn">reversion</span>
+
 <span class="c1"># Register your models here.</span>
 
-<div class="viewcode-block" id="MiembroEquipoInLine"><a class="viewcode-back" href="../../administracion.html#administracion.admin.MiembroEquipoInLine">[documentos]</a><span class="k">class</span> <span class="nc">MiembroEquipoInLine</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">TabularInline</span><span class="p">):</span>
+<div class="viewcode-block" id="MiembroEquipoInLine"><a class="viewcode-back" href="../../administracion.html#administracion.admin.MiembroEquipoInLine">[docs]</a><span class="k">class</span> <span class="nc">MiembroEquipoInLine</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">TabularInline</span><span class="p">):</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">MiembroEquipo</span>
     <span class="n">extra</span> <span class="o">=</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="ProyectoAdmin"><a class="viewcode-back" href="../../administracion.html#administracion.admin.ProyectoAdmin">[documentos]</a><span class="k">class</span> <span class="nc">ProyectoAdmin</span><span class="p">(</span><span class="n">GuardedModelAdmin</span><span class="p">):</span>
+<div class="viewcode-block" id="MiembroEquipoSprintInLine"><a class="viewcode-back" href="../../administracion.html#administracion.admin.MiembroEquipoSprintInLine">[docs]</a><span class="k">class</span> <span class="nc">MiembroEquipoSprintInLine</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">TabularInline</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">MiembroEquipoSprint</span>
+    <span class="n">extra</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="ProyectoAdmin"><a class="viewcode-back" href="../../administracion.html#administracion.admin.ProyectoAdmin">[docs]</a><span class="k">class</span> <span class="nc">ProyectoAdmin</span><span class="p">(</span><span class="n">GuardedModelAdmin</span><span class="p">):</span>
     <span class="n">inlines</span> <span class="o">=</span> <span class="p">[</span><span class="n">MiembroEquipoInLine</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="ActividadInLine"><a class="viewcode-back" href="../../administracion.html#administracion.admin.ActividadInLine">[documentos]</a><span class="k">class</span> <span class="nc">ActividadInLine</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">TabularInline</span><span class="p">):</span>
+<div class="viewcode-block" id="ActividadInLine"><a class="viewcode-back" href="../../administracion.html#administracion.admin.ActividadInLine">[docs]</a><span class="k">class</span> <span class="nc">ActividadInLine</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">TabularInline</span><span class="p">):</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">Actividad</span>
     <span class="n">extra</span> <span class="o">=</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="ActividadAdmin"><a class="viewcode-back" href="../../administracion.html#administracion.admin.ActividadAdmin">[documentos]</a><span class="k">class</span> <span class="nc">ActividadAdmin</span><span class="p">(</span><span class="n">GuardedModelAdmin</span><span class="p">):</span>
+<div class="viewcode-block" id="ActividadAdmin"><a class="viewcode-back" href="../../administracion.html#administracion.admin.ActividadAdmin">[docs]</a><span class="k">class</span> <span class="nc">ActividadAdmin</span><span class="p">(</span><span class="n">GuardedModelAdmin</span><span class="p">):</span>
     <span class="n">inlines</span> <span class="o">=</span> <span class="p">[</span><span class="n">ActividadInLine</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="UserStoryAdmin"><a class="viewcode-back" href="../../administracion.html#administracion.admin.UserStoryAdmin">[documentos]</a><span class="k">class</span> <span class="nc">UserStoryAdmin</span><span class="p">(</span><span class="n">GuardedModelAdmin</span><span class="p">):</span>
+<div class="viewcode-block" id="UserStoryAdmin"><a class="viewcode-back" href="../../administracion.html#administracion.admin.UserStoryAdmin">[docs]</a><span class="k">class</span> <span class="nc">UserStoryAdmin</span><span class="p">(</span><span class="n">GuardedModelAdmin</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="SprintAdmin"><a class="viewcode-back" href="../../administracion.html#administracion.admin.SprintAdmin">[docs]</a><span class="k">class</span> <span class="nc">SprintAdmin</span><span class="p">(</span><span class="n">GuardedModelAdmin</span><span class="p">):</span>
+    <span class="n">inlines</span> <span class="o">=</span> <span class="p">[</span><span class="n">MiembroEquipoSprintInLine</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="NotaAdmin"><a class="viewcode-back" href="../../administracion.html#administracion.admin.NotaAdmin">[docs]</a><span class="k">class</span> <span class="nc">NotaAdmin</span><span class="p">(</span><span class="n">reversion</span><span class="o">.</span><span class="n">VersionAdmin</span><span class="p">):</span>
     <span class="k">pass</span></div>
 
 <span class="c1">#admin.site.register(Usuario)</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">UserStory</span><span class="p">,</span> <span class="n">UserStoryAdmin</span><span class="p">)</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">ProyectoAdmin</span><span class="p">)</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">MiembroEquipo</span><span class="p">)</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">MiembroEquipoSprint</span><span class="p">)</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Flujo</span><span class="p">,</span> <span class="n">ActividadAdmin</span><span class="p">)</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Actividad</span><span class="p">)</span>
-<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Sprint</span><span class="p">)</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Sprint</span><span class="p">,</span> <span class="n">SprintAdmin</span><span class="p">)</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Adjunto</span><span class="p">)</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Nota</span><span class="p">,</span> <span class="n">NotaAdmin</span><span class="p">)</span>
 </pre></div>
 
            </div>
@@ -199,7 +207,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'3.0',
+            VERSION:'5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -208,7 +216,6 @@
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/translations.js"></script>
 
   
 

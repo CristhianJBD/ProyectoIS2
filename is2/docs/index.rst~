@@ -1,25 +1,17 @@
-.. ProyectoIs2 documentation master file, created by
-   sphinx-quickstart on Mon May 16 16:38:21 2016.
+.. ProyectoIS2 documentation master file, created by
+   sphinx-quickstart on Fri Jun 17 17:54:19 2016.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to ProyectoIs2's documentation!
+Welcome to ProyectoIS2's documentation!
 =======================================
 
-
+Contents:
 
 .. toctree::
    :maxdepth: 4
 
    administracion
-   views_project
-   views
-   views_flujo
-   views_rol
-   views_sprints
-   views_user
-   views_userstory
-   autenticacion
 
 
 Indices and tables

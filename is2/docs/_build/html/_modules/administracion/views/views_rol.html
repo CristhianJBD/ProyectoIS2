@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>administracion.views.views_rol &mdash; documentación de ProyectoIs2 - 3.0</title>
+  <title>administracion.views.views_rol &mdash; ProyectoIS2 5.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="../../../index.html"/>
-        <link rel="up" title="Código de módulo" href="../../index.html"/> 
+    <link rel="top" title="ProyectoIS2 5.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> ProyectoIs2
+            <a href="../../../index.html" class="icon icon-home"> ProyectoIS2
           
 
           
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                3.0
+                5.0
               </div>
             
           
@@ -81,15 +81,8 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../administracion.html">administracion package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../view_project.html">view_project module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views.html">views module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_flujo.html">views_flujo module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_rol.html">views_rol module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_sprints.html">views_sprints module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../views_user.html">views_user module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../view_userstory.html">view_userstory module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../autenticacion.html">autenticacion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../administracion.html">Modulo administracion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autenticacion.html">Modulo autenticacion</a></li>
 </ul>
 
             
@@ -103,7 +96,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../../index.html">ProyectoIs2</a>
+        <a href="../../../index.html">ProyectoIS2</a>
       </nav>
 
 
@@ -120,7 +113,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="../../index.html">Código de módulo</a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
       
     <li>administracion.views.views_rol</li>
       <li class="wy-breadcrumbs-aside">
@@ -134,8 +127,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Código fuente para administracion.views.views_rol</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">django.contrib.auth.mixins</span> <span class="kn">import</span> <span class="n">LoginRequiredMixin</span>
+  <h1>Source code for administracion.views.views_rol</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">guardian.mixins</span> <span class="kn">import</span> <span class="n">LoginRequiredMixin</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Permission</span>
 <span class="kn">from</span> <span class="nn">django.core.urlresolvers</span> <span class="kn">import</span> <span class="n">reverse</span><span class="p">,</span> <span class="n">reverse_lazy</span>
 <span class="kn">from</span> <span class="nn">django.http.response</span> <span class="kn">import</span> <span class="n">HttpResponseRedirect</span>
@@ -146,7 +139,7 @@
 <span class="kn">from</span> <span class="nn">administracion.views.views</span> <span class="kn">import</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">get_selected_perms</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span>
 
 
-<div class="viewcode-block" id="AddRol"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.AddRol">[documentos]</a><span class="k">class</span> <span class="nc">AddRol</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">CreateView</span><span class="p">):</span>
+<div class="viewcode-block" id="AddRol"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.AddRol">[docs]</a><span class="k">class</span> <span class="nc">AddRol</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">CreateViewPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">CreateView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Agregar Rol al sistema</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -155,7 +148,7 @@
     <span class="n">form_class</span> <span class="o">=</span> <span class="n">RolForm</span>
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;auth.add_group&#39;</span>
 
-<div class="viewcode-block" id="AddRol.get_context_data"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.AddRol.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="AddRol.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.AddRol.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Se agregan datos al contexto</span>
 <span class="sd">        :param kwargs: argumentos claves</span>
@@ -165,14 +158,14 @@
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;current_action&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Agregar&quot;</span>
         <span class="k">return</span> <span class="n">context</span></div>
 
-<div class="viewcode-block" id="AddRol.get_success_url"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.AddRol.get_success_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AddRol.get_success_url"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.AddRol.get_success_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Se redirije a la url de detalles del rol</span>
 <span class="sd">        :return: url de rol_detail</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;rol_list&#39;</span><span class="p">)</span></div>
     
-<div class="viewcode-block" id="AddRol.form_valid"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.AddRol.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<div class="viewcode-block" id="AddRol.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.AddRol.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Comprobar validez del formulario</span>
 <span class="sd">        :param form: formulario recibido</span>
@@ -186,7 +179,7 @@
         <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div></div>
 
 
-<div class="viewcode-block" id="EditRol"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.EditRol">[documentos]</a><span class="k">class</span> <span class="nc">EditRol</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
+<div class="viewcode-block" id="EditRol"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.EditRol">[docs]</a><span class="k">class</span> <span class="nc">EditRol</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">UpdateView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista de Actualizacion de Roles</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -195,7 +188,7 @@
     <span class="n">form_class</span> <span class="o">=</span> <span class="n">RolForm</span>
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;auth.change_group&#39;</span>
 
-<div class="viewcode-block" id="EditRol.get_context_data"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.EditRol.get_context_data">[documentos]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="EditRol.get_context_data"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.EditRol.get_context_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Agregar datos adicionales al contexto</span>
 <span class="sd">        :param kwargs: argumentos clave</span>
@@ -205,13 +198,13 @@
         <span class="n">context</span><span class="p">[</span><span class="s1">&#39;current_action&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Guardar&quot;</span>
         <span class="k">return</span> <span class="n">context</span></div>
 
-<div class="viewcode-block" id="EditRol.get_success_url"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.EditRol.get_success_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="EditRol.get_success_url"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.EditRol.get_success_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :return: URL de redireccion correcta a UserDetail</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;rol_list&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="EditRol.get_initial"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.EditRol.get_initial">[documentos]</a>    <span class="k">def</span> <span class="nf">get_initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="EditRol.get_initial"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.EditRol.get_initial">[docs]</a>    <span class="k">def</span> <span class="nf">get_initial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Obtener datos iniciales para el formulario</span>
 <span class="sd">        :return: diccionario de datos iniciales</span>
@@ -223,7 +216,7 @@
         <span class="k">return</span> <span class="n">initial</span></div>
 
 
-<div class="viewcode-block" id="EditRol.form_valid"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.EditRol.form_valid">[documentos]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<div class="viewcode-block" id="EditRol.form_valid"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.EditRol.form_valid">[docs]</a>    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Comprobar validez del formulario</span>
 
@@ -258,7 +251,7 @@
         <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_success_url</span><span class="p">())</span></div></div>
 
 
-<div class="viewcode-block" id="DeleteRolView"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.DeleteRolView">[documentos]</a><span class="k">class</span> <span class="nc">DeleteRolView</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DeleteView</span><span class="p">):</span>
+<div class="viewcode-block" id="DeleteRolView"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.DeleteRolView">[docs]</a><span class="k">class</span> <span class="nc">DeleteRolView</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">GlobalPermissionRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DeleteView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista de Eliminacion de Roles</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -267,7 +260,7 @@
     <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;rol_list&#39;</span><span class="p">)</span>
     <span class="n">permission_required</span> <span class="o">=</span> <span class="s1">&#39;auth.delete_group&#39;</span>
 
-<div class="viewcode-block" id="DeleteRolView.delete"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.DeleteRolView.delete">[documentos]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="DeleteRolView.delete"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.DeleteRolView.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Borrar permisos en miembros que hayan tenido este rol asignado luego de eliminar el rol</span>
 <span class="sd">        :param request: request del cliente</span>
@@ -298,7 +291,7 @@
 
         <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="n">success_url</span><span class="p">)</span></div></div>
 
-<div class="viewcode-block" id="RolList"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.RolList">[documentos]</a><span class="k">class</span> <span class="nc">RolList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
+<div class="viewcode-block" id="RolList"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.RolList">[docs]</a><span class="k">class</span> <span class="nc">RolList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista de Listado de Roles</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -307,7 +300,7 @@
     <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;roles&#39;</span></div>
 
 
-<div class="viewcode-block" id="RolDetail"><a class="viewcode-back" href="../../../views_rol.html#administracion.views.views_rol.RolDetail">[documentos]</a><span class="k">class</span> <span class="nc">RolDetail</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">):</span>
+<div class="viewcode-block" id="RolDetail"><a class="viewcode-back" href="../../../administracion.views.html#administracion.views.views_rol.RolDetail">[docs]</a><span class="k">class</span> <span class="nc">RolDetail</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">generic</span><span class="o">.</span><span class="n">DetailView</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vista de Detalles de Rol</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -359,7 +352,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'3.0',
+            VERSION:'5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -368,7 +361,6 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../../_static/translations.js"></script>
 
   
 

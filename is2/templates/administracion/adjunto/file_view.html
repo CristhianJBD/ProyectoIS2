@@ -65,7 +65,7 @@
                                     <p>{{ adjunto.descripcion }}</p>
                                     <pre><code class="language-{{ adjunto.lenguaje }}">{{ adjunto.binario }}</code></pre>
                                     <p><strong>User Story: </strong><a
-                                            href="{% url 'userstory_detail' adjunto.user_story_id %}">{{ adjunto.user_story }}</a>
+                                            href="{% url 'userstory_detail' adjunto.user_story_id %}">{{ adjunto.user_story.nombre_largo }}</a>
                                     </p>
                                     <p><strong>Lenguaje: </strong>{{ adjunto.get_lenguaje_display }}</p>
                                 </div>

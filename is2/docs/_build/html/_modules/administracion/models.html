@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>administracion.models &mdash; documentación de ProyectoIs2 - 3.0</title>
+  <title>administracion.models &mdash; ProyectoIS2 5.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="../../index.html"/>
-        <link rel="up" title="Código de módulo" href="../index.html"/> 
+    <link rel="top" title="ProyectoIS2 5.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> ProyectoIs2
+            <a href="../../index.html" class="icon icon-home"> ProyectoIS2
           
 
           
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                3.0
+                5.0
               </div>
             
           
@@ -81,15 +81,8 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../administracion.html">administracion package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../view_project.html">view_project module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views.html">views module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_flujo.html">views_flujo module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_rol.html">views_rol module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_sprints.html">views_sprints module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_user.html">views_user module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../view_userstory.html">view_userstory module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../autenticacion.html">autenticacion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../administracion.html">Modulo administracion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autenticacion.html">Modulo autenticacion</a></li>
 </ul>
 
             
@@ -103,7 +96,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">ProyectoIs2</a>
+        <a href="../../index.html">ProyectoIS2</a>
       </nav>
 
 
@@ -120,7 +113,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="../index.html">Código de módulo</a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
       
     <li>administracion.models</li>
       <li class="wy-breadcrumbs-aside">
@@ -134,8 +127,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Código fuente para administracion.models</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">django.db.models.signals</span> <span class="kn">import</span> <span class="n">m2m_changed</span>
+  <h1>Source code for administracion.models</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">django.db.models.signals</span> <span class="kn">import</span> <span class="n">m2m_changed</span>
 <span class="kn">from</span> <span class="nn">guardian.shortcuts</span> <span class="kn">import</span> <span class="n">assign_perm</span><span class="p">,</span> <span class="n">remove_perm</span><span class="p">,</span> <span class="n">get_perms_for_model</span><span class="p">,</span> <span class="n">get_perms</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Group</span>
 <span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ValidationError</span>
@@ -147,12 +141,12 @@
 <span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">get_object_or_404</span>
 <span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">timezone</span>
 <span class="kn">from</span> <span class="nn">django.utils.encoding</span> <span class="kn">import</span> <span class="n">force_bytes</span>
-<span class="kn">from</span> <span class="nn">reversion</span> <span class="kn">import</span> <span class="n">revisions</span> <span class="k">as</span> <span class="n">reversion</span>
+<span class="kn">import</span> <span class="nn">reversion</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">Sum</span>
 
 
-<div class="viewcode-block" id="Proyecto"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Proyecto">[documentos]</a><span class="k">class</span> <span class="nc">Proyecto</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="Proyecto"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Proyecto">[docs]</a><span class="k">class</span> <span class="nc">Proyecto</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Modelo de Proyecto del sistema.</span>
 
@@ -165,7 +159,6 @@
     <span class="n">fecha_inicio</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">()</span>
     <span class="n">fecha_fin</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">()</span>
     <span class="n">equipo</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">through</span><span class="o">=</span><span class="s1">&#39;MiembroEquipo&#39;</span><span class="p">)</span>
-    <span class="n">duracion_sprint</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 
 
 
@@ -201,10 +194,10 @@
             <span class="p">(</span><span class="s1">&#39;priorizar_userstory&#39;</span><span class="p">,</span> <span class="s1">&#39;asignar prioridad a userstories&#39;</span><span class="p">),</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nombre</span>
 
-<div class="viewcode-block" id="Proyecto.clean"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Proyecto.clean">[documentos]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Proyecto.clean"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Proyecto.clean">[docs]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1">#validacion de la fecha de inicio y final del proyecto</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fecha_inicio</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fecha_fin</span><span class="p">:</span>
@@ -212,13 +205,13 @@
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
             <span class="k">pass</span>  <span class="c1"># error si una de las fechas es null</span></div>
 
-<div class="viewcode-block" id="Proyecto.get_absolute_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Proyecto.get_absolute_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Proyecto.get_absolute_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Proyecto.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;project_detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="Proyecto.get_horas_estimadas"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Proyecto.get_horas_estimadas">[documentos]</a>    <span class="k">def</span> <span class="nf">get_horas_estimadas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Proyecto.get_horas_estimadas"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Proyecto.get_horas_estimadas">[docs]</a>    <span class="k">def</span> <span class="nf">get_horas_estimadas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">userstory_set</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;tiempo_estimado&#39;</span><span class="p">))[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Proyecto.get_horas_trabajadas"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Proyecto.get_horas_trabajadas">[documentos]</a>    <span class="k">def</span> <span class="nf">get_horas_trabajadas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Proyecto.get_horas_trabajadas"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Proyecto.get_horas_trabajadas">[docs]</a>    <span class="k">def</span> <span class="nf">get_horas_trabajadas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">userstory_set</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;tiempo_registrado&#39;</span><span class="p">))[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span></div>
 
     <span class="k">def</span> <span class="nf">_get_progreso</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -228,7 +221,7 @@
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">progreso</span><span class="p">)</span>
     <span class="n">progreso</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">_get_progreso</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="MiembroEquipo"><a class="viewcode-back" href="../../administracion.html#administracion.admin.MiembroEquipo">[documentos]</a><span class="k">class</span> <span class="nc">MiembroEquipo</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="MiembroEquipo"><a class="viewcode-back" href="../../administracion.html#administracion.admin.MiembroEquipo">[docs]</a><span class="k">class</span> <span class="nc">MiembroEquipo</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Miembros del equipo de un proyecto</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -237,14 +230,15 @@
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">)</span>
     <span class="n">roles</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Group</span><span class="p">)</span>
 
-    <span class="c1"># nota: si se quiere eliminar o guardar se llama al delete o save de cada objeto</span>
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">usuario</span><span class="o">.</span><span class="n">username</span>
 
-<div class="viewcode-block" id="MiembroEquipo.save"><a class="viewcode-back" href="../../administracion.html#administracion.admin.MiembroEquipo.save">[documentos]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_insert</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">force_update</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">using</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">update_fields</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="MiembroEquipo.save"><a class="viewcode-back" href="../../administracion.html#administracion.admin.MiembroEquipo.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_insert</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">force_update</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">using</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">update_fields</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">MiembroEquipo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">force_insert</span><span class="p">,</span> <span class="n">force_update</span><span class="p">,</span> <span class="n">using</span><span class="p">,</span> <span class="n">update_fields</span><span class="p">)</span>
         <span class="c1"># Agregamos el permiso ver_proyecto al usuario</span>
         <span class="n">assign_perm</span><span class="p">(</span><span class="s1">&#39;ver_proyecto&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">usuario</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">proyecto</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="MiembroEquipo.delete"><a class="viewcode-back" href="../../administracion.html#administracion.admin.MiembroEquipo.delete">[documentos]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">using</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="MiembroEquipo.delete"><a class="viewcode-back" href="../../administracion.html#administracion.admin.MiembroEquipo.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">using</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">roles</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
             <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">role</span><span class="o">.</span><span class="n">permissions</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
                 <span class="n">remove_perm</span><span class="p">(</span><span class="n">perm</span><span class="o">.</span><span class="n">codename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">usuario</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">proyecto</span><span class="p">)</span>
@@ -255,36 +249,78 @@
         <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s1">&#39;miembros equipo&#39;</span>
         <span class="n">unique_together</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;usuario&#39;</span><span class="p">,</span> <span class="s1">&#39;proyecto&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Sprint"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Sprint">[documentos]</a><span class="k">class</span> <span class="nc">Sprint</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Sprint"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Sprint">[docs]</a><span class="k">class</span> <span class="nc">Sprint</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Manejo de los sprints del proyecto</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">opciones_estado</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;PL&#39;</span><span class="p">,</span> <span class="s1">&#39;Planificacion&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;EJ&#39;</span><span class="p">,</span> <span class="s1">&#39;Ejecutandose&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;PE&#39;</span><span class="p">,</span> <span class="s1">&#39;Pendiente&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span> <span class="s1">&#39;Cancelado&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;TE&#39;</span><span class="p">,</span> <span class="s1">&#39;Terminado&#39;</span><span class="p">))</span>
     <span class="n">nombre</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
     <span class="n">fecha_inicio</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">()</span>
     <span class="n">fecha_fin</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">()</span>
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-
+    <span class="n">estado</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="n">opciones_estado</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;PE&#39;</span><span class="p">)</span>
+    <span class="n">equipo</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">through</span><span class="o">=</span><span class="s1">&#39;MiembroEquipoSprint&#39;</span><span class="p">)</span>
+    <span class="n">duracion_sprint</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">horasRegistradaSprint</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">horasDuracionSprint</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">default_permissions</span> <span class="o">=</span> <span class="p">()</span>
         <span class="n">verbose_name</span> <span class="o">=</span> <span class="s1">&#39;sprint&#39;</span>
         <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s1">&#39;sprints&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Sprint.clean"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Sprint.clean">[docs]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="n">Sprint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">estado</span><span class="o">=</span><span class="s1">&#39;EJ&#39;</span><span class="p">,</span> <span class="n">proyecto</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">proyecto</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">aux</span><span class="o">.</span><span class="n">first</span><span class="p">()</span> <span class="o">!=</span> <span class="bp">self</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">estado</span> <span class="o">==</span> <span class="s1">&#39;EJ&#39;</span> <span class="ow">and</span> <span class="n">aux</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">({</span><span class="s1">&#39;estado&#39;</span><span class="p">:</span> <span class="s1">&#39;Ya existe un sprint ejecutandose&#39;</span><span class="p">})</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">pass</span>  <span class="c1"># error si una de las fechas es null</span></div>
+
+<div class="viewcode-block" id="Sprint.sumarHoras"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Sprint.sumarHoras">[docs]</a>    <span class="k">def</span> <span class="nf">sumarHoras</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">horasDuracionSprint</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">miembro</span> <span class="ow">in</span> <span class="n">MiembroEquipoSprint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sprint</span><span class="o">=</span><span class="bp">self</span><span class="p">):</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">horasDuracionSprint</span> <span class="o">+=</span> <span class="n">miembro</span><span class="o">.</span><span class="n">horasDeTrabajo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">horasDuracionSprint</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duracion_sprint</span></div>
+
+<div class="viewcode-block" id="Sprint.registrarHoras"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Sprint.registrarHoras">[docs]</a>    <span class="k">def</span> <span class="nf">registrarHoras</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">horasRegistradaSprint</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">us</span> <span class="ow">in</span> <span class="n">UserStory</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sprint</span><span class="o">=</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">horasRegistradaSprint</span> <span class="o">+=</span> <span class="n">us</span><span class="o">.</span><span class="n">tiempo_estimado</span></div>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nombre</span>
 
-<div class="viewcode-block" id="Sprint.get_absolute_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Sprint.get_absolute_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Sprint.get_absolute_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Sprint.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;sprint_detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="p">])</span></div></div>
 
-<div class="viewcode-block" id="Flujo"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Flujo">[documentos]</a><span class="k">class</span> <span class="nc">Flujo</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+<div class="viewcode-block" id="MiembroEquipoSprint"><a class="viewcode-back" href="../../administracion.html#administracion.admin.MiembroEquipoSprint">[docs]</a><span class="k">class</span> <span class="nc">MiembroEquipoSprint</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Miembros del equipo de un sprint</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+    <span class="n">sprint</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Sprint</span><span class="p">)</span>
+    <span class="n">horasDeTrabajo</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">usuario</span><span class="o">.</span><span class="n">username</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">default_permissions</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s1">&#39;miembros equipo sprint&#39;</span>
+        <span class="n">unique_together</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;usuario&#39;</span><span class="p">,</span> <span class="s1">&#39;sprint&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Flujo"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Flujo">[docs]</a><span class="k">class</span> <span class="nc">Flujo</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Administración de los flujos que forman parte de un proyecto.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">nombre</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
     <span class="n">proyecto</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Proyecto</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nombre</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
@@ -293,18 +329,18 @@
 
 
 
-<div class="viewcode-block" id="Flujo.get_absolute_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Flujo.get_absolute_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Flujo.get_absolute_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Flujo.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;flujo_detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="p">])</span></div></div>
 
 
-<div class="viewcode-block" id="Actividad"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Actividad">[documentos]</a><span class="k">class</span> <span class="nc">Actividad</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="Actividad"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Actividad">[docs]</a><span class="k">class</span> <span class="nc">Actividad</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Las actividades representan las distintas etapas de las que se componen un flujo</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">nombre</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
     <span class="n">flujo</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Flujo</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nombre</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
@@ -316,7 +352,7 @@
 
 
 
-<div class="viewcode-block" id="UserStory"><a class="viewcode-back" href="../../administracion.html#administracion.admin.UserStory">[documentos]</a><span class="k">class</span> <span class="nc">UserStory</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="UserStory"><a class="viewcode-back" href="../../administracion.html#administracion.admin.UserStory">[docs]</a><span class="k">class</span> <span class="nc">UserStory</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Manejo de los User Stories. Los User Stories representan a cada</span>
 <span class="sd">    funcionalidad desde la perspectiva del cliente que debe realizar el sistema.</span>
@@ -341,8 +377,8 @@
     <span class="n">sprint</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Sprint</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">actividad</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Actividad</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nombre_largo</span>
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;{} - Prioridad: {} - Duracion: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nombre_largo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prioridadFormula</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tiempo_estimado</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_progreso</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">progreso</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tiempo_registrado</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">tiempo_estimado</span> <span class="o">*</span> <span class="mi">100</span>
@@ -350,10 +386,10 @@
     <span class="n">progreso</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">_get_progreso</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="UserStory.get_absolute_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.UserStory.get_absolute_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UserStory.get_absolute_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.UserStory.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;userstory_detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="UserStory.save"><a class="viewcode-back" href="../../administracion.html#administracion.admin.UserStory.save">[documentos]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_insert</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">force_update</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">using</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<div class="viewcode-block" id="UserStory.save"><a class="viewcode-back" href="../../administracion.html#administracion.admin.UserStory.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_insert</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">force_update</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">using</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
              <span class="n">update_fields</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prioridadFormula</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valor_negocio</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prioridad</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">valor_tecnico</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
 
@@ -395,7 +431,7 @@
 
 
 
-<div class="viewcode-block" id="Adjunto"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Adjunto">[documentos]</a><span class="k">class</span> <span class="nc">Adjunto</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="Adjunto"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Adjunto">[docs]</a><span class="k">class</span> <span class="nc">Adjunto</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Modelo para la administración de archivos adjuntos a un User Story.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -416,14 +452,34 @@
     <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nombre</span>
 
-<div class="viewcode-block" id="Adjunto.img64"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Adjunto.img64">[documentos]</a>    <span class="k">def</span> <span class="nf">img64</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Adjunto.img64"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Adjunto.img64">[docs]</a>    <span class="k">def</span> <span class="nf">img64</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">force_bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">binario</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Adjunto.get_absolute_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Adjunto.get_absolute_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Adjunto.get_absolute_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Adjunto.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;file_detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="Adjunto.get_download_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Adjunto.get_download_url">[documentos]</a>    <span class="k">def</span> <span class="nf">get_download_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Adjunto.get_download_url"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Adjunto.get_download_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_download_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;download_attachment&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="p">])</span></div></div>
+
+<div class="viewcode-block" id="Nota"><a class="viewcode-back" href="../../administracion.html#administracion.admin.Nota">[docs]</a><span class="k">class</span> <span class="nc">Nota</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manejo de notas adjuntas relacionadas a un User Story, estás entradas representan</span>
+<span class="sd">    constancias de los cambios, como cantidad de horas trabajadas, en un user story.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">estado_choices</span> <span class="o">=</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Inactivo&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;En curso&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Pendiente Aprobacion&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Aprobado&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;Cancelado&#39;</span><span class="p">),)</span>
+    <span class="n">mensaje</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;Mensaje de descripcion de los avances, motivo de cancelacion o eliminacion&#39;</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">fecha</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+    <span class="n">tiempo_registrado</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">horas_a_registrar</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">desarrollador</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">sprint</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Sprint</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">actividad</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Actividad</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">estado</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="n">estado_choices</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">estado_actividad</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="n">UserStory</span><span class="o">.</span><span class="n">estado_actividad_choices</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">user_story</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">UserStory</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;{}({}): {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desarrollador</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fecha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">horas_a_registrar</span><span class="p">)</span></div>
 
 
 
@@ -475,7 +531,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'3.0',
+            VERSION:'5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -484,7 +540,6 @@
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/translations.js"></script>
 
   
 

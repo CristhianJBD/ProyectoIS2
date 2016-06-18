@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>autenticacion.views &mdash; documentación de ProyectoIs2 - 3.0</title>
+  <title>autenticacion.views &mdash; ProyectoIS2 5.0 documentation</title>
   
 
   
@@ -30,8 +30,8 @@
   
 
   
-    <link rel="top" title="documentación de ProyectoIs2 - 3.0" href="../../index.html"/>
-        <link rel="up" title="Código de módulo" href="../index.html"/> 
+    <link rel="top" title="ProyectoIS2 5.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> ProyectoIs2
+            <a href="../../index.html" class="icon icon-home"> ProyectoIS2
           
 
           
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                3.0
+                5.0
               </div>
             
           
@@ -81,15 +81,8 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../administracion.html">administracion package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../view_project.html">view_project module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views.html">views module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_flujo.html">views_flujo module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_rol.html">views_rol module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_sprints.html">views_sprints module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../views_user.html">views_user module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../view_userstory.html">view_userstory module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../autenticacion.html">autenticacion package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../administracion.html">Modulo administracion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autenticacion.html">Modulo autenticacion</a></li>
 </ul>
 
             
@@ -103,7 +96,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">ProyectoIs2</a>
+        <a href="../../index.html">ProyectoIS2</a>
       </nav>
 
 
@@ -120,7 +113,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="../index.html">Código de módulo</a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
       
     <li>autenticacion.views</li>
       <li class="wy-breadcrumbs-aside">
@@ -134,17 +127,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Código fuente para autenticacion.views</h1><div class="highlight"><pre>
+  <h1>Source code for autenticacion.views</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span>
 <span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">HttpResponsePermanentRedirect</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth</span> <span class="kn">import</span> <span class="n">authenticate</span><span class="p">,</span> <span class="n">login</span>
-<span class="kn">from</span> <span class="nn">django.template.context_processors</span> <span class="kn">import</span> <span class="n">csrf</span>
+<span class="kn">from</span> <span class="nn">django.core.context_processors</span> <span class="kn">import</span> <span class="n">csrf</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">administracion.models</span> <span class="kn">import</span> <span class="n">Proyecto</span><span class="p">,</span> <span class="n">Sprint</span><span class="p">,</span> <span class="n">Nota</span>
 
 
 
 
 
-<div class="viewcode-block" id="login_view"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.views.login_view">[documentos]</a><span class="k">def</span> <span class="nf">login_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="login_view"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.views.login_view">[docs]</a><span class="k">def</span> <span class="nf">login_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Recibe de request los datos del usuario guardado que no cerro sesion.</span>
 <span class="sd">    Si el usuario esta autenticado entonces ingresa al sistema(se dirige a loggedin)</span>
@@ -159,7 +154,7 @@
         <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">csrf</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s1">&#39;autenticacion/login_view.html&#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="auth_view"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.views.auth_view">[documentos]</a><span class="k">def</span> <span class="nf">auth_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="auth_view"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.views.auth_view">[docs]</a><span class="k">def</span> <span class="nf">auth_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Recibe los parametros username y password de request.POST.</span>
 <span class="sd">    Seguidamente se guarda en user, para luego corroborar si existe en la</span>
@@ -176,7 +171,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">HttpResponsePermanentRedirect</span><span class="p">(</span><span class="s1">&#39;/invalid&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="index"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.views.index">[documentos]</a><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="index"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.views.index">[docs]</a><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
      <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">     Si request.user estar auntenticado muestra un mensaje de bienvenida para ese usuario.</span>
 <span class="sd">     sino se redirige a login para volver a introducir los datos</span>
@@ -184,11 +179,13 @@
 
 <span class="sd">     &quot;&quot;&quot;</span>
      <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">()</span> <span class="ow">and</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_active</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-         <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s1">&#39;administracion/index.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">})</span>
+
+         <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s1">&#39;administracion/index.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;full_name&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="s1">&#39;usuarios&#39;</span><span class="p">:</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="s1">&#39;proyectos&#39;</span><span class="p">:</span> <span class="n">Proyecto</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="s1">&#39;sprints&#39;</span><span class="p">:</span> <span class="n">Sprint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="s1">&#39;notas&#39;</span><span class="p">:</span> <span class="n">Nota</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">count</span><span class="p">()})</span>
+
      <span class="k">else</span><span class="p">:</span>
          <span class="k">return</span> <span class="n">HttpResponsePermanentRedirect</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="invalid"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.views.invalid">[documentos]</a><span class="k">def</span> <span class="nf">invalid</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="invalid"><a class="viewcode-back" href="../../autenticacion.html#autenticacion.views.invalid">[docs]</a><span class="k">def</span> <span class="nf">invalid</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Se dirige a invalid si esque es un usuario no registrado.</span>
 
@@ -235,7 +232,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'3.0',
+            VERSION:'5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -244,7 +241,6 @@
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/translations.js"></script>
 
   
 
