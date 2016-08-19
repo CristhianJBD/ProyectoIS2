@@ -36,7 +36,7 @@ class NotaList(LoginRequiredMixin, GlobalPermissionRequiredMixin, generic.ListVi
     """
     context_object_name = 'notas'
     template_name = 'administracion/nota/nota_list.html'
-    permission_required = 'administracion_ver_proyecto'
+    permission_required = 'administracion.ver_proyecto'
     us = None
 
     def get_permission_object(self):
